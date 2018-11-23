@@ -1,4 +1,4 @@
 package element;
 
-public class Distance extends ConstantElement {
+public class Distance extends Constant {
 }

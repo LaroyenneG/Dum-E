@@ -1,6 +1,6 @@
 package element;
 
-public class Angle extends ConstantElement {
+public class Angle extends Constant {
 
     private double angle;
 
