@@ -1,13 +1,11 @@
 import element.Element;
 
-import java.util.List;
-
 public abstract class Robot {
 
     private Element[] elements;
 
-    public Robot(List<Element> elementList) {
-        elements = (Element[]) elementList.toArray();
+    public Robot(Element... elements) {
+        this.elements = elements;
     }
 
     @Override
