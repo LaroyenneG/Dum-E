@@ -1,4 +1,6 @@
-import element.Element;
+package robot;
+
+import robot.element.Element;
 
 public abstract class Robot {
 
@@ -12,7 +14,6 @@ public abstract class Robot {
     public String toString() {
 
         StringBuilder builder = new StringBuilder();
-
 
         return new String(builder);
     }
