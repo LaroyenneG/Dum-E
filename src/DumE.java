@@ -1,11 +1,16 @@
 import robot.Robot;
 import robot.element.Element;
 
-public class DUM_E extends Robot {
+public class DumE extends Robot {
 
     private static final Element[] elements = {};
 
-    public DUM_E() {
+    public DumE() {
         super(elements);
+    }
+
+    public boolean execute(String line) {
+
+        return false;
     }
 }
