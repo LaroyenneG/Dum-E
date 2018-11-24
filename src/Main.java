@@ -68,6 +68,7 @@ public class Main {
                     "                                              .ydmmm/`                                              \n" +
                     "                                                `--`                                                  ";
 
+
     private static final DumE DUM_E = new DumE();
 
     private static final String EXIT_COMMAND = "stop";
@@ -95,6 +96,7 @@ public class Main {
         }
 
         System.out.println(DUM_E_IMAGE);
+        System.out.println("==========================================================================================");
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
@@ -115,8 +117,8 @@ public class Main {
                     System.err.println("I'm sorry sir, i don't know this operation");
                 }
             }
-
-
         } while (!stop);
+
+        System.out.println("Good bye sir");
     }
 }
