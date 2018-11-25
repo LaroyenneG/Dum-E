@@ -2,7 +2,6 @@ package robot;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import robot.element.connexion.Connexion;
 
 public class RobotTest {
 
@@ -15,8 +14,8 @@ public class RobotTest {
     }
 
     private static class TRobot extends Robot {
-        public TRobot(Connexion... cs) {
-            super(cs);
+        public TRobot() {
+            super(null);
         }
     }
 }

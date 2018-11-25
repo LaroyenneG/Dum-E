@@ -1,8 +1,10 @@
+import dume.DumE;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class Main {
+public class App {
 
 
     private static final String DUM_E_IMAGE =
@@ -90,7 +92,7 @@ public class Main {
     public static void main(String[] args) {
 
         if (args.length > 0) {
-            System.err.println("Usage : DumE");
+            System.err.println("Usage : dume.DumE");
             System.exit(-1);
         }
 

@@ -1,30 +1,28 @@
 package robot;
 
-import robot.element.connexion.Connexion;
+import robot.element.connexion.Composite;
 import robot.element.terminal.organ.TerminalOrgan;
 
 public abstract class Robot {
 
     private TerminalOrgan terminalOrgan;
-    private Connexion[] connexions;
+    private Composite[] composites;
 
-    public Robot(TerminalOrgan terminalOrgan, Connexion... connexions) {
-        this.connexions = connexions;
+    public Robot(TerminalOrgan terminalOrgan, Composite... composites) {
+        this.composites = composites;
         this.terminalOrgan = terminalOrgan;
     }
 
-    public Robot(Connexion... connexions) {
-        this(null, connexions);
+    public Robot(Composite composites) {
+        this(null, composites);
     }
 
     public int jointsNumber() {
 
         int n = 0;
 
-        for (Connexion c : connexions) {
-            if (!c.isStatic()) {
-                n++;
-            }
+        for (Composite c : composites) {
+            n += c.jointsNumber();
         }
 
         return n;
