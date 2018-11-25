@@ -17,6 +17,19 @@ public abstract class Robot {
         this(null, connexions);
     }
 
+    public int jointsNumber() {
+
+        int n = 0;
+
+        for (Connexion c : connexions) {
+            if (!c.isStatic()) {
+                n++;
+            }
+        }
+
+        return n;
+    }
+
     @Override
     public String toString() {
 
