@@ -1,4 +1,4 @@
-package robot.element.constant;
+package robot.element.connexion.constant;
 
 public class Angle extends Constant {
 

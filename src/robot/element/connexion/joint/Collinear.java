@@ -1,4 +1,4 @@
-package robot.element.joint;
+package robot.element.connexion.joint;
 
 public class Collinear extends Linear {
 

@@ -1,12 +1,12 @@
 import robot.Robot;
-import robot.element.Element;
+import robot.element.connexion.Connexion;
 
 public class DumE extends Robot {
 
-    private static final Element[] elements = {};
+    private static final Connexion[] CONNEXIONS = {};
 
     public DumE() {
-        super(elements);
+        super(CONNEXIONS);
     }
 
     public boolean execute(String line) {

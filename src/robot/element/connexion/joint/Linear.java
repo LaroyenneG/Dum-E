@@ -1,4 +1,4 @@
-package robot.element.joint;
+package robot.element.connexion.joint;
 
 public abstract class Linear extends Joint {
 

@@ -1,13 +1,20 @@
 package robot;
 
-import robot.element.Element;
+import robot.element.connexion.Connexion;
+import robot.element.terminal.organ.TerminalOrgan;
 
 public abstract class Robot {
 
-    private Element[] elements;
+    private TerminalOrgan terminalOrgan;
+    private Connexion[] connexions;
 
-    public Robot(Element... elements) {
-        this.elements = elements;
+    public Robot(TerminalOrgan terminalOrgan, Connexion... connexions) {
+        this.connexions = connexions;
+        this.terminalOrgan = terminalOrgan;
+    }
+
+    public Robot(Connexion... connexions) {
+        this(null, connexions);
     }
 
     @Override
