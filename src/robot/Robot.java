@@ -1,9 +1,13 @@
 package robot;
 
+import com.sun.j3d.utils.universe.SimpleUniverse;
+import robot.element.Element;
 import robot.element.connexion.Composite;
 import robot.element.terminal.organ.TerminalOrgan;
 
-public abstract class Robot {
+import javax.vecmath.Point3d;
+
+public abstract class Robot extends Element {
 
     private TerminalOrgan terminalOrgan;
     private Composite[] composites;
@@ -34,5 +38,15 @@ public abstract class Robot {
         StringBuilder builder = new StringBuilder();
 
         return new String(builder);
+    }
+
+    @Override
+    public Point3d changeFrame(Point3d frame) {
+        return null;
+    }
+
+    @Override
+    public void draw(SimpleUniverse universe) {
+
     }
 }

@@ -1,8 +1,6 @@
 package robot.element.connexion;
 
-import robot.element.Element;
-
-public abstract class Composite extends Element {
+public abstract class Composite extends Connexion {
 
     private Connexion[] connexions;
 
