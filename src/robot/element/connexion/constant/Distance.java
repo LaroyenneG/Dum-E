@@ -6,6 +6,8 @@ import javax.vecmath.Point3d;
 
 public class Distance extends Constant {
 
+    private static final double COEFFICIENT = Math.cos(Math.PI / 3.0);
+
     private final double distance;
 
     public Distance(double distance) {
@@ -19,7 +21,16 @@ public class Distance extends Constant {
 
     @Override
     public Point3d changeFrame(Point3d frame) {
-        return null;
+
+        setFrame(frame);
+
+        final double d = distance * COEFFICIENT;
+
+        frame.x += d;
+        frame.y += d;
+        frame.z += d;
+
+        return frame;
     }
 
     @Override

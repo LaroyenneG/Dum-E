@@ -17,9 +17,7 @@ public abstract class Element {
     }
 
     public void setFrame(Point3d frame) {
-        this.frame.x = frame.x;
-        this.frame.y = frame.y;
-        this.frame.z = frame.z;
+        this.frame = new Point3d(frame);
     }
 
     @Override
