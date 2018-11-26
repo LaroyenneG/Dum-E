@@ -1,15 +1,13 @@
-package robot.element.connexion.constant;
+package robot.element.connexion.constant.axis;
 
 import com.sun.j3d.utils.universe.SimpleUniverse;
 
 import javax.vecmath.Point3d;
 
-public class Angle extends Constant {
+public class Pitching extends Axis {
 
-    private final double angle;
-
-    public Angle(double angle) {
-        this.angle = angle % (Math.PI * 2.0);
+    public Pitching(double value) {
+        super(value);
     }
 
     @Override
