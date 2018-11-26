@@ -2,7 +2,7 @@ package robot.element.terminal.organ;
 
 import com.sun.j3d.utils.universe.SimpleUniverse;
 
-public class Pliers extends TerminalOrgan {
+public class Default extends TerminalOrgan {
 
     @Override
     public String toString() {

@@ -5,7 +5,8 @@ import robot.element.connexion.Connexion;
 public abstract class Joint extends Connexion {
 
     @Override
-    public boolean isStatic() {
-        return false;
+    public int jointsNumber() {
+
+        return 1;
     }
 }

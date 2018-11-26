@@ -3,6 +3,8 @@ package robot;
 import com.sun.j3d.utils.universe.SimpleUniverse;
 import robot.element.Element;
 import robot.element.connexion.Composite;
+import robot.element.connexion.Connexion;
+import robot.element.terminal.organ.Default;
 import robot.element.terminal.organ.TerminalOrgan;
 
 import javax.vecmath.Point3d;
@@ -10,22 +12,22 @@ import javax.vecmath.Point3d;
 public abstract class Robot extends Element {
 
     private TerminalOrgan terminalOrgan;
-    private Composite[] composites;
+    private Connexion[] connexions;
 
-    public Robot(TerminalOrgan terminalOrgan, Composite... composites) {
-        this.composites = composites;
+    public Robot(TerminalOrgan terminalOrgan, Connexion... connexions) {
+        this.connexions = connexions;
         this.terminalOrgan = terminalOrgan;
     }
 
-    public Robot(Composite composites) {
-        this(null, composites);
+    public Robot(Composite connexions) {
+        this(new Default(), connexions);
     }
 
     public int jointsNumber() {
 
         int n = 0;
 
-        for (Composite c : composites) {
+        for (Connexion c : connexions) {
             n += c.jointsNumber();
         }
 
@@ -42,11 +44,23 @@ public abstract class Robot extends Element {
 
     @Override
     public Point3d changeFrame(Point3d frame) {
-        return null;
+
+        setFrame(frame);
+
+        for (Connexion c : connexions) {
+            frame = c.changeFrame(frame);
+        }
+
+        return terminalOrgan.changeFrame(frame);
     }
 
     @Override
     public void draw(SimpleUniverse universe) {
 
+        for (Connexion c : connexions) {
+            c.draw(universe);
+        }
+
+        terminalOrgan.draw(universe);
     }
 }
