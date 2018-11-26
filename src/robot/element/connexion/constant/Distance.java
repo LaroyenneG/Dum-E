@@ -6,9 +6,9 @@ import javax.vecmath.Point3d;
 
 public class Distance extends Constant {
 
-    private final int distance;
+    private final double distance;
 
-    public Distance(int distance) {
+    public Distance(double distance) {
         this.distance = distance;
     }
 
