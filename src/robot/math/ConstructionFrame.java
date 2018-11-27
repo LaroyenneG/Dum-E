@@ -1,4 +1,4 @@
-package robot;
+package robot.math;
 
 import javax.vecmath.Point3d;
 
