@@ -1,8 +1,7 @@
 package robot.element.connexion.constant;
 
 import com.sun.j3d.utils.universe.SimpleUniverse;
-
-import javax.vecmath.Point3d;
+import robot.math.ConstructionFrame;
 
 public class Distance extends Constant {
 
@@ -20,16 +19,16 @@ public class Distance extends Constant {
     }
 
     @Override
-    public Point3d changeFrame(Point3d frame) {
+    public ConstructionFrame changeFrame(ConstructionFrame frame) {
 
         setFrame(frame);
 
         final double d = distance * COEFFICIENT;
-
+/*
         frame.x += d;
         frame.y += d;
         frame.z += d;
-
+*/
         return frame;
     }
 

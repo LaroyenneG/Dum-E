@@ -1,8 +1,7 @@
 package robot.element.connexion.joint;
 
 import com.sun.j3d.utils.universe.SimpleUniverse;
-
-import javax.vecmath.Point3d;
+import robot.math.ConstructionFrame;
 
 public class Collinear extends Linear {
 
@@ -16,7 +15,7 @@ public class Collinear extends Linear {
     }
 
     @Override
-    public Point3d changeFrame(Point3d frame) {
+    public ConstructionFrame changeFrame(ConstructionFrame frame) {
         return null;
     }
 

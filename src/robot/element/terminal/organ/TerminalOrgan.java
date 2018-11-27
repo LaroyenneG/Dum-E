@@ -1,13 +1,12 @@
 package robot.element.terminal.organ;
 
 import robot.element.Element;
-
-import javax.vecmath.Point3d;
+import robot.math.ConstructionFrame;
 
 public abstract class TerminalOrgan extends Element {
 
     @Override
-    public Point3d changeFrame(Point3d frame) {
+    public ConstructionFrame changeFrame(ConstructionFrame frame) {
         setFrame(frame);
         return getFrame();
     }

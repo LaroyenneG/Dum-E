@@ -6,8 +6,7 @@ import robot.element.connexion.Composite;
 import robot.element.connexion.Connexion;
 import robot.element.terminal.organ.Default;
 import robot.element.terminal.organ.TerminalOrgan;
-
-import javax.vecmath.Point3d;
+import robot.math.ConstructionFrame;
 
 public abstract class Robot extends Element {
 
@@ -43,7 +42,7 @@ public abstract class Robot extends Element {
     }
 
     @Override
-    public Point3d changeFrame(Point3d frame) {
+    public ConstructionFrame changeFrame(ConstructionFrame frame) {
 
         setFrame(frame);
 

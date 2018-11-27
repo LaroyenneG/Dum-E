@@ -1,8 +1,7 @@
 package robot.element.connexion.joint;
 
 import com.sun.j3d.utils.universe.SimpleUniverse;
-
-import javax.vecmath.Point3d;
+import robot.math.ConstructionFrame;
 
 public class Revolving extends Rotation {
 
@@ -16,7 +15,7 @@ public class Revolving extends Rotation {
     }
 
     @Override
-    public Point3d changeFrame(Point3d frame) {
+    public ConstructionFrame changeFrame(ConstructionFrame frame) {
         return null;
     }
 

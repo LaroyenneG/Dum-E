@@ -16,6 +16,10 @@ public class ConstructionFrame implements Cloneable {
         this.o = new Point3d(o);
     }
 
+    public ConstructionFrame() {
+        this(new Point3d(0, 0, 0), new Point3d(1, 0, 0), new Point3d(0, 1, 0), new Point3d(0, 0, 1));
+    }
+
     public Point3d getX() {
         return new Point3d(x);
     }

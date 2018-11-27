@@ -1,29 +1,28 @@
 package robot.element;
 
 import com.sun.j3d.utils.universe.SimpleUniverse;
-
-import javax.vecmath.Point3d;
+import robot.math.ConstructionFrame;
 
 public abstract class Element {
 
-    private Point3d frame;
+    private ConstructionFrame frame;
 
     public Element() {
-        frame = new Point3d();
+        frame = new ConstructionFrame();
     }
 
-    public Point3d getFrame() {
-        return new Point3d(frame);
+    public ConstructionFrame getFrame() {
+        return (ConstructionFrame) frame.clone();
     }
 
-    public void setFrame(Point3d frame) {
-        this.frame = new Point3d(frame);
+    public void setFrame(ConstructionFrame frame) {
+        this.frame = (ConstructionFrame) frame.clone();
     }
 
     @Override
     public abstract String toString();
 
-    public abstract Point3d changeFrame(Point3d frame);
+    public abstract ConstructionFrame changeFrame(ConstructionFrame frame);
 
     public abstract void draw(SimpleUniverse universe);
 }

@@ -1,8 +1,7 @@
 package robot.element.connexion;
 
 import com.sun.j3d.utils.universe.SimpleUniverse;
-
-import javax.vecmath.Point3d;
+import robot.math.ConstructionFrame;
 
 public abstract class Composite extends Connexion {
 
@@ -25,7 +24,7 @@ public abstract class Composite extends Connexion {
     }
 
     @Override
-    public Point3d changeFrame(Point3d frame) {
+    public ConstructionFrame changeFrame(ConstructionFrame frame) {
 
         setFrame(frame);
 
