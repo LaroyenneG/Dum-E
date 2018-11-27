@@ -1,51 +1,62 @@
 package robot;
 
-import javax.vecmath.Vector3d;
+import javax.vecmath.Point3d;
 
 public class ConstructionFrame implements Cloneable {
 
-    private Vector3d x;
-    private Vector3d y;
-    private Vector3d z;
+    private Point3d o;
+    private Point3d x;
+    private Point3d y;
+    private Point3d z;
 
-    public ConstructionFrame(Vector3d x, Vector3d y, Vector3d z) {
-        this.x = new Vector3d(x);
-        this.y = new Vector3d(y);
-        this.z = new Vector3d(z);
+    public ConstructionFrame(Point3d o, Point3d x, Point3d y, Point3d z) {
+        this.x = new Point3d(x);
+        this.y = new Point3d(y);
+        this.z = new Point3d(z);
+        this.o = new Point3d(o);
     }
 
-    public Vector3d getX() {
-        return new Vector3d(x);
+    public Point3d getX() {
+        return new Point3d(x);
     }
 
-    public void setX(Vector3d x) {
-        this.x = new Vector3d(x);
+    public void setX(Point3d x) {
+        this.x = new Point3d(x);
     }
 
-    public Vector3d getY() {
-        return new Vector3d(y);
+    public Point3d getY() {
+        return new Point3d(y);
     }
 
-    public void setY(Vector3d y) {
-        this.y = new Vector3d(y);
+    public void setY(Point3d y) {
+        this.y = new Point3d(y);
     }
 
-    public Vector3d getZ() {
-        return new Vector3d(y);
+    public Point3d getZ() {
+        return new Point3d(y);
     }
 
-    public void setZ(Vector3d z) {
-        this.z = new Vector3d(z);
+    public void setZ(Point3d z) {
+        this.z = new Point3d(z);
     }
 
-    public boolean isOrthogonal() {
-        return true;
+    public Point3d getO() {
+        return new Point3d(o);
+    }
+
+    public void setO(Point3d o) {
+        this.o = new Point3d(o);
+    }
+
+    public boolean isOrthonormal() {
+
+        return o.distance(x) == o.distance(y) && o.distance(y) == o.distance(z);
     }
 
     @Override
     public Object clone() {
 
-        return new ConstructionFrame(x, y, z);
+        return new ConstructionFrame(o, x, y, z);
     }
 
     @Override
@@ -57,7 +68,7 @@ public class ConstructionFrame implements Cloneable {
 
         ConstructionFrame constructionFrame = (ConstructionFrame) object;
 
-        return x.equals(constructionFrame.x) && y.equals(constructionFrame.y) && z.equals(constructionFrame.z);
+        return o.equals(constructionFrame.o) && x.equals(constructionFrame.x) && y.equals(constructionFrame.y) && z.equals(constructionFrame.z);
     }
 
     @Override
