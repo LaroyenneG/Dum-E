@@ -3,7 +3,7 @@ package robot.math;
 import javax.vecmath.Point3d;
 import javax.vecmath.Vector3d;
 
-public class ConstructionFrame implements Cloneable {
+public class ConstructionFrame implements Cloneable, Operation3D {
 
     private Point3d o;
     private Point3d x;
@@ -110,5 +110,30 @@ public class ConstructionFrame implements Cloneable {
 
     public void setZ(Point3d z) {
         this.z = z;
+    }
+
+
+    /*
+     * Operation3D
+     */
+
+    @Override
+    public Operation3D translate(Point3d point3d) {
+        return null;
+    }
+
+    @Override
+    public Operation3D rotoationOnX(double d) {
+        return null;
+    }
+
+    @Override
+    public Operation3D rotoationOnY(double d) {
+        return null;
+    }
+
+    @Override
+    public Operation3D rotoationOnZ(double d) {
+        return null;
     }
 }
