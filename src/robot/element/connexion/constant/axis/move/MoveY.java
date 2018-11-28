@@ -1,15 +1,13 @@
-package robot.element.connexion.constant;
+package robot.element.connexion.constant.axis.move;
 
 import com.sun.j3d.utils.universe.SimpleUniverse;
+import robot.element.connexion.constant.axis.AxisMove;
 import robot.math.Operation3D;
 
-public class Distance extends Constant {
+public class MoveY extends AxisMove {
 
-
-    private final double distance;
-
-    public Distance(double distance) {
-        this.distance = distance;
+    public MoveY(double distance) {
+        super(distance);
     }
 
     @Override

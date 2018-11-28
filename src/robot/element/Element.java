@@ -6,18 +6,18 @@ import robot.math.Operation3D;
 
 public abstract class Element {
 
-    private Operation3D frame;
+    private Operation3D operation3D;
 
     public Element() {
-        frame = new ConstructionFrame();
+        operation3D = new ConstructionFrame();
     }
 
-    public Operation3D getFrame() {
-        return frame;
+    public Operation3D getOperation3D() {
+        return operation3D;
     }
 
-    public void setFrame(Operation3D frame) {
-        this.frame = frame;
+    public void setOperation3D(Operation3D frame) {
+        this.operation3D = frame;
     }
 
     @Override

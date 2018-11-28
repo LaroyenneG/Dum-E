@@ -1,11 +1,12 @@
-package robot.element.connexion.constant.axis;
+package robot.element.connexion.constant.axis.rotation;
 
 import com.sun.j3d.utils.universe.SimpleUniverse;
+import robot.element.connexion.constant.axis.AxisRotation;
 import robot.math.Operation3D;
 
-public class Pitching extends Axis {
+public class Yawing extends AxisRotation {
 
-    public Pitching(double value) {
+    public Yawing(double value) {
         super(value);
     }
 

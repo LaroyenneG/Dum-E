@@ -1,12 +1,13 @@
-package robot.element.connexion.constant.axis;
+package robot.element.connexion.constant.axis.move;
 
 import com.sun.j3d.utils.universe.SimpleUniverse;
+import robot.element.connexion.constant.axis.AxisMove;
 import robot.math.Operation3D;
 
-public class Yawing extends Axis {
+public class MoveX extends AxisMove {
 
-    public Yawing(double value) {
-        super(value);
+    public MoveX(double distance) {
+        super(distance);
     }
 
     @Override

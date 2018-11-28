@@ -1,9 +1,10 @@
-package robot.element.connexion.constant.axis;
+package robot.element.connexion.constant.axis.rotation;
 
 import com.sun.j3d.utils.universe.SimpleUniverse;
+import robot.element.connexion.constant.axis.AxisRotation;
 import robot.math.Operation3D;
 
-public class Rolling extends Axis {
+public class Rolling extends AxisRotation {
 
     public Rolling(double value) {
         super(value);

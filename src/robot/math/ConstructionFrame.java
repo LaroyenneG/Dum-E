@@ -128,6 +128,43 @@ public class ConstructionFrame implements Cloneable, Operation3D {
         point3d.z += d;
     }
 
+    private static void rotXPoint(Point3d point3d, double angle) {
+
+        double y = point3d.y;
+        double z = point3d.z;
+
+        final double ca = Math.cos(angle);
+        final double sa = Math.sin(angle);
+
+        point3d.y = ca * y - sa * z;
+        point3d.z = sa * y + ca * z;
+    }
+
+    private static void rotYPoint(Point3d point3d, double angle) {
+
+        double x = point3d.x;
+        double z = point3d.z;
+
+        final double ca = Math.cos(angle);
+        final double sa = Math.sin(angle);
+
+
+        point3d.x = ca * x + sa * z;
+        point3d.z = -sa * x + ca * z;
+    }
+
+    private static void rotZPoint(Point3d point3d, double angle) {
+
+        double x = point3d.x;
+        double y = point3d.y;
+
+        final double ca = Math.cos(angle);
+        final double sa = Math.sin(angle);
+
+
+        point3d.x = ca * x - sa * y;
+        point3d.y = sa * x + ca * y;
+    }
 
     /*
      * Operation3D
@@ -146,6 +183,7 @@ public class ConstructionFrame implements Cloneable, Operation3D {
 
     @Override
     public Operation3D rotationOnX(double d) {
+
 
         return (Operation3D) this.clone();
     }

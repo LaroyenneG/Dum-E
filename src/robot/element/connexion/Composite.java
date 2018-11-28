@@ -26,7 +26,7 @@ public abstract class Composite extends Connexion {
     @Override
     public Operation3D changeFrame(Operation3D frame) {
 
-        setFrame(frame);
+        setOperation3D(frame);
 
         for (Connexion c : connexions) {
             frame = c.changeFrame(frame);
