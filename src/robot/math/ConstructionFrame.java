@@ -1,6 +1,7 @@
 package robot.math;
 
 import javax.vecmath.Point3d;
+import javax.vecmath.Vector3d;
 
 public class ConstructionFrame implements Cloneable {
 
@@ -10,57 +11,38 @@ public class ConstructionFrame implements Cloneable {
     private Point3d z;
 
     public ConstructionFrame(Point3d o, Point3d x, Point3d y, Point3d z) {
-        this.x = new Point3d(x);
-        this.y = new Point3d(y);
-        this.z = new Point3d(z);
-        this.o = new Point3d(o);
+        this.x = x;
+        this.y = y;
+        this.z = z;
+        this.o = o;
     }
 
     public ConstructionFrame() {
         this(new Point3d(0, 0, 0), new Point3d(1, 0, 0), new Point3d(0, 1, 0), new Point3d(0, 0, 1));
     }
 
-    public Point3d getX() {
-        return new Point3d(x);
+    public boolean isOrthogonal() {
+
+        Vector3d vX = new Vector3d(x.x - o.x, x.y - o.y, x.z - o.z);
+        Vector3d vY = new Vector3d(y.x - o.x, y.y - o.y, y.z - o.z);
+        Vector3d vZ = new Vector3d(z.x - o.x, z.y - o.y, z.z - o.z);
+
+        double d1 = vX.angle(vY);
+        double d2 = vY.angle(vZ);
+        double d3 = vZ.angle(vX);
+
+
+        return d1 == d2 && d2 == d3 && d1 == Math.PI / 2.0;
     }
 
-    public void setX(Point3d x) {
-        this.x = new Point3d(x);
-    }
-
-    public Point3d getY() {
-        return new Point3d(y);
-    }
-
-    public void setY(Point3d y) {
-        this.y = new Point3d(y);
-    }
-
-    public Point3d getZ() {
-        return new Point3d(y);
-    }
-
-    public void setZ(Point3d z) {
-        this.z = new Point3d(z);
-    }
-
-    public Point3d getO() {
-        return new Point3d(o);
-    }
-
-    public void setO(Point3d o) {
-        this.o = new Point3d(o);
-    }
-
-    public boolean isOrthonormal() {
-
-        return o.distance(x) == o.distance(y) && o.distance(y) == o.distance(z);
+    public boolean axisHaveSameLength() {
+        return o.distance(x) == o.distance(y) && o.distance(y) == o.distance(z) && o.distance(x) == o.distance(z);
     }
 
     @Override
     public Object clone() {
 
-        return new ConstructionFrame(o, x, y, z);
+        return new ConstructionFrame(new Point3d(o), new Point3d(x), new Point3d(y), new Point3d(z));
     }
 
     @Override
@@ -82,6 +64,8 @@ public class ConstructionFrame implements Cloneable {
 
         builder.append("ConstructionFrame[");
         builder.append("\n\t");
+        builder.append(o);
+        builder.append("\n\t");
         builder.append(x);
         builder.append("\n\t");
         builder.append(y);
@@ -90,5 +74,41 @@ public class ConstructionFrame implements Cloneable {
         builder.append("]\n");
 
         return new String(builder);
+    }
+
+
+    /*
+     * Getter and Setter
+     */
+    public Point3d getO() {
+        return o;
+    }
+
+    public void setO(Point3d o) {
+        this.o = o;
+    }
+
+    public Point3d getX() {
+        return x;
+    }
+
+    public void setX(Point3d x) {
+        this.x = x;
+    }
+
+    public Point3d getY() {
+        return y;
+    }
+
+    public void setY(Point3d y) {
+        this.y = y;
+    }
+
+    public Point3d getZ() {
+        return z;
+    }
+
+    public void setZ(Point3d z) {
+        this.z = z;
     }
 }
