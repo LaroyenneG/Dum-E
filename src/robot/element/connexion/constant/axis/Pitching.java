@@ -1,7 +1,7 @@
 package robot.element.connexion.constant.axis;
 
 import com.sun.j3d.utils.universe.SimpleUniverse;
-import robot.math.ConstructionFrame;
+import robot.math.Operation3D;
 
 public class Pitching extends Axis {
 
@@ -15,7 +15,7 @@ public class Pitching extends Axis {
     }
 
     @Override
-    public ConstructionFrame changeFrame(ConstructionFrame frame) {
+    public Operation3D changeFrame(Operation3D frame) {
         return null;
     }
 

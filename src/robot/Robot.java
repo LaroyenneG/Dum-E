@@ -6,7 +6,7 @@ import robot.element.connexion.Composite;
 import robot.element.connexion.Connexion;
 import robot.element.terminal.organ.Default;
 import robot.element.terminal.organ.TerminalOrgan;
-import robot.math.ConstructionFrame;
+import robot.math.Operation3D;
 
 public abstract class Robot extends Element {
 
@@ -42,7 +42,7 @@ public abstract class Robot extends Element {
     }
 
     @Override
-    public ConstructionFrame changeFrame(ConstructionFrame frame) {
+    public Operation3D changeFrame(Operation3D frame) {
 
         setFrame(frame);
 

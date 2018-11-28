@@ -1,14 +1,14 @@
 package robot.math;
 
-import javax.vecmath.Point3d;
+/* In this interface only methods must return a clone of current entity  */
 
 public interface Operation3D {
 
-    Operation3D translate(Point3d point3d);
+    Operation3D move(double distance);
 
-    Operation3D rotoationOnX(double d);
+    Operation3D rotationOnX(double d);
 
-    Operation3D rotoationOnY(double d);
+    Operation3D rotationOnY(double d);
 
-    Operation3D rotoationOnZ(double d);
+    Operation3D rotationOnZ(double d);
 }

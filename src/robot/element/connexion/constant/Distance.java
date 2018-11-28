@@ -1,11 +1,10 @@
 package robot.element.connexion.constant;
 
 import com.sun.j3d.utils.universe.SimpleUniverse;
-import robot.math.ConstructionFrame;
+import robot.math.Operation3D;
 
 public class Distance extends Constant {
 
-    private static final double COEFFICIENT = Math.cos(Math.PI / 3.0);
 
     private final double distance;
 
@@ -19,17 +18,8 @@ public class Distance extends Constant {
     }
 
     @Override
-    public ConstructionFrame changeFrame(ConstructionFrame frame) {
-
-        setFrame(frame);
-
-        final double d = distance * COEFFICIENT;
-/*
-        frame.x += d;
-        frame.y += d;
-        frame.z += d;
-*/
-        return frame;
+    public Operation3D changeFrame(Operation3D frame) {
+        return null;
     }
 
     @Override

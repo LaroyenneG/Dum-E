@@ -5,6 +5,12 @@ import javax.vecmath.Vector3d;
 
 public class ConstructionFrame implements Cloneable, Operation3D {
 
+    public static final ConstructionFrame DEFAULT_FRAME = new ConstructionFrame();
+    private static final double[] DEFAULT_O = {0.0, 0.0, 0.0};
+    private static final double[] DEFAULT_X = {1.0, 0.0, 0.0};
+    private static final double[] DEFAULT_Y = {0.0, 1.0, 0.0};
+    private static final double[] DEFAULT_Z = {0.0, 0.0, 1.0};
+
     private Point3d o;
     private Point3d x;
     private Point3d y;
@@ -18,7 +24,7 @@ public class ConstructionFrame implements Cloneable, Operation3D {
     }
 
     public ConstructionFrame() {
-        this(new Point3d(0, 0, 0), new Point3d(1, 0, 0), new Point3d(0, 1, 0), new Point3d(0, 0, 1));
+        this(new Point3d(DEFAULT_O), new Point3d(DEFAULT_X), new Point3d(DEFAULT_Y), new Point3d(DEFAULT_Z));
     }
 
     public boolean isOrthogonal() {
@@ -31,7 +37,6 @@ public class ConstructionFrame implements Cloneable, Operation3D {
         double d2 = vY.angle(vZ);
         double d3 = vZ.angle(vX);
 
-
         return d1 == d2 && d2 == d3 && d1 == Math.PI / 2.0;
     }
 
@@ -41,7 +46,6 @@ public class ConstructionFrame implements Cloneable, Operation3D {
 
     @Override
     public Object clone() {
-
         return new ConstructionFrame(new Point3d(o), new Point3d(x), new Point3d(y), new Point3d(z));
     }
 
@@ -113,27 +117,48 @@ public class ConstructionFrame implements Cloneable, Operation3D {
     }
 
 
+    private static void movePoint(Point3d point3d, double distance) {
+
+        final double COEFFICIENT = Math.cos(Math.PI / 3.0);
+
+        double d = distance * COEFFICIENT;
+
+        point3d.x += d;
+        point3d.y += d;
+        point3d.z += d;
+    }
+
+
     /*
      * Operation3D
      */
 
     @Override
-    public Operation3D translate(Point3d point3d) {
-        return null;
+    public Operation3D move(double distance) {
+
+        movePoint(o, distance);
+        movePoint(x, distance);
+        movePoint(y, distance);
+        movePoint(z, distance);
+
+        return (Operation3D) this.clone();
     }
 
     @Override
-    public Operation3D rotoationOnX(double d) {
-        return null;
+    public Operation3D rotationOnX(double d) {
+
+        return (Operation3D) this.clone();
     }
 
     @Override
-    public Operation3D rotoationOnY(double d) {
-        return null;
+    public Operation3D rotationOnY(double d) {
+
+        return (Operation3D) this.clone();
     }
 
     @Override
-    public Operation3D rotoationOnZ(double d) {
-        return null;
+    public Operation3D rotationOnZ(double d) {
+
+        return (Operation3D) this.clone();
     }
 }
