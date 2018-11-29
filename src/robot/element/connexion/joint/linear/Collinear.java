@@ -1,10 +1,12 @@
-package robot.element.connexion.joint;
+package robot.element.connexion.joint.linear;
+
+import robot.element.connexion.joint.Linear;
 
 import javax.media.j3d.Transform3D;
 
-public class Rotational extends Rotation {
+public class Collinear extends Linear {
 
-    public Rotational(double value) {
+    public Collinear(int value) {
         super(value);
     }
 

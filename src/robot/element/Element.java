@@ -28,5 +28,10 @@ public abstract class Element {
         return new String(builder);
     }
 
-    public abstract Transform3D applyTransformation(Transform3D transform3D);
+    public Transform3D applyTransformation(Transform3D transform3D) {
+
+        setTransform3D(new Transform3D(transform3D));
+
+        return transform3D;
+    }
 }

@@ -1,10 +1,12 @@
-package robot.element.connexion.joint;
+package robot.element.connexion.joint.rotation;
+
+import robot.element.connexion.joint.Rotation;
 
 import javax.media.j3d.Transform3D;
 
-public class Orthogonal extends Linear {
+public class Revolving extends Rotation {
 
-    public Orthogonal(int value) {
+    public Revolving(double value) {
         super(value);
     }
 

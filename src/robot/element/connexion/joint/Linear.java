@@ -2,17 +2,17 @@ package robot.element.connexion.joint;
 
 public abstract class Linear extends Joint {
 
-    private int value;
+    private double value;
 
-    public Linear(int value) {
+    public Linear(double value) {
         setValue(value);
     }
 
-    public int getValue() {
+    public double getValue() {
         return value;
     }
 
-    public void setValue(int value) {
-        this.value = (value < 0) ? value : 0;
+    public void setValue(double value) {
+        this.value = (value < 0.0) ? value : 0.0;
     }
 }
