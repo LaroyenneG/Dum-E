@@ -91,8 +91,9 @@ public class App {
 
     public static void main(String[] args) {
 
+
         if (args.length > 0) {
-            System.err.println("Usage : dume.DumE");
+            System.err.println("Usage : DumE");
             System.exit(-1);
         }
 
