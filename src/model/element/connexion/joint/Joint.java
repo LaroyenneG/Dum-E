@@ -1,16 +1,11 @@
 package model.element.connexion.joint;
 
-import model.element.connexion.Connexion;
+import model.element.connexion.SimpleConnexion;
 
-public abstract class Joint extends Connexion {
-
-    @Override
-    public Joint[] getJoints() {
-        return new Joint[]{this};
-    }
+public abstract class Joint extends SimpleConnexion {
 
     @Override
-    public int jointsNumber() {
-        return 1;
+    public boolean isJoint() {
+        return true;
     }
 }

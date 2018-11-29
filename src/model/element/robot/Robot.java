@@ -1,6 +1,7 @@
 package model.element.robot;
 
 import model.ElementVisitor;
+import model.element.Element;
 import model.element.connexion.Composite;
 import model.element.connexion.Connexion;
 import model.element.terminal.organ.Default;
@@ -8,12 +9,12 @@ import model.element.terminal.organ.TerminalOrgan;
 
 import javax.media.j3d.Transform3D;
 
-public abstract class Robot extends Composite {
+public abstract class Robot extends Element {
 
+    private Connexion connexions;
     private TerminalOrgan terminalOrgan;
 
     public Robot(TerminalOrgan terminalOrgan, Connexion... connexions) {
-        super(connexions);
         this.terminalOrgan = terminalOrgan;
     }
 
@@ -33,7 +34,6 @@ public abstract class Robot extends Composite {
     public Transform3D applyTransformation(Transform3D transform3D) {
 
         super.applyTransformation(transform3D);
-
 
         return terminalOrgan.applyTransformation(transform3D);
     }
