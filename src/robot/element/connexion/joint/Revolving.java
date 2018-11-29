@@ -1,7 +1,6 @@
 package robot.element.connexion.joint;
 
-import com.sun.j3d.utils.universe.SimpleUniverse;
-import robot.math.ConstructionFrame;
+import javax.media.j3d.Transform3D;
 
 public class Revolving extends Rotation {
 
@@ -15,12 +14,7 @@ public class Revolving extends Rotation {
     }
 
     @Override
-    public ConstructionFrame changeFrame(ConstructionFrame frame) {
+    public Transform3D applyTransformation(Transform3D transform3D) {
         return null;
-    }
-
-    @Override
-    public void draw(SimpleUniverse universe) {
-
     }
 }

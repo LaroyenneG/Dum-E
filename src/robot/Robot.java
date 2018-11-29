@@ -1,12 +1,12 @@
 package robot;
 
-import com.sun.j3d.utils.universe.SimpleUniverse;
 import robot.element.Element;
 import robot.element.connexion.Composite;
 import robot.element.connexion.Connexion;
 import robot.element.terminal.organ.Default;
 import robot.element.terminal.organ.TerminalOrgan;
-import robot.math.ConstructionFrame;
+
+import javax.media.j3d.Transform3D;
 
 public abstract class Robot extends Element {
 
@@ -42,24 +42,14 @@ public abstract class Robot extends Element {
     }
 
     @Override
-    public ConstructionFrame changeFrame(ConstructionFrame frame) {
+    public Transform3D applyTransformation(Transform3D transform3D) {
 
-        setFrame(frame);
-
-        for (Connexion c : connexions) {
-            frame = c.changeFrame(frame);
-        }
-
-        return terminalOrgan.changeFrame(frame);
-    }
-
-    @Override
-    public void draw(SimpleUniverse universe) {
+        setTransform3D(transform3D);
 
         for (Connexion c : connexions) {
-            c.draw(universe);
+            transform3D = c.applyTransformation(transform3D);
         }
 
-        terminalOrgan.draw(universe);
+        return terminalOrgan.applyTransformation(transform3D);
     }
 }

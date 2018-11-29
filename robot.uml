@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>robot</OriginalElement>
+  <nodes>
+    <node x="229.65504992319484" y="0.0">robot.element.Element</node>
+    <node x="2724.623799923195" y="858.0">robot.element.connexion.constant.axis.rotation.Rolling</node>
+    <node x="1731.4737903225805" y="603.5">robot.element.connexion.joint.Linear</node>
+    <node x="1862.6237999231948" y="858.0">robot.element.connexion.joint.Orthogonal</node>
+    <node x="2293.623799923195" y="858.0">robot.element.connexion.constant.axis.rotation.Pitching</node>
+    <node x="197.2237903225805" y="563.0">robot.Robot</node>
+    <node x="3996.7237903225805" y="631.0">robot.element.connexion.constant.axis.AxisMove</node>
+    <node x="3343.831557219662" y="400.5">robot.element.connexion.constant.Constant</node>
+    <node x="1000.623799923195" y="858.0">robot.element.connexion.joint.Rotational</node>
+    <node x="479.2237903225805" y="359.0">robot.element.connexion.Composite</node>
+    <node x="1431.6237999231948" y="858.0">robot.element.connexion.joint.Collinear</node>
+    <node x="3155.623799923195" y="858.0">robot.element.connexion.constant.axis.rotation.Yawing</node>
+    <node x="97.75" y="400.5">robot.element.terminal.organ.Default</node>
+    <node x="3586.6237999231953" y="858.0">robot.element.connexion.constant.axis.move.MoveX</node>
+    <node x="0.0" y="248.0">robot.element.terminal.organ.TerminalOrgan</node>
+    <node x="4017.6237999231953" y="858.0">robot.element.connexion.constant.axis.move.MoveY</node>
+    <node x="2698.9737903225805" y="631.0">robot.element.connexion.constant.axis.AxisRotation</node>
+    <node x="861.9737903225805" y="603.5">robot.element.connexion.joint.Rotation</node>
+    <node x="1086.6648905529955" y="400.5">robot.element.connexion.joint.Joint</node>
+    <node x="4448.623799923195" y="858.0">robot.element.connexion.constant.axis.move.MoveZ</node>
+    <node x="569.6237999231948" y="858.0">robot.element.connexion.joint.Revolving</node>
+    <node x="775.155049923195" y="248.0">robot.element.connexion.Connexion</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="robot.element.connexion.joint.Rotation" target="robot.element.connexion.joint.Joint">
+      <point x="0.0" y="-72.0" />
+      <point x="970.9737903225805" y="543.0" />
+      <point x="1135.4148905529955" y="543.0" />
+      <point x="-48.75" y="30.5" />
+    </edge>
+    <edge source="robot.element.connexion.constant.axis.move.MoveY" target="robot.element.connexion.constant.axis.AxisMove">
+      <point x="-102.75" y="-58.0" />
+      <point x="4120.373799923195" y="838.0" />
+      <point x="4079.2237903225805" y="838.0" />
+      <point x="-16.5" y="44.5" />
+    </edge>
+    <edge source="robot.element.connexion.Composite" target="robot.element.Element">
+      <point x="-154.125" y="-72.0" />
+      <point x="530.5987903225805" y="339.0" />
+      <point x="505.1612903225805" y="339.0" />
+      <point x="505.1612903225805" y="223.0" />
+      <point x="537.9050499231948" y="223.0" />
+      <point x="102.75" y="99.0" />
+    </edge>
+    <edge source="robot.element.connexion.joint.Joint" target="robot.element.connexion.Connexion">
+      <point x="0.0" y="-30.5" />
+      <point x="1184.1648905529955" y="339.0" />
+      <point x="928.3693356374807" y="339.0" />
+      <point x="55.71428571428578" y="30.5" />
+    </edge>
+    <edge source="robot.element.connexion.constant.axis.rotation.Rolling" target="robot.element.connexion.constant.axis.AxisRotation">
+      <point x="-102.75000000000023" y="-58.0" />
+      <point x="2827.3737999231944" y="838.0" />
+      <point x="2789.3904569892475" y="838.0" />
+      <point x="-18.083333333333258" y="44.5" />
+    </edge>
+    <edge source="robot.Robot" target="robot.element.connexion.Composite">
+      <point x="77.0625" y="-112.5" />
+      <point x="479.7862903225805" y="523.0" />
+      <point x="684.7237903225805" y="523.0" />
+      <point x="0.0" y="72.0" />
+    </edge>
+    <edge source="robot.element.connexion.joint.Orthogonal" target="robot.element.connexion.joint.Linear">
+      <point x="102.75" y="-58.0" />
+      <point x="2170.873799923195" y="828.0" />
+      <point x="1895.9737903225805" y="828.0" />
+      <point x="70.5" y="72.0" />
+    </edge>
+    <edge source="robot.Robot" target="robot.element.Element">
+      <point x="-25.6875" y="-112.5" />
+      <point x="377.0362903225805" y="543.0" />
+      <point x="421.5" y="543.0" />
+      <point x="421.5" y="223.0" />
+      <point x="400.90504992319484" y="223.0" />
+      <point x="-34.25" y="99.0" />
+    </edge>
+    <edge source="robot.element.connexion.constant.Constant" target="robot.element.connexion.Connexion">
+      <point x="0.0" y="-30.5" />
+      <point x="3441.331557219662" y="329.0" />
+      <point x="956.2264784946234" y="329.0" />
+      <point x="83.57142857142844" y="30.5" />
+    </edge>
+    <edge source="robot.element.connexion.constant.axis.rotation.Pitching" target="robot.element.connexion.constant.axis.AxisRotation">
+      <point x="-102.75" y="-58.0" />
+      <point x="2396.373799923195" y="828.0" />
+      <point x="2717.0571236559135" y="828.0" />
+      <point x="-90.41666666666674" y="44.5" />
+    </edge>
+    <edge source="robot.element.connexion.constant.axis.AxisMove" target="robot.element.connexion.constant.Constant">
+      <point x="0.0" y="-44.5" />
+      <point x="4095.7237903225805" y="543.0" />
+      <point x="3490.081557219662" y="543.0" />
+      <point x="48.75" y="30.5" />
+    </edge>
+    <edge source="robot.element.terminal.organ.TerminalOrgan" target="robot.element.Element">
+      <point x="102.75" y="-30.5" />
+      <point x="308.25" y="223.0" />
+      <point x="332.40504992319484" y="223.0" />
+      <point x="-102.75" y="99.0" />
+    </edge>
+    <edge source="robot.element.connexion.constant.axis.move.MoveZ" target="robot.element.connexion.constant.axis.AxisMove">
+      <point x="102.75" y="-58.0" />
+      <point x="4756.873799923195" y="808.0" />
+      <point x="4178.2237903225805" y="808.0" />
+      <point x="82.5" y="44.5" />
+    </edge>
+    <edge source="robot.Robot" target="robot.element.terminal.organ.Default">
+      <point x="-128.4375" y="-112.5" />
+      <point x="274.2862903225805" y="533.0" />
+      <point x="186.75" y="533.0" />
+      <point x="0.0" y="30.5" />
+    </edge>
+    <edge source="robot.element.terminal.organ.Default" target="robot.element.terminal.organ.TerminalOrgan">
+      <point x="0.0" y="-30.5" />
+      <point x="186.75" y="339.0" />
+      <point x="205.5" y="339.0" />
+      <point x="0.0" y="30.5" />
+    </edge>
+    <edge source="robot.element.connexion.joint.Revolving" target="robot.element.connexion.joint.Rotation">
+      <point x="-102.75" y="-58.0" />
+      <point x="672.3737999231948" y="828.0" />
+      <point x="889.2237903225805" y="828.0" />
+      <point x="-81.75" y="72.0" />
+    </edge>
+    <edge source="robot.element.connexion.Composite" target="robot.element.connexion.Connexion">
+      <point x="51.375" y="-72.0" />
+      <point x="736.0987903225805" y="339.0" />
+      <point x="816.9407642089092" y="339.0" />
+      <point x="-55.71428571428578" y="30.5" />
+    </edge>
+    <edge source="robot.element.connexion.constant.axis.move.MoveX" target="robot.element.connexion.constant.axis.AxisMove">
+      <point x="-102.75" y="-58.0" />
+      <point x="3689.3737999231953" y="828.0" />
+      <point x="4013.2237903225805" y="828.0" />
+      <point x="-82.5" y="44.5" />
+    </edge>
+    <edge source="robot.element.connexion.constant.axis.rotation.Yawing" target="robot.element.connexion.constant.axis.AxisRotation">
+      <point x="102.75" y="-58.0" />
+      <point x="3463.873799923195" y="808.0" />
+      <point x="2897.890456989247" y="808.0" />
+      <point x="90.41666666666652" y="44.5" />
+    </edge>
+    <edge source="robot.element.connexion.constant.axis.AxisRotation" target="robot.element.connexion.constant.Constant">
+      <point x="0.0" y="-44.5" />
+      <point x="2807.4737903225805" y="543.0" />
+      <point x="3392.581557219662" y="543.0" />
+      <point x="-48.75" y="30.5" />
+    </edge>
+    <edge source="robot.element.connexion.Connexion" target="robot.element.Element">
+      <point x="0.0" y="-30.5" />
+      <point x="872.655049923195" y="223.0" />
+      <point x="606.4050499231948" y="223.0" />
+      <point x="171.25" y="99.0" />
+    </edge>
+    <edge source="robot.element.connexion.joint.Collinear" target="robot.element.connexion.joint.Linear">
+      <point x="-102.75" y="-58.0" />
+      <point x="1534.3737999231948" y="828.0" />
+      <point x="1754.9737903225805" y="828.0" />
+      <point x="-70.5" y="72.0" />
+    </edge>
+    <edge source="robot.Robot" target="robot.element.connexion.Connexion">
+      <point x="128.4375" y="-112.5" />
+      <point x="531.1612903225805" y="533.0" />
+      <point x="900.7237903225805" y="533.0" />
+      <point x="900.7237903225805" y="339.0" />
+      <point x="872.655049923195" y="339.0" />
+      <point x="0.0" y="30.5" />
+    </edge>
+    <edge source="robot.Robot" target="robot.element.terminal.organ.TerminalOrgan">
+      <point x="-179.8125" y="-112.5" />
+      <point x="222.9112903225805" y="543.0" />
+      <point x="87.25" y="543.0" />
+      <point x="87.25" y="339.0" />
+      <point x="68.5" y="339.0" />
+      <point x="-137.0" y="30.5" />
+    </edge>
+    <edge source="robot.element.connexion.joint.Rotational" target="robot.element.connexion.joint.Rotation">
+      <point x="-102.75" y="-58.0" />
+      <point x="1103.3737999231948" y="838.0" />
+      <point x="998.2237903225805" y="838.0" />
+      <point x="27.25" y="72.0" />
+    </edge>
+    <edge source="robot.element.connexion.joint.Linear" target="robot.element.connexion.joint.Joint">
+      <point x="0.0" y="-72.0" />
+      <point x="1825.4737903225805" y="543.0" />
+      <point x="1232.9148905529955" y="543.0" />
+      <point x="48.75" y="30.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.0" x="601.0" y="98.5" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Constructors</Category>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

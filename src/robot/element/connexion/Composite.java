@@ -1,7 +1,6 @@
 package robot.element.connexion;
 
-import com.sun.j3d.utils.universe.SimpleUniverse;
-import robot.math.ConstructionFrame;
+import javax.media.j3d.Transform3D;
 
 public abstract class Composite extends Connexion {
 
@@ -24,22 +23,14 @@ public abstract class Composite extends Connexion {
     }
 
     @Override
-    public ConstructionFrame changeFrame(ConstructionFrame frame) {
+    public Transform3D applyTransformation(Transform3D transform3D) {
 
-        setFrame(frame);
-
-        for (Connexion c : connexions) {
-            frame = c.changeFrame(frame);
-        }
-
-        return frame;
-    }
-
-    @Override
-    public void draw(SimpleUniverse universe) {
+        setTransform3D(transform3D);
 
         for (Connexion c : connexions) {
-            c.draw(universe);
+            transform3D = c.applyTransformation(transform3D);
         }
+
+        return transform3D;
     }
 }

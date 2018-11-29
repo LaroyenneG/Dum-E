@@ -1,28 +1,32 @@
 package robot.element;
 
-import com.sun.j3d.utils.universe.SimpleUniverse;
-import robot.math.ConstructionFrame;
+import javax.media.j3d.Transform3D;
 
 public abstract class Element {
 
-    private ConstructionFrame frame;
+    private Transform3D transform3D;
 
     public Element() {
-        frame = new ConstructionFrame();
+        transform3D = new Transform3D();
     }
 
-    public ConstructionFrame getFrame() {
-        return frame;
+    public Transform3D getTransform3D() {
+        return transform3D;
     }
 
-    public void setFrame(ConstructionFrame frame) {
-        this.frame = frame;
+    public void setTransform3D(Transform3D transform3D) {
+        this.transform3D = transform3D;
     }
 
     @Override
-    public abstract String toString();
+    public String toString() {
 
-    public abstract ConstructionFrame changeFrame(ConstructionFrame frame);
+        StringBuilder builder = new StringBuilder();
 
-    public abstract void draw(SimpleUniverse universe);
+        builder.append(this.getClass().getSimpleName());
+
+        return new String(builder);
+    }
+
+    public abstract Transform3D applyTransformation(Transform3D transform3D);
 }

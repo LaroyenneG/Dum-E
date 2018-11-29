@@ -1,8 +1,8 @@
 package robot.element.connexion.constant.axis.rotation;
 
-import com.sun.j3d.utils.universe.SimpleUniverse;
 import robot.element.connexion.constant.axis.AxisRotation;
-import robot.math.ConstructionFrame;
+
+import javax.media.j3d.Transform3D;
 
 public class Rolling extends AxisRotation {
 
@@ -16,12 +16,7 @@ public class Rolling extends AxisRotation {
     }
 
     @Override
-    public ConstructionFrame changeFrame(ConstructionFrame frame) {
+    public Transform3D applyTransformation(Transform3D transform3D) {
         return null;
-    }
-
-    @Override
-    public void draw(SimpleUniverse universe) {
-
     }
 }

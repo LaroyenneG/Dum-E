@@ -1,13 +1,14 @@
 package robot.element.terminal.organ;
 
 import robot.element.Element;
-import robot.math.ConstructionFrame;
+
+import javax.media.j3d.Transform3D;
 
 public abstract class TerminalOrgan extends Element {
 
     @Override
-    public ConstructionFrame changeFrame(ConstructionFrame frame) {
-        setFrame(frame);
+    public Transform3D applyTransformation(Transform3D transform3D) {
+        setTransform3D(transform3D);
         return null;
     }
 }
