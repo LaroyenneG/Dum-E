@@ -1,4 +1,4 @@
-package dume;
+import dume.DumE;
 
 import java.io.BufferedReader;
 import java.io.IOException;

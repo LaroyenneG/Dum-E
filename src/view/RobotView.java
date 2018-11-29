@@ -23,13 +23,6 @@ public class RobotView extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
     }
-/*
-    @Override
-    public void repaint() {
-        canvas3D.preRender();
-    }
-*/
-
 
     public Canvas3D getCanvas3D() {
         return canvas3D;

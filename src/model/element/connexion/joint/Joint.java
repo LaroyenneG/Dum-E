@@ -5,8 +5,12 @@ import model.element.connexion.Connexion;
 public abstract class Joint extends Connexion {
 
     @Override
-    public int jointsNumber() {
+    public Joint[] getJoints() {
+        return new Joint[]{this};
+    }
 
+    @Override
+    public int jointsNumber() {
         return 1;
     }
 }
