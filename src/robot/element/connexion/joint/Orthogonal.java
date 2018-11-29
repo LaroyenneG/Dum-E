@@ -1,7 +1,7 @@
 package robot.element.connexion.joint;
 
 import com.sun.j3d.utils.universe.SimpleUniverse;
-import robot.math.Operation3D;
+import robot.math.ConstructionFrame;
 
 public class Orthogonal extends Linear {
 
@@ -15,7 +15,7 @@ public class Orthogonal extends Linear {
     }
 
     @Override
-    public Operation3D changeFrame(Operation3D frame) {
+    public ConstructionFrame changeFrame(ConstructionFrame frame) {
         return null;
     }
 

@@ -2,7 +2,7 @@ package robot.element.connexion.constant.axis.rotation;
 
 import com.sun.j3d.utils.universe.SimpleUniverse;
 import robot.element.connexion.constant.axis.AxisRotation;
-import robot.math.Operation3D;
+import robot.math.ConstructionFrame;
 
 public class Yawing extends AxisRotation {
 
@@ -16,7 +16,7 @@ public class Yawing extends AxisRotation {
     }
 
     @Override
-    public Operation3D changeFrame(Operation3D frame) {
+    public ConstructionFrame changeFrame(ConstructionFrame frame) {
         return null;
     }
 

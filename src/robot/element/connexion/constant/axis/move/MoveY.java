@@ -2,7 +2,7 @@ package robot.element.connexion.constant.axis.move;
 
 import com.sun.j3d.utils.universe.SimpleUniverse;
 import robot.element.connexion.constant.axis.AxisMove;
-import robot.math.Operation3D;
+import robot.math.ConstructionFrame;
 
 public class MoveY extends AxisMove {
 
@@ -16,7 +16,7 @@ public class MoveY extends AxisMove {
     }
 
     @Override
-    public Operation3D changeFrame(Operation3D frame) {
+    public ConstructionFrame changeFrame(ConstructionFrame frame) {
         return null;
     }
 
