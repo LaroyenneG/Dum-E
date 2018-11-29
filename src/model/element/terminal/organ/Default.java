@@ -1,9 +1,8 @@
-package dume;
+package model.element.terminal.organ;
 
 import model.ElementVisitor;
-import model.element.terminal.organ.TerminalOrgan;
 
-public class Pliers extends TerminalOrgan {
+public class Default extends TerminalOrgan {
 
     @Override
     public String toString() {

@@ -1,6 +1,6 @@
 package dume;
 
-import robot.Robot;
+import model.element.robot.Robot;
 
 public class DumE extends Robot {
 
