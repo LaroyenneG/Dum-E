@@ -2,7 +2,6 @@ package model.element.robot;
 
 import model.ElementVisitor;
 import model.element.Element;
-import model.element.connexion.Composite;
 import model.element.connexion.Connexion;
 import model.element.terminal.organ.Default;
 import model.element.terminal.organ.TerminalOrgan;
@@ -19,7 +18,7 @@ public abstract class Robot extends Element {
         this.connexions = connexions;
     }
 
-    public Robot(Composite connexions) {
+    public Robot(Connexion... connexions) {
         this(new Default(), connexions);
     }
 

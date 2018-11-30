@@ -7,8 +7,8 @@ import javax.swing.*;
 
 public class RobotView extends JFrame {
 
-    private static final int DEFAULT_WIDTH = 150;
-    private static final int DEFAULT_HEIGHT = 150;
+    private static final int DEFAULT_WIDTH = 550;
+    private static final int DEFAULT_HEIGHT = 550;
 
     private Canvas3D canvas3D;
 
