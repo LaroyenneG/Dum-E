@@ -7,6 +7,6 @@ import view.RobotView;
 public class ControlGroup {
 
     public ControlGroup(Robot robot, RobotView view) {
-        new RobotController(robot, view);
+        new TerminalController(robot, view);
     }
 }
