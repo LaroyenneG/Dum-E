@@ -4,8 +4,7 @@ package view;
 import com.sun.j3d.utils.universe.SimpleUniverse;
 import model.ElementVisitor;
 
-import javax.media.j3d.BranchGroup;
-import javax.media.j3d.Canvas3D;
+import javax.media.j3d.*;
 
 public class ElementDraftman implements ElementVisitor {
 
@@ -22,7 +21,19 @@ public class ElementDraftman implements ElementVisitor {
 
 
     public void display() {
+
         theScene.compile();
         universe.addBranchGraph(theScene);
+
+        TransformGroup tgPlatform = new TransformGroup(new Transform3D());
+    }
+
+
+    private void addToScene(Node node, Transform3D transform3D) {
+
+        TransformGroup group = new TransformGroup(transform3D);
+        group.addChild(node);
+
+        theScene.addChild(group);
     }
 }

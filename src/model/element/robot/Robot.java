@@ -28,6 +28,13 @@ public abstract class Robot extends Element {
 
         StringBuilder builder = new StringBuilder();
 
+        builder.append(super.toString());
+
+        builder.append("\nConnexions :\n");
+        builder.append(connexions);
+        builder.append("\nTerminal organ :\n");
+        builder.append(terminalOrgan);
+
         return new String(builder);
     }
 

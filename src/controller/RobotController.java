@@ -8,6 +8,4 @@ public class RobotController extends Controller {
     public RobotController(Robot model, RobotView view) {
         super(model, view);
     }
-
-
 }

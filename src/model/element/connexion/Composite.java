@@ -42,6 +42,21 @@ public abstract class Composite extends Connexion {
     }
 
     @Override
+    public String toString() {
+
+        StringBuilder builder = new StringBuilder();
+
+        builder.append(super.toString());
+
+        for (Simple s : simples) {
+            builder.append("\n\t");
+            builder.append(s);
+        }
+
+        return new String(builder);
+    }
+
+    @Override
     public Transform3D applyTransformation(Transform3D transform3D) {
 
         super.applyTransformation(transform3D);

@@ -18,7 +18,12 @@ public class Yawing extends AxisRotation {
 
     @Override
     public Transform3D applyTransformation(Transform3D transform3D) {
-        return null;
+
+        super.applyTransformation(transform3D);
+
+        transform3D.rotY(getValue());
+
+        return transform3D;
     }
 
     @Override

@@ -26,6 +26,7 @@ public abstract class Element {
         StringBuilder builder = new StringBuilder();
 
         builder.append(this.getClass().getSimpleName());
+        builder.append(transform3D);
 
         return new String(builder);
     }
