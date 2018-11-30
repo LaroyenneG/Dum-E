@@ -12,11 +12,6 @@ public class Collinear extends Linear {
     }
 
     @Override
-    public String toString() {
-        return null;
-    }
-
-    @Override
     public Transform3D applyTransformation(Transform3D transform3D) {
 
         return transform3D;

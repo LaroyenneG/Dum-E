@@ -16,7 +16,7 @@ public abstract class AbstractController {
         this.view = view;
     }
 
-    private void virtualize(Canvas3D canvas3D) {
+    private void virtualized(Canvas3D canvas3D) {
 
         ElementDraftman elementDraftman = new ElementDraftman(canvas3D);
 
@@ -28,10 +28,14 @@ public abstract class AbstractController {
 
     protected void displayView() {
 
+        model.build();
+
         Canvas3D canvas3D = view.getCanvas3D();
 
-        virtualize(canvas3D);
+        virtualized(canvas3D);
 
         view.repaint();
+
+        System.out.println(model);
     }
 }

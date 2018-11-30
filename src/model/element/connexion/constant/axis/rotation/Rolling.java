@@ -12,11 +12,6 @@ public class Rolling extends AxisRotation {
     }
 
     @Override
-    public String toString() {
-        return null;
-    }
-
-    @Override
     public Transform3D applyTransformation(Transform3D transform3D) {
 
         super.applyTransformation(transform3D);

@@ -30,7 +30,10 @@ public abstract class Robot extends Element {
         builder.append(super.toString());
 
         builder.append("\nConnexions :\n");
-        builder.append(connexions);
+        for (Connexion connexion : connexions) {
+            builder.append("\n");
+            builder.append(connexion);
+        }
         builder.append("\nTerminal organ :\n");
         builder.append(terminalOrgan);
 
@@ -52,5 +55,14 @@ public abstract class Robot extends Element {
     @Override
     public void accept(ElementVisitor sv) {
 
+        for (Connexion connexion : connexions) {
+            connexion.accept(sv);
+        }
+
+        terminalOrgan.accept(sv);
+    }
+
+    public void build() {
+        applyTransformation(getTransform3D());
     }
 }

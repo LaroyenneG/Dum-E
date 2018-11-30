@@ -17,7 +17,6 @@ public class RobotView extends JFrame {
         canvas3D = new Canvas3D(SimpleUniverse.getPreferredConfiguration());
 
         add(canvas3D);
-
         setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
         setTitle(name);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

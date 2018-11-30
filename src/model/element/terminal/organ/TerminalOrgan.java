@@ -8,7 +8,9 @@ public abstract class TerminalOrgan extends Element {
 
     @Override
     public Transform3D applyTransformation(Transform3D transform3D) {
-        setTransform3D(transform3D);
-        return null;
+
+        super.applyTransformation(transform3D);
+
+        return transform3D;
     }
 }

@@ -48,9 +48,9 @@ public abstract class Composite extends Connexion {
 
         builder.append(super.toString());
 
-        for (Simple s : simples) {
-            builder.append("\n\t");
-            builder.append(s);
+        for (Simple simple : simples) {
+            builder.append("\n");
+            builder.append(simple);
         }
 
         return new String(builder);

@@ -7,5 +7,6 @@ public class RobotController extends AbstractController {
 
     public RobotController(Robot model, RobotView view) {
         super(model, view);
+        displayView();
     }
 }

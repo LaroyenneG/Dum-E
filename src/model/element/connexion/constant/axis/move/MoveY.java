@@ -13,11 +13,6 @@ public class MoveY extends AxisMove {
     }
 
     @Override
-    public String toString() {
-        return null;
-    }
-
-    @Override
     public Transform3D applyTransformation(Transform3D transform3D) {
 
         super.applyTransformation(transform3D);
