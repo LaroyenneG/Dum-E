@@ -11,6 +11,6 @@ public class Default extends TerminalOrgan {
 
     @Override
     public void accept(ElementVisitor sv) {
-
+        sv.virtualizedDefault(this);
     }
 }

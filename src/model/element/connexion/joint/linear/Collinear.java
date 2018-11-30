@@ -7,7 +7,7 @@ import javax.media.j3d.Transform3D;
 
 public class Collinear extends Linear {
 
-    public Collinear(int value) {
+    public Collinear(double value) {
         super(value);
     }
 
@@ -18,7 +18,8 @@ public class Collinear extends Linear {
 
     @Override
     public Transform3D applyTransformation(Transform3D transform3D) {
-        return null;
+
+        return transform3D;
     }
 
     @Override

@@ -1,8 +1,10 @@
 package view;
 
 
+import com.sun.j3d.utils.geometry.Cone;
 import com.sun.j3d.utils.universe.SimpleUniverse;
 import model.ElementVisitor;
+import model.element.terminal.organ.Default;
 
 import javax.media.j3d.*;
 
@@ -12,7 +14,6 @@ public class ElementDraftman implements ElementVisitor {
     private BranchGroup theScene;
 
     public ElementDraftman(Canvas3D canvas3D) {
-
         theScene = new BranchGroup();
         universe = new SimpleUniverse(canvas3D);
         universe.getViewingPlatform().setNominalViewingTransform();
@@ -24,8 +25,6 @@ public class ElementDraftman implements ElementVisitor {
 
         theScene.compile();
         universe.addBranchGraph(theScene);
-
-        TransformGroup tgPlatform = new TransformGroup(new Transform3D());
     }
 
 
@@ -35,5 +34,13 @@ public class ElementDraftman implements ElementVisitor {
         group.addChild(node);
 
         theScene.addChild(group);
+    }
+
+    @Override
+    public void virtualizedDefault(Default organ) {
+
+        Cone cone = new Cone(0.3f, 0.5f);
+
+        addToScene(cone, organ.getTransform3D());
     }
 }
