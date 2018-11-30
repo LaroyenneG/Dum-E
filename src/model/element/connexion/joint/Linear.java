@@ -5,7 +5,7 @@ public abstract class Linear extends Joint {
     private double value;
 
     public Linear(double value) {
-        setValue(value);
+        super(value);
     }
 
     public double getValue() {
@@ -13,6 +13,11 @@ public abstract class Linear extends Joint {
     }
 
     public void setValue(double value) {
-        this.value = (value < 0.0) ? value : 0.0;
+        this.value = value;
+    }
+
+    @Override
+    public double clearValue(double v) {
+        return (v < 0.0) ? 0.0 : v;
     }
 }

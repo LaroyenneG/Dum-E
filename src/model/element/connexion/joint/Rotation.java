@@ -2,17 +2,12 @@ package model.element.connexion.joint;
 
 public abstract class Rotation extends Joint {
 
-    private double value;
-
     public Rotation(double value) {
-        setValue(value);
+        super(value);
     }
 
-    public double getValue() {
-        return value;
-    }
-
-    public void setValue(double value) {
-        this.value = value % Math.PI;
+    @Override
+    public double clearValue(double v) {
+        return v % Math.PI;
     }
 }

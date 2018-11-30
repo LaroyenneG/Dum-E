@@ -4,6 +4,7 @@ import model.ElementVisitor;
 import model.element.connexion.joint.Rotation;
 
 public class Twisting extends Rotation {
+
     public Twisting(double value) {
         super(value);
     }
