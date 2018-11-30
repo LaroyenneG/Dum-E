@@ -8,8 +8,8 @@ import javax.media.j3d.Canvas3D;
 
 public abstract class AbstractController {
 
-    private Robot model;
-    private RobotView view;
+    protected Robot model;
+    protected RobotView view;
 
     public AbstractController(Robot model, RobotView view) {
         this.model = model;

@@ -6,5 +6,5 @@ public abstract class Connexion extends Element {
 
     public abstract boolean isSimple();
 
-    public abstract boolean isConnexion();
+    public abstract boolean isComposite();
 }

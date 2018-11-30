@@ -20,7 +20,7 @@ public abstract class Constant extends Simple {
     }
 
     @Override
-    public boolean isConstant() {
+    public boolean isComposite() {
         return true;
     }
 }

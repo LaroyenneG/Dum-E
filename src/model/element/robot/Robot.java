@@ -1,14 +1,18 @@
 package model.element.robot;
 
 import model.ElementVisitor;
+import model.NumerousJoints;
 import model.element.Element;
+import model.element.connexion.Composite;
 import model.element.connexion.Connexion;
+import model.element.connexion.Simple;
+import model.element.connexion.joint.Joint;
 import model.element.terminal.organ.Default;
 import model.element.terminal.organ.TerminalOrgan;
 
 import javax.media.j3d.Transform3D;
 
-public abstract class Robot extends Element {
+public abstract class Robot extends Element implements NumerousJoints {
 
     private Connexion[] connexions;
     private TerminalOrgan terminalOrgan;
@@ -20,6 +24,61 @@ public abstract class Robot extends Element {
 
     public Robot(Connexion... connexions) {
         this(new Default(), connexions);
+    }
+
+    @Override
+    public int jointsNumber() {
+
+        int n = 0;
+
+        for (Connexion connexion : connexions) {
+
+            if (connexion.isComposite()) {
+                n += ((Composite) connexion).jointsNumber();
+            }
+
+            if (connexion.isSimple()) {
+                if (((Simple) connexion).isJoint()) {
+                    n++;
+                }
+            }
+        }
+
+        return n;
+    }
+
+    @Override
+    public Joint[] getJoints() {
+
+        Joint[] joints = new Joint[jointsNumber()];
+
+
+        int count = 0;
+        for (Connexion connexion : connexions) {
+
+            if (connexion.isSimple()) {
+
+                Simple simple = (Simple) connexion;
+
+                if (simple.isJoint()) {
+                    joints[count] = (Joint) simple;
+                    count++;
+                }
+            }
+
+            if (connexion.isComposite()) {
+
+                Composite composite = (Composite) connexion;
+
+                Joint[] tmp = composite.getJoints();
+
+                System.arraycopy(tmp, 0, joints, count, tmp.length);
+
+                count += tmp.length;
+            }
+        }
+
+        return joints;
     }
 
     @Override

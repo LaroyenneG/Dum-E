@@ -1,10 +1,11 @@
 package model.element.connexion;
 
+import model.NumerousJoints;
 import model.element.connexion.joint.Joint;
 
 import javax.media.j3d.Transform3D;
 
-public abstract class Composite extends Connexion {
+public abstract class Composite extends Connexion implements NumerousJoints {
 
     private Simple[] simples;
 
@@ -12,6 +13,7 @@ public abstract class Composite extends Connexion {
         this.simples = simples;
     }
 
+    @Override
     public Joint[] getJoints() {
 
         Joint[] joints = new Joint[jointsNumber()];
@@ -28,6 +30,7 @@ public abstract class Composite extends Connexion {
     }
 
 
+    @Override
     public int jointsNumber() {
 
         int n = 0;
@@ -70,11 +73,11 @@ public abstract class Composite extends Connexion {
 
     @Override
     public boolean isSimple() {
-        return true;
+        return false;
     }
 
     @Override
-    public boolean isConnexion() {
+    public boolean isComposite() {
         return true;
     }
 }

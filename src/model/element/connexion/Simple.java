@@ -8,11 +8,9 @@ public abstract class Simple extends Connexion {
     }
 
     @Override
-    public boolean isConnexion() {
+    public boolean isComposite() {
         return false;
     }
 
     public abstract boolean isJoint();
-
-    public abstract boolean isConstant();
 }
