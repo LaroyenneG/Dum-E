@@ -13,4 +13,6 @@ public abstract class Simple extends Connexion {
     }
 
     public abstract boolean isJoint();
+
+    public abstract boolean isConstant();
 }

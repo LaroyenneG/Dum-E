@@ -14,13 +14,12 @@ public abstract class Constant extends Simple {
         return value;
     }
 
-    @Override
-    public boolean isJoint() {
-        return false;
+    public boolean isConstant() {
+        return true;
     }
 
     @Override
-    public boolean isComposite() {
-        return true;
+    public boolean isJoint() {
+        return false;
     }
 }

@@ -28,7 +28,7 @@ public abstract class Joint extends Simple {
     }
 
     @Override
-    public boolean isComposite() {
-        return true;
+    public boolean isConstant() {
+        return false;
     }
 }
