@@ -1,8 +1,8 @@
 package model.element.connexion.constant;
 
-import model.element.connexion.SimpleConnexion;
+import model.element.connexion.Simple;
 
-public abstract class Constant extends SimpleConnexion {
+public abstract class Constant extends Simple {
 
     private final double value;
 
@@ -17,5 +17,10 @@ public abstract class Constant extends SimpleConnexion {
     @Override
     public boolean isJoint() {
         return false;
+    }
+
+    @Override
+    public boolean isConstant() {
+        return true;
     }
 }

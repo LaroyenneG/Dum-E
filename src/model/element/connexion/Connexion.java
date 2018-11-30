@@ -5,4 +5,6 @@ import model.element.Element;
 public abstract class Connexion extends Element {
 
     public abstract boolean isSimple();
+
+    public abstract boolean isConnexion();
 }

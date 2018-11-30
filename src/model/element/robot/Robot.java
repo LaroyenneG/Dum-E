@@ -11,11 +11,12 @@ import javax.media.j3d.Transform3D;
 
 public abstract class Robot extends Element {
 
-    private Connexion connexions;
+    private Connexion[] connexions;
     private TerminalOrgan terminalOrgan;
 
     public Robot(TerminalOrgan terminalOrgan, Connexion... connexions) {
         this.terminalOrgan = terminalOrgan;
+        this.connexions = connexions;
     }
 
     public Robot(Composite connexions) {
@@ -34,6 +35,10 @@ public abstract class Robot extends Element {
     public Transform3D applyTransformation(Transform3D transform3D) {
 
         super.applyTransformation(transform3D);
+
+        for (Connexion connexion : connexions) {
+            connexion.applyTransformation(transform3D);
+        }
 
         return terminalOrgan.applyTransformation(transform3D);
     }

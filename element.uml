@@ -3,162 +3,160 @@
   <ID>JAVA</ID>
   <OriginalElement>model.element</OriginalElement>
   <nodes>
-    <node x="40.023550724637516" y="857.0">model.element.connexion.joint.rotation.Twisting</node>
-    <node x="1048.8985507246375" y="221.0">model.element.connexion.Connexion</node>
-    <node x="1512.5235507246375" y="636.5">model.element.connexion.joint.Linear</node>
-    <node x="4195.023550724638" y="830.0">model.element.connexion.constant.axis.rotation.Yawing</node>
-    <node x="1609.0235507246375" y="830.0">model.element.connexion.joint.linear.Collinear</node>
-    <node x="2471.0235507246375" y="830.0">model.element.connexion.constant.axis.move.MoveZ</node>
-    <node x="1178.0235507246375" y="830.0">model.element.connexion.joint.linear.Orthogonal</node>
-    <node x="2902.0235507246375" y="830.0">model.element.connexion.constant.axis.move.MoveY</node>
-    <node x="2040.0235507246375" y="830.0">model.element.connexion.constant.axis.move.MoveX</node>
-    <node x="922.9692028985505" y="401.5">model.element.connexion.joint.Joint</node>
-    <node x="316.0235507246375" y="830.0">model.element.connexion.joint.rotation.Revolving</node>
-    <node x="747.0235507246375" y="830.0">model.element.connexion.joint.rotation.Rotational</node>
-    <node x="3440.5235507246375" y="402.0">model.element.terminal.organ.Default</node>
-    <node x="431.0" y="636.5">model.element.connexion.joint.Rotation</node>
-    <node x="3764.0235507246375" y="830.0">model.element.connexion.constant.axis.rotation.Pitching</node>
-    <node x="3225.5235507246375" y="401.5">model.element.connexion.constant.Constant</node>
-    <node x="3333.0235507246375" y="830.0">model.element.connexion.constant.axis.rotation.Rolling</node>
-    <node x="0.0" y="360.0">model.element.connexion.Composite</node>
-    <node x="2542.25" y="636.5">model.element.connexion.constant.axis.AxisMove</node>
-    <node x="3363.0235507246375" y="235.0">model.element.terminal.organ.TerminalOrgan</node>
-    <node x="2162.7735507246375" y="0.0">model.element.Element</node>
-    <node x="0.0" y="582.0">model.element.robot.Robot</node>
-    <node x="3825.75" y="636.5">model.element.connexion.constant.axis.AxisRotation</node>
+    <node x="3168.5" y="285.0">model.element.connexion.Connexion</node>
+    <node x="426.0000000000002" y="861.0">model.element.connexion.joint.rotation.Twisting</node>
+    <node x="1419.5000000000002" y="703.0">model.element.connexion.joint.Linear</node>
+    <node x="4108.0" y="836.0">model.element.connexion.constant.axis.rotation.Yawing</node>
+    <node x="1126.0000000000002" y="836.0">model.element.connexion.joint.linear.Collinear</node>
+    <node x="1978.0000000000002" y="836.0">model.element.connexion.constant.axis.move.MoveZ</node>
+    <node x="1552.0000000000002" y="836.0">model.element.connexion.joint.linear.Orthogonal</node>
+    <node x="2830.0" y="836.0">model.element.connexion.constant.axis.move.MoveY</node>
+    <node x="942.7228260869565" y="493.5">model.element.connexion.joint.Joint</node>
+    <node x="2404.0" y="836.0">model.element.connexion.constant.axis.move.MoveX</node>
+    <node x="700.0000000000002" y="836.0">model.element.connexion.joint.rotation.Revolving</node>
+    <node x="645.9402173913045" y="519.5">model.element.terminal.organ.Default</node>
+    <node x="0.0" y="836.0">model.element.connexion.joint.rotation.Rotational</node>
+    <node x="483.731884057971" y="703.0">model.element.connexion.joint.Rotation</node>
+    <node x="3682.0" y="836.0">model.element.connexion.constant.axis.rotation.Pitching</node>
+    <node x="3256.0" y="836.0">model.element.connexion.constant.axis.rotation.Rolling</node>
+    <node x="3151.5" y="506.5">model.element.connexion.constant.Constant</node>
+    <node x="3360.5" y="468.0">model.element.connexion.Composite</node>
+    <node x="1951.0000000000002" y="0.0">model.element.Element</node>
+    <node x="1951.0000000000002" y="209.0">model.element.robot.Robot</node>
+    <node x="2587.014492753623" y="716.0">model.element.connexion.constant.axis.AxisMove</node>
+    <node x="569.9402173913045" y="285.0">model.element.terminal.organ.TerminalOrgan</node>
+    <node x="3854.514492753623" y="716.0">model.element.connexion.constant.axis.AxisRotation</node>
   </nodes>
   <notes />
   <edges>
     <edge source="model.element.connexion.joint.rotation.Revolving" target="model.element.connexion.joint.Rotation">
-      <point x="0.0" y="-71.5" />
-      <point x="521.5235507246375" y="805.0" />
-      <point x="525.0" y="805.0" />
-      <point x="0.0" y="44.5" />
-    </edge>
-    <edge source="model.element.connexion.constant.axis.rotation.Pitching" target="model.element.connexion.constant.axis.AxisRotation">
-      <point x="0.0" y="-71.5" />
-      <point x="3969.5235507246375" y="805.0" />
-      <point x="3934.25" y="805.0" />
-      <point x="0.0" y="44.5" />
+      <point x="0.0" y="-66.5" />
+      <point x="903.0000000000002" y="816.0" />
+      <point x="687.8985507246375" y="816.0" />
+      <point x="81.66666666666652" y="41.5" />
     </edge>
     <edge source="model.element.connexion.constant.axis.move.MoveZ" target="model.element.connexion.constant.axis.AxisMove">
-      <point x="0.0" y="-71.5" />
-      <point x="2676.5235507246375" y="805.0" />
-      <point x="2641.25" y="805.0" />
-      <point x="0.0" y="44.5" />
+      <point x="0.0" y="-66.5" />
+      <point x="2181.0" y="806.0" />
+      <point x="2619.014492753623" y="806.0" />
+      <point x="-64.0" y="28.5" />
+    </edge>
+    <edge source="model.element.connexion.constant.axis.rotation.Pitching" target="model.element.connexion.constant.axis.AxisRotation">
+      <point x="0.0" y="-66.5" />
+      <point x="3885.0" y="816.0" />
+      <point x="3961.014492753623" y="816.0" />
+      <point x="0.0" y="28.5" />
+    </edge>
+    <edge source="model.element.robot.Robot" target="model.element.Element">
+      <point x="0.0" y="-104.5" />
+      <point x="0.0" y="79.5" />
     </edge>
     <edge source="model.element.connexion.constant.axis.move.MoveY" target="model.element.connexion.constant.axis.AxisMove">
-      <point x="0.0" y="-71.5" />
-      <point x="3107.5235507246375" y="805.0" />
-      <point x="2707.25" y="805.0" />
-      <point x="66.0" y="44.5" />
+      <point x="0.0" y="-66.5" />
+      <point x="3033.0" y="816.0" />
+      <point x="2747.014492753623" y="816.0" />
+      <point x="64.0" y="28.5" />
     </edge>
     <edge source="model.element.connexion.Composite" target="model.element.connexion.Connexion">
-      <point x="0.0" y="-86.0" />
-      <point x="205.5" y="330.0" />
-      <point x="1081.3985507246375" y="330.0" />
-      <point x="-65.0" y="44.5" />
-    </edge>
-    <edge source="model.element.connexion.joint.Rotation" target="model.element.connexion.joint.Joint">
-      <point x="0.0" y="-44.5" />
-      <point x="525.0" y="557.0" />
-      <point x="971.7192028985505" y="557.0" />
-      <point x="-48.75" y="44.5" />
+      <point x="0.0" y="-92.5" />
+      <point x="3563.5" y="443.0" />
+      <point x="3297.666666666667" y="443.0" />
+      <point x="51.666666666666515" y="28.5" />
     </edge>
     <edge source="model.element.connexion.joint.rotation.Rotational" target="model.element.connexion.joint.Rotation">
-      <point x="0.0" y="-71.5" />
-      <point x="952.5235507246375" y="805.0" />
-      <point x="587.6666666666665" y="805.0" />
-      <point x="62.666666666666515" y="44.5" />
+      <point x="0.0" y="-66.5" />
+      <point x="203.0" y="816.0" />
+      <point x="524.5652173913045" y="816.0" />
+      <point x="-81.66666666666652" y="41.5" />
+    </edge>
+    <edge source="model.element.connexion.joint.Rotation" target="model.element.connexion.joint.Joint">
+      <point x="0.0" y="-41.5" />
+      <point x="606.231884057971" y="678.0" />
+      <point x="1003.9728260869565" y="678.0" />
+      <point x="-61.25" y="67.0" />
     </edge>
     <edge source="model.element.connexion.constant.axis.move.MoveX" target="model.element.connexion.constant.axis.AxisMove">
-      <point x="0.0" y="-71.5" />
-      <point x="2245.5235507246375" y="805.0" />
-      <point x="2575.25" y="805.0" />
-      <point x="-66.0" y="44.5" />
+      <point x="0.0" y="-66.5" />
+      <point x="2607.0" y="816.0" />
+      <point x="2683.014492753623" y="816.0" />
+      <point x="0.0" y="28.5" />
     </edge>
     <edge source="model.element.terminal.organ.TerminalOrgan" target="model.element.Element">
-      <point x="0.0" y="-30.5" />
-      <point x="3568.5235507246375" y="196.0" />
-      <point x="2471.0235507246375" y="196.0" />
-      <point x="102.75" y="85.5" />
+      <point x="0.0" y="-28.5" />
+      <point x="772.9402173913045" y="184.0" />
+      <point x="2018.6666666666667" y="184.0" />
+      <point x="-135.33333333333348" y="79.5" />
     </edge>
     <edge source="model.element.connexion.constant.axis.rotation.Rolling" target="model.element.connexion.constant.axis.AxisRotation">
-      <point x="0.0" y="-71.5" />
-      <point x="3538.5235507246375" y="805.0" />
-      <point x="3861.916666666667" y="805.0" />
-      <point x="-72.33333333333326" y="44.5" />
-    </edge>
-    <edge source="model.element.robot.Robot" target="model.element.connexion.Composite">
-      <point x="0.0" y="-99.0" />
-      <point x="0.0" y="86.0" />
+      <point x="0.0" y="-66.5" />
+      <point x="3459.0" y="806.0" />
+      <point x="3890.014492753623" y="806.0" />
+      <point x="-71.0" y="28.5" />
     </edge>
     <edge source="model.element.connexion.constant.Constant" target="model.element.connexion.Connexion">
-      <point x="0.0" y="-44.5" />
-      <point x="3323.0235507246375" y="340.0" />
-      <point x="1211.3985507246375" y="340.0" />
-      <point x="65.0" y="44.5" />
+      <point x="0.0" y="-54.0" />
+      <point x="0.0" y="28.5" />
     </edge>
     <edge source="model.element.connexion.joint.Joint" target="model.element.connexion.Connexion">
-      <point x="0.0" y="-44.5" />
-      <point x="1020.4692028985505" y="340.0" />
-      <point x="1146.3985507246375" y="340.0" />
-      <point x="0.0" y="44.5" />
+      <point x="0.0" y="-67.0" />
+      <point x="1065.2228260869565" y="443.0" />
+      <point x="3194.333333333334" y="443.0" />
+      <point x="-51.666666666666515" y="28.5" />
     </edge>
     <edge source="model.element.connexion.joint.linear.Collinear" target="model.element.connexion.joint.Linear">
-      <point x="0.0" y="-71.5" />
-      <point x="1814.5235507246375" y="805.0" />
-      <point x="1642.2735507246375" y="805.0" />
-      <point x="43.25" y="44.5" />
+      <point x="0.0" y="-66.5" />
+      <point x="1329.0000000000002" y="816.0" />
+      <point x="1480.7500000000002" y="816.0" />
+      <point x="-61.25" y="41.5" />
     </edge>
     <edge source="model.element.connexion.joint.linear.Orthogonal" target="model.element.connexion.joint.Linear">
-      <point x="0.0" y="-71.5" />
-      <point x="1383.5235507246375" y="805.0" />
-      <point x="1555.7735507246375" y="805.0" />
-      <point x="-43.25" y="44.5" />
+      <point x="0.0" y="-66.5" />
+      <point x="1755.0000000000002" y="816.0" />
+      <point x="1603.2500000000002" y="816.0" />
+      <point x="61.25" y="41.5" />
     </edge>
     <edge source="model.element.connexion.joint.Linear" target="model.element.connexion.joint.Joint">
-      <point x="0.0" y="-44.5" />
-      <point x="1599.0235507246375" y="557.0" />
-      <point x="1069.2192028985505" y="557.0" />
-      <point x="48.75" y="44.5" />
-    </edge>
-    <edge source="model.element.connexion.constant.axis.AxisRotation" target="model.element.connexion.constant.Constant">
-      <point x="0.0" y="-44.5" />
-      <point x="3934.25" y="557.0" />
-      <point x="3371.7735507246375" y="557.0" />
-      <point x="48.75" y="44.5" />
+      <point x="0.0" y="-41.5" />
+      <point x="1542.0000000000002" y="678.0" />
+      <point x="1126.4728260869565" y="678.0" />
+      <point x="61.25" y="67.0" />
     </edge>
     <edge source="model.element.connexion.Connexion" target="model.element.Element">
-      <point x="0.0" y="-44.5" />
-      <point x="1146.3985507246375" y="196.0" />
-      <point x="2265.5235507246375" y="196.0" />
-      <point x="-102.75" y="85.5" />
+      <point x="0.0" y="-28.5" />
+      <point x="3246.0" y="184.0" />
+      <point x="2289.333333333334" y="184.0" />
+      <point x="135.33333333333348" y="79.5" />
+    </edge>
+    <edge source="model.element.connexion.constant.axis.AxisRotation" target="model.element.connexion.constant.Constant">
+      <point x="0.0" y="-28.5" />
+      <point x="3961.014492753623" y="678.0" />
+      <point x="3293.25" y="678.0" />
+      <point x="47.25" y="54.0" />
     </edge>
     <edge source="model.element.terminal.organ.Default" target="model.element.terminal.organ.TerminalOrgan">
-      <point x="0.0" y="-44.0" />
-      <point x="0.0" y="30.5" />
+      <point x="0.0" y="-41.0" />
+      <point x="0.0" y="28.5" />
     </edge>
     <edge source="model.element.connexion.constant.axis.AxisMove" target="model.element.connexion.constant.Constant">
-      <point x="0.0" y="-44.5" />
-      <point x="2641.25" y="557.0" />
-      <point x="3274.2735507246375" y="557.0" />
-      <point x="-48.75" y="44.5" />
+      <point x="0.0" y="-28.5" />
+      <point x="2683.014492753623" y="678.0" />
+      <point x="3198.75" y="678.0" />
+      <point x="-47.25" y="54.0" />
     </edge>
     <edge source="model.element.connexion.joint.rotation.Twisting" target="model.element.connexion.joint.Rotation">
-      <point x="0.0" y="-44.5" />
-      <point x="168.02355072463752" y="805.0" />
-      <point x="462.3333333333335" y="805.0" />
-      <point x="-62.666666666666515" y="44.5" />
+      <point x="0.0" y="-41.5" />
+      <point x="553.0000000000002" y="816.0" />
+      <point x="606.231884057971" y="816.0" />
+      <point x="0.0" y="41.5" />
     </edge>
     <edge source="model.element.connexion.constant.axis.rotation.Yawing" target="model.element.connexion.constant.axis.AxisRotation">
-      <point x="0.0" y="-71.5" />
-      <point x="4400.523550724638" y="805.0" />
-      <point x="4006.583333333333" y="805.0" />
-      <point x="72.33333333333326" y="44.5" />
+      <point x="0.0" y="-66.5" />
+      <point x="4311.0" y="816.0" />
+      <point x="4032.014492753623" y="816.0" />
+      <point x="71.0" y="28.5" />
     </edge>
   </edges>
-  <settings layout="Hierarchic Group" zoom="0.47985236647850626" x="2293.0" y="488.4999999999999" />
+  <settings layout="Hierarchic Group" zoom="0.9440069234097793" x="2300.9999999999995" y="481.4999999999999" />
   <SelectedNodes />
   <Categories>
     <Category>Fields</Category>

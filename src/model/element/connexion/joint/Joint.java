@@ -1,8 +1,8 @@
 package model.element.connexion.joint;
 
-import model.element.connexion.SimpleConnexion;
+import model.element.connexion.Simple;
 
-public abstract class Joint extends SimpleConnexion {
+public abstract class Joint extends Simple {
 
     private double value;
 
@@ -24,6 +24,11 @@ public abstract class Joint extends SimpleConnexion {
 
     @Override
     public boolean isJoint() {
+        return true;
+    }
+
+    @Override
+    public boolean isConstant() {
         return true;
     }
 }

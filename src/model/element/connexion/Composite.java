@@ -6,10 +6,10 @@ import javax.media.j3d.Transform3D;
 
 public abstract class Composite extends Connexion {
 
-    private SimpleConnexion[] simpleConnexions;
+    private Simple[] simples;
 
-    public Composite(SimpleConnexion... simpleConnexions) {
-        this.simpleConnexions = simpleConnexions;
+    public Composite(Simple... simples) {
+        this.simples = simples;
     }
 
     public Joint[] getJoints() {
@@ -17,9 +17,9 @@ public abstract class Composite extends Connexion {
         Joint[] joints = new Joint[jointsNumber()];
 
         int count = 0;
-        for (SimpleConnexion simpleConnexion : simpleConnexions) {
-            if (simpleConnexion.isJoint()) {
-                joints[count] = (Joint) simpleConnexion;
+        for (Simple simple : simples) {
+            if (simple.isJoint()) {
+                joints[count] = (Joint) simple;
                 count++;
             }
         }
@@ -32,8 +32,8 @@ public abstract class Composite extends Connexion {
 
         int n = 0;
 
-        for (SimpleConnexion simpleConnexion : simpleConnexions) {
-            if (simpleConnexion.isJoint()) {
+        for (Simple simple : simples) {
+            if (simple.isJoint()) {
                 n++;
             }
         }
@@ -46,8 +46,8 @@ public abstract class Composite extends Connexion {
 
         super.applyTransformation(transform3D);
 
-        for (Connexion c : simpleConnexions) {
-            transform3D = c.applyTransformation(transform3D);
+        for (Connexion connexion : simples) {
+            connexion.applyTransformation(transform3D);
         }
 
         return transform3D;
@@ -55,6 +55,11 @@ public abstract class Composite extends Connexion {
 
     @Override
     public boolean isSimple() {
+        return true;
+    }
+
+    @Override
+    public boolean isConnexion() {
         return true;
     }
 }
