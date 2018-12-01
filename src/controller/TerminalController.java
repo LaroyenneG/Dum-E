@@ -27,7 +27,7 @@ public class TerminalController extends AbstractController {
         COMMANDS.put(ORBIT, 1);
     }
 
-    private Thread thread;
+    private final Thread thread;
 
     public TerminalController(Robot model, RobotView view) {
         super(model, view);
@@ -114,6 +114,8 @@ public class TerminalController extends AbstractController {
 
         @Override
         public void run() {
+
+            System.out.println("-------------------------------------------------------------------------------------");
 
             while (!isInterrupted()) {
 
