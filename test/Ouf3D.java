@@ -1,4 +1,3 @@
-import com.sun.istack.internal.NotNull;
 import com.sun.j3d.utils.behaviors.vp.OrbitBehavior;
 import com.sun.j3d.utils.geometry.Cylinder;
 import com.sun.j3d.utils.universe.SimpleUniverse;
@@ -59,7 +58,6 @@ public class Ouf3D extends JFrame {
     }
 
 
-    @NotNull
     public static void main(String[] args) {
         Ouf3D staticScene = new Ouf3D();
     }
@@ -67,7 +65,7 @@ public class Ouf3D extends JFrame {
 
     //In this method, the objects for the scene are generated and added to
     //the SimpleUniverse.
-    @NotNull
+
     public void createSceneGraph(SimpleUniverse su) {
 
         BranchGroup group = new BranchGroup();
