@@ -18,6 +18,8 @@ public class TerminalController extends AbstractController {
     private static final String AXIS = "axis";
     private static final String LIGHT = "light";
     private static final String ORBIT = "orbit";
+    private static final String CLEAR = "clear";
+    private static final String EXIT = "exit";
 
     static {
         COMMANDS.put(DRAW, 0);
@@ -25,6 +27,8 @@ public class TerminalController extends AbstractController {
         COMMANDS.put(AXIS, 1);
         COMMANDS.put(LIGHT, 1);
         COMMANDS.put(ORBIT, 1);
+        COMMANDS.put(CLEAR, 0);
+        COMMANDS.put(EXIT, 0);
     }
 
     private final Thread thread;
@@ -60,14 +64,17 @@ public class TerminalController extends AbstractController {
         switch (args[0]) {
 
             case RANDOM:
+
                 model.getJoints()[0].setValue(Double.parseDouble(args[1]));
                 break;
 
             case DRAW:
+
                 displayView();
                 break;
 
             case LIGHT:
+
                 if (args[1].equals("on")) {
                     view.addBackground();
                 } else if (args[1].equals("off")) {
@@ -78,6 +85,7 @@ public class TerminalController extends AbstractController {
                 break;
 
             case AXIS:
+
                 if (args[1].equals("on")) {
                     view.addAxis();
                 } else if (args[1].equals("off")) {
@@ -88,6 +96,7 @@ public class TerminalController extends AbstractController {
                 break;
 
             case ORBIT:
+
                 if (args[1].equals("on")) {
                     view.addOrbitBehavior();
                 } else if (args[1].equals("off")) {
@@ -95,6 +104,19 @@ public class TerminalController extends AbstractController {
                 } else {
                     usage(ORBIT, "<on/off>");
                 }
+                break;
+
+            case CLEAR:
+
+                if (args.length == 2 && args[1].equals("all")) {
+                    view.clearAll();
+                } else {
+                    view.clear();
+                }
+                break;
+
+            case EXIT:
+                System.exit(0);
                 break;
 
             default:

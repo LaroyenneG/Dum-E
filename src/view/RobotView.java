@@ -164,7 +164,18 @@ public class RobotView extends JFrame {
         scene.compile();
 
         simpleUniverse.addBranchGraph(scene);
-        this.scene.detach();
+        clear();
         this.scene = scene;
+    }
+
+    public void clear() {
+        scene.detach();
+    }
+
+    public void clearAll() {
+        removeOrbitBehavior();
+        removeBackground();
+        removeAxis();
+        clear();
     }
 }
