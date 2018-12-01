@@ -1,5 +1,6 @@
 package view;
 
+import com.sun.j3d.utils.behaviors.vp.OrbitBehavior;
 import com.sun.j3d.utils.universe.SimpleUniverse;
 
 import javax.media.j3d.Background;
@@ -13,8 +14,8 @@ import java.awt.*;
 
 public class RobotView extends JFrame {
 
-    private static final int DEFAULT_WIDTH = 550;
-    private static final int DEFAULT_HEIGHT = 550;
+    private static final int DEFAULT_WIDTH = 1000;
+    private static final int DEFAULT_HEIGHT = (int) (DEFAULT_WIDTH / 1.61803398875);
 
     private SimpleUniverse simpleUniverse;
     private BranchGroup scene;
@@ -31,30 +32,39 @@ public class RobotView extends JFrame {
         simpleUniverse = new SimpleUniverse(canvas3D);
         simpleUniverse.getViewingPlatform().setNominalViewingTransform();
 
-        simpleUniverse.addBranchGraph(createBackground());
+        addBackground();
+        addOrbitBehavior();
 
-        setTitle("Robot View");
+        setTitle("Robot Viewer");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
         getContentPane().setBackground(Color.WHITE);
-        setResizable(false);
+        setLocationRelativeTo(null);
+        setResizable(true);
         setVisible(true);
     }
 
-    private BranchGroup createBackground() {
+    private void addBackground() {
 
         final Background background = new Background(new Color3f(Color.WHITE));
         final BoundingSphere sphere = new BoundingSphere(new Point3d(), Double.MAX_VALUE);
 
         background.setApplicationBounds(sphere);
 
-        BranchGroup branchGroup = new BranchGroup();
+        final BranchGroup branchGroup = new BranchGroup();
         branchGroup.addChild(background);
         branchGroup.compile();
 
-        return branchGroup;
+        simpleUniverse.addBranchGraph(branchGroup);
     }
 
+    private void addOrbitBehavior() {
+
+        final OrbitBehavior orbitBehavior = new OrbitBehavior(canvas3D);
+        orbitBehavior.setSchedulingBounds(new BoundingSphere(new Point3d(), Double.MAX_VALUE));
+
+        simpleUniverse.getViewingPlatform().setViewPlatformBehavior(orbitBehavior);
+    }
 
     public SimpleUniverse getSimpleUniverse() {
         return simpleUniverse;
