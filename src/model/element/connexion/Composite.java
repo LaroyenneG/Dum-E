@@ -1,6 +1,6 @@
 package model.element.connexion;
 
-import model.NumerousJoints;
+import model.element.NumerousJoints;
 import model.element.connexion.joint.Joint;
 
 import javax.media.j3d.Transform3D;

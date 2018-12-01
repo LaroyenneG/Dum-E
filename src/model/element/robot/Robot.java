@@ -1,8 +1,8 @@
 package model.element.robot;
 
 import model.ElementVisitor;
-import model.NumerousJoints;
 import model.element.Element;
+import model.element.NumerousJoints;
 import model.element.connexion.Composite;
 import model.element.connexion.Connexion;
 import model.element.connexion.Simple;

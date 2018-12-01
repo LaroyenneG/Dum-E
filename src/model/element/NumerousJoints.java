@@ -1,4 +1,4 @@
-package model;
+package model.element;
 
 import model.element.connexion.joint.Joint;
 
