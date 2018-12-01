@@ -2,6 +2,7 @@ package view;
 
 
 import com.sun.j3d.utils.geometry.Cylinder;
+import com.sun.j3d.utils.geometry.Sphere;
 import model.ElementVisitor;
 import model.element.Element;
 import model.element.connexion.constant.axis.AxisMove;
@@ -11,7 +12,6 @@ import javax.media.j3d.BranchGroup;
 import javax.media.j3d.Node;
 import javax.media.j3d.Transform3D;
 import javax.media.j3d.TransformGroup;
-import javax.vecmath.Point3d;
 import javax.vecmath.Vector3d;
 
 public class ElementDraftMan implements ElementVisitor {
@@ -23,8 +23,7 @@ public class ElementDraftMan implements ElementVisitor {
         branchGroup.setCapability(BranchGroup.ALLOW_DETACH);
     }
 
-    public BranchGroup compile() {
-        branchGroup.compile();
+    public BranchGroup getResult() {
         return branchGroup;
     }
 
@@ -59,8 +58,20 @@ public class ElementDraftMan implements ElementVisitor {
         addToScene(cylinder, organ);
     }
 
+
+    @Override
+    public void virtualziedElement(Element element) {
+
+        Sphere sphere = new Sphere(0.01f);
+
+        addToScene(sphere, element);
+    }
+
     @Override
     public void virtualizedMove(AxisMove axisMove) {
+
+        virtualziedElement(axisMove);
+        /*
 
         Point3d axis = axisMove.getAxis();
 
@@ -68,21 +79,11 @@ public class ElementDraftMan implements ElementVisitor {
 
         Node cylinder = buildCylinder(0.02f, (float) axisMove.getValue());
 
-        if (axis.getX() != 0.0 && axis.getY() != 0.0 && axis.getZ() != 0.0) {
-            throw new IllegalStateException("invalid axis");
-        }
-
-        if (axis.getX() != 0.0) {
-            transform3D.rotZ(Math.PI / 2.0);
-        }
-
-        if (axis.getZ() != 0.0) {
-            transform3D.rotX(Math.PI / 2.0);
-        }
 
         TransformGroup transformGroup = new TransformGroup(transform3D);
         transformGroup.addChild(cylinder);
 
         addToScene(transformGroup, axisMove);
+        */
     }
 }

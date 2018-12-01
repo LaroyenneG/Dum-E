@@ -23,6 +23,6 @@ public abstract class AbstractController {
 
         model.accept(elementDraftman);
 
-        view.setNewScene(elementDraftman.compile());
+        view.setNewScene(elementDraftman.getResult());
     }
 }

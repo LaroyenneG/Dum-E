@@ -15,10 +15,16 @@ public class TerminalController extends AbstractController {
 
     private static final String DRAW = "draw";
     private static final String RANDOM = "random";
+    private static final String AXIS = "axis";
+    private static final String LIGHT = "light";
+    private static final String ORBIT = "orbit";
 
     static {
         COMMANDS.put(DRAW, 0);
         COMMANDS.put(RANDOM, 1);
+        COMMANDS.put(AXIS, 1);
+        COMMANDS.put(LIGHT, 1);
+        COMMANDS.put(ORBIT, 1);
     }
 
     private Thread thread;
@@ -27,6 +33,10 @@ public class TerminalController extends AbstractController {
         super(model, view);
         thread = new TerminalReader(this);
         thread.start();
+    }
+
+    private static void usage(String cmd, String args) {
+        System.err.println("Usage : " + cmd + " " + args);
     }
 
     private void execute(String line) {
@@ -55,6 +65,36 @@ public class TerminalController extends AbstractController {
 
             case DRAW:
                 displayView();
+                break;
+
+            case LIGHT:
+                if (args[1].equals("on")) {
+                    view.addBackground();
+                } else if (args[1].equals("off")) {
+                    view.removeBackground();
+                } else {
+                    usage(LIGHT, "<on/off>");
+                }
+                break;
+
+            case AXIS:
+                if (args[1].equals("on")) {
+                    view.addAxis();
+                } else if (args[1].equals("off")) {
+                    view.removeAxis();
+                } else {
+                    usage(AXIS, "<on/off>");
+                }
+                break;
+
+            case ORBIT:
+                if (args[1].equals("on")) {
+                    view.addOrbitBehavior();
+                } else if (args[1].equals("off")) {
+                    view.removeOrbitBehavior();
+                } else {
+                    usage(ORBIT, "<on/off>");
+                }
                 break;
 
             default:

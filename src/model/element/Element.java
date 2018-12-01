@@ -39,5 +39,8 @@ public abstract class Element {
         return transform3D;
     }
 
-    public abstract void accept(ElementVisitor sv);
+    public void accept(ElementVisitor sv) {
+
+        sv.virtualziedElement(this);
+    }
 }

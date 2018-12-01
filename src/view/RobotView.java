@@ -3,10 +3,7 @@ package view;
 import com.sun.j3d.utils.behaviors.vp.OrbitBehavior;
 import com.sun.j3d.utils.universe.SimpleUniverse;
 
-import javax.media.j3d.Background;
-import javax.media.j3d.BoundingSphere;
-import javax.media.j3d.BranchGroup;
-import javax.media.j3d.Canvas3D;
+import javax.media.j3d.*;
 import javax.swing.*;
 import javax.vecmath.Color3f;
 import javax.vecmath.Point3d;
@@ -18,22 +15,28 @@ public class RobotView extends JFrame {
     private static final int DEFAULT_HEIGHT = (int) (DEFAULT_WIDTH / 1.61803398875);
 
     private SimpleUniverse simpleUniverse;
-    private BranchGroup scene;
+
     private Canvas3D canvas3D;
 
-    public RobotView() {
+    private BranchGroup axis;
+    private BranchGroup background;
+    private BranchGroup scene;
 
-        scene = null;
+    private OrbitBehavior orbitBehavior;
+
+
+    public RobotView() {
 
         canvas3D = new Canvas3D(SimpleUniverse.getPreferredConfiguration());
 
         getContentPane().add(canvas3D);
 
-        simpleUniverse = new SimpleUniverse(canvas3D);
-        simpleUniverse.getViewingPlatform().setNominalViewingTransform();
+        createSimpleUniverse();
+        createBackground();
+        createOrbitBehavior();
+        createAxis();
 
-        addBackground();
-        addOrbitBehavior();
+        scene = new BranchGroup();
 
         setTitle("Robot Viewer");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -44,27 +47,109 @@ public class RobotView extends JFrame {
         setVisible(true);
     }
 
-    private void addBackground() {
+    private void createSimpleUniverse() {
 
-        final Background background = new Background(new Color3f(Color.WHITE));
-        final BoundingSphere sphere = new BoundingSphere(new Point3d(), Double.MAX_VALUE);
+        simpleUniverse = new SimpleUniverse(canvas3D);
+        simpleUniverse.getViewingPlatform().setNominalViewingTransform();
+    }
+
+    private void createBackground() {
+
+        Background background = new Background(new Color3f(Color.WHITE));
+        BoundingSphere sphere = new BoundingSphere(new Point3d(), Double.MAX_VALUE);
 
         background.setApplicationBounds(sphere);
 
-        final BranchGroup branchGroup = new BranchGroup();
-        branchGroup.addChild(background);
-        branchGroup.compile();
-
-        simpleUniverse.addBranchGraph(branchGroup);
+        this.background = new BranchGroup();
+        this.background.setCapability(BranchGroup.ALLOW_DETACH);
+        this.background.addChild(background);
+        this.background.compile();
     }
 
-    private void addOrbitBehavior() {
+    private void createOrbitBehavior() {
 
-        final OrbitBehavior orbitBehavior = new OrbitBehavior(canvas3D);
+        orbitBehavior = new OrbitBehavior(canvas3D);
         orbitBehavior.setSchedulingBounds(new BoundingSphere(new Point3d(), Double.MAX_VALUE));
+    }
 
+    private void createAxis() {
+
+        axis = new BranchGroup();
+        axis.setCapability(BranchGroup.ALLOW_DETACH);
+
+        Appearance appearance = null;
+        ColoringAttributes coloringAttributes = null;
+
+        appearance = new Appearance();
+        coloringAttributes = new ColoringAttributes();
+        coloringAttributes.setColor(new Color3f(Color.RED));
+        appearance.setColoringAttributes(coloringAttributes);
+
+        LineArray lineX = new LineArray(2, LineArray.COORDINATES);
+        lineX.setCoordinate(0, new Point3d());
+        lineX.setCoordinate(1, new Point3d(Float.MAX_VALUE, 0, 0));
+        Shape3D x = new Shape3D(lineX);
+        x.setAppearance(appearance);
+        axis.addChild(x);
+
+        appearance = new Appearance();
+        coloringAttributes = new ColoringAttributes();
+        coloringAttributes.setColor(new Color3f(Color.BLUE));
+        appearance.setColoringAttributes(coloringAttributes);
+
+
+        LineArray lineY = new LineArray(2, LineArray.COORDINATES);
+        lineY.setCoordinate(0, new Point3d());
+        lineY.setCoordinate(1, new Point3d(0, Float.MAX_VALUE, 0));
+        Shape3D y = new Shape3D(lineY);
+        y.setAppearance(appearance);
+        axis.addChild(y);
+
+
+        appearance = new Appearance();
+        coloringAttributes = new ColoringAttributes();
+        coloringAttributes.setColor(new Color3f(Color.GREEN));
+        appearance.setColoringAttributes(coloringAttributes);
+
+
+        LineArray lineZ = new LineArray(2, LineArray.COORDINATES);
+        lineZ.setCoordinate(0, new Point3d());
+        lineZ.setCoordinate(1, new Point3d(0, 0, Float.MAX_VALUE));
+        Shape3D z = new Shape3D(lineZ);
+        z.setAppearance(appearance);
+        axis.addChild(z);
+
+        axis.compile();
+    }
+
+    public void removeOrbitBehavior() {
+        simpleUniverse.getViewingPlatform().setViewPlatformBehavior(null);
+    }
+
+    public void addOrbitBehavior() {
+
+        removeOrbitBehavior();
         simpleUniverse.getViewingPlatform().setViewPlatformBehavior(orbitBehavior);
     }
+
+    public void removeBackground() {
+        background.detach();
+    }
+
+    public void addBackground() {
+        removeBackground();
+        simpleUniverse.addBranchGraph(background);
+    }
+
+    public void removeAxis() {
+        axis.detach();
+    }
+
+    public void addAxis() {
+        removeAxis();
+        simpleUniverse.addBranchGraph(axis);
+    }
+
 
     public SimpleUniverse getSimpleUniverse() {
         return simpleUniverse;
@@ -76,12 +161,10 @@ public class RobotView extends JFrame {
 
     public void setNewScene(BranchGroup scene) {
 
+        scene.compile();
+
         simpleUniverse.addBranchGraph(scene);
-
-        if (this.scene != null) {
-            this.scene.detach();
-        }
-
+        this.scene.detach();
         this.scene = scene;
     }
 }
