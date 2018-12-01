@@ -15,33 +15,37 @@ import javax.vecmath.Point3d;
 import javax.vecmath.Vector3d;
 import java.awt.*;
 
-public class ElementDraftman implements ElementVisitor {
+public class ElementDraftMan implements ElementVisitor {
 
-    private SimpleUniverse universe;
+    private SimpleUniverse simpleUniverse;
     private BranchGroup theScene;
 
-    public ElementDraftman(Canvas3D canvas3D) {
+    public ElementDraftMan(SimpleUniverse simpleUniverse) {
+
+        this.simpleUniverse = simpleUniverse;
+        this.simpleUniverse.getViewingPlatform().setNominalViewingTransform();
+
         theScene = new BranchGroup();
 
-        Background background = new Background(new Color3f(Color.WHITE));
-        BoundingSphere sphere = new BoundingSphere(new Point3d(), Double.MAX_VALUE);
+        final Background background = new Background(new Color3f(Color.WHITE));
+        final BoundingSphere sphere = new BoundingSphere(new Point3d(), Double.MAX_VALUE);
         background.setApplicationBounds(sphere);
+
         theScene.addChild(background);
-        universe = new SimpleUniverse(canvas3D);
-        universe.getViewingPlatform().setNominalViewingTransform();
-        addOrbitator(canvas3D);
+
+        //addOrbitator(simpleUniverse.getCanvas());
     }
 
     private void addOrbitator(Canvas3D canvas3D) {
 
         OrbitBehavior ob = new OrbitBehavior(canvas3D);
         ob.setSchedulingBounds(new BoundingSphere(new Point3d(), Double.MAX_VALUE));
-        universe.getViewingPlatform().setViewPlatformBehavior(ob);
+        simpleUniverse.getViewingPlatform().setViewPlatformBehavior(ob);
     }
 
     public void display() {
         theScene.compile();
-        universe.addBranchGraph(theScene);
+        simpleUniverse.addBranchGraph(theScene);
     }
 
     private static Node buildCylinder(float r, float h) {

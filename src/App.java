@@ -14,7 +14,7 @@ public class App {
 
         SwingUtilities.invokeLater(() -> {
             Robot robot = new TestRobot();
-            RobotView view = new RobotView("Test");
+            RobotView view = new RobotView();
             new ControlGroup(robot, view);
         });
     }

@@ -4,8 +4,8 @@ import model.element.robot.Robot;
 import view.RobotView;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Random;
 
 public class TerminalController extends AbstractController {
 
@@ -51,7 +51,7 @@ public class TerminalController extends AbstractController {
         public void run() {
 
             while (!isInterrupted()) {
-
+/*
                 try {
 
                     System.out.print(">>>");
@@ -62,6 +62,19 @@ public class TerminalController extends AbstractController {
 
                 } catch (IOException e) {
                     break;
+                }
+
+                */
+
+                Random random = new Random();
+
+                controller.execute("random " + random.nextDouble());
+                controller.execute("draw");
+
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
             }
         }
