@@ -4,10 +4,22 @@ import model.element.robot.Robot;
 import view.RobotView;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Random;
+import java.util.HashMap;
+import java.util.Map;
 
 public class TerminalController extends AbstractController {
+
+    private static final Map<String, Integer> COMMANDS = new HashMap<>();
+
+    private static final String DRAW = "draw";
+    private static final String RANDOM = "random";
+
+    static {
+        COMMANDS.put(DRAW, 0);
+        COMMANDS.put(RANDOM, 1);
+    }
 
     private Thread thread;
 
@@ -21,19 +33,32 @@ public class TerminalController extends AbstractController {
 
         String[] args = line.split(" ");
 
+        if (args.length < 1) {
+            return;
+        }
+
+        if (COMMANDS.get(args[0]) == null) {
+            System.err.println("Unknown command " + args[0]);
+            return;
+        }
+
+        if (COMMANDS.get(args[0]) != args.length - 1) {
+            System.err.println("invalid argument number");
+            return;
+        }
+
         switch (args[0]) {
 
-            case "random":
+            case RANDOM:
                 model.getJoints()[0].setValue(Double.parseDouble(args[1]));
                 break;
 
-            case "draw":
+            case DRAW:
                 displayView();
                 break;
 
             default:
-                System.err.println("Unknown command " + args[0]);
-                break;
+                throw new IllegalStateException("");
         }
     }
 
@@ -51,7 +76,7 @@ public class TerminalController extends AbstractController {
         public void run() {
 
             while (!isInterrupted()) {
-/*
+
                 try {
 
                     System.out.print(">>>");
@@ -62,19 +87,6 @@ public class TerminalController extends AbstractController {
 
                 } catch (IOException e) {
                     break;
-                }
-
-                */
-
-                Random random = new Random();
-
-                controller.execute("random " + random.nextDouble());
-                controller.execute("draw");
-
-                try {
-                    Thread.sleep(100);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
                 }
             }
         }

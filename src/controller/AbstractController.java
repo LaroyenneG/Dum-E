@@ -14,21 +14,15 @@ public abstract class AbstractController {
         this.view = view;
     }
 
-    private void virtualized() {
-
-
-        ElementDraftMan elementDraftman = new ElementDraftMan(view.getSimpleUniverse());
-
-        model.accept(elementDraftman);
-
-        elementDraftman.display();
-    }
-
 
     protected void displayView() {
 
         model.build();
 
-        virtualized();
+        ElementDraftMan elementDraftman = new ElementDraftMan();
+
+        model.accept(elementDraftman);
+
+        view.setNewScene(elementDraftman.compile());
     }
 }

@@ -1,51 +1,31 @@
 package view;
 
 
-import com.sun.j3d.utils.behaviors.vp.OrbitBehavior;
 import com.sun.j3d.utils.geometry.Cylinder;
-import com.sun.j3d.utils.universe.SimpleUniverse;
 import model.ElementVisitor;
 import model.element.Element;
 import model.element.connexion.constant.axis.AxisMove;
 import model.element.terminal.organ.Default;
 
-import javax.media.j3d.*;
-import javax.vecmath.Color3f;
+import javax.media.j3d.BranchGroup;
+import javax.media.j3d.Node;
+import javax.media.j3d.Transform3D;
+import javax.media.j3d.TransformGroup;
 import javax.vecmath.Point3d;
 import javax.vecmath.Vector3d;
-import java.awt.*;
 
 public class ElementDraftMan implements ElementVisitor {
 
-    private SimpleUniverse simpleUniverse;
-    private BranchGroup theScene;
+    private BranchGroup branchGroup;
 
-    public ElementDraftMan(SimpleUniverse simpleUniverse) {
-
-        this.simpleUniverse = simpleUniverse;
-        this.simpleUniverse.getViewingPlatform().setNominalViewingTransform();
-
-        theScene = new BranchGroup();
-
-        final Background background = new Background(new Color3f(Color.WHITE));
-        final BoundingSphere sphere = new BoundingSphere(new Point3d(), Double.MAX_VALUE);
-        background.setApplicationBounds(sphere);
-
-        theScene.addChild(background);
-
-        //addOrbitator(simpleUniverse.getCanvas());
+    public ElementDraftMan() {
+        branchGroup = new BranchGroup();
+        branchGroup.setCapability(BranchGroup.ALLOW_DETACH);
     }
 
-    private void addOrbitator(Canvas3D canvas3D) {
-
-        OrbitBehavior ob = new OrbitBehavior(canvas3D);
-        ob.setSchedulingBounds(new BoundingSphere(new Point3d(), Double.MAX_VALUE));
-        simpleUniverse.getViewingPlatform().setViewPlatformBehavior(ob);
-    }
-
-    public void display() {
-        theScene.compile();
-        simpleUniverse.addBranchGraph(theScene);
+    public BranchGroup compile() {
+        branchGroup.compile();
+        return branchGroup;
     }
 
     private static Node buildCylinder(float r, float h) {
@@ -68,7 +48,7 @@ public class ElementDraftMan implements ElementVisitor {
         TransformGroup group = new TransformGroup(element.getTransform3D());
         group.addChild(node);
 
-        theScene.addChild(group);
+        branchGroup.addChild(group);
     }
 
     @Override
