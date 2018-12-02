@@ -4,10 +4,19 @@ import model.element.connexion.Simple;
 
 public abstract class Joint extends Simple {
 
+    public final double max;
+    public final double min;
+
     private double value;
 
+    public Joint(double value, double min, double max) {
+        setValue(value);
+        this.min = min;
+        this.max = max;
+    }
+
     public Joint(double value) {
-        this.value = clearValue(value);
+        this(value, 0, 0);
     }
 
     public double getValue() {
