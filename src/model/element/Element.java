@@ -32,9 +32,13 @@ public abstract class Element {
         return new String(builder);
     }
 
+    public abstract Transform3D transformation();
+
     public Transform3D applyTransformation(Transform3D transform3D) {
 
         setTransform3D(new Transform3D(transform3D));
+
+        transform3D.mul(transformation());
 
         return transform3D;
     }

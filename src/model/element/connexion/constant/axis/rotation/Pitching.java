@@ -12,14 +12,15 @@ public class Pitching extends AxisRotation {
     }
 
     @Override
-    public Transform3D applyTransformation(Transform3D transform3D) {
+    public Transform3D transformation() {
 
-        super.applyTransformation(transform3D);
+        Transform3D transform3D = new Transform3D();
 
         transform3D.rotX(getValue());
 
         return transform3D;
     }
+
 
     @Override
     public void accept(ElementVisitor sv) {

@@ -18,15 +18,11 @@ public class MoveX extends AxisMove {
     }
 
     @Override
-    public Transform3D applyTransformation(Transform3D transform3D) {
+    public Transform3D transformation() {
 
-        super.applyTransformation(transform3D);
+        Transform3D transform3D = new Transform3D();
 
-        Transform3D nTrans = new Transform3D();
-
-        nTrans.setTranslation(new Vector3d(getValue(), 0, 0));
-
-        transform3D.mul(nTrans);
+        transform3D.setTranslation(new Vector3d(getValue(), 0, 0));
 
         return transform3D;
     }

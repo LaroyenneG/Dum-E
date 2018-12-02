@@ -75,12 +75,12 @@ public class ElementDraftMan implements ElementVisitor {
 
         Point3d axis = axisMove.getAxis();
 
-        Transform3D transform3D = new Transform3D();
+        Transform3D transformation = new Transform3D();
 
         Node cylinder = buildCylinder(0.02f, (float) axisMove.getValue());
 
 
-        TransformGroup transformGroup = new TransformGroup(transform3D);
+        TransformGroup transformGroup = new TransformGroup(transformation);
         transformGroup.addChild(cylinder);
 
         addToScene(transformGroup, axisMove);

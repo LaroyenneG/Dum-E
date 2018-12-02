@@ -12,8 +12,8 @@ public class Orthogonal extends Linear {
     }
 
     @Override
-    public Transform3D applyTransformation(Transform3D transform3D) {
-        return null;
+    public Transform3D transformation() {
+        return new Transform3D();
     }
 
     @Override

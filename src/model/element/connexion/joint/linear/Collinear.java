@@ -13,17 +13,15 @@ public class Collinear extends Linear {
     }
 
     @Override
-    public Transform3D applyTransformation(Transform3D transform3D) {
+    public Transform3D transformation() {
 
-        super.applyTransformation(transform3D);
+        Transform3D transform3D = new Transform3D();
 
-        Transform3D nTranf = new Transform3D();
-        nTranf.setTranslation(new Vector3d(getValue(), getValue(), getValue()));
-
-        transform3D.mul(nTranf);
+        transform3D.setTranslation(new Vector3d(getValue(), getValue(), getValue()));
 
         return transform3D;
     }
+
 
     @Override
     public void accept(ElementVisitor sv) {

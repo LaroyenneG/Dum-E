@@ -13,17 +13,13 @@ public class MoveY extends AxisMove {
     }
 
     @Override
-    public Transform3D applyTransformation(Transform3D transform3D) {
+    public Transform3D transformation() {
 
-        super.applyTransformation(transform3D);
+        Transform3D transform3D = new Transform3D();
 
-        Transform3D nTrans = new Transform3D();
+        transform3D.setTranslation(new Vector3d(0, getValue(), 0));
 
-        nTrans.setTranslation(new Vector3d(0, getValue(), 0));
-
-        transform3D.mul(nTrans);
-
-        return transform3D;
+        return null;
     }
 
     @Override
