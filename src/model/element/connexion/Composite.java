@@ -60,12 +60,12 @@ public abstract class Composite extends Connexion implements NumerousJoints {
     }
 
     @Override
-    public Transform3D applyTransformation(Transform3D transform3D) {
+    public Transform3D transformation() {
 
-        super.applyTransformation(transform3D);
+        Transform3D transform3D = new Transform3D();
 
         for (Connexion connexion : simples) {
-            connexion.applyTransformation(transform3D);
+            transform3D.mul(connexion.transformation());
         }
 
         return transform3D;
