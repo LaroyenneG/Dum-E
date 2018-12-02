@@ -3,7 +3,6 @@ package model.element.connexion.constant.axis.move;
 import model.element.connexion.constant.axis.AxisMove;
 
 import javax.media.j3d.Transform3D;
-import javax.vecmath.Point3d;
 import javax.vecmath.Vector3d;
 
 public class MoveZ extends AxisMove {
@@ -20,10 +19,5 @@ public class MoveZ extends AxisMove {
         transform3D.setTranslation(new Vector3d(0, 0, getValue()));
 
         return transform3D;
-    }
-
-    @Override
-    public Point3d getAxis() {
-        return new Point3d(0.0, 0.0, getValue());
     }
 }

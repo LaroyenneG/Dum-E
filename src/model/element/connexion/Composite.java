@@ -45,21 +45,6 @@ public abstract class Composite extends Connexion implements NumerousJoints {
     }
 
     @Override
-    public String toString() {
-
-        StringBuilder builder = new StringBuilder();
-
-        builder.append(super.toString());
-
-        for (Simple simple : simples) {
-            builder.append("\n");
-            builder.append(simple);
-        }
-
-        return new String(builder);
-    }
-
-    @Override
     public Transform3D transformation() {
 
         Transform3D transform3D = new Transform3D();
