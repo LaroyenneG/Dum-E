@@ -1,13 +1,16 @@
 package controller;
 
+import model.element.connexion.joint.Joint;
 import model.element.robot.Robot;
 import view.RobotView;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.security.SecureRandom;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 public class TerminalController extends AbstractController {
 
@@ -22,6 +25,7 @@ public class TerminalController extends AbstractController {
     private static final String EXIT = "exit";
     private static final String BASIC = "basic";
     private static final String AUTO = "auto";
+    private static final String ANIMATION = "animation";
 
     static {
         COMMANDS.put(DRAW, 0);
@@ -33,6 +37,7 @@ public class TerminalController extends AbstractController {
         COMMANDS.put(EXIT, 0);
         COMMANDS.put(BASIC, 0);
         COMMANDS.put(AUTO, 0);
+        COMMANDS.put(ANIMATION, 1);
     }
 
     private final Thread thread;
@@ -41,6 +46,33 @@ public class TerminalController extends AbstractController {
         super(model, view);
         thread = new TerminalReader(this);
         thread.start();
+    }
+
+    private void randomAnimation(int cycle) {
+
+        for (int i = 0; i < cycle; i++) {
+
+            Joint[] joints = model.getJoints();
+
+            Random random = new SecureRandom();
+
+            for (Joint joint : joints) {
+
+                double v = joint.getValue();
+
+                v += (random.nextBoolean()) ? 0.01 : -0.01;
+
+                joint.setValue(v);
+            }
+
+            displayView();
+
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                break;
+            }
+        }
     }
 
     private static void usage(String cmd, String args) {
@@ -117,6 +149,10 @@ public class TerminalController extends AbstractController {
                 } else {
                     view.clear();
                 }
+                break;
+
+            case ANIMATION:
+                randomAnimation(Integer.parseInt(args[1]));
                 break;
 
             case EXIT:

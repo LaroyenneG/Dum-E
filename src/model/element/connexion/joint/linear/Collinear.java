@@ -17,7 +17,7 @@ public class Collinear extends Linear {
 
         Transform3D transform3D = new Transform3D();
 
-        transform3D.setTranslation(new Vector3d(getValue(), getValue(), getValue()));
+        transform3D.setTranslation(new Vector3d(0.0, getValue(), 0.0));
 
         return transform3D;
     }
@@ -25,6 +25,6 @@ public class Collinear extends Linear {
 
     @Override
     public void accept(ElementVisitor sv) {
-
+        sv.virtualizedCollinear(this);
     }
 }

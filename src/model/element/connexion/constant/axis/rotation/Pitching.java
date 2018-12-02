@@ -1,6 +1,5 @@
 package model.element.connexion.constant.axis.rotation;
 
-import model.ElementVisitor;
 import model.element.connexion.constant.axis.AxisRotation;
 
 import javax.media.j3d.Transform3D;
@@ -19,11 +18,5 @@ public class Pitching extends AxisRotation {
         transform3D.rotX(getValue());
 
         return transform3D;
-    }
-
-
-    @Override
-    public void accept(ElementVisitor sv) {
-
     }
 }

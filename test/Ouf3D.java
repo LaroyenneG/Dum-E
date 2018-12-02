@@ -110,7 +110,7 @@ public class Ouf3D extends JFrame {
 
         app = new Appearance();
         c = new ColoringAttributes();
-        c.setColor(new Color3f(Color.BLUE));
+        c.setColor(new Color3f(Color.GREEN));
         app.setColoringAttributes(c);
 
 
@@ -124,7 +124,7 @@ public class Ouf3D extends JFrame {
 
         app = new Appearance();
         c = new ColoringAttributes();
-        c.setColor(new Color3f(Color.GREEN));
+        c.setColor(new Color3f(Color.BLUE));
         app.setColoringAttributes(c);
 
 

@@ -4,6 +4,7 @@ import model.ElementVisitor;
 import model.element.connexion.joint.Linear;
 
 import javax.media.j3d.Transform3D;
+import javax.vecmath.Vector3d;
 
 public class Orthogonal extends Linear {
 
@@ -13,11 +14,17 @@ public class Orthogonal extends Linear {
 
     @Override
     public Transform3D transformation() {
-        return new Transform3D();
+
+        Transform3D transform3D = new Transform3D();
+
+        transform3D.setTranslation(new Vector3d(0.0, getValue(), 0.0));
+        transform3D.rotZ(-Math.PI);
+
+        return transform3D;
     }
 
     @Override
     public void accept(ElementVisitor sv) {
-
+        sv.virtualizedOrthogonal(this);
     }
 }

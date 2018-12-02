@@ -5,18 +5,23 @@ import com.sun.j3d.utils.geometry.Cylinder;
 import com.sun.j3d.utils.geometry.Sphere;
 import model.ElementVisitor;
 import model.element.Element;
+import model.element.connexion.constant.axis.AxisRotation;
 import model.element.connexion.constant.axis.move.MoveX;
 import model.element.connexion.constant.axis.move.MoveY;
 import model.element.connexion.constant.axis.move.MoveZ;
+import model.element.connexion.joint.Rotation;
+import model.element.connexion.joint.linear.Collinear;
+import model.element.connexion.joint.linear.Orthogonal;
 import model.element.terminal.organ.Default;
 
-import javax.media.j3d.BranchGroup;
-import javax.media.j3d.Node;
-import javax.media.j3d.Transform3D;
-import javax.media.j3d.TransformGroup;
+import javax.media.j3d.*;
+import javax.vecmath.Color3f;
 import javax.vecmath.Vector3d;
+import java.awt.*;
 
 public class ElementDraftMan implements ElementVisitor {
+
+    private static final Color DEFAULT_COLOR = Color.BLACK;
 
     private static final double R_CYLINDER_MOVE = 0.01;
 
@@ -31,7 +36,12 @@ public class ElementDraftMan implements ElementVisitor {
         return branchGroup;
     }
 
-    private static Node buildCylinder(float r, float h) {
+    private static Node buildCylinder(float r, float h, Color color) {
+
+        Appearance appearance = new Appearance();
+        ColoringAttributes coloringAttributes = new ColoringAttributes();
+        coloringAttributes.setColor(new Color3f(color));
+        appearance.setColoringAttributes(coloringAttributes);
 
         Transform3D transform3D = new Transform3D();
 
@@ -40,6 +50,7 @@ public class ElementDraftMan implements ElementVisitor {
         TransformGroup transformGroup = new TransformGroup(transform3D);
 
         Cylinder cylinder = new Cylinder(r, h);
+        cylinder.setAppearance(appearance);
 
         transformGroup.addChild(cylinder);
 
@@ -58,7 +69,7 @@ public class ElementDraftMan implements ElementVisitor {
     @Override
     public void virtualizedDefault(Default organ) {
 
-        Node cylinder = buildCylinder(0.01f, 0.1f);
+        Node cylinder = buildCylinder(0.01f, 0.1f, DEFAULT_COLOR);
 
         addToScene(cylinder, organ);
     }
@@ -67,7 +78,7 @@ public class ElementDraftMan implements ElementVisitor {
     @Override
     public void virtualizedElement(Element element) {
 
-        Sphere sphere = new Sphere(0.01f);
+        Sphere sphere = new Sphere(0.05f);
 
         addToScene(sphere, element);
     }
@@ -75,7 +86,7 @@ public class ElementDraftMan implements ElementVisitor {
     @Override
     public void virtualizedMoveY(MoveY axisMove) {
 
-        Node cylinder = buildCylinder((float) R_CYLINDER_MOVE, (float) axisMove.getValue());
+        Node cylinder = buildCylinder((float) R_CYLINDER_MOVE, (float) axisMove.getValue(), DEFAULT_COLOR);
 
         addToScene(cylinder, axisMove);
     }
@@ -83,7 +94,7 @@ public class ElementDraftMan implements ElementVisitor {
     @Override
     public void virtualizedMoveX(MoveX axisMove) {
 
-        Node cylinder = buildCylinder((float) R_CYLINDER_MOVE, (float) axisMove.getValue());
+        Node cylinder = buildCylinder((float) R_CYLINDER_MOVE, (float) axisMove.getValue(), DEFAULT_COLOR);
 
         Transform3D transform3D = new Transform3D();
 
@@ -99,7 +110,7 @@ public class ElementDraftMan implements ElementVisitor {
     @Override
     public void virtualizedMoveZ(MoveZ axisMove) {
 
-        Node cylinder = buildCylinder((float) R_CYLINDER_MOVE, (float) axisMove.getValue());
+        Node cylinder = buildCylinder((float) R_CYLINDER_MOVE, (float) axisMove.getValue(), DEFAULT_COLOR);
 
         Transform3D transform3D = new Transform3D();
 
@@ -110,5 +121,43 @@ public class ElementDraftMan implements ElementVisitor {
         transformGroup.addChild(cylinder);
 
         addToScene(transformGroup, axisMove);
+    }
+
+    @Override
+    public void virtualizedAxisRotation(AxisRotation axisRotation) {
+
+        Sphere sphere = new Sphere(0.01f);
+
+        addToScene(sphere, axisRotation);
+    }
+
+    @Override
+    public void virtualizedRotation(Rotation rotation) {
+
+        Appearance appearance = new Appearance();
+        ColoringAttributes coloringAttributes = new ColoringAttributes();
+        coloringAttributes.setColor(new Color3f(Color.RED));
+        appearance.setColoringAttributes(coloringAttributes);
+
+        Sphere sphere = new Sphere(0.02f);
+        sphere.setAppearance(appearance);
+
+        addToScene(sphere, rotation);
+    }
+
+    @Override
+    public void virtualizedCollinear(Collinear collinear) {
+
+        Node cylinder = buildCylinder((float) R_CYLINDER_MOVE, (float) collinear.getValue(), Color.RED);
+
+        addToScene(cylinder, collinear);
+    }
+
+    @Override
+    public void virtualizedOrthogonal(Orthogonal orthogonal) {
+
+        Node cylinder = buildCylinder((float) R_CYLINDER_MOVE, (float) orthogonal.getValue(), Color.RED);
+
+        addToScene(cylinder, orthogonal);
     }
 }

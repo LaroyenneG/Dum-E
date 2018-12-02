@@ -9,26 +9,33 @@ public abstract class Joint extends Simple {
 
     private double value;
 
-    public Joint(double value, double min, double max) {
-        setValue(value);
+    public Joint(double value, double min, double max) throws JointInvalidValueException {
+        setValueSafe(value);
         this.min = min;
         this.max = max;
     }
 
     public Joint(double value) {
-        this(value, 0, 0);
+        min = Double.MIN_VALUE;
+        max = Double.MAX_VALUE;
+        this.value = value;
     }
 
     public double getValue() {
         return value;
     }
 
-    public void setValue(double value) {
-        this.value = clearValue(value);
+    public void setValueSafe(double value) throws JointInvalidValueException {
+
+        if (value < min || value > max) {
+            throw new JointInvalidValueException(this);
+        }
+
+        this.value = value;
     }
 
-    public double clearValue(double v) {
-        return v;
+    public void setValue(double value) {
+        this.value = value;
     }
 
     @Override

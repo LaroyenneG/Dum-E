@@ -1,7 +1,6 @@
 import controller.ControlGroup;
-import model.element.connexion.constant.axis.move.MoveX;
 import model.element.connexion.constant.axis.move.MoveY;
-import model.element.connexion.constant.axis.move.MoveZ;
+import model.element.connexion.constant.axis.rotation.Rolling;
 import model.element.connexion.joint.rotation.Revolving;
 import model.element.robot.Robot;
 import view.RobotView;
@@ -21,7 +20,7 @@ public class App {
 
     private static class TestRobot extends Robot {
         public TestRobot() {
-            super(new MoveY(0.2), new Revolving(Math.PI / 3.0), new MoveX(0.3), new MoveZ(0.5));
+            super(new MoveY(0.5), new Revolving(Math.PI / 3.0), new Rolling(-Math.PI / 2.0), new MoveY(0.6));
         }
     }
 }

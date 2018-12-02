@@ -1,6 +1,5 @@
 package model.element.connexion.joint.rotation;
 
-import model.ElementVisitor;
 import model.element.connexion.joint.Rotation;
 
 import javax.media.j3d.Transform3D;
@@ -20,10 +19,5 @@ public class Revolving extends Rotation {
         transform3D.rotY(getValue());
 
         return transform3D;
-    }
-
-    @Override
-    public void accept(ElementVisitor sv) {
-        sv.virtualizedElement(this);
     }
 }

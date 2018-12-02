@@ -1,5 +1,7 @@
 package model.element.connexion.joint;
 
+import model.ElementVisitor;
+
 public abstract class Rotation extends Joint {
 
     public Rotation(double value) {
@@ -7,7 +9,7 @@ public abstract class Rotation extends Joint {
     }
 
     @Override
-    public double clearValue(double v) {
-        return v % Math.PI;
+    public void accept(ElementVisitor sv) {
+        sv.virtualizedRotation(this);
     }
 }
