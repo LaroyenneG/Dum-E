@@ -10,7 +10,6 @@ public class Revolving extends Rotation {
         super(value);
     }
 
-
     @Override
     public Transform3D transformation() {
 

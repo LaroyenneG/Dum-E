@@ -12,6 +12,11 @@ public class Twisting extends Rotation {
 
     @Override
     public Transform3D transformation() {
-        return new Transform3D();
+
+        Transform3D transform3D = new Transform3D();
+
+        transform3D.rotY(getValue());
+
+        return transform3D;
     }
 }

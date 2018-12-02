@@ -11,12 +11,12 @@ public class Rotational extends Rotation {
     }
 
     @Override
-    public String toString() {
-        return null;
-    }
-
-    @Override
     public Transform3D transformation() {
-        return new Transform3D();
+
+        Transform3D transform3D = new Transform3D();
+
+        transform3D.rotZ(getValue());
+
+        return transform3D;
     }
 }
