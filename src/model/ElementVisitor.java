@@ -6,7 +6,7 @@ import model.element.terminal.organ.Default;
 
 public interface ElementVisitor {
 
-    void virtualziedElement(Element element);
+    void virtualizedElement(Element element);
 
     void virtualizedDefault(Default organ);
 

@@ -60,7 +60,7 @@ public class ElementDraftMan implements ElementVisitor {
 
 
     @Override
-    public void virtualziedElement(Element element) {
+    public void virtualizedElement(Element element) {
 
         Sphere sphere = new Sphere(0.01f);
 
@@ -70,7 +70,7 @@ public class ElementDraftMan implements ElementVisitor {
     @Override
     public void virtualizedMove(AxisMove axisMove) {
 
-        virtualziedElement(axisMove);
+        virtualizedElement(axisMove);
         /*
 
         Point3d axis = axisMove.getAxis();
