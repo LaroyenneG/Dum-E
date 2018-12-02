@@ -1,5 +1,6 @@
 package model.element.connexion.constant.axis.move;
 
+import model.ElementVisitor;
 import model.element.connexion.constant.axis.AxisMove;
 
 import javax.media.j3d.Transform3D;
@@ -19,5 +20,11 @@ public class MoveZ extends AxisMove {
         transform3D.setTranslation(new Vector3d(0, 0, getValue()));
 
         return transform3D;
+    }
+
+    @Override
+    public void accept(ElementVisitor sv) {
+
+        sv.virtualizedMoveZ(this);
     }
 }

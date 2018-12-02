@@ -1,5 +1,7 @@
 package model.element.connexion;
 
+import javax.media.j3d.Transform3D;
+
 public abstract class Simple extends Connexion {
 
     @Override
@@ -15,4 +17,14 @@ public abstract class Simple extends Connexion {
     public abstract boolean isJoint();
 
     public abstract boolean isConstant();
+
+    @Override
+    public Transform3D applyTransformation(Transform3D transform3D) {
+
+        super.applyTransformation(transform3D);
+
+        transform3D.mul(transformation());
+
+        return transform3D;
+    }
 }

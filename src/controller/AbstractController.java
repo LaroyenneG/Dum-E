@@ -19,6 +19,8 @@ public abstract class AbstractController {
 
         model.build();
 
+        System.out.println(model);
+
         ElementDraftMan elementDraftman = new ElementDraftMan();
 
         model.accept(elementDraftman);

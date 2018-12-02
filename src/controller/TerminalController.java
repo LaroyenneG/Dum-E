@@ -20,6 +20,8 @@ public class TerminalController extends AbstractController {
     private static final String ORBIT = "orbit";
     private static final String CLEAR = "clear";
     private static final String EXIT = "exit";
+    private static final String BASIC = "basic";
+    private static final String AUTO = "auto";
 
     static {
         COMMANDS.put(DRAW, 0);
@@ -29,6 +31,8 @@ public class TerminalController extends AbstractController {
         COMMANDS.put(ORBIT, 1);
         COMMANDS.put(CLEAR, 0);
         COMMANDS.put(EXIT, 0);
+        COMMANDS.put(BASIC, 0);
+        COMMANDS.put(AUTO, 0);
     }
 
     private final Thread thread;
@@ -117,6 +121,19 @@ public class TerminalController extends AbstractController {
 
             case EXIT:
                 System.exit(0);
+                break;
+
+            case BASIC:
+                view.addOrbitBehavior();
+                view.addBackground();
+                view.addAxis();
+                break;
+
+            case AUTO:
+                view.addOrbitBehavior();
+                view.addBackground();
+                view.addAxis();
+                displayView();
                 break;
 
             default:

@@ -77,8 +77,8 @@ public class RobotView extends JFrame {
         axis = new BranchGroup();
         axis.setCapability(BranchGroup.ALLOW_DETACH);
 
-        Appearance appearance = null;
-        ColoringAttributes coloringAttributes = null;
+        Appearance appearance;
+        ColoringAttributes coloringAttributes;
 
         appearance = new Appearance();
         coloringAttributes = new ColoringAttributes();
@@ -94,7 +94,7 @@ public class RobotView extends JFrame {
 
         appearance = new Appearance();
         coloringAttributes = new ColoringAttributes();
-        coloringAttributes.setColor(new Color3f(Color.BLUE));
+        coloringAttributes.setColor(new Color3f(Color.GREEN));
         appearance.setColoringAttributes(coloringAttributes);
 
 
@@ -108,7 +108,7 @@ public class RobotView extends JFrame {
 
         appearance = new Appearance();
         coloringAttributes = new ColoringAttributes();
-        coloringAttributes.setColor(new Color3f(Color.GREEN));
+        coloringAttributes.setColor(new Color3f(Color.BLUE));
         appearance.setColoringAttributes(coloringAttributes);
 
 

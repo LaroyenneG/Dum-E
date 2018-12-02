@@ -1,7 +1,9 @@
 package model;
 
 import model.element.Element;
-import model.element.connexion.constant.axis.AxisMove;
+import model.element.connexion.constant.axis.move.MoveX;
+import model.element.connexion.constant.axis.move.MoveY;
+import model.element.connexion.constant.axis.move.MoveZ;
 import model.element.terminal.organ.Default;
 
 public interface ElementVisitor {
@@ -10,5 +12,9 @@ public interface ElementVisitor {
 
     void virtualizedDefault(Default organ);
 
-    void virtualizedMove(AxisMove axisMove);
+    void virtualizedMoveY(MoveY axisMove);
+
+    void virtualizedMoveX(MoveX axisMove);
+
+    void virtualizedMoveZ(MoveZ axisMove);
 }

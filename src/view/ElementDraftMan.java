@@ -5,7 +5,9 @@ import com.sun.j3d.utils.geometry.Cylinder;
 import com.sun.j3d.utils.geometry.Sphere;
 import model.ElementVisitor;
 import model.element.Element;
-import model.element.connexion.constant.axis.AxisMove;
+import model.element.connexion.constant.axis.move.MoveX;
+import model.element.connexion.constant.axis.move.MoveY;
+import model.element.connexion.constant.axis.move.MoveZ;
 import model.element.terminal.organ.Default;
 
 import javax.media.j3d.BranchGroup;
@@ -15,6 +17,8 @@ import javax.media.j3d.TransformGroup;
 import javax.vecmath.Vector3d;
 
 public class ElementDraftMan implements ElementVisitor {
+
+    private static final double R_CYLINDER_MOVE = 0.01;
 
     private BranchGroup branchGroup;
 
@@ -44,10 +48,11 @@ public class ElementDraftMan implements ElementVisitor {
 
     private void addToScene(Node node, Element element) {
 
-        TransformGroup group = new TransformGroup(element.getTransform3D());
-        group.addChild(node);
+        TransformGroup transformGroup = new TransformGroup(element.getTransform3D());
 
-        branchGroup.addChild(group);
+        transformGroup.addChild(node);
+
+        branchGroup.addChild(transformGroup);
     }
 
     @Override
@@ -68,22 +73,42 @@ public class ElementDraftMan implements ElementVisitor {
     }
 
     @Override
-    public void virtualizedMove(AxisMove axisMove) {
+    public void virtualizedMoveY(MoveY axisMove) {
 
-        virtualizedElement(axisMove);
-        /*
+        Node cylinder = buildCylinder((float) R_CYLINDER_MOVE, (float) axisMove.getValue());
 
-        Point3d axis = axisMove.getAxis();
+        addToScene(cylinder, axisMove);
+    }
 
-        Transform3D transformation = new Transform3D();
+    @Override
+    public void virtualizedMoveX(MoveX axisMove) {
 
-        Node cylinder = buildCylinder(0.02f, (float) axisMove.getValue());
+        Node cylinder = buildCylinder((float) R_CYLINDER_MOVE, (float) axisMove.getValue());
 
+        Transform3D transform3D = new Transform3D();
 
-        TransformGroup transformGroup = new TransformGroup(transformation);
+        transform3D.rotZ(-Math.PI / 2.0);
+
+        TransformGroup transformGroup = new TransformGroup(transform3D);
+
         transformGroup.addChild(cylinder);
 
         addToScene(transformGroup, axisMove);
-        */
+    }
+
+    @Override
+    public void virtualizedMoveZ(MoveZ axisMove) {
+
+        Node cylinder = buildCylinder((float) R_CYLINDER_MOVE, (float) axisMove.getValue());
+
+        Transform3D transform3D = new Transform3D();
+
+        transform3D.rotX(Math.PI / 2.0);
+
+        TransformGroup transformGroup = new TransformGroup(transform3D);
+
+        transformGroup.addChild(cylinder);
+
+        addToScene(transformGroup, axisMove);
     }
 }

@@ -11,18 +11,19 @@ public class Revolving extends Rotation {
         super(value);
     }
 
-    @Override
-    public String toString() {
-        return null;
-    }
 
     @Override
     public Transform3D transformation() {
-        return new Transform3D();
+
+        Transform3D transform3D = new Transform3D();
+
+        transform3D.rotY(getValue());
+
+        return transform3D;
     }
 
     @Override
     public void accept(ElementVisitor sv) {
-
+        sv.virtualizedElement(this);
     }
 }
