@@ -26,6 +26,7 @@ public class TerminalController extends AbstractController {
     private static final String BASIC = "basic";
     private static final String AUTO = "auto";
     private static final String ANIMATION = "animation";
+    private static final String HELP = "help";
 
     static {
         COMMANDS.put(DRAW, 0);
@@ -38,6 +39,7 @@ public class TerminalController extends AbstractController {
         COMMANDS.put(BASIC, 0);
         COMMANDS.put(AUTO, 0);
         COMMANDS.put(ANIMATION, 1);
+        COMMANDS.put(HELP, 0);
     }
 
     private final Thread thread;
@@ -170,6 +172,13 @@ public class TerminalController extends AbstractController {
                 view.addBackground();
                 view.addAxis();
                 displayView();
+                break;
+
+            case HELP:
+                System.out.println("Commands list :");
+                for (String cmd : COMMANDS.keySet()) {
+                    System.out.println("\t\t\t\t- " + cmd);
+                }
                 break;
 
             default:
