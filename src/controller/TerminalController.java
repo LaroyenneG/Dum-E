@@ -27,6 +27,8 @@ public class TerminalController extends AbstractController {
     private static final String AUTO = "auto";
     private static final String ANIMATION = "animation";
     private static final String HELP = "help";
+    private static final String MATRIX = "matrix";
+    private static final String COMPUTE = "compute";
 
     static {
         COMMANDS.put(DRAW, 0);
@@ -38,8 +40,10 @@ public class TerminalController extends AbstractController {
         COMMANDS.put(EXIT, 0);
         COMMANDS.put(BASIC, 0);
         COMMANDS.put(AUTO, 0);
-        COMMANDS.put(ANIMATION, 1);
+        COMMANDS.put(ANIMATION, 2);
         COMMANDS.put(HELP, 0);
+        COMMANDS.put(MATRIX, 0);
+        COMMANDS.put(COMPUTE, 0);
     }
 
     private final Thread thread;
@@ -50,30 +54,72 @@ public class TerminalController extends AbstractController {
         thread.start();
     }
 
-    private void randomAnimation(int cycle) {
+    private static boolean myRandom(int v) {
+
+        final Random random = new SecureRandom();
+
+        boolean result = true;
+
+        for (int i = 0; i < v; i++) {
+            result &= random.nextBoolean();
+        }
+
+        return result;
+    }
+
+    private void randomAnimation(int cycle, double p) {
+
+        final Random random = new SecureRandom();
+
+        Joint[] joints = model.getJoints();
+
+        boolean[] status = new boolean[joints.length]; // true + / false -
+
+        for (int i = 0; i < status.length; i++) {
+            status[i] = random.nextBoolean();
+        }
 
         for (int i = 0; i < cycle; i++) {
 
-            Joint[] joints = model.getJoints();
+            for (int j = 0; j < joints.length; j++) {
 
-            Random random = new SecureRandom();
+                double v = joints[j].getValue();
 
-            for (Joint joint : joints) {
+                if (status[j]) { // +
+                    if (v + p >= joints[j].max) {
+                        status[j] = false;
+                    }
+                } else { // -
+                    if (v - p <= joints[j].min) {
+                        status[j] = true;
+                    }
+                }
 
-                double v = joint.getValue();
+                v += (status[j]) ? p : -p;
 
-                v += (random.nextBoolean()) ? 0.01 : -0.01;
-
-                joint.setValue(v);
+                if (v < joints[j].max && v > joints[j].min) {
+                    joints[j].setValue(v);
+                } else {
+                    System.err.println("bad parameters");
+                    return;
+                }
             }
 
-            displayView();
+            if (myRandom(4)) {
+                for (int s = 0; s < status.length; s++) {
+                    status[s] = random.nextBoolean();
+                }
+            }
 
             try {
                 Thread.sleep(100);
             } catch (InterruptedException e) {
-                break;
+                System.err.println("interruption, stop running...");
+                return;
             }
+
+            model.build();
+            displayView();
         }
     }
 
@@ -111,6 +157,11 @@ public class TerminalController extends AbstractController {
                 displayView();
                 break;
 
+            case COMPUTE:
+
+                model.build();
+                break;
+
             case LIGHT:
 
                 if (args[1].equals("on")) {
@@ -146,15 +197,26 @@ public class TerminalController extends AbstractController {
 
             case CLEAR:
 
-                if (args.length == 2 && args[1].equals("all")) {
+                if (args.length == 1) {
+                    view.clear();
+                } else if (args.length == 2 && args[1].equals("all")) {
                     view.clearAll();
                 } else {
-                    view.clear();
+                    usage(CLEAR, "<option>");
                 }
                 break;
 
             case ANIMATION:
-                randomAnimation(Integer.parseInt(args[1]));
+
+                if (args[1].equals("max")) {
+                    args[1] = String.valueOf(Integer.MAX_VALUE);
+                }
+
+                try {
+                    randomAnimation(Integer.parseInt(args[1]), Double.parseDouble(args[2]));
+                } catch (NumberFormatException e) {
+                    usage(ANIMATION, "<cycles> <pas>");
+                }
                 break;
 
             case EXIT:
@@ -168,10 +230,15 @@ public class TerminalController extends AbstractController {
                 break;
 
             case AUTO:
+                model.build();
                 view.addOrbitBehavior();
                 view.addBackground();
                 view.addAxis();
                 displayView();
+                break;
+
+            case MATRIX:
+                System.out.println(model);
                 break;
 
             case HELP:

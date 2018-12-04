@@ -17,10 +17,6 @@ public abstract class AbstractController {
 
     protected void displayView() {
 
-        model.build();
-
-        System.out.println(model);
-
         ElementDraftMan elementDraftman = new ElementDraftMan();
 
         model.accept(elementDraftman);
