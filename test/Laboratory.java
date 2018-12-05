@@ -10,6 +10,9 @@ import java.awt.*;
 
 public class Laboratory extends JFrame {
 
+    private static final Color DUM_E_DEFAULT_COLOR = Color.BLACK;
+    private static final double DUM_E_SCALE = 1.0;
+
     private Laboratory(Node node) {
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -33,27 +36,32 @@ public class Laboratory extends JFrame {
         setTitle(getClass().getSimpleName());
         setSize(900, 900);
         getContentPane().add("Center", myCanvas3D);
+        setLocationRelativeTo(null);
         setVisible(true);
         setResizable(false);
     }
 
-    /**
+    /*******************************************************************************************************************
      * =====> User control <======
      */
-    private static BranchGroup observable() {
+    private static Node observable() {
 
-        BranchGroup branchGroup = new BranchGroup();
-
+        Node node = null;
         /*
-         * to complete
+         * to complete (Alexis)
          */
 
-        return branchGroup;
+        return node;
     }
+
+    /**
+     * ******************************************************************************************************************
+     */
 
     public static void main(String[] args) {
 
-        BranchGroup branchGroup = observable();
+        BranchGroup branchGroup = new BranchGroup();
+        branchGroup.addChild(observable());
 
         branchGroup.compile();
 
