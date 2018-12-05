@@ -11,6 +11,6 @@ public abstract class AxisRotation extends Constant {
 
     @Override
     public void accept(ElementVisitor sv) {
-        sv.virtualizedAxisRotation(this);
+        sv.virtualizationAxisRotation(this);
     }
 }

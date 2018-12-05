@@ -19,7 +19,7 @@ import javax.vecmath.Color3f;
 import javax.vecmath.Vector3d;
 import java.awt.*;
 
-public class ElementDraftMan implements ElementVisitor {
+public class ElementVirtualization implements ElementVisitor {
 
     private static final Color DEFAULT_COLOR = Color.BLACK;
 
@@ -27,7 +27,7 @@ public class ElementDraftMan implements ElementVisitor {
 
     private BranchGroup branchGroup;
 
-    public ElementDraftMan() {
+    public ElementVirtualization() {
         branchGroup = new BranchGroup();
         branchGroup.setCapability(BranchGroup.ALLOW_DETACH);
     }
@@ -67,7 +67,7 @@ public class ElementDraftMan implements ElementVisitor {
     }
 
     @Override
-    public void virtualizedDefault(Default organ) {
+    public void virtualizationDefault(Default organ) {
 
         Node cylinder = buildCylinder(0.01f, 0.1f, DEFAULT_COLOR);
 
@@ -76,7 +76,7 @@ public class ElementDraftMan implements ElementVisitor {
 
 
     @Override
-    public void virtualizedElement(Element element) {
+    public void virtualizationElement(Element element) {
 
         Sphere sphere = new Sphere(0.05f);
 
@@ -84,7 +84,7 @@ public class ElementDraftMan implements ElementVisitor {
     }
 
     @Override
-    public void virtualizedMoveY(MoveY axisMove) {
+    public void virtualizationMoveY(MoveY axisMove) {
 
         Node cylinder = buildCylinder((float) R_CYLINDER_MOVE, (float) axisMove.getValue(), DEFAULT_COLOR);
 
@@ -92,7 +92,7 @@ public class ElementDraftMan implements ElementVisitor {
     }
 
     @Override
-    public void virtualizedMoveX(MoveX axisMove) {
+    public void virtualizationMoveX(MoveX axisMove) {
 
         Node cylinder = buildCylinder((float) R_CYLINDER_MOVE, (float) axisMove.getValue(), DEFAULT_COLOR);
 
@@ -108,7 +108,7 @@ public class ElementDraftMan implements ElementVisitor {
     }
 
     @Override
-    public void virtualizedMoveZ(MoveZ axisMove) {
+    public void virtualizationMoveZ(MoveZ axisMove) {
 
         Node cylinder = buildCylinder((float) R_CYLINDER_MOVE, (float) axisMove.getValue(), DEFAULT_COLOR);
 
@@ -124,7 +124,7 @@ public class ElementDraftMan implements ElementVisitor {
     }
 
     @Override
-    public void virtualizedAxisRotation(AxisRotation axisRotation) {
+    public void virtualizationAxisRotation(AxisRotation axisRotation) {
 
         Sphere sphere = new Sphere(0.01f);
 
@@ -132,7 +132,7 @@ public class ElementDraftMan implements ElementVisitor {
     }
 
     @Override
-    public void virtualizedRotation(Rotation rotation) {
+    public void virtualizationRotation(Rotation rotation) {
 
         Appearance appearance = new Appearance();
         ColoringAttributes coloringAttributes = new ColoringAttributes();
@@ -146,7 +146,7 @@ public class ElementDraftMan implements ElementVisitor {
     }
 
     @Override
-    public void virtualizedCollinear(Collinear collinear) {
+    public void virtualizationCollinear(Collinear collinear) {
 
         Node cylinder = buildCylinder((float) R_CYLINDER_MOVE, (float) collinear.getValue(), Color.RED);
 
@@ -154,7 +154,7 @@ public class ElementDraftMan implements ElementVisitor {
     }
 
     @Override
-    public void virtualizedOrthogonal(Orthogonal orthogonal) {
+    public void virtualizationOrthogonal(Orthogonal orthogonal) {
 
         Node cylinder = buildCylinder((float) R_CYLINDER_MOVE, (float) orthogonal.getValue(), Color.RED);
 

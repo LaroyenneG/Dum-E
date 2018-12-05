@@ -10,6 +10,6 @@ public abstract class Rotation extends Joint {
 
     @Override
     public void accept(ElementVisitor sv) {
-        sv.virtualizedRotation(this);
+        sv.virtualizationRotation(this);
     }
 }

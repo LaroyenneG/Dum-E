@@ -25,6 +25,6 @@ public class MoveY extends AxisMove {
     @Override
     public void accept(ElementVisitor sv) {
 
-        sv.virtualizedMoveY(this);
+        sv.virtualizationMoveY(this);
     }
 }

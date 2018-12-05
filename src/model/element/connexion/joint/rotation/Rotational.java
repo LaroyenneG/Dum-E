@@ -15,7 +15,7 @@ public class Rotational extends Rotation {
 
         Transform3D transform3D = new Transform3D();
 
-        transform3D.rotZ(getValue());
+        transform3D.rotX(getValue());
 
         return transform3D;
     }

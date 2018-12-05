@@ -25,6 +25,6 @@ public class Collinear extends Linear {
 
     @Override
     public void accept(ElementVisitor sv) {
-        sv.virtualizedCollinear(this);
+        sv.virtualizationCollinear(this);
     }
 }

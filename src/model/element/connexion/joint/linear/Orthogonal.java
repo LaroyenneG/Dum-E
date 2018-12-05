@@ -25,6 +25,6 @@ public class Orthogonal extends Linear {
 
     @Override
     public void accept(ElementVisitor sv) {
-        sv.virtualizedOrthogonal(this);
+        sv.virtualizationOrthogonal(this);
     }
 }

@@ -43,6 +43,6 @@ public abstract class Element {
 
     public void accept(ElementVisitor sv) {
 
-        sv.virtualizedElement(this);
+        sv.virtualizationElement(this);
     }
 }

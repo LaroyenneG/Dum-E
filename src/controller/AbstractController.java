@@ -1,7 +1,7 @@
 package controller;
 
 import model.element.robot.Robot;
-import view.ElementDraftMan;
+import view.ElementVirtualization;
 import view.RobotView;
 
 public abstract class AbstractController {
@@ -17,7 +17,7 @@ public abstract class AbstractController {
 
     protected void displayView() {
 
-        ElementDraftMan elementDraftman = new ElementDraftMan();
+        ElementVirtualization elementDraftman = new ElementVirtualization();
 
         model.accept(elementDraftman);
 

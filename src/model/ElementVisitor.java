@@ -12,21 +12,21 @@ import model.element.terminal.organ.Default;
 
 public interface ElementVisitor {
 
-    void virtualizedElement(Element element);
+    void virtualizationElement(Element element);
 
-    void virtualizedDefault(Default organ);
+    void virtualizationDefault(Default organ);
 
-    void virtualizedMoveY(MoveY axisMove);
+    void virtualizationMoveY(MoveY axisMove);
 
-    void virtualizedMoveX(MoveX axisMove);
+    void virtualizationMoveX(MoveX axisMove);
 
-    void virtualizedMoveZ(MoveZ axisMove);
+    void virtualizationMoveZ(MoveZ axisMove);
 
-    void virtualizedAxisRotation(AxisRotation axisRotation);
+    void virtualizationAxisRotation(AxisRotation axisRotation);
 
-    void virtualizedRotation(Rotation rotation);
+    void virtualizationRotation(Rotation rotation);
 
-    void virtualizedCollinear(Collinear collinear);
+    void virtualizationCollinear(Collinear collinear);
 
-    void virtualizedOrthogonal(Orthogonal orthogonal);
+    void virtualizationOrthogonal(Orthogonal orthogonal);
 }
