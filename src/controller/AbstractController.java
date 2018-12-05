@@ -6,6 +6,8 @@ import view.RobotView;
 
 public abstract class AbstractController {
 
+    private static final int TIME_TO_SLEEP = 100;
+
     protected Robot model;
     protected RobotView view;
 
@@ -14,13 +16,26 @@ public abstract class AbstractController {
         this.view = view;
     }
 
+    protected void computeAndSleepAndDisplay() {
+
+        model.build();
+
+        try {
+            Thread.sleep(TIME_TO_SLEEP);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+            return;
+        }
+
+        displayView();
+    }
 
     protected void displayView() {
 
-        ElementVirtualization elementDraftman = new ElementVirtualization();
+        ElementVirtualization virtualization = new ElementVirtualization();
 
-        model.accept(elementDraftman);
+        model.accept(virtualization);
 
-        view.setNewScene(elementDraftman.getResult());
+        view.setNewScene(virtualization.getResult());
     }
 }

@@ -29,7 +29,7 @@ public class App {
 
     private static class TestRobot extends Robot {
         public TestRobot() throws JointInvalidValueException {
-            super(new Twisting(0.0), new MoveY(0.35), new Rotational(0.0, -Math.PI / 6.0, Math.PI / 4.0), new MoveY(0.45), new Pitching(Math.PI / 2.0), new Collinear(0.55, 0.3, 0.7), new Rotational(0.0, -Math.PI, Math.PI), new MoveY(0.1), new Revolving(0.0, -Math.PI, Math.PI));
+            super(new Twisting(0.0), new MoveY(0.35), new Rotational(0.0, -Math.PI / 6.0, Math.PI / 4.0), new MoveY(0.45), new Pitching(Math.PI / 2.0), new Collinear(0.55, 0.3, 0.7), new Rotational(0.0, -Math.PI / 2.0, Math.PI / 2.0), new MoveY(0.1), new Revolving(0.0, -Math.PI / 2.0, Math.PI / 2.0));
         }
     }
 }

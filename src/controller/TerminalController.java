@@ -29,6 +29,8 @@ public class TerminalController extends AbstractController {
     private static final String HELP = "help";
     private static final String MATRIX = "matrix";
     private static final String COMPUTE = "compute";
+    private static final String JOINTS_TEST = "test";
+
 
     static {
         COMMANDS.put(DRAW, 0);
@@ -44,6 +46,7 @@ public class TerminalController extends AbstractController {
         COMMANDS.put(HELP, 0);
         COMMANDS.put(MATRIX, 0);
         COMMANDS.put(COMPUTE, 0);
+        COMMANDS.put(JOINTS_TEST, 1);
     }
 
     private final Thread thread;
@@ -248,9 +251,55 @@ public class TerminalController extends AbstractController {
                 }
                 break;
 
+            case JOINTS_TEST:
+                try {
+                    jointsTest(Double.parseDouble(args[1]));
+                } catch (NumberFormatException e) {
+                    usage(ANIMATION, "<pas>");
+                }
+                break;
+
             default:
                 throw new IllegalStateException("");
         }
+    }
+
+    private void jointsTest(double pas) {
+
+        System.out.println("Test is running...");
+
+        Joint[] joints = model.getJoints();
+
+        for (int i = 0; i < joints.length; i++) {
+
+            System.out.println("\t- Test joint number " + i);
+
+            Joint joint = joints[i];
+
+            final int maxCycle = (joint.min == Double.MIN_VALUE || joint.max == Double.MAX_VALUE) ? (int) (1 / pas * Math.PI * 2) : Integer.MAX_VALUE;
+            int cycle = 0;
+
+            for (double v = joint.getValue(); v > joint.min; v -= pas, cycle++) {
+
+                joint.setValue(v);
+                computeAndSleepAndDisplay();
+
+                if (cycle > maxCycle) {
+                    break;
+                }
+            }
+
+            for (double v = joint.getValue(); v < joint.max; v += pas, cycle++) {
+
+                joint.setValue(v);
+                computeAndSleepAndDisplay();
+
+                if (cycle > maxCycle) {
+                    break;
+                }
+            }
+        }
+
     }
 
     private static class TerminalReader extends Thread {
