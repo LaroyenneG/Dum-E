@@ -7,6 +7,9 @@ import javax.vecmath.Color3f;
 import javax.vecmath.Point3d;
 import java.awt.*;
 
+/**
+ * Abandonne tout espoir toi qui entre ici...
+ */
 
 public class Laboratory extends JFrame {
 
@@ -41,7 +44,8 @@ public class Laboratory extends JFrame {
         setResizable(false);
     }
 
-    /*******************************************************************************************************************
+    /*
+     * ******************************************************************************************************************
      * =====> User control <======
      */
     private static Node observable() {
@@ -54,7 +58,7 @@ public class Laboratory extends JFrame {
         return node;
     }
 
-    /**
+    /*
      * ******************************************************************************************************************
      */
 
