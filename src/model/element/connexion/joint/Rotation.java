@@ -8,6 +8,10 @@ public abstract class Rotation extends Joint {
         super(value);
     }
 
+    public Rotation(double value, double min, double max) throws JointInvalidValueException {
+        super(value, min, max);
+    }
+
     @Override
     public void accept(ElementVisitor sv) {
         sv.virtualizationRotation(this);
