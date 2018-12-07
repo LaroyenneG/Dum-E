@@ -1,4 +1,4 @@
-package model.element.connexion.constant.axis.move;
+package model.element.connexion.constant.axis.distance;
 
 import model.ElementVisitor;
 import model.element.connexion.constant.axis.AxisMove;
@@ -6,9 +6,9 @@ import model.element.connexion.constant.axis.AxisMove;
 import javax.media.j3d.Transform3D;
 import javax.vecmath.Vector3d;
 
-public class MoveX extends AxisMove {
+public class Distance extends AxisMove {
 
-    public MoveX(double distance) {
+    public Distance(double distance) {
         super(distance);
     }
 
@@ -17,7 +17,7 @@ public class MoveX extends AxisMove {
 
         Transform3D transform3D = new Transform3D();
 
-        transform3D.setTranslation(new Vector3d(getValue(), 0, 0));
+        transform3D.setTranslation(new Vector3d(0, getValue(), 0));
 
         return transform3D;
     }
@@ -25,6 +25,6 @@ public class MoveX extends AxisMove {
     @Override
     public void accept(ElementVisitor sv) {
 
-        sv.virtualizationMoveX(this);
+        sv.virtualizationDistance(this);
     }
 }

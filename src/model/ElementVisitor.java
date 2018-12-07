@@ -2,9 +2,7 @@ package model;
 
 import model.element.Element;
 import model.element.connexion.constant.axis.AxisRotation;
-import model.element.connexion.constant.axis.move.MoveX;
-import model.element.connexion.constant.axis.move.MoveY;
-import model.element.connexion.constant.axis.move.MoveZ;
+import model.element.connexion.constant.axis.distance.Distance;
 import model.element.connexion.joint.Rotation;
 import model.element.connexion.joint.linear.Collinear;
 import model.element.connexion.joint.linear.Orthogonal;
@@ -16,11 +14,7 @@ public interface ElementVisitor {
 
     void virtualizationDefault(Default organ);
 
-    void virtualizationMoveY(MoveY axisMove);
-
-    void virtualizationMoveX(MoveX axisMove);
-
-    void virtualizationMoveZ(MoveZ axisMove);
+    void virtualizationDistance(Distance axisMove);
 
     void virtualizationAxisRotation(AxisRotation axisRotation);
 

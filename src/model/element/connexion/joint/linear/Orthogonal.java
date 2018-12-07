@@ -1,6 +1,7 @@
 package model.element.connexion.joint.linear;
 
 import model.ElementVisitor;
+import model.element.connexion.joint.JointInvalidValueException;
 import model.element.connexion.joint.Linear;
 
 import javax.media.j3d.Transform3D;
@@ -10,6 +11,10 @@ public class Orthogonal extends Linear {
 
     public Orthogonal(int value) {
         super(value);
+    }
+
+    public Orthogonal(double value, double min, double max) throws JointInvalidValueException {
+        super(value, min, max);
     }
 
     @Override

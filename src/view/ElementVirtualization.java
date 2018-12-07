@@ -6,9 +6,7 @@ import com.sun.j3d.utils.geometry.Sphere;
 import model.ElementVisitor;
 import model.element.Element;
 import model.element.connexion.constant.axis.AxisRotation;
-import model.element.connexion.constant.axis.move.MoveX;
-import model.element.connexion.constant.axis.move.MoveY;
-import model.element.connexion.constant.axis.move.MoveZ;
+import model.element.connexion.constant.axis.distance.Distance;
 import model.element.connexion.joint.Rotation;
 import model.element.connexion.joint.linear.Collinear;
 import model.element.connexion.joint.linear.Orthogonal;
@@ -84,43 +82,11 @@ public class ElementVirtualization implements ElementVisitor {
     }
 
     @Override
-    public void virtualizationMoveY(MoveY axisMove) {
+    public void virtualizationDistance(Distance axisMove) {
 
         Node cylinder = buildCylinder((float) R_CYLINDER_MOVE, (float) axisMove.getValue(), DEFAULT_COLOR);
 
         addToScene(cylinder, axisMove);
-    }
-
-    @Override
-    public void virtualizationMoveX(MoveX axisMove) {
-
-        Node cylinder = buildCylinder((float) R_CYLINDER_MOVE, (float) axisMove.getValue(), DEFAULT_COLOR);
-
-        Transform3D transform3D = new Transform3D();
-
-        transform3D.rotZ(-Math.PI / 2.0);
-
-        TransformGroup transformGroup = new TransformGroup(transform3D);
-
-        transformGroup.addChild(cylinder);
-
-        addToScene(transformGroup, axisMove);
-    }
-
-    @Override
-    public void virtualizationMoveZ(MoveZ axisMove) {
-
-        Node cylinder = buildCylinder((float) R_CYLINDER_MOVE, (float) axisMove.getValue(), DEFAULT_COLOR);
-
-        Transform3D transform3D = new Transform3D();
-
-        transform3D.rotX(Math.PI / 2.0);
-
-        TransformGroup transformGroup = new TransformGroup(transform3D);
-
-        transformGroup.addChild(cylinder);
-
-        addToScene(transformGroup, axisMove);
     }
 
     @Override
