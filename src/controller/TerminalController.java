@@ -324,7 +324,7 @@ public class TerminalController extends AbstractController {
 
                 try {
 
-                    System.out.print(">>>");
+                    System.out.print(">>> ");
 
                     String line = reader.readLine();
 
