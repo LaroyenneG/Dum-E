@@ -67,7 +67,7 @@ public class ElementVirtualization implements ElementVisitor {
     @Override
     public void virtualizationDefault(Default organ) {
 
-        Node cylinder = buildCylinder(0.01f, 0.1f, DEFAULT_COLOR);
+        Node cylinder = buildCylinder(0.01f, 0.1f, Color.MAGENTA);
 
         addToScene(cylinder, organ);
     }

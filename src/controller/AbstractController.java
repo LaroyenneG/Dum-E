@@ -18,13 +18,28 @@ public abstract class AbstractController {
 
     protected void computeAndSleepAndDisplay() {
 
-        model.build();
+        Thread[] threads = new Thread[2];
 
-        try {
-            Thread.sleep(TIME_TO_SLEEP);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-            return;
+        threads[0] = new Thread(() -> model.build());
+
+        threads[1] = new Thread(() -> {
+            try {
+                Thread.sleep(TIME_TO_SLEEP);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+
+        for (Thread thread : threads) {
+            thread.start();
+        }
+
+        for (Thread thread : threads) {
+            try {
+                thread.join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
 
         displayView();

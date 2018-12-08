@@ -30,6 +30,8 @@ public class TerminalController extends AbstractController {
     private static final String MATRIX = "matrix";
     private static final String COMPUTE = "compute";
     private static final String JOINTS_TEST = "test";
+    private static final String STEP = "step";
+    private static final double DEFAULT_STEP = 0.01;
 
 
     static {
@@ -42,19 +44,23 @@ public class TerminalController extends AbstractController {
         COMMANDS.put(EXIT, 0);
         COMMANDS.put(BASIC, 0);
         COMMANDS.put(AUTO, 0);
-        COMMANDS.put(ANIMATION, 2);
+        COMMANDS.put(ANIMATION, 1);
         COMMANDS.put(HELP, 0);
         COMMANDS.put(MATRIX, 0);
         COMMANDS.put(COMPUTE, 0);
-        COMMANDS.put(JOINTS_TEST, 1);
+        COMMANDS.put(JOINTS_TEST, 0);
+        COMMANDS.put(STEP, 1);
     }
 
     private final Thread thread;
+
+    private double step;
 
     public TerminalController(Robot model, RobotView view) {
         super(model, view);
         thread = new TerminalReader(this);
         thread.start();
+        step = DEFAULT_STEP;
     }
 
     private static boolean myRandom(int v) {
@@ -103,7 +109,7 @@ public class TerminalController extends AbstractController {
                 if (v < joints[j].max && v > joints[j].min) {
                     joints[j].setValue(v);
                 } else {
-                    System.err.println("bad parameters");
+                    System.out.println("bad parameters");
                     return;
                 }
             }
@@ -114,15 +120,7 @@ public class TerminalController extends AbstractController {
                 }
             }
 
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-                System.err.println("interruption, stop running...");
-                return;
-            }
-
-            model.build();
-            displayView();
+            computeAndSleepAndDisplay();
         }
     }
 
@@ -139,12 +137,12 @@ public class TerminalController extends AbstractController {
         }
 
         if (COMMANDS.get(args[0]) == null) {
-            System.err.println("Unknown command " + args[0]);
+            System.out.println("Unknown command " + args[0]);
             return;
         }
 
         if (COMMANDS.get(args[0]) != args.length - 1) {
-            System.err.println("invalid argument number");
+            System.out.println("invalid argument number");
             return;
         }
 
@@ -216,9 +214,9 @@ public class TerminalController extends AbstractController {
                 }
 
                 try {
-                    randomAnimation(Integer.parseInt(args[1]), Double.parseDouble(args[2]));
+                    randomAnimation(Integer.parseInt(args[1]), step);
                 } catch (NumberFormatException e) {
-                    usage(ANIMATION, "<cycles> <pas>");
+                    usage(ANIMATION, "<cycles>");
                 }
                 break;
 
@@ -252,10 +250,15 @@ public class TerminalController extends AbstractController {
                 break;
 
             case JOINTS_TEST:
+
+                jointsTest(step);
+                break;
+
+            case STEP:
                 try {
-                    jointsTest(Double.parseDouble(args[1]));
+                    step = Double.parseDouble(args[0]);
                 } catch (NumberFormatException e) {
-                    usage(ANIMATION, "<pas>");
+                    usage(STEP, "<pas>");
                 }
                 break;
 
