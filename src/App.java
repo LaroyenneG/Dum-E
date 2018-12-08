@@ -7,6 +7,7 @@ import view.RobotView;
 
 import javax.swing.*;
 import javax.vecmath.Point3d;
+import java.util.Arrays;
 
 public class App {
 
@@ -84,7 +85,9 @@ public class App {
 
         Robot robot = new DumE();
 
-        Solver<Robot> solver = new Solver<>(robot, new Point3d(0.6 * 10, 0.0, 0.0));
+        Solver<Robot> solver = new Solver<>(robot, new Point3d(0.6, 0.1, 0.0));
+
+        System.out.println(Arrays.toString(solver.compute()));
 
         SwingUtilities.invokeLater(() -> {
             RobotView view = new RobotView();

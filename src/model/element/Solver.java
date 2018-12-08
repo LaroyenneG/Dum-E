@@ -36,13 +36,15 @@ public class Solver<Fragment extends Element & NumerousJoints & Cloneable> {
 
     private double distance() {
 
-        Transform3D transform3D = fragment.getTransform3D();
-        transform3D.mul(fragment.transformation());
+        double[] u0 = new double[16];
 
-        Point3d position = new Point3d();
-        transform3D.transform(position);
 
-        return Math.abs(point.distance(position));
+        Transform3D transform3D = fragment.applyTransformation(fragment.getTransform3D());
+
+        transform3D.get(u0);
+
+
+        return Math.abs(point.distance(new Point3d(u0[4], u0[8], u0[12])));
     }
 
     public double[] compute() {
@@ -71,7 +73,7 @@ public class Solver<Fragment extends Element & NumerousJoints & Cloneable> {
 
                             joint.setValueSafe(testValue);
 
-                            if (distance() >= d) {
+                            if (distance() > d) {
                                 joint.setValue(value);
                             } else {
                                 stop = false;
