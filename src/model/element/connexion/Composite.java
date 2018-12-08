@@ -65,4 +65,17 @@ public abstract class Composite extends Connexion implements NumerousJoints {
     public boolean isComposite() {
         return true;
     }
+
+
+    @Override
+    public Object clone() {
+
+        Composite composite = null;
+
+        composite = (Composite) super.clone();
+
+        composite.simples = simples.clone();
+
+        return composite;
+    }
 }

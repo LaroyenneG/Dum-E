@@ -315,7 +315,7 @@ public class TerminalController extends AbstractController {
         @Override
         public void run() {
 
-            System.out.println("-------------------------------------------------------------------------------------");
+            System.out.println("-----------------------------------------------------------------------------------------------");
 
             while (!isInterrupted()) {
 

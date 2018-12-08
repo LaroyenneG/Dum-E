@@ -1,6 +1,6 @@
 package model.element.connexion.constant.axis;
 
-import model.ElementVisitor;
+import model.element.ElementVisitor;
 import model.element.connexion.constant.Constant;
 
 public abstract class AxisRotation extends Constant {

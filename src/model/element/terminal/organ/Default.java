@@ -1,6 +1,6 @@
 package model.element.terminal.organ;
 
-import model.ElementVisitor;
+import model.element.ElementVisitor;
 
 import javax.media.j3d.Transform3D;
 

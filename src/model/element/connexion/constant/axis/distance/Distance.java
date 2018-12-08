@@ -1,6 +1,6 @@
 package model.element.connexion.constant.axis.distance;
 
-import model.ElementVisitor;
+import model.element.ElementVisitor;
 import model.element.connexion.constant.axis.AxisMove;
 
 import javax.media.j3d.Transform3D;

@@ -3,8 +3,8 @@ package view;
 
 import com.sun.j3d.utils.geometry.Cylinder;
 import com.sun.j3d.utils.geometry.Sphere;
-import model.ElementVisitor;
 import model.element.Element;
+import model.element.ElementVisitor;
 import model.element.connexion.constant.axis.AxisRotation;
 import model.element.connexion.constant.axis.distance.Distance;
 import model.element.connexion.joint.Rotation;

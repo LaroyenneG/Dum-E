@@ -1,6 +1,6 @@
 package model.element.connexion.joint;
 
-import model.ElementVisitor;
+import model.element.ElementVisitor;
 
 public abstract class Rotation extends Joint {
 

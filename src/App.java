@@ -1,35 +1,94 @@
 import controller.ControlGroup;
-import model.element.connexion.constant.axis.distance.Distance;
-import model.element.connexion.constant.axis.rotation.Pitching;
+import model.dume.DumE;
+import model.element.Solver;
 import model.element.connexion.joint.JointInvalidValueException;
-import model.element.connexion.joint.linear.Collinear;
-import model.element.connexion.joint.rotation.Revolving;
-import model.element.connexion.joint.rotation.Rotational;
-import model.element.connexion.joint.rotation.Twisting;
 import model.element.robot.Robot;
 import view.RobotView;
 
 import javax.swing.*;
+import javax.vecmath.Point3d;
 
 public class App {
 
-    public static void main(String[] args) {
+    private static void printDumE() {
+
+        final String DUM_E_IMAGE =
+                "                                                                           `....``                  \n" +
+                        "                                                                         .:::::/o++-                \n" +
+                        "                                                                       `-:+o+s/:ssso                \n" +
+                        "                                                                    -/+++:/soo:/hhy+                \n" +
+                        "                                                                 `-/++oyhhdNs/+yhso:`               \n" +
+                        "                                                             `-:/+oyhdmmmm/shdmmmhyhs/`             \n" +
+                        "                                                         `.:/+oyhdyo:.-+s: .smmmmmNd+++.            \n" +
+                        "                                                      .:/+oshdmh+.    `s:   .ohmNNmh++o+-           \n" +
+                        "                                                 ..-/+oshdddyo.``...  //:  .o./odyo+/++syyys.       \n" +
+                        "                                              `-/hoshdhs+:.`       `--//:`--+: :+o++/+ohmNmmo.      \n" +
+                        "                                       ``  .:+oshmmms-`              `-++::-` `/.ss++ydmmNddds.     \n" +
+                        "                                    .:ohy+syhddyo+/.                    .----:/+ommmNdyhmmdoy/      \n" +
+                        "                           `    .-/ohNyNddmho:``-`                              `osymmmshmd/+y`     \n" +
+                        "                          `ys:.:hyyyyMNNNmh.  .-                                    :ymmmmmmh:.```` \n" +
+                        "                       `-+ymmhyydhyyymNNmmh+.:-                                      `ohhsho:`  -//.\n" +
+                        "                    ./sdmNmNmdmmNyhhyoshdmmddd+                                      ``..`` `:.     \n" +
+                        "                  .hmNNNNNNNNMNNy`-mmdddhdmNNN/                                     `-       .:     \n" +
+                        "                  .NNNNNNNMNNhys+shmmddddNNNMy                                     -+-              \n" +
+                        "                   /mNNNNyo/+syddhsoddhdNMNNN-.`                                                    \n" +
+                        "                    .+/-/oshdddsydhyhmdmMMMMNmms`                                                   \n" +
+                        "                        sddddmmh+dNNNNmmMMMdNNmmy.                                                  \n" +
+                        "                        .yddddmms+hmNMMmmNMmdNNhdh/                                                 \n" +
+                        "                         .hmdddmms+sdmNMmmmmmmNNhhdo`                                               \n" +
+                        "                          -yo::hmmy+ohdNMNmddddhmhyhy-                                              \n" +
+                        "                           `   /sdm/-+ydmNNmdddhsmdydy.                                             \n" +
+                        "                         `.-/osh:ymdoo+sddNNddddhoso+-`                                             \n" +
+                        "                     -:osysyddddmosmNdy+ohmNNmdddy.  ..`                                            \n" +
+                        "                     hsymNmhhdmmmmhdmmmhyhymMNddhhy.  `.`                                           \n" +
+                        "                     ymhsdNNmdNNmmmdmhmdhh::dNNmdhhy.  `....                                        \n" +
+                        "                     ommdsymNmmmmmmmdmmN/:m/-yNmddddy`  `ydy`                                       \n" +
+                        "                     +mmmmhsdNmmmmmdddmmmsNNo-ommddddy:/+dNdo:.`                                    \n" +
+                        "                     :mmmNNmsymNNmmmdNmNmmNMMy-ymmmmmmNNNNNmdhys+`                                  \n" +
+                        "                     `hmmmNmmhsdNNmmmNmmmdddNNddmNNmmmNNNNNNNNmhho                                  \n" +
+                        "                      .:/oyhsss+dmNNmNmmdddmNNmmmmmmddhhdNMMMNNdho                                  \n" +
+                        "                           `   `..-:ommmmNNNMMNNmddmNmmmhdNNNmdhy+                                  \n" +
+                        "                                    :mmmNNNNMMMMMNmmmNNNmhddhhhyy-                                  \n" +
+                        "                                    -mmdysyhmNMMMMMNmNNNNdhhhhyyy.                                  \n" +
+                        "                                    -dh/---:ohNNMMMMNmNMNdhhhhys/`                                  \n" +
+                        "                                    .dh-----:omNMMMMNmNMNdhhs/-`                                    \n" +
+                        "                                    `dms:---:sNNMMMMNNNNNdh-`                                       \n" +
+                        "                                    `hmmhsoohNNNMMNNNNNmdmd                                         \n" +
+                        "                                    `hmmmmmmNNNNNNNNmmmmddh                                         \n" +
+                        "                                 `-+sdmmmmmmmNmNNNmmNmddddy                                         \n" +
+                        "                              `-+shddmNmmmmmmNmmmmmNmmdddmh                                         \n" +
+                        "                           `-+yhhdmmdNNNmmmmmNmhddNNmdmmmmo    ````...`````                         \n" +
+                        "                        `:shddmNMNddmNNNmmmmmNmhhhNNmmmNNh+osoohyhdmNmdyo/++                        \n" +
+                        "                     ```sNNNMMMMMmdNmmNNNmmmNNNNmmNNNNNNmdNNmdddhddmNNmds//s.                       \n" +
+                        "              ````.+yhhhmNdNNNNNNNmmNNNmNmmNNNNMMMNMMMMNNNmddddddhdmNmmd`                           \n" +
+                        "              s/:+dNNNNNNmmdddmNNNNNmmmNNNmNNNNMMMMMMMMMNNmddddhhhdmNNNm.                           \n" +
+                        "              o+/+sdmmmmmmNNNNNNMMMNNmmddmmmNNNNMMMMMMMNNNmddhhhddmNmmh:                            \n" +
+                        "                   hmNMMmmmmmdhhdmNNNNNmmmmNNMMMMMMMMMNNmddhhhhNNmy:::`                             \n" +
+                        "                   omNNmmdhyyyyyyyyhdmmNNNNMNNMMdNMMNNmdhhhhhdmms-                                  \n" +
+                        "                    oh/.--/syhhhyyyyyyyyhdmNNNMMmNMMMNdhhdNdmmo.                                    \n" +
+                        "                            `./oyhhyyyyyyssyNNNMMMMMMNhhdNNdo.                                      \n" +
+                        "                                 .:+syyyysssdmNMMMMMMNdmNd+`                                        \n" +
+                        "                                     `-/oyyyhdddmmmNNNNd/`                                          \n" +
+                        "                                          .:+hNNNNmNMNd`                                            \n" +
+                        "                                             /dNNNNNNd`                                             \n" +
+                        "                                              .ydmmm/`                                              \n" +
+                        "                                                `--`                                                  ";
+
+
+        System.out.println(DUM_E_IMAGE);
+    }
+
+    public static void main(String[] args) throws JointInvalidValueException {
+
+        printDumE();
+
+        Robot robot = new DumE();
+
+        Solver<Robot> solver = new Solver<>(robot, new Point3d(0.6 * 10, 0.0, 0.0));
 
         SwingUtilities.invokeLater(() -> {
-            Robot robot = null;
-            try {
-                robot = new TestRobot();
-            } catch (JointInvalidValueException e) {
-                e.printStackTrace();
-            }
             RobotView view = new RobotView();
             new ControlGroup(robot, view);
         });
-    }
-
-    private static class TestRobot extends Robot {
-        public TestRobot() throws JointInvalidValueException {
-            super(new Twisting(0.0), new Distance(0.35), new Rotational(0.0, -Math.PI / 6.0, Math.PI / 4.0), new Distance(0.45), new Pitching(Math.PI / 2.0), new Collinear(0.55, 0.3, 0.7), new Rotational(0.0, -Math.PI / 2.0, Math.PI / 2.0), new Distance(0.1), new Revolving(0.0, -Math.PI / 2.0, Math.PI / 2.0));
-        }
     }
 }

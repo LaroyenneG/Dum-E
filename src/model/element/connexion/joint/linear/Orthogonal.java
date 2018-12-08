@@ -1,6 +1,6 @@
 package model.element.connexion.joint.linear;
 
-import model.ElementVisitor;
+import model.element.ElementVisitor;
 import model.element.connexion.joint.JointInvalidValueException;
 import model.element.connexion.joint.Linear;
 

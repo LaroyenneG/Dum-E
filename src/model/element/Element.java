@@ -1,10 +1,8 @@
 package model.element;
 
-import model.ElementVisitor;
-
 import javax.media.j3d.Transform3D;
 
-public abstract class Element {
+public abstract class Element implements Cloneable {
 
     private Transform3D transform3D;
 
@@ -44,5 +42,23 @@ public abstract class Element {
     public void accept(ElementVisitor sv) {
 
         sv.virtualizationElement(this);
+    }
+
+    @Override
+    public Object clone() {
+
+        Element element = null;
+
+        try {
+
+            element = (Element) super.clone();
+
+            element.transform3D = new Transform3D(transform3D);
+
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
+
+        return element;
     }
 }

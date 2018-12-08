@@ -1,6 +1,5 @@
-package model;
+package model.element;
 
-import model.element.Element;
 import model.element.connexion.constant.axis.AxisRotation;
 import model.element.connexion.constant.axis.distance.Distance;
 import model.element.connexion.joint.Rotation;

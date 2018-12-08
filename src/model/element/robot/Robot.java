@@ -1,7 +1,7 @@
 package model.element.robot;
 
-import model.ElementVisitor;
 import model.element.Element;
+import model.element.ElementVisitor;
 import model.element.NumerousJoints;
 import model.element.connexion.Composite;
 import model.element.connexion.Connexion;
