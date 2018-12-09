@@ -4,6 +4,7 @@ import model.element.connexion.joint.Joint;
 import model.element.robot.Robot;
 import view.RobotView;
 
+import javax.vecmath.Point3d;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -12,7 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-public class TerminalController extends AbstractController {
+public class TerminalController extends AbstractRobotController {
 
     private static final Map<String, Integer> COMMANDS = new HashMap<>();
 
@@ -31,7 +32,7 @@ public class TerminalController extends AbstractController {
     private static final String COMPUTE = "compute";
     private static final String JOINTS_TEST = "test";
     private static final String STEP = "step";
-    private static final double DEFAULT_STEP = 0.01;
+    private static final String POINT = "point";
 
 
     static {
@@ -50,17 +51,16 @@ public class TerminalController extends AbstractController {
         COMMANDS.put(COMPUTE, 0);
         COMMANDS.put(JOINTS_TEST, 0);
         COMMANDS.put(STEP, 1);
+        COMMANDS.put(POINT, 3);
     }
 
     private final Thread thread;
 
-    private double step;
 
     public TerminalController(Robot model, RobotView view) {
         super(model, view);
         thread = new TerminalReader(this);
         thread.start();
-        step = DEFAULT_STEP;
     }
 
     private static boolean myRandom(int v) {
@@ -125,7 +125,7 @@ public class TerminalController extends AbstractController {
     }
 
     private static void usage(String cmd, String args) {
-        System.err.println("Usage : " + cmd + " " + args);
+        System.out.println("Usage : " + cmd + " " + args);
     }
 
     private void execute(String line) {
@@ -214,13 +214,14 @@ public class TerminalController extends AbstractController {
                 }
 
                 try {
-                    randomAnimation(Integer.parseInt(args[1]), step);
+                    randomAnimation(Integer.parseInt(args[1]), getStep());
                 } catch (NumberFormatException e) {
                     usage(ANIMATION, "<cycles>");
                 }
                 break;
 
             case EXIT:
+
                 System.exit(0);
                 break;
 
@@ -231,6 +232,7 @@ public class TerminalController extends AbstractController {
                 break;
 
             case AUTO:
+
                 model.build();
                 view.addOrbitBehavior();
                 view.addBackground();
@@ -239,10 +241,12 @@ public class TerminalController extends AbstractController {
                 break;
 
             case MATRIX:
+
                 System.out.println(model);
                 break;
 
             case HELP:
+
                 System.out.println("Commands list :");
                 for (String cmd : COMMANDS.keySet()) {
                     System.out.println("\t\t\t\t- " + cmd);
@@ -251,15 +255,32 @@ public class TerminalController extends AbstractController {
 
             case JOINTS_TEST:
 
-                jointsTest(step);
+                jointsTest(getStep());
                 break;
 
             case STEP:
+
                 try {
-                    step = Double.parseDouble(args[0]);
+                    setStep(Double.parseDouble(args[1]));
                 } catch (NumberFormatException e) {
                     usage(STEP, "<pas>");
                 }
+                break;
+
+            case POINT:
+
+                try {
+
+                    Point3d point3d = new Point3d(Double.parseDouble(args[1]), Double.parseDouble(args[2]), Double.parseDouble(args[3]));
+
+                    if (!setTerminalOrganOnPoint(point3d)) {
+                        System.out.println("Can't find solution...");
+                    }
+
+                } catch (NumberFormatException e) {
+                    usage(POINT, "<x> <y> <z>");
+                }
+
                 break;
 
             default:
