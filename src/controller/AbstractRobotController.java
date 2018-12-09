@@ -73,7 +73,7 @@ public abstract class AbstractRobotController {
     protected boolean setTerminalOrganOnPoint(Point3d point3d) {
 
         Solver<Robot> solver = new Solver<>(model, point3d);
-
+        solver.setStep(getStep());
         double[] solution = solver.compute();
 
         if (solution == null) {
