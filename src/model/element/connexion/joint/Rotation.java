@@ -8,7 +8,7 @@ public abstract class Rotation extends Joint {
         super(value);
     }
 
-    public Rotation(double value, double min, double max) throws JointInvalidValueException {
+    public Rotation(double value, double min, double max) {
         super(value, min, max);
     }
 

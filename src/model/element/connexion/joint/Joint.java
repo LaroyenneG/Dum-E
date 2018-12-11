@@ -9,7 +9,7 @@ public abstract class Joint extends Simple {
 
     private double value;
 
-    public Joint(double value, double min, double max) throws JointInvalidValueException {
+    public Joint(double value, double min, double max) {
         this.min = min;
         this.max = max;
         setValueSafe(value);
@@ -25,10 +25,10 @@ public abstract class Joint extends Simple {
         return value;
     }
 
-    public void setValueSafe(double value) throws JointInvalidValueException {
+    public void setValueSafe(double value) {
 
         if (value <= min || value >= max) {
-            throw new JointInvalidValueException(this);
+            return;
         }
 
         this.value = value;

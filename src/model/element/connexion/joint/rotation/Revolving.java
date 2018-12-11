@@ -1,13 +1,12 @@
 package model.element.connexion.joint.rotation;
 
-import model.element.connexion.joint.JointInvalidValueException;
 import model.element.connexion.joint.Rotation;
 
 import javax.media.j3d.Transform3D;
 
 public class Revolving extends Rotation {
 
-    public Revolving(double value, double min, double max) throws JointInvalidValueException {
+    public Revolving(double value, double min, double max) {
         super(value, min, max);
     }
 

@@ -1,6 +1,5 @@
 package model.element.connexion.joint.rotation;
 
-import model.element.connexion.joint.JointInvalidValueException;
 import model.element.connexion.joint.Rotation;
 
 import javax.media.j3d.Transform3D;
@@ -11,7 +10,7 @@ public class Rotational extends Rotation {
         super(value);
     }
 
-    public Rotational(double value, double min, double max) throws JointInvalidValueException {
+    public Rotational(double value, double min, double max) {
         super(value, min, max);
     }
 

@@ -1,6 +1,5 @@
 import controller.ControlGroup;
 import model.dume.DumE;
-import model.element.connexion.joint.JointInvalidValueException;
 import model.element.robot.Robot;
 import view.RobotView;
 
@@ -76,7 +75,7 @@ public class App {
         System.out.println(DUM_E_IMAGE);
     }
 
-    public static void main(String[] args) throws JointInvalidValueException {
+    public static void main(String[] args) {
 
         printDumE();
 
