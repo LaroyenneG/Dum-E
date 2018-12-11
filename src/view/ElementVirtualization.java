@@ -19,9 +19,9 @@ import java.awt.*;
 
 public class ElementVirtualization implements ElementVisitor {
 
-    private static final Color DEFAULT_COLOR = Color.BLACK;
+    private static final float MULTIPLIER = 1.0f;
 
-    private static final double R_CYLINDER_MOVE = 0.01;
+    private static final Color DEFAULT_COLOR = Color.BLACK;
 
     private BranchGroup branchGroup;
 
@@ -67,7 +67,7 @@ public class ElementVirtualization implements ElementVisitor {
     @Override
     public void virtualizationDefault(Default organ) {
 
-        Node cylinder = buildCylinder(0.01f, 0.1f, Color.MAGENTA);
+        Node cylinder = buildCylinder(0.01f * MULTIPLIER, 0.1f * MULTIPLIER, Color.MAGENTA);
 
         addToScene(cylinder, organ);
     }
@@ -76,7 +76,7 @@ public class ElementVirtualization implements ElementVisitor {
     @Override
     public void virtualizationElement(Element element) {
 
-        Sphere sphere = new Sphere(0.05f);
+        Sphere sphere = new Sphere(0.05f * MULTIPLIER);
 
         addToScene(sphere, element);
     }
@@ -84,7 +84,7 @@ public class ElementVirtualization implements ElementVisitor {
     @Override
     public void virtualizationDistance(Distance axisMove) {
 
-        Node cylinder = buildCylinder((float) R_CYLINDER_MOVE, (float) axisMove.getValue(), DEFAULT_COLOR);
+        Node cylinder = buildCylinder((float) 0.01 * MULTIPLIER, (float) axisMove.getValue(), DEFAULT_COLOR);
 
         addToScene(cylinder, axisMove);
     }
@@ -92,7 +92,7 @@ public class ElementVirtualization implements ElementVisitor {
     @Override
     public void virtualizationAxisRotation(AxisRotation axisRotation) {
 
-        Sphere sphere = new Sphere(0.01f);
+        Sphere sphere = new Sphere(0.01f * MULTIPLIER);
 
         addToScene(sphere, axisRotation);
     }
@@ -105,7 +105,7 @@ public class ElementVirtualization implements ElementVisitor {
         coloringAttributes.setColor(new Color3f(Color.RED));
         appearance.setColoringAttributes(coloringAttributes);
 
-        Sphere sphere = new Sphere(0.02f);
+        Sphere sphere = new Sphere(0.02f * MULTIPLIER);
         sphere.setAppearance(appearance);
 
         addToScene(sphere, rotation);
@@ -114,7 +114,7 @@ public class ElementVirtualization implements ElementVisitor {
     @Override
     public void virtualizationCollinear(Collinear collinear) {
 
-        Node cylinder = buildCylinder((float) R_CYLINDER_MOVE, (float) collinear.getValue(), Color.RED);
+        Node cylinder = buildCylinder(0.01f * MULTIPLIER, (float) collinear.getValue(), Color.RED);
 
         addToScene(cylinder, collinear);
     }
@@ -122,7 +122,7 @@ public class ElementVirtualization implements ElementVisitor {
     @Override
     public void virtualizationOrthogonal(Orthogonal orthogonal) {
 
-        Node cylinder = buildCylinder((float) R_CYLINDER_MOVE, (float) orthogonal.getValue(), Color.RED);
+        Node cylinder = buildCylinder(0.01f * MULTIPLIER, (float) orthogonal.getValue(), Color.RED);
 
         addToScene(cylinder, orthogonal);
     }

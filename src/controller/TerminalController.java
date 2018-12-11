@@ -339,7 +339,7 @@ public class TerminalController extends AbstractRobotController {
         @Override
         public void run() {
 
-            System.out.println("-----------------------------------------------------------------------------------------------");
+            System.out.println("--------------------------------------------------------------------------------------------------------");
 
             while (!isInterrupted()) {
 

@@ -10,7 +10,7 @@ import javax.vecmath.Point3d;
 
 public abstract class AbstractRobotController {
 
-    private static final int TIME_TO_SLEEP = 100;
+    private static final int CLOCK = 50;
     public static final double DEFAULT_STEP = 0.01;
 
     private static double step = DEFAULT_STEP;
@@ -36,7 +36,7 @@ public abstract class AbstractRobotController {
 
         threads[1] = new Thread(() -> {
             try {
-                Thread.sleep(TIME_TO_SLEEP);
+                Thread.sleep(CLOCK);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

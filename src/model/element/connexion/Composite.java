@@ -1,5 +1,6 @@
 package model.element.connexion;
 
+import model.element.ElementVisitor;
 import model.element.NumerousJoints;
 import model.element.connexion.joint.Joint;
 
@@ -54,6 +55,26 @@ public abstract class Composite extends Connexion implements NumerousJoints {
         }
 
         return transform3D;
+    }
+
+    @Override
+    public Transform3D applyTransformation(Transform3D transform3D) {
+
+        super.applyTransformation(transform3D);
+
+        for (Simple simple : simples) {
+            simple.applyTransformation(transform3D);
+        }
+
+        return transform3D;
+    }
+
+    @Override
+    public void accept(ElementVisitor sv) {
+
+        for (Simple simple : simples) {
+            simple.accept(sv);
+        }
     }
 
     @Override
