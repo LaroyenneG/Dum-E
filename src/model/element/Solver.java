@@ -1,7 +1,6 @@
 package model.element;
 
 import model.element.connexion.joint.Joint;
-import model.element.connexion.joint.JointInvalidValueException;
 
 import javax.media.j3d.Transform3D;
 import javax.vecmath.Point3d;
@@ -69,7 +68,6 @@ public class Solver<Fragment extends Element & NumerousJoints & Cloneable> {
 
                     for (double testValue : testValues) {
 
-                        try {
 
                             joint.setValueSafe(testValue);
 
@@ -79,9 +77,6 @@ public class Solver<Fragment extends Element & NumerousJoints & Cloneable> {
                                 stop = false;
                                 break;
                             }
-
-                        } catch (JointInvalidValueException ignored) {
-                        }
                     }
                 }
             }

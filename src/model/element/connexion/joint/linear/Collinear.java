@@ -1,7 +1,6 @@
 package model.element.connexion.joint.linear;
 
 import model.element.ElementVisitor;
-import model.element.connexion.joint.JointInvalidValueException;
 import model.element.connexion.joint.Linear;
 
 import javax.media.j3d.Transform3D;
@@ -9,7 +8,7 @@ import javax.vecmath.Vector3d;
 
 public class Collinear extends Linear {
 
-    public Collinear(double value, double min, double max) throws JointInvalidValueException {
+    public Collinear(double value, double min, double max) {
         super(value, min, max);
     }
 
