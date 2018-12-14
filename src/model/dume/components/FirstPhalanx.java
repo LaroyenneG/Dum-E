@@ -9,6 +9,7 @@ import model.element.connexion.joint.rotation.Rotational;
 public class FirstPhalanx extends Composite {
 
     private static final Rotational Q4 = new Rotational(0.0, -Math.PI / 2.0, Math.PI / 2.0);
+
     private static final Distance D5 = new Distance(0.5 * DumE.MULTIPLIER);
 
     public FirstPhalanx() {

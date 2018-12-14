@@ -19,7 +19,7 @@ import java.awt.*;
 
 public class ElementVirtualization implements ElementVisitor {
 
-    private static final float MULTIPLIER = 1.0f;
+    private static final float MULTIPLIER = 1f;
 
     private static final Color DEFAULT_COLOR = Color.BLACK;
 

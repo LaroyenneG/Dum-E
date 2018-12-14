@@ -8,9 +8,9 @@ import model.element.connexion.joint.rotation.Twisting;
 
 public class Turret extends Composite {
 
-    public static final Distance D2 = new Distance(3.5 * DumE.MULTIPLIER);
+    private static final Distance D2 = new Distance(3.5 * DumE.MULTIPLIER);
 
-    public static final Twisting Q1 = new Twisting(0.0);
+    private static final Twisting Q1 = new Twisting(0.0);
 
     public Turret() {
         super((Simple) Q1.clone(), D2);
