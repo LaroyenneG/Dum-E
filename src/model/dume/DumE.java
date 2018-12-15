@@ -6,8 +6,6 @@ import model.element.robot.Robot;
 
 public class DumE extends Robot {
 
-    public static double MULTIPLIER = 1;
-
     private static final Base BASE = new Base();
 
     private static final Turret TURRET = new Turret();
