@@ -5,6 +5,7 @@ import view.RobotView;
 
 import javax.swing.*;
 
+
 public class App {
 
     private static void printDumE() {

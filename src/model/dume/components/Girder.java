@@ -9,7 +9,7 @@ public class Girder extends Composite {
 
     private static final Rotational Q2 = new Rotational(0.0, -Math.PI / 4.0, Math.PI / 4.0);
 
-    private static final Distance D3 = new Distance(4.5);
+    private static final Distance D3 = new Distance(0.45);
 
     public Girder() {
         super((Simple) Q2.clone(), D3);

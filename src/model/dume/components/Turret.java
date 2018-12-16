@@ -7,7 +7,7 @@ import model.element.connexion.joint.rotation.Twisting;
 
 public class Turret extends Composite {
 
-    private static final Distance D1 = new Distance(3.5);
+    private static final Distance D1 = new Distance(0.35);
 
     private static final Twisting Q1 = new Twisting(0.0);
 

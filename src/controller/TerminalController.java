@@ -109,7 +109,7 @@ public class TerminalController extends AbstractRobotController {
                 if (v < joints[j].max && v > joints[j].min) {
                     joints[j].setValue(v);
                 } else {
-                    System.out.println("bad parameters");
+                    System.out.println("bad parameters" + v);
                     return;
                 }
             }
