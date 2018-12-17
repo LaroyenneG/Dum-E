@@ -140,4 +140,15 @@ public abstract class Robot extends Element implements NumerousJoints {
     public void build() {
         applyTransformation(getTransform3D());
     }
+
+    @Override
+    public Object clone() {
+
+        Robot robot = (Robot) super.clone();
+
+        robot.connexions = connexions.clone();
+        robot.terminalOrgan = (TerminalOrgan) terminalOrgan.clone();
+
+        return robot;
+    }
 }

@@ -35,13 +35,11 @@ public class Solver<Fragment extends Element & NumerousJoints & Cloneable> {
 
     private double distance() {
 
-        double[] u0 = new double[16];
-
+        final double[] u0 = new double[16];
 
         Transform3D transform3D = fragment.applyTransformation(fragment.getTransform3D());
 
         transform3D.get(u0);
-
 
         return Math.abs(point.distance(new Point3d(u0[4], u0[8], u0[12])));
     }
@@ -68,7 +66,6 @@ public class Solver<Fragment extends Element & NumerousJoints & Cloneable> {
 
                     for (double testValue : testValues) {
 
-
                             joint.setValueSafe(testValue);
 
                             if (distance() > d) {
@@ -93,6 +90,16 @@ public class Solver<Fragment extends Element & NumerousJoints & Cloneable> {
         }
 
         return solution;
+    }
+
+    public double[][] computeTrajectory() {
+
+        final int nbValues = 10;
+
+        double[][] values = new double[nbValues][fragment.jointsNumber()];
+
+
+        return values;
     }
 
     public void lockJoint(int j) {
