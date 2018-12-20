@@ -1,15 +1,14 @@
-package model.element;
+package model.element.robot;
 
 import model.element.connexion.joint.Joint;
-import model.element.robot.Robot;
 
 import javax.vecmath.Point3d;
 
 public class Solver {
 
-    private static final double MINIMAL_DISTANCE = 0.001;
+    private static final double MINIMAL_DISTANCE = 0.000001;
     private static final double DEFAULT_STEP = 0.001;
-    private static final double MINIMAL_STEP = 0.00005;
+    private static final double MINIMAL_STEP = MINIMAL_DISTANCE / 2.0;
 
     private Robot robot;
 
@@ -18,6 +17,8 @@ public class Solver {
     private Point3d point;
 
     private double step;
+
+    private StringBuffer journal;
 
     public Solver(Robot robot, Point3d point) {
 
@@ -32,8 +33,16 @@ public class Solver {
         this.point = point;
 
         step = DEFAULT_STEP;
+        journal = null;
     }
 
+    public void enableJournal() {
+        journal = new StringBuffer();
+    }
+
+    public void disableJournal() {
+        journal = null;
+    }
 
     private double distance() {
 
@@ -70,7 +79,7 @@ public class Solver {
 
                             joint.setValueSafe(testValue);
 
-                            if (distance() > d) {
+                        if (distance() >= d) {
                                 joint.setValue(value);
                             } else {
                                 notBetter = false;
@@ -80,14 +89,17 @@ public class Solver {
                 }
             }
 
-            System.out.println(robot.stringValuesForCSV());
-
             if (notBetter) {
                 divisor++;
             }
 
-            if (step < MINIMAL_STEP) {
+            if (step <= MINIMAL_STEP) {
                 return null;
+            }
+
+            if (journal != null) {
+                journal.append(robot.stringValuesForCSV());
+                journal.append('\n');
             }
         }
 
@@ -130,5 +142,13 @@ public class Solver {
 
     public void setStep(double step) {
         this.step = step;
+    }
+
+    public String getJournal() {
+        return new String(journal);
+    }
+
+    public void purgeJournal() {
+        journal = new StringBuffer();
     }
 }

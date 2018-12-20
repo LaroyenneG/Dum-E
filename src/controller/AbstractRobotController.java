@@ -1,8 +1,8 @@
 package controller;
 
-import model.element.Solver;
 import model.element.connexion.joint.Joint;
 import model.element.robot.Robot;
+import model.element.robot.Solver;
 import view.ElementVirtualization;
 import view.RobotView;
 
