@@ -1,15 +1,17 @@
 package model.element;
 
 import model.element.connexion.joint.Joint;
+import model.element.robot.Robot;
 
-import javax.media.j3d.Transform3D;
 import javax.vecmath.Point3d;
 
-public class Solver<Fragment extends Element & NumerousJoints & Cloneable> {
+public class Solver {
 
+    private static final double MINIMAL_DISTANCE = 0.001;
     private static final double DEFAULT_STEP = 0.001;
+    private static final double MINIMAL_STEP = 0.00005;
 
-    private Fragment fragment;
+    private Robot robot;
 
     private boolean[] lockJoints;
 
@@ -17,11 +19,11 @@ public class Solver<Fragment extends Element & NumerousJoints & Cloneable> {
 
     private double step;
 
-    public Solver(Fragment fragment, Point3d point) {
+    public Solver(Robot robot, Point3d point) {
 
-        this.fragment = (Fragment) fragment.clone();
+        this.robot = (Robot) robot.clone();
 
-        lockJoints = new boolean[fragment.jointsNumber()];
+        lockJoints = new boolean[robot.jointsNumber()];
 
         for (int i = 0; i < lockJoints.length; i++) {
             lockJoints[i] = false;
@@ -35,26 +37,26 @@ public class Solver<Fragment extends Element & NumerousJoints & Cloneable> {
 
     private double distance() {
 
-        final double[] u0 = new double[16];
+        robot.build();
 
-        Transform3D transform3D = fragment.applyTransformation(fragment.getTransform3D());
-
-        transform3D.get(u0);
-
-        return Math.abs(point.distance(new Point3d(u0[4], u0[8], u0[12])));
+        return Math.abs(point.distance(robot.getTerminalOrganPosition()));
     }
 
     public double[] compute() {
 
         double d = 0.0;
 
-        Joint[] joints = fragment.getJoints();
+        double divisor = 1.0;
 
-        while ((d = distance()) > step) {
+        Joint[] joints = robot.getJoints();
 
-            boolean stop = true;
+        while ((d = distance()) > MINIMAL_DISTANCE) {
 
-            for (int j = 0; j < joints.length; j++) {
+            final double step = d / divisor;
+
+            boolean notBetter = true;
+
+            for (int j = joints.length - 1; j >= 0; j--) {
 
                 Joint joint = joints[j];
 
@@ -71,14 +73,20 @@ public class Solver<Fragment extends Element & NumerousJoints & Cloneable> {
                             if (distance() > d) {
                                 joint.setValue(value);
                             } else {
-                                stop = false;
+                                notBetter = false;
                                 break;
                             }
                     }
                 }
             }
 
-            if (stop) {
+            System.out.println(robot.stringValuesForCSV());
+
+            if (notBetter) {
+                divisor++;
+            }
+
+            if (step < MINIMAL_STEP) {
                 return null;
             }
         }
@@ -96,7 +104,7 @@ public class Solver<Fragment extends Element & NumerousJoints & Cloneable> {
 
         final int nbValues = 10;
 
-        double[][] values = new double[nbValues][fragment.jointsNumber()];
+        double[][] values = new double[nbValues][robot.jointsNumber()];
 
 
         return values;

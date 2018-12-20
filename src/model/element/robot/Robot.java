@@ -11,6 +11,8 @@ import model.element.terminal.organ.Default;
 import model.element.terminal.organ.TerminalOrgan;
 
 import javax.media.j3d.Transform3D;
+import javax.vecmath.Point3d;
+import java.text.DecimalFormat;
 
 public abstract class Robot extends Element implements NumerousJoints {
 
@@ -139,6 +141,31 @@ public abstract class Robot extends Element implements NumerousJoints {
 
     public void build() {
         applyTransformation(getTransform3D());
+    }
+
+    public Point3d getTerminalOrganPosition() {
+
+        return terminalOrgan.getPosition();
+    }
+
+    public String stringValuesForCSV() {
+
+        StringBuilder builder = new StringBuilder();
+
+        Joint[] joints = getJoints();
+
+        final DecimalFormat decimalFormat = new DecimalFormat("##.#####");
+
+        for (int i = 0; i < joints.length; i++) {
+
+            builder.append(decimalFormat.format(joints[i].getValue()));
+
+            if (i + 1 < joints.length) {
+                builder.append(';');
+            }
+        }
+
+        return new String(builder);
     }
 
     @Override

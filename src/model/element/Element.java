@@ -1,6 +1,7 @@
 package model.element;
 
 import javax.media.j3d.Transform3D;
+import javax.vecmath.Point3d;
 
 public abstract class Element implements Cloneable {
 
@@ -42,6 +43,15 @@ public abstract class Element implements Cloneable {
     public void accept(ElementVisitor sv) {
 
         sv.virtualizationElement(this);
+    }
+
+    public Point3d getPosition() {
+
+        final double[] u0 = new double[16];
+
+        transform3D.get(u0);
+
+        return new Point3d(u0[3], u0[7], u0[11]);
     }
 
     @Override

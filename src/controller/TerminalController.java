@@ -33,6 +33,7 @@ public class TerminalController extends AbstractRobotController {
     private static final String JOINTS_TEST = "test";
     private static final String STEP = "step";
     private static final String POINT = "point";
+    private static final String WHERE = "where";
 
 
     static {
@@ -52,6 +53,7 @@ public class TerminalController extends AbstractRobotController {
         COMMANDS.put(JOINTS_TEST, 0);
         COMMANDS.put(STEP, 1);
         COMMANDS.put(POINT, 3);
+        COMMANDS.put(WHERE, 0);
     }
 
     private final Thread thread;
@@ -281,6 +283,10 @@ public class TerminalController extends AbstractRobotController {
                     usage(POINT, "<x> <y> <z>");
                 }
 
+                break;
+
+            case WHERE:
+                System.out.println("The terminal organ of the robot is here : " + model.getTerminalOrganPosition());
                 break;
 
             default:
