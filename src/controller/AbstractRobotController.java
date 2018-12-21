@@ -14,7 +14,7 @@ import java.io.InputStreamReader;
 
 public abstract class AbstractRobotController {
 
-    private static final int CLOCK = 150;
+    private static final int CLOCK = 50;
     public static final double DEFAULT_STEP = 0.01;
 
     private static double step = DEFAULT_STEP;

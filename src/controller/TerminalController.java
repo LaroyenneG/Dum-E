@@ -270,7 +270,9 @@ public class TerminalController extends AbstractRobotController {
 
             case DRAW:
                 try {
-                    automate(new FileInputStream("asset/" + args[1] + ".robot"));
+                    FileInputStream inputStream = new FileInputStream("asset/" + args[1] + ".robot");
+                    automate(inputStream);
+                    inputStream.close();
                 } catch (IOException e) {
                     System.out.println("Can't read file '" + args[1] + "'");
                 }
