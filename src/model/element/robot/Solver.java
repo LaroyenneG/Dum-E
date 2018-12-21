@@ -6,11 +6,12 @@ import javax.vecmath.Point3d;
 
 public class Solver {
 
-    private static final double MINIMAL_DISTANCE = 0.000001;
-    private static final double DEFAULT_STEP = 0.001;
-    private static final double MINIMAL_STEP = MINIMAL_DISTANCE / 2.0;
+    private static final double MINIMAL_DISTANCE = 0.0000001;
+    private static final double MINIMAL_COMPUTE_STEP = MINIMAL_DISTANCE / 2.0;
 
-    private Robot robot;
+    private static final double DEFAULT_STEP = 0.001;
+
+    private final Robot robot;
 
     private boolean[] lockJoints;
 
@@ -53,17 +54,15 @@ public class Solver {
 
     public double[] compute() {
 
+        Joint[] joints = robot.getJoints();
+
         double d = 0.0;
 
-        double divisor = 1.0;
-
-        Joint[] joints = robot.getJoints();
+        double computeStep = distance();
 
         while ((d = distance()) > MINIMAL_DISTANCE) {
 
-            final double step = d / divisor;
-
-            boolean notBetter = true;
+            boolean failed = true;
 
             for (int j = joints.length - 1; j >= 0; j--) {
 
@@ -73,7 +72,7 @@ public class Solver {
 
                     double value = joint.getValue();
 
-                    double[] testValues = {value + step, value - step};
+                    double[] testValues = {value + computeStep, value - computeStep};
 
                     for (double testValue : testValues) {
 
@@ -82,25 +81,23 @@ public class Solver {
                         if (distance() >= d) {
                                 joint.setValue(value);
                             } else {
-                                notBetter = false;
+                            failed = false;
                                 break;
                             }
                     }
                 }
             }
 
-            if (notBetter) {
-                divisor++;
-            }else{
-                divisor--;
-             } 
+            if (failed) {
+                computeStep /= 2.0;
+            }
 
-            if (step <= MINIMAL_STEP) {
+            if (computeStep <= MINIMAL_COMPUTE_STEP) {
                 return null;
             }
 
             if (journal != null) {
-                journal.append(robot.stringValuesForCSV());
+                journal.append(this.robot.stringValuesForCSV());
                 journal.append('\n');
             }
         }

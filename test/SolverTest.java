@@ -34,7 +34,7 @@ public class SolverTest {
     @Test
     public void testComputePoint() {
 
-        Point3d point = new Point3d(0.7, 0.4, 0.6);
+        Point3d point = new Point3d(0.5, 0.5, 0.6);
 
         Solver solver = new Solver(sut, point);
         solver.enableJournal();
