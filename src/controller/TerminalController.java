@@ -6,6 +6,7 @@ import view.RobotView;
 
 import javax.vecmath.Point3d;
 import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.security.SecureRandom;
@@ -15,10 +16,11 @@ import java.util.Random;
 
 public class TerminalController extends AbstractRobotController {
 
+    private static final SecureRandom SECURE_RANDOM = new SecureRandom();
+
     private static final Map<String, Integer> COMMANDS = new HashMap<>();
 
     private static final String DRAW = "draw";
-    private static final String RANDOM = "random";
     private static final String AXIS = "axis";
     private static final String LIGHT = "light";
     private static final String ORBIT = "orbit";
@@ -34,11 +36,11 @@ public class TerminalController extends AbstractRobotController {
     private static final String STEP = "step";
     private static final String POINT = "point";
     private static final String WHERE = "where";
+    private static final String READ = "read";
 
 
     static {
         COMMANDS.put(DRAW, 0);
-        COMMANDS.put(RANDOM, 1);
         COMMANDS.put(AXIS, 1);
         COMMANDS.put(LIGHT, 1);
         COMMANDS.put(ORBIT, 1);
@@ -54,6 +56,7 @@ public class TerminalController extends AbstractRobotController {
         COMMANDS.put(STEP, 1);
         COMMANDS.put(POINT, 3);
         COMMANDS.put(WHERE, 0);
+        COMMANDS.put(READ, 1);
     }
 
     private final Thread thread;
@@ -80,14 +83,12 @@ public class TerminalController extends AbstractRobotController {
 
     private void randomAnimation(int cycle, double p) {
 
-        final Random random = new SecureRandom();
-
         Joint[] joints = model.getJoints();
 
         boolean[] status = new boolean[joints.length]; // true + / false -
 
         for (int i = 0; i < status.length; i++) {
-            status[i] = random.nextBoolean();
+            status[i] = SECURE_RANDOM.nextBoolean();
         }
 
         for (int i = 0; i < cycle; i++) {
@@ -118,7 +119,7 @@ public class TerminalController extends AbstractRobotController {
 
             if (myRandom(4)) {
                 for (int s = 0; s < status.length; s++) {
-                    status[s] = random.nextBoolean();
+                    status[s] = SECURE_RANDOM.nextBoolean();
                 }
             }
 
@@ -150,23 +151,15 @@ public class TerminalController extends AbstractRobotController {
 
         switch (args[0]) {
 
-            case RANDOM:
-
-                model.getJoints()[0].setValue(Double.parseDouble(args[1]));
-                break;
-
             case DRAW:
-
                 displayView();
                 break;
 
             case COMPUTE:
-
                 model.build();
                 break;
 
             case LIGHT:
-
                 if (args[1].equals("on")) {
                     view.addBackground();
                 } else if (args[1].equals("off")) {
@@ -177,7 +170,6 @@ public class TerminalController extends AbstractRobotController {
                 break;
 
             case AXIS:
-
                 if (args[1].equals("on")) {
                     view.addAxis();
                 } else if (args[1].equals("off")) {
@@ -188,7 +180,6 @@ public class TerminalController extends AbstractRobotController {
                 break;
 
             case ORBIT:
-
                 if (args[1].equals("on")) {
                     view.addOrbitBehavior();
                 } else if (args[1].equals("off")) {
@@ -199,7 +190,6 @@ public class TerminalController extends AbstractRobotController {
                 break;
 
             case CLEAR:
-
                 if (args.length == 1) {
                     view.clear();
                 } else if (args.length == 2 && args[1].equals("all")) {
@@ -210,7 +200,6 @@ public class TerminalController extends AbstractRobotController {
                 break;
 
             case ANIMATION:
-
                 if (args[1].equals("max")) {
                     args[1] = String.valueOf(Integer.MAX_VALUE);
                 }
@@ -223,7 +212,6 @@ public class TerminalController extends AbstractRobotController {
                 break;
 
             case EXIT:
-
                 System.exit(0);
                 break;
 
@@ -234,7 +222,6 @@ public class TerminalController extends AbstractRobotController {
                 break;
 
             case AUTO:
-
                 model.build();
                 view.addOrbitBehavior();
                 view.addBackground();
@@ -243,12 +230,10 @@ public class TerminalController extends AbstractRobotController {
                 break;
 
             case MATRIX:
-
                 System.out.println(model);
                 break;
 
             case HELP:
-
                 System.out.println("Commands list :");
                 for (String cmd : COMMANDS.keySet()) {
                     System.out.println("\t\t\t\t- " + cmd);
@@ -256,12 +241,10 @@ public class TerminalController extends AbstractRobotController {
                 break;
 
             case JOINTS_TEST:
-
                 jointsTest(getStep());
                 break;
 
             case STEP:
-
                 try {
                     setStep(Double.parseDouble(args[1]));
                 } catch (NumberFormatException e) {
@@ -270,23 +253,27 @@ public class TerminalController extends AbstractRobotController {
                 break;
 
             case POINT:
-
                 try {
-
                     Point3d point3d = new Point3d(Double.parseDouble(args[1]), Double.parseDouble(args[2]), Double.parseDouble(args[3]));
 
-                    if (!setTerminalOrganOnPoint(point3d)) {
+                    if (setTerminalOrganOnPoint(point3d)) {
                         System.out.println("Can't find solution...");
                     }
-
                 } catch (NumberFormatException e) {
                     usage(POINT, "<x> <y> <z>");
                 }
-
                 break;
 
             case WHERE:
                 System.out.println("The terminal organ of the robot is here : " + model.getTerminalOrganPosition());
+                break;
+
+            case READ:
+                try {
+                    automate(new FileInputStream("asset/" + args[1]));
+                } catch (IOException e) {
+                    System.out.println("Can't read file '" + args[1] + "'");
+                }
                 break;
 
             default:
@@ -307,6 +294,7 @@ public class TerminalController extends AbstractRobotController {
             Joint joint = joints[i];
 
             final int maxCycle = (joint.min == Double.MIN_VALUE || joint.max == Double.MAX_VALUE) ? (int) (1 / pas * Math.PI * 2) : Integer.MAX_VALUE;
+
             int cycle = 0;
 
             for (double v = joint.getValue(); v > joint.min; v -= pas, cycle++) {

@@ -7,6 +7,10 @@ import view.ElementVirtualization;
 import view.RobotView;
 
 import javax.vecmath.Point3d;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 public abstract class AbstractRobotController {
 
@@ -21,10 +25,6 @@ public abstract class AbstractRobotController {
     public AbstractRobotController(Robot model, RobotView view) {
         this.model = model;
         this.view = view;
-    }
-
-    public static synchronized double getStep() {
-        return step;
     }
 
 
@@ -70,6 +70,10 @@ public abstract class AbstractRobotController {
         AbstractRobotController.step = step;
     }
 
+    public static synchronized double getStep() {
+        return step;
+    }
+
     protected boolean setTerminalOrganOnPoint(Point3d point3d) {
 
         Solver solver = new Solver(model, point3d);
@@ -78,7 +82,7 @@ public abstract class AbstractRobotController {
         double[][] solutions = solver.computeTrajectory();
 
         if (solutions == null) {
-            return false;
+            return true;
         }
 
         final Joint[] joints = model.getJoints();
@@ -92,6 +96,33 @@ public abstract class AbstractRobotController {
             computeAndSleepAndDisplay();
         }
 
-        return true;
+        return false;
+    }
+
+    protected void automate(InputStream stream) throws IOException {
+
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(stream));
+
+        String line;
+        while ((line = bufferedReader.readLine()) != null) {
+
+            String[] parameters = line.split(" ");
+
+            if (parameters.length != 3) {
+                System.out.println("Invalid data");
+                return;
+            }
+
+            double x = Double.parseDouble(parameters[0]);
+            double y = Double.parseDouble(parameters[1]);
+            double z = Double.parseDouble(parameters[2]);
+
+            Point3d point = new Point3d(x, y, z);
+
+            if (setTerminalOrganOnPoint(point)) {
+                System.out.println("Can't set terminal organ at this position " + point);
+                return;
+            }
+        }
     }
 }
