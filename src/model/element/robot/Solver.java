@@ -3,7 +3,8 @@ package model.element.robot;
 import model.element.connexion.joint.Joint;
 
 import javax.vecmath.Point3d;
-import javax.vecmath.Vector3d;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Solver {
 
@@ -112,8 +113,8 @@ public class Solver {
         return solution;
     }
 
-    private static double nextPoint(double a, double step, int t, double b) {
-        return a * (step * t) + b;
+    private static double nextPoint(double a, double t, double b) {
+        return a * t + b;
     }
 
     public double[][] computeTrajectory() {
@@ -122,20 +123,43 @@ public class Solver {
 
         final Point3d origin = robot.getTerminalOrganPosition();
 
-        Vector3d vector = new Vector3d(point.x - origin.x, point.y - origin.y, point.z - origin.z);
+        Point3d vector = new Point3d(destination.x - origin.x, destination.y - origin.y, destination.z - origin.z);
 
-        final int nbValues = (int) (distance() / step);
+        final double tMax = (origin.x - destination.x) / -vector.x;
 
-        double[][] values = new double[nbValues][robot.jointsNumber()];
+        List<double[]> values = new ArrayList<>();
 
-        for (int i = 0; i < nbValues; i++) {
-            point = new Point3d(nextPoint(vector.x, step, i, origin.x), nextPoint(vector.y, step, i, origin.y), nextPoint(vector.z, step, i, origin.z));
-            values[i] = compute();
+        boolean success = true;
+
+        point = origin;
+
+        for (double t = 0.0; t <= tMax; t += step) {
+
+            point = new Point3d(nextPoint(vector.x, t, origin.x), nextPoint(vector.y, t, origin.y), nextPoint(vector.z, t, origin.z));
+
+            double[] value = compute();
+
+            values.add(value);
+
+            if (value == null) {
+                success = false;
+                break;
+            }
         }
 
         point = destination;
 
-        return values;
+        if (!success) {
+            return null;
+        }
+
+        double[][] result = new double[values.size()][];
+
+        for (int i = 0; i < result.length; i++) {
+            result[i] = values.get(i);
+        }
+
+        return result;
     }
 
     public void lockJoint(int j) {
