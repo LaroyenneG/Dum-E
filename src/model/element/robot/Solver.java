@@ -91,7 +91,9 @@ public class Solver {
 
             if (notBetter) {
                 divisor++;
-            }
+            }else{
+                divisor--;
+             } 
 
             if (step <= MINIMAL_STEP) {
                 return null;
