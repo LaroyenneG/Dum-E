@@ -74,16 +74,22 @@ public abstract class AbstractRobotController {
 
         Solver solver = new Solver(model, point3d);
         solver.setStep(getStep());
-        double[] solution = solver.compute();
 
-        if (solution == null) {
+        double[][] solutions = solver.computeTrajectory();
+
+        if (solutions == null) {
             return false;
         }
 
-        Joint[] joints = model.getJoints();
+        final Joint[] joints = model.getJoints();
 
-        for (int i = 0; i < joints.length; i++) {
-            joints[i].setValue(solution[i]);
+        for (double[] solution : solutions) {
+
+            for (int i = 0; i < joints.length; i++) {
+                joints[i].setValue(solution[i]);
+            }
+
+            computeAndSleepAndDisplay();
         }
 
         return true;

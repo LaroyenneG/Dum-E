@@ -3,6 +3,7 @@ package model.element.robot;
 import model.element.connexion.joint.Joint;
 
 import javax.vecmath.Point3d;
+import javax.vecmath.Vector3d;
 
 public class Solver {
 
@@ -31,7 +32,7 @@ public class Solver {
             lockJoints[i] = false;
         }
 
-        this.point = point;
+        this.point = new Point3d(point);
 
         step = DEFAULT_STEP;
         journal = null;
@@ -111,12 +112,28 @@ public class Solver {
         return solution;
     }
 
+    private static double nextPoint(double a, double step, int t, double b) {
+        return a * (step * t) + b;
+    }
+
     public double[][] computeTrajectory() {
 
-        final int nbValues = 10;
+        final Point3d destination = point;
+
+        final Point3d origin = robot.getTerminalOrganPosition();
+
+        Vector3d vector = new Vector3d(point.x - origin.x, point.y - origin.y, point.z - origin.z);
+
+        final int nbValues = (int) (distance() / step);
 
         double[][] values = new double[nbValues][robot.jointsNumber()];
 
+        for (int i = 0; i < nbValues; i++) {
+            point = new Point3d(nextPoint(vector.x, step, i, origin.x), nextPoint(vector.y, step, i, origin.y), nextPoint(vector.z, step, i, origin.z));
+            values[i] = compute();
+        }
+
+        point = destination;
 
         return values;
     }
