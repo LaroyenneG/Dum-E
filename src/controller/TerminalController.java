@@ -37,6 +37,7 @@ public class TerminalController extends AbstractRobotController {
     private static final String POINT = "point";
     private static final String WHERE = "where";
     private static final String DRAW = "draw";
+    private static final String LOCKER = "locker";
 
 
     static {
@@ -57,6 +58,7 @@ public class TerminalController extends AbstractRobotController {
         COMMANDS.put(POINT, 3);
         COMMANDS.put(WHERE, 0);
         COMMANDS.put(DRAW, 1);
+        COMMANDS.put(LOCKER, 2);
     }
 
     private final Thread thread;
@@ -276,6 +278,10 @@ public class TerminalController extends AbstractRobotController {
                 } catch (IOException e) {
                     System.out.println("Can't read file '" + args[1] + "'");
                 }
+                break;
+
+            case LOCKER:
+
                 break;
 
             default:

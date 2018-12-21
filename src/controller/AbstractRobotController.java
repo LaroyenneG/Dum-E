@@ -109,20 +109,35 @@ public abstract class AbstractRobotController {
             String[] parameters = line.split(" ");
 
             if (parameters.length != 3) {
-                System.out.println("Invalid data");
+                System.out.println("Invalid data format");
                 return;
             }
 
-            double x = Double.parseDouble(parameters[0]);
-            double y = Double.parseDouble(parameters[1]);
-            double z = Double.parseDouble(parameters[2]);
+            try {
+                double x = Double.parseDouble(parameters[0]);
+                double y = Double.parseDouble(parameters[1]);
+                double z = Double.parseDouble(parameters[2]);
 
-            Point3d point = new Point3d(x, y, z);
+                Point3d point = new Point3d(x, y, z);
 
-            if (setTerminalOrganOnPoint(point)) {
-                System.out.println("Can't set terminal organ at this position " + point);
+                if (setTerminalOrganOnPoint(point)) {
+                    System.out.println("Can't set terminal organ at this position " + point);
+                    return;
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid number format");
                 return;
             }
         }
+    }
+
+    protected void jointLocker(int number, boolean state) {
+
+        if (number < 0 || number >= model.jointsNumber()) {
+            System.out.println("Invalid joint number");
+            return;
+        }
+
+
     }
 }

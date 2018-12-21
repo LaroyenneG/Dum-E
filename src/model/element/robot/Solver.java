@@ -125,7 +125,7 @@ public class Solver {
 
         Point3d vector = new Point3d(destination.x - origin.x, destination.y - origin.y, destination.z - origin.z);
 
-        final double tMax = (origin.x - destination.x) / -vector.x;
+        final double tMax = Math.abs((origin.x - destination.x) / -vector.x);
 
         List<double[]> values = new ArrayList<>();
 
