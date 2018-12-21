@@ -20,7 +20,7 @@ public class TerminalController extends AbstractRobotController {
 
     private static final Map<String, Integer> COMMANDS = new HashMap<>();
 
-    private static final String DRAW = "draw";
+    private static final String DISPLAY = "display";
     private static final String AXIS = "axis";
     private static final String LIGHT = "light";
     private static final String ORBIT = "orbit";
@@ -36,11 +36,11 @@ public class TerminalController extends AbstractRobotController {
     private static final String STEP = "step";
     private static final String POINT = "point";
     private static final String WHERE = "where";
-    private static final String READ = "read";
+    private static final String DRAW = "draw";
 
 
     static {
-        COMMANDS.put(DRAW, 0);
+        COMMANDS.put(DISPLAY, 0);
         COMMANDS.put(AXIS, 1);
         COMMANDS.put(LIGHT, 1);
         COMMANDS.put(ORBIT, 1);
@@ -56,7 +56,7 @@ public class TerminalController extends AbstractRobotController {
         COMMANDS.put(STEP, 1);
         COMMANDS.put(POINT, 3);
         COMMANDS.put(WHERE, 0);
-        COMMANDS.put(READ, 1);
+        COMMANDS.put(DRAW, 1);
     }
 
     private final Thread thread;
@@ -151,7 +151,7 @@ public class TerminalController extends AbstractRobotController {
 
         switch (args[0]) {
 
-            case DRAW:
+            case DISPLAY:
                 displayView();
                 break;
 
@@ -268,9 +268,9 @@ public class TerminalController extends AbstractRobotController {
                 System.out.println("The terminal organ of the robot is here : " + model.getTerminalOrganPosition());
                 break;
 
-            case READ:
+            case DRAW:
                 try {
-                    automate(new FileInputStream("asset/" + args[1]));
+                    automate(new FileInputStream("asset/" + args[1] + ".robot"));
                 } catch (IOException e) {
                     System.out.println("Can't read file '" + args[1] + "'");
                 }
