@@ -281,7 +281,22 @@ public class TerminalController extends AbstractRobotController {
                 break;
 
             case LOCKER:
+                try {
+                    int number = Integer.parseInt(args[1]);
+                    boolean state;
 
+                    if (args[2].equals("on")) {
+                        state = true;
+                    } else if (args[2].equals("off")) {
+                        state = false;
+                    } else {
+                        usage(LOCKER, "<number> <on/off>");
+                        return;
+                    }
+                    jointLocker(number, state);
+                } catch (NumberFormatException e) {
+                    usage(LOCKER, "<number> <on/off>");
+                }
                 break;
 
             default:

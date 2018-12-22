@@ -11,29 +11,25 @@ public class Solver {
     private static final double MINIMAL_DISTANCE = 0.0000001;
     private static final double MINIMAL_COMPUTE_STEP = MINIMAL_DISTANCE / 2.0;
 
-    private static final double DEFAULT_STEP = 0.001;
+    private static final double DEFAULT_STEP = 0.0001;
 
     private final Robot robot;
 
     private boolean[] lockJoints;
 
-    private Point3d point;
-
     private double step;
 
     private StringBuffer journal;
 
-    public Solver(Robot robot, Point3d point) {
+    public Solver(Robot robot) {
 
-        this.robot = (Robot) robot.clone();
+        this.robot = robot;
 
         lockJoints = new boolean[robot.jointsNumber()];
 
         for (int i = 0; i < lockJoints.length; i++) {
             lockJoints[i] = false;
         }
-
-        this.point = new Point3d(point);
 
         step = DEFAULT_STEP;
         journal = null;
@@ -47,22 +43,22 @@ public class Solver {
         journal = null;
     }
 
-    private double distance() {
+    private static double distance(Robot subject, Point3d point) {
 
-        robot.build();
+        subject.build();
 
-        return Math.abs(point.distance(robot.getTerminalOrganPosition()));
+        return Math.abs(point.distance(subject.getTerminalOrganPosition()));
     }
 
-    public double[] compute() {
+    private double[] compute(Robot subject, Point3d point) {
 
-        Joint[] joints = robot.getJoints();
+        Joint[] joints = subject.getJoints();
 
         double d = 0.0;
 
-        double computeStep = distance();
+        double computeStep = distance(subject, point);
 
-        while ((d = distance()) > MINIMAL_DISTANCE) {
+        while ((d = distance(subject, point)) > MINIMAL_DISTANCE) {
 
             boolean failed = true;
 
@@ -80,7 +76,7 @@ public class Solver {
 
                             joint.setValueSafe(testValue);
 
-                        if (distance() >= d) {
+                        if (distance(subject, point) >= d) {
                                 joint.setValue(value);
                             } else {
                             failed = false;
@@ -117,11 +113,11 @@ public class Solver {
         return a * t + b;
     }
 
-    public double[][] computeTrajectory() {
+    public double[][] computeTrajectory(final Point3d destination) {
 
-        final Point3d destination = point;
+        Robot subject = (Robot) this.robot.clone();
 
-        final Point3d origin = robot.getTerminalOrganPosition();
+        final Point3d origin = subject.getTerminalOrganPosition();
 
         Point3d vector = new Point3d(destination.x - origin.x, destination.y - origin.y, destination.z - origin.z);
 
@@ -131,13 +127,13 @@ public class Solver {
 
         boolean success = true;
 
-        point = origin;
+        Point3d point;
 
         for (double t = 0.0; t <= tMax; t += step) {
 
             point = new Point3d(nextPoint(vector.x, t, origin.x), nextPoint(vector.y, t, origin.y), nextPoint(vector.z, t, origin.z));
 
-            double[] value = compute();
+            double[] value = compute(subject, point);
 
             values.add(value);
 
@@ -146,8 +142,6 @@ public class Solver {
                 break;
             }
         }
-
-        point = destination;
 
         if (!success) {
             return null;

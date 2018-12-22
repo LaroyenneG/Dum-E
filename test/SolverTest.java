@@ -24,11 +24,11 @@ public class SolverTest {
 
         Point3d point = new Point3d(0.0, 0.0, 0.0);
 
-        Solver solver = new Solver(sut, point);
+        Solver solver = new Solver(sut);
 
-        double[] solution = solver.compute();
+        double[][] solutions = solver.computeTrajectory(point);
 
-        assertNull(solution);
+        assertNull(solutions);
     }
 
     @Test
@@ -36,14 +36,12 @@ public class SolverTest {
 
         Point3d point = new Point3d(0.5, 0.5, 0.6);
 
-        Solver solver = new Solver(sut, point);
+        Solver solver = new Solver(sut);
         solver.enableJournal();
 
-        double[] solution = solver.compute();
+        double[][] solutions = solver.computeTrajectory(point);
 
-        System.out.println(solver.getJournal());
-
-        assertNotNull(solution);
+        assertNotNull(solutions);
     }
 
     @AfterEach

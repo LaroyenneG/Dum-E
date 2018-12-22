@@ -14,10 +14,13 @@ import java.io.InputStreamReader;
 
 public abstract class AbstractRobotController {
 
+
     private static final int CLOCK = 50;
     public static final double DEFAULT_STEP = 0.01;
 
     private static double step = DEFAULT_STEP;
+
+    private static Solver solver;
 
     protected Robot model;
     protected RobotView view;
@@ -27,6 +30,14 @@ public abstract class AbstractRobotController {
         this.view = view;
     }
 
+    private synchronized Solver getSolver() {
+
+        if (solver == null) {
+            solver = new Solver(model);
+        }
+
+        return solver;
+    }
 
     protected void computeAndSleepAndDisplay() {
 
@@ -74,12 +85,13 @@ public abstract class AbstractRobotController {
         return step;
     }
 
-    protected boolean setTerminalOrganOnPoint(Point3d point3d) {
+    protected boolean setTerminalOrganOnPoint(Point3d point) {
 
-        Solver solver = new Solver(model, point3d);
+        Solver solver = getSolver();
+
         solver.setStep(getStep());
 
-        double[][] solutions = solver.computeTrajectory();
+        double[][] solutions = solver.computeTrajectory(point);
 
         if (solutions == null) {
             return true;
@@ -138,6 +150,12 @@ public abstract class AbstractRobotController {
             return;
         }
 
+        Solver solver = getSolver();
 
+        if (state) {
+            solver.lockJoint(number);
+        } else {
+            solver.unlockJoint(number);
+        }
     }
 }
