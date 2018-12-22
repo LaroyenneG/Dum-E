@@ -53,7 +53,7 @@ public class Solver {
 
             boolean failed = true;
 
-            for (int j = joints.length - 1; j >= 0; j--) {
+            for (int j = 0; j < joints.length; j++) {
 
                 Joint joint = joints[j];
 
@@ -170,6 +170,10 @@ public class Solver {
             point = nextPoint(vector, t, origin);
 
             double[] value = compute(subject, point);
+
+            if (value == null) {
+                return null;
+            }
 
             values.add(value);
         }
