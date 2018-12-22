@@ -174,6 +174,9 @@ public abstract class Robot extends Element implements NumerousJoints {
         Robot robot = (Robot) super.clone();
 
         robot.connexions = connexions.clone();
+        for (int i = 0; i < connexions.length; i++) {
+            robot.connexions[i] = (Connexion) connexions[i].clone();
+        }
 
         robot.terminalOrgan = (TerminalOrgan) terminalOrgan.clone();
 

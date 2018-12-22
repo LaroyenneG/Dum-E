@@ -3,6 +3,7 @@ package model.element.robot;
 import model.element.connexion.joint.Joint;
 
 import javax.vecmath.Point3d;
+import javax.vecmath.Vector3d;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,8 +20,6 @@ public class Solver {
 
     private double step;
 
-    private StringBuffer journal;
-
     public Solver(Robot robot) {
 
         this.robot = robot;
@@ -32,15 +31,6 @@ public class Solver {
         }
 
         step = DEFAULT_STEP;
-        journal = null;
-    }
-
-    public void enableJournal() {
-        journal = new StringBuffer();
-    }
-
-    public void disableJournal() {
-        journal = null;
     }
 
     private static double distance(Robot subject, Point3d point) {
@@ -50,7 +40,7 @@ public class Solver {
         return Math.abs(point.distance(subject.getTerminalOrganPosition()));
     }
 
-    private double[] compute(Robot subject, Point3d point) {
+    static double[] findSolution(StringBuffer journal, boolean[] lockJoints, Robot subject, Point3d point) {
 
         Joint[] joints = subject.getJoints();
 
@@ -66,7 +56,7 @@ public class Solver {
 
                 Joint joint = joints[j];
 
-                if (!lockJoints[j]) {
+                if (lockJoints == null || !lockJoints[j]) {
 
                     double value = joint.getValue();
 
@@ -74,14 +64,14 @@ public class Solver {
 
                     for (double testValue : testValues) {
 
-                            joint.setValueSafe(testValue);
+                        joint.setValueSafe(testValue);
 
                         if (distance(subject, point) >= d) {
-                                joint.setValue(value);
-                            } else {
+                            joint.setValue(value);
+                        } else {
                             failed = false;
-                                break;
-                            }
+                            break;
+                        }
                     }
                 }
             }
@@ -95,7 +85,7 @@ public class Solver {
             }
 
             if (journal != null) {
-                journal.append(this.robot.stringValuesForCSV());
+                journal.append(subject.stringValuesForCSV());
                 journal.append('\n');
             }
         }
@@ -109,48 +99,68 @@ public class Solver {
         return solution;
     }
 
-    private static double nextPoint(double a, double t, double b) {
-        return a * t + b;
+    private static Double computeTmax(Vector3d vector, Point3d origin, Point3d destination) {
+
+        if (vector.x != 0) {
+            return Math.abs((origin.x - destination.x) / -vector.x);
+        } else if (vector.y != 0) {
+            return Math.abs((origin.y - destination.y) / -vector.y);
+        } else if (vector.z != 0) {
+            return Math.abs((origin.z - destination.z) / -vector.z);
+        }
+
+        return null;
+    }
+
+    private static Point3d nextPoint(Vector3d vector, double t, Point3d origin) {
+
+        return new Point3d(vector.x * t + origin.x, vector.y * t + origin.y, vector.z * t + origin.z);
+    }
+
+    private double[] compute(Robot subject, Point3d point) {
+
+        return findSolution(null, lockJoints, subject, point);
     }
 
     public double[][] computeTrajectory(final Point3d destination) {
 
         Robot subject = (Robot) this.robot.clone();
 
+        if (distance(subject, destination) <= MINIMAL_DISTANCE) {  // First building
+            return new double[0][0];
+        }
+
         final Point3d origin = subject.getTerminalOrganPosition();
 
-        Point3d vector = new Point3d(destination.x - origin.x, destination.y - origin.y, destination.z - origin.z);
+        Vector3d vector = new Vector3d(destination.x - origin.x, destination.y - origin.y, destination.z - origin.z);
 
-        final double tMax = Math.abs((origin.x - destination.x) / -vector.x);
+        final Double tMax = computeTmax(vector, origin, destination);
+        if (tMax == null) {
+            return null;
+        }
 
         List<double[]> values = new ArrayList<>();
-
-        boolean success = true;
 
         Point3d point;
 
         for (double t = 0.0; t <= tMax; t += step) {
 
-            point = new Point3d(nextPoint(vector.x, t, origin.x), nextPoint(vector.y, t, origin.y), nextPoint(vector.z, t, origin.z));
+            point = nextPoint(vector, t, origin);
 
             double[] value = compute(subject, point);
 
             values.add(value);
-
-            if (value == null) {
-                success = false;
-                break;
-            }
         }
 
-        if (!success) {
-            return null;
-        }
+        values.add(compute(subject, destination));
 
         double[][] result = new double[values.size()][];
 
         for (int i = 0; i < result.length; i++) {
             result[i] = values.get(i);
+            if (result[i] == null) {
+                return null;
+            }
         }
 
         return result;
@@ -176,13 +186,5 @@ public class Solver {
 
     public void setStep(double step) {
         this.step = step;
-    }
-
-    public String getJournal() {
-        return new String(journal);
-    }
-
-    public void purgeJournal() {
-        journal = new StringBuffer();
     }
 }

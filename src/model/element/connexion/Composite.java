@@ -97,6 +97,10 @@ public abstract class Composite extends Connexion implements NumerousJoints {
 
         composite.simples = simples.clone();
 
+        for (int i = 0; i < simples.length; i++) {
+            composite.simples[i] = (Simple) simples[i].clone();
+        }
+
         return composite;
     }
 }

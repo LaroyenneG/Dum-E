@@ -31,13 +31,14 @@ public class TerminalController extends AbstractRobotController {
     private static final String ANIMATION = "animation";
     private static final String HELP = "help";
     private static final String MATRIX = "matrix";
-    private static final String COMPUTE = "compute";
+    private static final String BUILD = "build";
     private static final String JOINTS_TEST = "test";
     private static final String STEP = "step";
     private static final String POINT = "point";
     private static final String WHERE = "where";
     private static final String DRAW = "draw";
     private static final String LOCKER = "locker";
+    private static final String JOINT = "joint";
 
 
     static {
@@ -52,17 +53,17 @@ public class TerminalController extends AbstractRobotController {
         COMMANDS.put(ANIMATION, 1);
         COMMANDS.put(HELP, 0);
         COMMANDS.put(MATRIX, 0);
-        COMMANDS.put(COMPUTE, 0);
+        COMMANDS.put(BUILD, 0);
         COMMANDS.put(JOINTS_TEST, 0);
         COMMANDS.put(STEP, 1);
         COMMANDS.put(POINT, 3);
         COMMANDS.put(WHERE, 0);
         COMMANDS.put(DRAW, 1);
         COMMANDS.put(LOCKER, 2);
+        COMMANDS.put(JOINT, 2);
     }
 
     private final Thread thread;
-
 
     public TerminalController(Robot model, RobotView view) {
         super(model, view);
@@ -157,7 +158,7 @@ public class TerminalController extends AbstractRobotController {
                 displayView();
                 break;
 
-            case COMPUTE:
+            case BUILD:
                 model.build();
                 break;
 
@@ -282,7 +283,7 @@ public class TerminalController extends AbstractRobotController {
 
             case LOCKER:
                 try {
-                    int number = Integer.parseInt(args[1]);
+                    int number = Integer.parseInt(args[1]) - 1;
                     boolean state;
 
                     if (args[2].equals("on")) {
@@ -299,8 +300,32 @@ public class TerminalController extends AbstractRobotController {
                 }
                 break;
 
+            case JOINT:
+                try {
+                    int number = Integer.parseInt(args[1]) - 1;
+                    double value = Double.parseDouble(args[2]);
+
+                    Joint[] joints = model.getJoints();
+
+                    if (number < 0 || number > joints.length) {
+                        System.out.println("Invalid joint number");
+                        return;
+                    }
+
+                    if (joints[number].max <= value || joints[number].min >= value) {
+                        System.out.println("Invalid value, value must be between [" + joints[number].min + ", " + joints[number].max + "]");
+                        return;
+                    }
+
+                    joints[number].setValueSafe(value);
+
+                } catch (NumberFormatException e) {
+                    usage(LOCKER, "<number> <value>");
+                }
+                break;
+
             default:
-                throw new IllegalStateException("");
+                throw new IllegalStateException("XD");
         }
     }
 
