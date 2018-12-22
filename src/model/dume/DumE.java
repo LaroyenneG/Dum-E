@@ -3,6 +3,7 @@ package model.dume;
 import model.dume.components.*;
 import model.element.connexion.Connexion;
 import model.element.robot.Robot;
+import model.element.terminal.organ.TerminalOrgan;
 
 public class DumE extends Robot {
 
@@ -18,8 +19,10 @@ public class DumE extends Robot {
 
     private static final SecondPhalanx SECOND_PHALANX = new SecondPhalanx();
 
+    private static final Grapnel GRAPNEL = new Grapnel();
+
     public DumE() {
-        super((Connexion) BASE.clone(), (Connexion) TURRET.clone(), (Connexion) GIRDER.clone(), (Connexion) POLE.clone(), (Connexion) FIRST_PHALANX.clone(), (Connexion) SECOND_PHALANX.clone());
+        super((TerminalOrgan) GRAPNEL.clone(), (Connexion) BASE.clone(), (Connexion) TURRET.clone(), (Connexion) GIRDER.clone(), (Connexion) POLE.clone(), (Connexion) FIRST_PHALANX.clone(), (Connexion) SECOND_PHALANX.clone());
     }
 }
 
