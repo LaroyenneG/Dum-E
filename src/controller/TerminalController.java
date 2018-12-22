@@ -307,12 +307,12 @@ public class TerminalController extends AbstractRobotController {
 
                     Joint[] joints = model.getJoints();
 
-                    if (number < 0 || number > joints.length) {
+                    if (number < 0 || number >= joints.length) {
                         System.out.println("Invalid joint number");
                         return;
                     }
 
-                    if (joints[number].max <= value || joints[number].min >= value) {
+                    if (joints[number].max <= value || value <= joints[number].min) {
                         System.out.println("Invalid value, value must be between [" + joints[number].min + ", " + joints[number].max + "]");
                         return;
                     }

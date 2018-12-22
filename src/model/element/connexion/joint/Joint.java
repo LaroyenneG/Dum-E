@@ -16,7 +16,7 @@ public abstract class Joint extends Simple {
     }
 
     public Joint(double value) {
-        min = Double.MIN_VALUE;
+        min = -Double.MAX_VALUE;
         max = Double.MAX_VALUE;
         this.value = value;
     }

@@ -12,6 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class SolverTest {
 
+    private StringBuffer journal;
     private Robot robot;
     private Solver sut;
 
@@ -20,12 +21,12 @@ public class SolverTest {
         robot = new DumE();
         robot.build();
         sut = new Solver(new DumE());
+        journal = new StringBuffer();
+        Solver.printJournalHeader(journal, robot.jointsNumber());
     }
 
     @Test
     public void testFindSolutionInAlphaZone() {
-
-        StringBuffer journal = new StringBuffer();
 
         double[] solution = Solver.findSolution(journal, null, robot, new Point3d(0.3, 0.5, 0.4));
 
@@ -34,8 +35,6 @@ public class SolverTest {
 
     @Test
     public void testFindSolutionInBetaZone() {
-
-        StringBuffer journal = new StringBuffer();
 
         double[] solution = Solver.findSolution(journal, null, robot, new Point3d(-0.3, 0.5, 0.4));
 
@@ -46,7 +45,6 @@ public class SolverTest {
     @Test
     public void testFindSolutionInOmegaZone() {
 
-        StringBuffer journal = new StringBuffer();
 
         double[] solution = Solver.findSolution(journal, null, robot, new Point3d(-0.3, 0.5, -0.4));
 
@@ -55,8 +53,6 @@ public class SolverTest {
 
     @Test
     public void testFindSolutionInGamaZone() {
-
-        StringBuffer journal = new StringBuffer();
 
         double[] solution = Solver.findSolution(journal, null, robot, new Point3d(0.3, 0.5, -0.4));
 
@@ -103,9 +99,10 @@ public class SolverTest {
         assertNotNull(solutions);
     }
 
-
     @AfterEach
     public void stop() {
+        System.out.println(journal);
+        journal = null;
         sut = null;
         robot = null;
     }

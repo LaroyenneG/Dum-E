@@ -4,6 +4,7 @@ import model.element.connexion.joint.Joint;
 
 import javax.vecmath.Point3d;
 import javax.vecmath.Vector3d;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -85,8 +86,7 @@ public class Solver {
             }
 
             if (journal != null) {
-                journal.append(subject.stringValuesForCSV());
-                journal.append('\n');
+                printLineInJournal(journal, subject, d);
             }
         }
 
@@ -99,6 +99,29 @@ public class Solver {
         return solution;
     }
 
+    public static void printJournalHeader(StringBuffer journal, int jointNumber) {
+
+        for (int i = 1; i <= jointNumber; i++) {
+            journal.append('q');
+            journal.append(i);
+            journal.append(';');
+        }
+        journal.append("distance\n");
+    }
+
+    private static void printLineInJournal(StringBuffer journal, Robot robot, double distance) {
+
+        final DecimalFormat decimalFormat = new DecimalFormat("##.#######");
+
+        for (Joint joint : robot.getJoints()) {
+            journal.append(decimalFormat.format(joint.getValue()));
+            journal.append(';');
+        }
+
+        journal.append(decimalFormat.format(distance));
+        journal.append('\n');
+    }
+
     private static Double computeTmax(Vector3d vector, Point3d origin, Point3d destination) {
 
         if (vector.x != 0) {
@@ -108,7 +131,6 @@ public class Solver {
         } else if (vector.z != 0) {
             return Math.abs((origin.z - destination.z) / -vector.z);
         }
-
         return null;
     }
 
