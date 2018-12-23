@@ -10,7 +10,7 @@ public class Base extends Composite {
 
     private static final Twisting Q1 = new Twisting(0.0);
 
-    public static final Distance D0 = new Distance(0.1);
+    public static final Distance D0 = new Distance(0.05);
 
     public Base() {
         super(D0, (Simple) Q1.clone());

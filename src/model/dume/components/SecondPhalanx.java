@@ -7,7 +7,7 @@ import model.element.connexion.constant.axis.distance.Distance;
 
 public class SecondPhalanx extends Composite {
 
-    public static final Distance D6 = new Distance(0.1);
+    public static final Distance D6 = new Distance(0.05);
 
     public SecondPhalanx() {
         super((Simple) D6);

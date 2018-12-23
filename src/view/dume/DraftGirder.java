@@ -11,8 +11,8 @@ import java.awt.*;
 
 public class DraftGirder {
 
-    private static final float POLE_FIXATION_OFFSET = 4f / 100f;
-    private static final float CYLINDERS_FIXATION_OFFSET = 10f / 100f;
+    private static final float POLE_FIXATION_OFFSET = 10f / 100f;
+    private static final float CYLINDERS_FIXATION_OFFSET = 13f / 100f;
 
 
     public static void buildPoleFixation(BranchGroup branchGroup, final float radius, final float length) {

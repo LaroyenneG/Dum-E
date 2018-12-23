@@ -9,7 +9,7 @@ public class Girder extends Composite {
 
     private static final Pitching A3 = new Pitching(Math.PI / 2.0);
 
-    public static final Distance D3 = new Distance(0.45);
+    public static final Distance D3 = new Distance(0.25);
 
     public Girder() {
         super(D3, A3);
