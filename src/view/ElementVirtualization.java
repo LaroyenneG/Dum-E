@@ -3,6 +3,7 @@ package view;
 
 import com.sun.j3d.utils.geometry.Cylinder;
 import com.sun.j3d.utils.geometry.Sphere;
+import model.dume.components.FirstPhalanx;
 import model.dume.components.Grapnel;
 import model.dume.components.Pole;
 import model.element.Element;
@@ -13,6 +14,7 @@ import model.element.connexion.joint.Rotation;
 import model.element.connexion.joint.linear.Collinear;
 import model.element.connexion.joint.linear.Orthogonal;
 import model.element.terminal.organ.Default;
+import view.dume.DraftFirstPhalanx;
 import view.dume.DraftGrapnel;
 import view.dume.DraftPole;
 
@@ -147,7 +149,7 @@ public class ElementVirtualization implements ElementVisitor {
 
         BranchGroup branchGroup = new BranchGroup();
 
-        DraftGrapnel.buildGrapnelBell(branchGroup, radius);
+        DraftGrapnel.buildBell(branchGroup, radius);
 
         final double offset = radius / 3;
 
@@ -155,7 +157,7 @@ public class ElementVirtualization implements ElementVisitor {
 
             double angle = (Math.PI * 2.0 * i) / 3.0;
 
-            DraftGrapnel.buildGrapnelPliers(branchGroup, radius, new Vector3d(Math.cos(angle) * (radius - offset), radius, Math.sin(angle) * (radius - offset)));
+            DraftGrapnel.buildPliers(branchGroup, radius, new Vector3d(Math.cos(angle) * (radius - offset), radius, Math.sin(angle) * (radius - offset)));
         }
 
         addToScene(branchGroup, grapnel);
@@ -175,5 +177,20 @@ public class ElementVirtualization implements ElementVisitor {
         DraftPole.buildContentCylinder(branchGroup, RADIUS, (float) pole.getJoints()[0].min);
 
         addToScene(branchGroup, pole);
+    }
+
+    /*
+     * First Phalanx
+     */
+
+    @Override
+    public void virtualizationFirstPhalanx(FirstPhalanx firstPhalanx) {
+
+        BranchGroup branchGroup = new BranchGroup();
+
+        DraftFirstPhalanx.buildPatella(branchGroup, RADIUS);
+        DraftFirstPhalanx.buildBloc(branchGroup, RADIUS, (float) FirstPhalanx.D5.getValue());
+
+        addToScene(branchGroup, firstPhalanx);
     }
 }

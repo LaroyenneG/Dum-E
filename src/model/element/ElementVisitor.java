@@ -1,5 +1,6 @@
 package model.element;
 
+import model.dume.components.FirstPhalanx;
 import model.dume.components.Grapnel;
 import model.dume.components.Pole;
 import model.element.connexion.constant.axis.AxisRotation;
@@ -30,4 +31,6 @@ public interface ElementVisitor {
     void virtualizationGrapnel(Grapnel grapnel);
 
     void virtualizationPole(Pole pole);
+
+    void virtualizationFirstPhalanx(FirstPhalanx firstPhalanx);
 }

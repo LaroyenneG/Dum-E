@@ -1,17 +1,22 @@
 package model.dume.components;
 
+import model.element.ElementVisitor;
 import model.element.connexion.Composite;
 import model.element.connexion.Simple;
 import model.element.connexion.constant.axis.distance.Distance;
-import model.element.connexion.joint.rotation.Rotational;
+import model.element.connexion.joint.rotation.Revolving;
 
 public class FirstPhalanx extends Composite {
 
-    private static final Rotational Q4 = new Rotational(0.0, -Math.PI / 2.0, Math.PI / 2.0);
-
-    private static final Distance D5 = new Distance(0.1);
+    public static final Distance D5 = new Distance(0.1);
+    private static final Revolving Q5 = new Revolving(0.0, -Math.PI / 2.0, Math.PI / 2.0);
 
     public FirstPhalanx() {
-        super((Simple) Q4.clone(), D5);
+        super(D5, (Simple) Q5.clone());
+    }
+
+    @Override
+    public void accept(ElementVisitor sv) {
+        sv.virtualizationFirstPhalanx(this);
     }
 }

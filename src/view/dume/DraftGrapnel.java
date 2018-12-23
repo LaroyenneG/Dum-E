@@ -10,7 +10,7 @@ import java.awt.*;
 
 public class DraftGrapnel {
 
-    public static void buildGrapnelPliers(BranchGroup branchGroup, final float radius, Vector3d translator) {
+    public static void buildPliers(BranchGroup branchGroup, final float radius, Vector3d translator) {
 
         Appearance appearance = new Appearance();
         ColoringAttributes coloringAttributes = new ColoringAttributes();
@@ -30,7 +30,7 @@ public class DraftGrapnel {
         branchGroup.addChild(groupCylinder);
     }
 
-    public static void buildGrapnelBell(BranchGroup branchGroup, final float radius) {
+    public static void buildBell(BranchGroup branchGroup, final float radius) {
 
         Appearance appearance = new Appearance();
         ColoringAttributes coloringAttributes = new ColoringAttributes();
