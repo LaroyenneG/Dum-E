@@ -3,11 +3,13 @@ package view.dume;
 import com.sun.j3d.utils.geometry.Box;
 import com.sun.j3d.utils.geometry.Cylinder;
 import com.sun.j3d.utils.geometry.Sphere;
+import model.dume.components.Girder;
 import view.ElementVirtualization;
 
 import javax.media.j3d.BranchGroup;
 import javax.media.j3d.Transform3D;
 import javax.media.j3d.TransformGroup;
+import javax.vecmath.Point2d;
 import javax.vecmath.Vector3d;
 import java.awt.*;
 
@@ -15,6 +17,59 @@ public class DraftTurret {
 
     public static void buildCylinders(BranchGroup branchGroup, final float radius, final float length, final float angle) {
 
+        float r = (float) Girder.D3.getValue();
+        r -= r * DraftGirder.POLE_FIXATION_OFFSET;
+        r -= r * (DraftGirder.CYLINDERS_FIXATION_OFFSET / 2.0);
+
+        Point2d a = new Point2d();
+        a.x = Math.sin(angle) * r;
+        a.y = Math.cos(angle) * r;
+
+        Point2d b = new Point2d();
+        b.x = radius * 9.0f;
+        b.y = 0;
+
+        float translate = radius * 3.0f;
+        float sphereRayon = radius / 1.5f;
+
+        Sphere rightUp = new Sphere(sphereRayon);
+
+        Transform3D transRightUp = new Transform3D();
+        transRightUp.setTranslation(new Vector3d(translate, a.y + length, a.x));
+
+        TransformGroup groupRightUp = new TransformGroup(transRightUp);
+        groupRightUp.addChild(rightUp);
+
+        Sphere rightDown = new Sphere(sphereRayon);
+
+        Transform3D transRightDown = new Transform3D();
+        transRightDown.setTranslation(new Vector3d(translate, b.y + length, b.x));
+
+        TransformGroup groupRightDown = new TransformGroup(transRightDown);
+        groupRightDown.addChild(rightDown);
+
+
+        Sphere leftUp = new Sphere(sphereRayon);
+
+        Transform3D transleftUp = new Transform3D();
+        transleftUp.setTranslation(new Vector3d(-translate, a.y + length, a.x));
+
+        TransformGroup groupleftUp = new TransformGroup(transleftUp);
+        groupleftUp.addChild(leftUp);
+
+        Sphere leftDown = new Sphere(sphereRayon);
+
+        Transform3D transleftDown = new Transform3D();
+        transleftDown.setTranslation(new Vector3d(-translate, b.y + length, b.x));
+
+        TransformGroup groupleftDown = new TransformGroup(transleftDown);
+        groupleftDown.addChild(leftDown);
+
+
+        branchGroup.addChild(groupRightUp);
+        branchGroup.addChild(groupRightDown);
+        branchGroup.addChild(groupleftUp);
+        branchGroup.addChild(groupleftDown);
     }
 
     public static void buildPrincipalCylinder(BranchGroup branchGroup, final float radius, final float length) {
