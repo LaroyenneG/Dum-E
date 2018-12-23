@@ -232,6 +232,7 @@ public class ElementVirtualization implements ElementVisitor {
         BranchGroup branchGroup = new BranchGroup();
 
         DraftTurret.buildPrincipalCylinder(branchGroup, RADIUS, (float) Turret.D1.getValue());
+        DraftTurret.buildCylinders(branchGroup, RADIUS, (float) Turret.D1.getValue(), (float) turret.getJoints()[0].getValue());
 
         addToScene(branchGroup, turret);
     }
