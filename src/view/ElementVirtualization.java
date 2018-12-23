@@ -6,6 +6,7 @@ import com.sun.j3d.utils.geometry.Sphere;
 import model.dume.components.FirstPhalanx;
 import model.dume.components.Grapnel;
 import model.dume.components.Pole;
+import model.dume.components.SecondPhalanx;
 import model.element.Element;
 import model.element.ElementVisitor;
 import model.element.connexion.constant.axis.AxisRotation;
@@ -17,6 +18,7 @@ import model.element.terminal.organ.Default;
 import view.dume.DraftFirstPhalanx;
 import view.dume.DraftGrapnel;
 import view.dume.DraftPole;
+import view.dume.DraftSecondPhalanx;
 
 import javax.media.j3d.*;
 import javax.vecmath.Color3f;
@@ -192,5 +194,20 @@ public class ElementVirtualization implements ElementVisitor {
         DraftFirstPhalanx.buildBloc(branchGroup, RADIUS, (float) FirstPhalanx.D5.getValue());
 
         addToScene(branchGroup, firstPhalanx);
+    }
+
+
+    /*
+     * Second Phalanx
+     */
+    @Override
+    public void virtualizationSecondPhalanx(SecondPhalanx secondPhalanx) {
+
+        BranchGroup branchGroup = new BranchGroup();
+
+        DraftSecondPhalanx.buildPatella(branchGroup, RADIUS);
+        DraftSecondPhalanx.buildBloc(branchGroup, RADIUS, (float) SecondPhalanx.D6.getValue());
+
+        addToScene(branchGroup, secondPhalanx);
     }
 }
