@@ -337,7 +337,7 @@ public class TerminalController extends AbstractRobotController {
 
         for (int i = 0; i < joints.length; i++) {
 
-            System.out.println("\t- Test joint number " + i + 1);
+            System.out.println("\t- Test joint number " + (i + 1));
 
             Joint joint = joints[i];
 

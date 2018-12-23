@@ -69,8 +69,13 @@ public class DraftTurret {
 
         float cylinderSize = (float) a.distance(b);
 
-        Node leftCylinder = ElementVirtualization.buildCylinder(sphereRayon, cylinderSize, Color.GRAY);
-        Node rightCylinder = ElementVirtualization.buildCylinder(sphereRayon, cylinderSize, Color.GRAY);
+
+        Node leftCylinder = ElementVirtualization.buildCylinder(sphereRayon / 2.0f, cylinderSize, Color.LIGHT_GRAY);
+        Node rightCylinder = ElementVirtualization.buildCylinder(sphereRayon / 2.0f, cylinderSize, Color.LIGHT_GRAY);
+
+        Node leftContent = ElementVirtualization.buildCylinder(sphereRayon + radius / 3.0f, 0.0991728f, Color.BLACK);
+        Node rightContent = ElementVirtualization.buildCylinder(sphereRayon + radius / 3.0f, 0.0991728f, Color.BLACK);
+
 
         double cylindersAngle = (a.x <= b.x) ? Math.PI / 2.0 - Math.asin(a.y / cylinderSize) : (Math.PI / 2.0 - Math.asin(-a.y / cylinderSize)) + Math.PI;
 
@@ -84,6 +89,7 @@ public class DraftTurret {
 
         TransformGroup groupLeft = new TransformGroup(translateLeft);
         groupLeft.addChild(leftCylinder);
+        groupLeft.addChild(leftContent);
 
 
         Transform3D translateRight = new Transform3D();
@@ -92,6 +98,7 @@ public class DraftTurret {
 
         TransformGroup groupRigth = new TransformGroup(translateRight);
         groupRigth.addChild(rightCylinder);
+        groupRigth.addChild(rightContent);
 
         branchGroup.addChild(groupRightUp);
         branchGroup.addChild(groupRightDown);

@@ -10,7 +10,7 @@ public class Turret extends Composite {
 
     private static final Rotational Q2 = new Rotational(0.0, -Math.PI / 4.0, Math.PI / 4.0);
 
-    public static final Distance D1 = new Distance(0.23);
+    public static final Distance D1 = new Distance(0.1533);
 
     public Turret() {
         super(D1, (Simple) Q2.clone());

@@ -15,7 +15,7 @@ public class DraftPole {
 
     private static final float RADIUS_C = (1.0f / 6);
 
-    private static final float OFFSET = 10f / 100;
+    private static final float OFFSET = 15f / 100;
 
     public static void buildMasterCylinder(BranchGroup branchGroup, final float radius, final float size, float minimalSize) {
 
@@ -40,7 +40,6 @@ public class DraftPole {
         if (minimalSize < 0) {
             minimalSize = 0f;
         }
-
 
         Node contentCylinder = ElementVirtualization.buildCylinder(radius + radius * RADIUS_C, minimalSize - minimalSize * OFFSET, Color.DARK_GRAY);
 

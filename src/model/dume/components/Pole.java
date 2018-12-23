@@ -8,7 +8,7 @@ import model.element.connexion.joint.rotation.Rotational;
 
 public class Pole extends Composite {
 
-    private static final Collinear Q3 = new Collinear(0.3, 0.275, 0.55);
+    private static final Collinear Q3 = new Collinear(0.16, 0.15, 0.35);
 
     private static final Rotational Q4 = new Rotational(0.0, -Math.PI / 2.0, Math.PI / 2.0);
 
