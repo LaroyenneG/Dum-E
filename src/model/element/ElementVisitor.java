@@ -1,6 +1,7 @@
 package model.element;
 
 import model.dume.components.Grapnel;
+import model.dume.components.Pole;
 import model.element.connexion.constant.axis.AxisRotation;
 import model.element.connexion.constant.axis.distance.Distance;
 import model.element.connexion.joint.Rotation;
@@ -27,4 +28,6 @@ public interface ElementVisitor {
     /* Dum-E virtualization */
 
     void virtualizationGrapnel(Grapnel grapnel);
+
+    void virtualizationPole(Pole pole);
 }
