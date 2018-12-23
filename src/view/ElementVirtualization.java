@@ -236,4 +236,19 @@ public class ElementVirtualization implements ElementVisitor {
 
         addToScene(branchGroup, turret);
     }
+
+    /*
+     * Base
+     */
+    @Override
+    public void virtualizationBase(Base base) {
+
+        BranchGroup branchGroup = new BranchGroup();
+
+        DraftBase.buildCylinder(branchGroup, RADIUS, (float) Base.D0.getValue());
+        DraftBase.buildWheels(branchGroup, RADIUS, (float) Base.D0.getValue());
+        DraftBase.buildPlate(branchGroup, RADIUS, (float) Base.D0.getValue());
+
+        addToScene(branchGroup, base);
+    }
 }

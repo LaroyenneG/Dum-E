@@ -37,4 +37,6 @@ public interface ElementVisitor {
     void virtualizationGirder(Girder girder);
 
     void virtualizationTurret(Turret turret);
+
+    void virtualizationBase(Base base);
 }
