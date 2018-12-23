@@ -1,9 +1,6 @@
 package model.element;
 
-import model.dume.components.FirstPhalanx;
-import model.dume.components.Grapnel;
-import model.dume.components.Pole;
-import model.dume.components.SecondPhalanx;
+import model.dume.components.*;
 import model.element.connexion.constant.axis.AxisRotation;
 import model.element.connexion.constant.axis.distance.Distance;
 import model.element.connexion.joint.Rotation;
@@ -36,4 +33,6 @@ public interface ElementVisitor {
     void virtualizationFirstPhalanx(FirstPhalanx firstPhalanx);
 
     void virtualizationSecondPhalanx(SecondPhalanx secondPhalanx);
+
+    void virtualizationGirder(Girder girder);
 }

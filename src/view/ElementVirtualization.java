@@ -3,10 +3,7 @@ package view;
 
 import com.sun.j3d.utils.geometry.Cylinder;
 import com.sun.j3d.utils.geometry.Sphere;
-import model.dume.components.FirstPhalanx;
-import model.dume.components.Grapnel;
-import model.dume.components.Pole;
-import model.dume.components.SecondPhalanx;
+import model.dume.components.*;
 import model.element.Element;
 import model.element.ElementVisitor;
 import model.element.connexion.constant.axis.AxisRotation;
@@ -15,10 +12,7 @@ import model.element.connexion.joint.Rotation;
 import model.element.connexion.joint.linear.Collinear;
 import model.element.connexion.joint.linear.Orthogonal;
 import model.element.terminal.organ.Default;
-import view.dume.DraftFirstPhalanx;
-import view.dume.DraftGrapnel;
-import view.dume.DraftPole;
-import view.dume.DraftSecondPhalanx;
+import view.dume.*;
 
 import javax.media.j3d.*;
 import javax.vecmath.Color3f;
@@ -214,5 +208,21 @@ public class ElementVirtualization implements ElementVisitor {
         DraftSecondPhalanx.buildBloc(branchGroup, RADIUS, (float) SecondPhalanx.D6.getValue());
 
         addToScene(branchGroup, secondPhalanx);
+    }
+
+    /*
+     * Girder
+     */
+
+    @Override
+    public void virtualizationGirder(Girder girder) {
+
+        BranchGroup branchGroup = new BranchGroup();
+
+        DraftGirder.buildPrincipalGirder(branchGroup, RADIUS, (float) Girder.D3.getValue());
+        DraftGirder.buildCylindersFixation(branchGroup, RADIUS, (float) Girder.D3.getValue());
+        DraftGirder.buildPoleFixation(branchGroup, RADIUS, (float) Girder.D3.getValue());
+
+        addToScene(branchGroup, girder);
     }
 }
