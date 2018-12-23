@@ -42,12 +42,17 @@ public class ElementVirtualization implements ElementVisitor {
         return branchGroup;
     }
 
-    public static Node buildCylinder(float r, float h, Color color) {
+    public static Appearance buildApperance(Color color) {
 
         Appearance appearance = new Appearance();
         ColoringAttributes coloringAttributes = new ColoringAttributes();
         coloringAttributes.setColor(new Color3f(color));
         appearance.setColoringAttributes(coloringAttributes);
+
+        return appearance;
+    }
+
+    public static Node buildCylinder(float r, float h, Color color) {
 
         Transform3D transform3D = new Transform3D();
 
@@ -56,7 +61,7 @@ public class ElementVirtualization implements ElementVisitor {
         TransformGroup transformGroup = new TransformGroup(transform3D);
 
         Cylinder cylinder = new Cylinder(r, h);
-        cylinder.setAppearance(appearance);
+        cylinder.setAppearance(buildApperance(color));
 
         transformGroup.addChild(cylinder);
 
