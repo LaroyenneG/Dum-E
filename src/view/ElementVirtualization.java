@@ -168,7 +168,6 @@ public class ElementVirtualization implements ElementVisitor {
     /*
      * DraftPole
      */
-
     @Override
     public void virtualizationPole(Pole pole) {
 
@@ -183,7 +182,6 @@ public class ElementVirtualization implements ElementVisitor {
     /*
      * First Phalanx
      */
-
     @Override
     public void virtualizationFirstPhalanx(FirstPhalanx firstPhalanx) {
 
@@ -213,7 +211,6 @@ public class ElementVirtualization implements ElementVisitor {
     /*
      * Girder
      */
-
     @Override
     public void virtualizationGirder(Girder girder) {
 
@@ -224,5 +221,18 @@ public class ElementVirtualization implements ElementVisitor {
         DraftGirder.buildPoleFixation(branchGroup, RADIUS, (float) Girder.D3.getValue());
 
         addToScene(branchGroup, girder);
+    }
+
+    /*
+     * Turret
+     */
+    @Override
+    public void virtualizationTurret(Turret turret) {
+
+        BranchGroup branchGroup = new BranchGroup();
+
+        DraftTurret.buildPrincipalCylinder(branchGroup, RADIUS, (float) Turret.D1.getValue());
+
+        addToScene(branchGroup, turret);
     }
 }

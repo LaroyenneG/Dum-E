@@ -35,4 +35,6 @@ public interface ElementVisitor {
     void virtualizationSecondPhalanx(SecondPhalanx secondPhalanx);
 
     void virtualizationGirder(Girder girder);
+
+    void virtualizationTurret(Turret turret);
 }
