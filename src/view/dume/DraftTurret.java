@@ -7,6 +7,7 @@ import model.dume.components.Girder;
 import view.ElementVirtualization;
 
 import javax.media.j3d.BranchGroup;
+import javax.media.j3d.Node;
 import javax.media.j3d.Transform3D;
 import javax.media.j3d.TransformGroup;
 import javax.vecmath.Point2d;
@@ -66,10 +67,38 @@ public class DraftTurret {
         groupleftDown.addChild(leftDown);
 
 
+        float cylinderSize = (float) a.distance(b);
+
+        Node leftCylinder = ElementVirtualization.buildCylinder(sphereRayon, cylinderSize, Color.GRAY);
+        Node rightCylinder = ElementVirtualization.buildCylinder(sphereRayon, cylinderSize, Color.GRAY);
+
+        double cylindersAngle = (a.x <= b.x) ? Math.PI / 2.0 - Math.asin(a.y / cylinderSize) : (Math.PI / 2.0 - Math.asin(-a.y / cylinderSize)) + Math.PI;
+
+
+        Transform3D transformCylinders = new Transform3D();
+        transformCylinders.rotX(-cylindersAngle);
+
+        Transform3D translateLeft = new Transform3D();
+        translateLeft.setTranslation(new Vector3d(translate, b.y + length, b.x));
+        translateLeft.mul(transformCylinders);
+
+        TransformGroup groupLeft = new TransformGroup(translateLeft);
+        groupLeft.addChild(leftCylinder);
+
+
+        Transform3D translateRight = new Transform3D();
+        translateRight.setTranslation(new Vector3d(-translate, b.y + length, b.x));
+        translateRight.mul(transformCylinders);
+
+        TransformGroup groupRigth = new TransformGroup(translateRight);
+        groupRigth.addChild(rightCylinder);
+
         branchGroup.addChild(groupRightUp);
         branchGroup.addChild(groupRightDown);
         branchGroup.addChild(groupleftUp);
         branchGroup.addChild(groupleftDown);
+        branchGroup.addChild(groupLeft);
+        branchGroup.addChild(groupRigth);
     }
 
     public static void buildPrincipalCylinder(BranchGroup branchGroup, final float radius, final float length) {

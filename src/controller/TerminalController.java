@@ -337,11 +337,11 @@ public class TerminalController extends AbstractRobotController {
 
         for (int i = 0; i < joints.length; i++) {
 
-            System.out.println("\t- Test joint number " + i);
+            System.out.println("\t- Test joint number " + i + 1);
 
             Joint joint = joints[i];
 
-            final int maxCycle = (joint.min == Double.MIN_VALUE || joint.max == Double.MAX_VALUE) ? (int) (1 / pas * Math.PI * 2) : Integer.MAX_VALUE;
+            final int maxCycle = (joint.min == -Double.MAX_VALUE || joint.max == Double.MAX_VALUE) ? (int) (1 / pas * Math.PI * 2) : Integer.MAX_VALUE;
 
             int cycle = 0;
 
