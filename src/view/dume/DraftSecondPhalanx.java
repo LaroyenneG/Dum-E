@@ -14,7 +14,7 @@ public class DraftSecondPhalanx {
     public static void buildPatella(BranchGroup branchGroup, final float radius) {
 
         Cylinder patella = new Cylinder(radius, radius * 2.0f);
-        patella.setAppearance(ElementVirtualization.buildApperance(Color.DARK_GRAY));
+        patella.setAppearance(ElementVirtualization.buildAppearance(Color.DARK_GRAY));
         Transform3D transformPatella = new Transform3D();
         transformPatella.rotX(Math.PI / 2.0);
         TransformGroup groupPatella = new TransformGroup(transformPatella);
@@ -25,7 +25,7 @@ public class DraftSecondPhalanx {
 
     public static void buildBloc(BranchGroup branchGroup, final float radius, final float length) {
 
-        com.sun.j3d.utils.geometry.Box box = new com.sun.j3d.utils.geometry.Box(radius / 1.5f, length / 2.0f, radius, ElementVirtualization.buildApperance(Color.DARK_GRAY));
+        com.sun.j3d.utils.geometry.Box box = new com.sun.j3d.utils.geometry.Box(radius / 1.5f, length / 2.0f, radius, ElementVirtualization.buildAppearance(Color.DARK_GRAY));
         Transform3D transformBox = new Transform3D();
         transformBox.setTranslation(new Vector3d(0.0, box.getYdimension(), 0.0));
         TransformGroup groupBox = new TransformGroup(transformBox);

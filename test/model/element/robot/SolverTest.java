@@ -28,7 +28,7 @@ public class SolverTest {
     @Test
     public void testFindSolutionInAlphaZone() {
 
-        double[] solution = Solver.findSolution(journal, null, robot, new Point3d(0.3, 0.5, 0.4));
+        double[] solution = Solver.findSolution(journal, null, robot, new Point3d(0.2, 0.3, 0.4));
 
         assertNotNull(solution);
     }
@@ -36,7 +36,7 @@ public class SolverTest {
     @Test
     public void testFindSolutionInBetaZone() {
 
-        double[] solution = Solver.findSolution(journal, null, robot, new Point3d(-0.3, 0.5, 0.4));
+        double[] solution = Solver.findSolution(journal, null, robot, new Point3d(-0.2, 0.3, 0.4));
 
         assertNotNull(solution);
     }
@@ -46,7 +46,7 @@ public class SolverTest {
     public void testFindSolutionInOmegaZone() {
 
 
-        double[] solution = Solver.findSolution(journal, null, robot, new Point3d(-0.3, 0.5, -0.4));
+        double[] solution = Solver.findSolution(journal, null, robot, new Point3d(-0.2, 0.3, -0.4));
 
         assertNotNull(solution);
     }
@@ -54,7 +54,7 @@ public class SolverTest {
     @Test
     public void testFindSolutionInGamaZone() {
 
-        double[] solution = Solver.findSolution(journal, null, robot, new Point3d(0.3, 0.5, -0.4));
+        double[] solution = Solver.findSolution(journal, null, robot, new Point3d(0.2, 0.3, -0.4));
 
         assertNotNull(solution);
     }
@@ -82,7 +82,7 @@ public class SolverTest {
     @Test
     public void testComputePointInZoneAlpha() {
 
-        Point3d point = new Point3d(0.5, 0.5, 0.6);
+        Point3d point = new Point3d(0.2, 0.2, 0.4);
 
         double[][] solutions = sut.computeTrajectory(point);
 
@@ -92,7 +92,7 @@ public class SolverTest {
     @Test
     public void testComputePointInZoneBeta() {
 
-        Point3d point = new Point3d(-0.5, 0.5, 0.6);
+        Point3d point = new Point3d(-0.2, 0.2, 0.4);
 
         double[][] solutions = sut.computeTrajectory(point);
 
@@ -108,7 +108,7 @@ public class SolverTest {
         robot.getJoints()[3].setValueSafe(0.8671663965624079);
         robot.getJoints()[4].setValueSafe(0.06003396891462865);
 
-        double[] solution = Solver.findSolution(journal, null, robot, new Point3d(0.5, 0.5, 0));
+        double[] solution = Solver.findSolution(journal, null, robot, new Point3d(0.3, 0.3, 0));
 
         assertNotNull(solution);
     }
@@ -158,7 +158,7 @@ public class SolverTest {
     @Test
     public void testComputeLineTrajectory() {
 
-        double[][] solutions = sut.computeTrajectory(new Point3d(0.0, 0.5, 0.5));
+        double[][] solutions = sut.computeTrajectory(new Point3d(0.0, 0.4, 0.4));
 
         assertNotNull(solutions);
     }

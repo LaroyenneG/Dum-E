@@ -18,7 +18,7 @@ public class DraftGirder {
     public static void buildPoleFixation(BranchGroup branchGroup, final float radius, final float length) {
 
         Cylinder poleFixation = new Cylinder(radius * 2.0f, length * POLE_FIXATION_OFFSET);
-        poleFixation.setAppearance(ElementVirtualization.buildApperance(Color.DARK_GRAY));
+        poleFixation.setAppearance(ElementVirtualization.buildAppearance(Color.DARK_GRAY));
 
         Transform3D transformFixation = new Transform3D();
         transformFixation.setTranslation(new Vector3d(0.0, length - poleFixation.getHeight() / 2.0f, 0.0));
@@ -31,7 +31,7 @@ public class DraftGirder {
     public static void buildCylindersFixation(BranchGroup branchGroup, final float radius, final float length) {
 
 
-        com.sun.j3d.utils.geometry.Box fixation = new com.sun.j3d.utils.geometry.Box(radius * 2.0f, (length * CYLINDERS_FIXATION_OFFSET) / 2.0f, radius * 4.0f, ElementVirtualization.buildApperance(Color.DARK_GRAY));
+        com.sun.j3d.utils.geometry.Box fixation = new com.sun.j3d.utils.geometry.Box(radius * 2.0f, (length * CYLINDERS_FIXATION_OFFSET) / 2.0f, radius * 4.0f, ElementVirtualization.buildAppearance(Color.DARK_GRAY));
         Transform3D transformFixation = new Transform3D();
         transformFixation.setTranslation(new Vector3d(0.0, length - fixation.getYdimension() - length * POLE_FIXATION_OFFSET, 0.0));
 
@@ -40,7 +40,7 @@ public class DraftGirder {
 
 
         Cylinder cylinder = new Cylinder(radius, fixation.getXdimension() * 2.0f + radius);
-        cylinder.setAppearance(ElementVirtualization.buildApperance(Color.BLACK));
+        cylinder.setAppearance(ElementVirtualization.buildAppearance(Color.BLACK));
 
         Transform3D transformCylinder = new Transform3D();
         transformCylinder.rotZ(Math.PI / 2.0);
@@ -61,7 +61,7 @@ public class DraftGirder {
         size -= size * POLE_FIXATION_OFFSET;
         size -= size * CYLINDERS_FIXATION_OFFSET;
 
-        com.sun.j3d.utils.geometry.Box box = new com.sun.j3d.utils.geometry.Box(radius * 2.0f, size, radius * 2.0f, ElementVirtualization.buildApperance(Color.DARK_GRAY));
+        com.sun.j3d.utils.geometry.Box box = new com.sun.j3d.utils.geometry.Box(radius * 2.0f, size, radius * 2.0f, ElementVirtualization.buildAppearance(Color.DARK_GRAY));
         Transform3D transformBox = new Transform3D();
         transformBox.setTranslation(new Vector3d(0.0, box.getYdimension(), 0.0));
         TransformGroup groupBox = new TransformGroup(transformBox);

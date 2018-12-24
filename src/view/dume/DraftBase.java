@@ -24,7 +24,7 @@ public class DraftBase {
         float size = length / 2.0f;
         size -= size * CYLINDER_OFFSET;
 
-        Box plate = new Box(radius * 10f, size, radius * 10f, ElementVirtualization.buildApperance(Color.DARK_GRAY));
+        Box plate = new Box(radius * 10f, size, radius * 10f, ElementVirtualization.buildAppearance(Color.DARK_GRAY));
 
         Transform3D transformPlate = new Transform3D();
         transformPlate.setTranslation(new Vector3d(0.0, plate.getYdimension(), 0.0));

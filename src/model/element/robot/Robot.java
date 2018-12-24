@@ -161,4 +161,8 @@ public abstract class Robot extends Element implements NumerousJoints {
 
         return robot;
     }
+
+    public TerminalOrgan getTerminalOrgan() {
+        return terminalOrgan;
+    }
 }

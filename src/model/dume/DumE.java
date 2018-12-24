@@ -2,7 +2,6 @@ package model.dume;
 
 import model.dume.components.*;
 import model.element.connexion.Connexion;
-import model.element.connexion.joint.Joint;
 import model.element.robot.Robot;
 import model.element.terminal.organ.TerminalOrgan;
 
@@ -24,21 +23,6 @@ public class DumE extends Robot {
 
     public DumE() {
         super((TerminalOrgan) GRAPNEL.clone(), (Connexion) BASE.clone(), (Connexion) TURRET.clone(), (Connexion) GIRDER.clone(), (Connexion) POLE.clone(), (Connexion) FIRST_PHALANX.clone(), (Connexion) SECOND_PHALANX.clone());
-    }
-
-    @Override
-    public String toString() {
-
-        Joint[] joints = getJoints();
-
-        StringBuilder builder = new StringBuilder();
-
-        for (Joint joint : joints) {
-            builder.append(joint.getValue());
-            builder.append(' ');
-        }
-
-        return new String(builder);
     }
 }
 

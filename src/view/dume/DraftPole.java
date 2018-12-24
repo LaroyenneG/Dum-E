@@ -44,7 +44,7 @@ public class DraftPole {
         Node contentCylinder = ElementVirtualization.buildCylinder(radius + radius * RADIUS_C, minimalSize - minimalSize * OFFSET, Color.DARK_GRAY);
 
         Cylinder engine = new Cylinder(radius * 2.0f, radius * 5.0f);
-        engine.setAppearance(ElementVirtualization.buildApperance(Color.yellow));
+        engine.setAppearance(ElementVirtualization.buildAppearance(Color.yellow));
 
         Transform3D transformEngine = new Transform3D();
         transformEngine.setTranslation(new Vector3d(0.0, -engine.getHeight() * 2.0, 0.0));
@@ -52,14 +52,14 @@ public class DraftPole {
         groupEngine.addChild(engine);
 
         Cylinder engineFixation = new Cylinder(radius + radius * RADIUS_C, engine.getHeight() * 2.0f);
-        engineFixation.setAppearance(ElementVirtualization.buildApperance(Color.DARK_GRAY));
+        engineFixation.setAppearance(ElementVirtualization.buildAppearance(Color.DARK_GRAY));
         Transform3D engineTransformFix = new Transform3D();
         engineTransformFix.setTranslation(new Vector3d(0.0, -engineFixation.getHeight() / 2.0, 0.0));
         TransformGroup groupEngineFix = new TransformGroup(engineTransformFix);
         groupEngineFix.addChild(engineFixation);
 
         Sphere fixation = new Sphere(radius * 2);
-        fixation.setAppearance(ElementVirtualization.buildApperance(Color.DARK_GRAY));
+        fixation.setAppearance(ElementVirtualization.buildAppearance(Color.DARK_GRAY));
 
 
         branchGroup.addChild(contentCylinder);

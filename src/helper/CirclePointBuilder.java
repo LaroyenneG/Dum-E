@@ -7,7 +7,7 @@ public class CirclePointBuilder {
     private static final double A = 0.0;
     private static final double B = 0.0;
     private static final double R = 0.3;
-    private static final double H = 1.0;
+    private static final double H = 0.5;
 
     private static String buildLine(double angle) {
 

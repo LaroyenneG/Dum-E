@@ -39,6 +39,7 @@ public class TerminalController extends AbstractRobotController {
     private static final String DRAW = "draw";
     private static final String LOCKER = "locker";
     private static final String JOINT = "joint";
+    private static final String ORGAN = "organ";
 
 
     static {
@@ -61,6 +62,7 @@ public class TerminalController extends AbstractRobotController {
         COMMANDS.put(DRAW, 1);
         COMMANDS.put(LOCKER, 2);
         COMMANDS.put(JOINT, 2);
+        COMMANDS.put(ORGAN, 1);
     }
 
     private final Thread thread;
@@ -206,7 +208,6 @@ public class TerminalController extends AbstractRobotController {
                 if (args[1].equals("max")) {
                     args[1] = String.valueOf(Integer.MAX_VALUE);
                 }
-
                 try {
                     randomAnimation(Integer.parseInt(args[1]), getStep());
                 } catch (NumberFormatException e) {
@@ -319,8 +320,28 @@ public class TerminalController extends AbstractRobotController {
 
                     joints[number].setValueSafe(value);
 
+                    computeAndSleepAndDisplay();
+
                 } catch (NumberFormatException e) {
                     usage(LOCKER, "<number> <value>");
+                }
+                break;
+
+            case ORGAN:
+                try {
+                    boolean state;
+
+                    if (args[1].equals("on")) {
+                        state = true;
+                    } else if (args[1].equals("off")) {
+                        state = false;
+                    } else {
+                        usage(LOCKER, "<on/off>");
+                        return;
+                    }
+                    model.getTerminalOrgan().setAction(state);
+                } catch (NumberFormatException e) {
+                    usage(LOCKER, "<on/off>");
                 }
                 break;
 

@@ -73,8 +73,8 @@ public class DraftTurret {
         Node leftCylinder = ElementVirtualization.buildCylinder(sphereRayon / 2.0f, cylinderSize, Color.LIGHT_GRAY);
         Node rightCylinder = ElementVirtualization.buildCylinder(sphereRayon / 2.0f, cylinderSize, Color.LIGHT_GRAY);
 
-        Node leftContent = ElementVirtualization.buildCylinder(sphereRayon + radius / 3.0f, 0.0991728f, Color.BLACK);
-        Node rightContent = ElementVirtualization.buildCylinder(sphereRayon + radius / 3.0f, 0.0991728f, Color.BLACK);
+        Node leftContent = ElementVirtualization.buildCylinder(sphereRayon + radius / 3.0f, 0.0991728f - sphereRayon, Color.BLACK);
+        Node rightContent = ElementVirtualization.buildCylinder(sphereRayon + radius / 3.0f, 0.0991728f - sphereRayon, Color.BLACK);
 
 
         double cylindersAngle = (a.x <= b.x) ? Math.PI / 2.0 - Math.asin(a.y / cylinderSize) : (Math.PI / 2.0 - Math.asin(-a.y / cylinderSize)) + Math.PI;
@@ -111,7 +111,7 @@ public class DraftTurret {
     public static void buildPrincipalCylinder(BranchGroup branchGroup, final float radius, final float length) {
 
         Cylinder cylinder = new Cylinder(radius * 4.0f, length);
-        cylinder.setAppearance(ElementVirtualization.buildApperance(Color.DARK_GRAY));
+        cylinder.setAppearance(ElementVirtualization.buildAppearance(Color.DARK_GRAY));
         Transform3D transformCylinder = new Transform3D();
         transformCylinder.setTranslation(new Vector3d(0.0, cylinder.getHeight() / 2.0f, 0.0));
 
@@ -119,7 +119,7 @@ public class DraftTurret {
         groupCylinder.addChild(cylinder);
 
 
-        Box supportCylinders = new Box(cylinder.getRadius(), cylinder.getRadius(), cylinder.getRadius(), ElementVirtualization.buildApperance(Color.DARK_GRAY));
+        Box supportCylinders = new Box(cylinder.getRadius(), cylinder.getRadius(), cylinder.getRadius(), ElementVirtualization.buildAppearance(Color.DARK_GRAY));
 
         Transform3D transformSupport = new Transform3D();
         transformSupport.setTranslation(new Vector3d(0.0, length - supportCylinders.getYdimension(), supportCylinders.getZdimension()));
@@ -128,7 +128,7 @@ public class DraftTurret {
         groupSupport.addChild(supportCylinders);
 
         Cylinder headSupport = new Cylinder(supportCylinders.getYdimension(), supportCylinders.getXdimension() * 2.0f);
-        headSupport.setAppearance(ElementVirtualization.buildApperance(Color.DARK_GRAY));
+        headSupport.setAppearance(ElementVirtualization.buildAppearance(Color.DARK_GRAY));
 
         Transform3D transformHead = new Transform3D();
         transformHead.rotZ(Math.PI / 2.0f);
@@ -142,7 +142,7 @@ public class DraftTurret {
         groupHead.addChild(headSupport);
 
         Cylinder pin = new Cylinder(radius * 3.0f, cylinder.getRadius() * 2.0f + radius);
-        pin.setAppearance(ElementVirtualization.buildApperance(Color.yellow));
+        pin.setAppearance(ElementVirtualization.buildAppearance(Color.yellow));
 
         Transform3D transformPin = new Transform3D();
         transformPin.rotZ(Math.PI / 2.0);
@@ -155,7 +155,7 @@ public class DraftTurret {
         groupPin.addChild(pin);
 
         Sphere sphere = new Sphere(cylinder.getRadius());
-        sphere.setAppearance(ElementVirtualization.buildApperance(Color.DARK_GRAY));
+        sphere.setAppearance(ElementVirtualization.buildAppearance(Color.DARK_GRAY));
 
         Transform3D transformSphere = new Transform3D();
         transformSphere.setTranslation(new Vector3d(0.0, length, 0.0));

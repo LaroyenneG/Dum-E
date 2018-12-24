@@ -36,7 +36,7 @@ public class ElementVirtualization implements ElementVisitor {
         return branchGroup;
     }
 
-    public static Appearance buildApperance(Color color) {
+    public static Appearance buildAppearance(Color color) {
 
         Appearance appearance = new Appearance();
         ColoringAttributes coloringAttributes = new ColoringAttributes();
@@ -55,7 +55,7 @@ public class ElementVirtualization implements ElementVisitor {
         TransformGroup transformGroup = new TransformGroup(transform3D);
 
         Cylinder cylinder = new Cylinder(r, h);
-        cylinder.setAppearance(buildApperance(color));
+        cylinder.setAppearance(buildAppearance(color));
 
         transformGroup.addChild(cylinder);
 
@@ -149,6 +149,10 @@ public class ElementVirtualization implements ElementVisitor {
         final float radius = RADIUS * 1.5f;
 
         BranchGroup branchGroup = new BranchGroup();
+
+        if (grapnel.isAction()) {
+            DraftGrapnel.drawPoints(this.branchGroup, radius, grapnel.getPoint3ds());
+        }
 
         DraftGrapnel.buildBell(branchGroup, radius);
 
