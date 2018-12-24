@@ -187,12 +187,20 @@ public class ControllerRobotController extends AbstractRobotController implement
             case HELP:
                 viewRobotController.addTextInConsole("Commands list :");
                 for (String cmd : COMMANDS) {
-                    viewRobotController.addTextInConsole("\t\t\t\t- " + cmd);
+                    viewRobotController.addTextInConsole("\t- " + cmd);
                 }
                 break;
 
             case JOINTS_TEST:
-                jointsTest(getStep());
+                try {
+                    int number = -1;
+                    if (args.length >= 2) {
+                        number = Integer.parseInt(args[1]);
+                    }
+                    jointsTest(getStep(), number);
+                } catch (NumberFormatException e) {
+                    usage(JOINTS_TEST, "<joint number>");
+                }
                 break;
 
             case STEP:

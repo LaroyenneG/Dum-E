@@ -56,13 +56,17 @@ public abstract class AbstractRobotController {
         return result;
     }
 
-    protected void jointsTest(double step) {
+    protected void jointsTest(double step, int number) {
 
         viewRobotController.addTextInConsole("Test is running...");
 
         Joint[] joints = model.getJoints();
 
-        for (int i = 0; i < joints.length; i++) {
+        if (number >= joints.length) {
+            number = -1;
+        }
+
+        for (int i = (number < 0) ? 0 : number; i < ((number < 0) ? joints.length : number); i++) {
 
             viewRobotController.addTextInConsole("\t- Test joint number " + (i + 1));
 

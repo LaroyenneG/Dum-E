@@ -32,7 +32,6 @@ public class ViewRobotController extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Robot Controller");
-        setName("ViewRobotController");
         setResizable(false);
 
         button.setText("Fetch");
@@ -105,6 +104,7 @@ public class ViewRobotController extends javax.swing.JFrame {
 
     public synchronized void addTextInConsole(String text) {
         outTextArea.append(text + '\n');
+        autoScroller.release();
     }
 
     public void disableInput() {
@@ -128,16 +128,34 @@ public class ViewRobotController extends javax.swing.JFrame {
         @Override
         public synchronized void run() {
 
-            while (!interrupted()) {
+            while (!isInterrupted()) {
+
+                pause();
 
                 try {
-                    sleep(1000);
+                    sleep(500);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
-                    break;
                 }
-
                 viewRobotController.jScrollDown();
+            }
+
+        }
+
+
+        public void pause() {
+            synchronized (this) {
+                try {
+                    this.wait();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        public void release() {
+            synchronized (this) {
+                this.notify();
             }
         }
     }
