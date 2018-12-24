@@ -1,12 +1,14 @@
 package controller;
 
 import model.element.robot.Robot;
-import view.RobotView;
+import view.RobotViewer;
+import view.ViewRobotController;
 
 
 public class ControlGroup {
 
-    public ControlGroup(Robot robot, RobotView view) {
-        new TerminalController(robot, view);
+    public ControlGroup(Robot robot, RobotViewer view, ViewRobotController viewRobotController) {
+        ControllerRobotController controllerRobotController = new ControllerRobotController(robot, view, viewRobotController);
+        viewRobotController.setActionEvent(controllerRobotController);
     }
 }

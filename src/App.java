@@ -1,7 +1,8 @@
 import controller.ControlGroup;
 import model.dume.DumE;
 import model.element.robot.Robot;
-import view.RobotView;
+import view.RobotViewer;
+import view.ViewRobotController;
 
 import javax.swing.*;
 
@@ -83,8 +84,9 @@ public class App {
         Robot robot = new DumE();
 
         SwingUtilities.invokeLater(() -> {
-            RobotView view = new RobotView();
-            new ControlGroup(robot, view);
+            RobotViewer view = new RobotViewer();
+            ViewRobotController viewRobotController = new ViewRobotController();
+            new ControlGroup(robot, view, viewRobotController);
         });
     }
 }

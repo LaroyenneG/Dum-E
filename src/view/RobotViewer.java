@@ -9,7 +9,7 @@ import javax.vecmath.Color3f;
 import javax.vecmath.Point3d;
 import java.awt.*;
 
-public class RobotView extends JFrame {
+public class RobotViewer extends JFrame {
 
     private static final int DEFAULT_WIDTH = 1000;
     private static final int DEFAULT_HEIGHT = (int) (DEFAULT_WIDTH / 1.61803398875);
@@ -25,7 +25,7 @@ public class RobotView extends JFrame {
     private OrbitBehavior orbitBehavior;
 
 
-    public RobotView() {
+    public RobotViewer() {
 
         canvas3D = new Canvas3D(SimpleUniverse.getPreferredConfiguration());
 

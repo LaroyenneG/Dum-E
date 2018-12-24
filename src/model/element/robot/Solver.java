@@ -213,4 +213,15 @@ public class Solver {
     public void setStep(double step) {
         this.step = step;
     }
+
+    public double[] reachDirectlyPoint(Point3d destination) {
+
+        Robot subject = (Robot) this.robot.clone();
+
+        if (distance(subject, destination) <= MINIMAL_DISTANCE) {  // First building
+            return new double[0];
+        }
+
+        return compute(subject, destination);
+    }
 }
