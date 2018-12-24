@@ -75,7 +75,7 @@ public class DraftGrapnel {
             sphere.setAppearance(ElementVirtualization.buildAppearance(Color.green));
 
             Transform3D transform3D = new Transform3D();
-            transform3D.setTranslation(new Vector3d(point3d));
+            transform3D.setTranslation(new Vector3d(point3d.x, point3d.y, point3d.z));
 
             TransformGroup group = new TransformGroup(transform3D);
             group.addChild(sphere);
