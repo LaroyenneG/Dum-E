@@ -86,7 +86,22 @@ public class ViewRobotController extends javax.swing.JFrame {
     }
 
     private void helpMouseClicked(java.awt.event.MouseEvent evt) {
-        JOptionPane.showMessageDialog(this, "Do you need help using this interface ?\n\t to see all commands enter help");
+        JOptionPane.showMessageDialog(this,
+                "Guide d'utilisation.\n" +
+                        "1) Principe d'utilisation.\n" +
+                        "* Pour manipuler le robot, entrez une commande et cliquer sur le bouton \"Fetch\".\n" +
+                        "2) Installation de base.\n" +
+                        "* Pour configurer simplement l’environnement 3D, lancer la commande auto. Vous pouvez utiliser la souris pour vous déplacer dans l’environnement 3D.\n" +
+                        "3) Manipulations de base.\n" +
+                        "* Pour lancer l'animation, utilisez la commande \"animation\".\n" +
+                        "* Pour positionner l'organe terminal sur un point particulier utiliser la commande \"reach\" suivi des trois coordonnées x, y, z\n Exemple : reach 0.2 0.3 0.4\n" +
+                        "* Pour déplacer l'organe terminal vers un autre point en suivant une trajectoire linéaire utilisez la commande \"go\".\n Exemple : go 0.3 0.3 0.2\n" +
+                        "4) Commandes avancées\n" +
+                        "* Pour afficher les matrices de transformations utilisez la commande \"matrix\"\n" +
+                        "* Pour tester le débattement des articulations utilisez la commande \"test\" suivi du numéro d'articulation à tester. Ou rien si vous voulez les tester toutes.\n" +
+                        "* Pour changer le pas de traitement du robot utiliser la commande \"step\" suivi de la valeur à affecter.\n Exemple : step 0.01\n" +
+                        "* Pour connaitre l'emplacement actuel de l’organe terminal utiliser la commande \"where\".\n"
+        );
     }
 
     public void setActionEvent(ActionListener listener) {
@@ -102,7 +117,7 @@ public class ViewRobotController extends javax.swing.JFrame {
         return text;
     }
 
-    public synchronized void addTextInConsole(String text) {
+    public void addTextInConsole(String text) {
         outTextArea.append(text + '\n');
         autoScroller.release();
     }
@@ -139,7 +154,6 @@ public class ViewRobotController extends javax.swing.JFrame {
                 }
                 viewRobotController.jScrollDown();
             }
-
         }
 
 

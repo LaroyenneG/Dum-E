@@ -31,7 +31,7 @@ public class ControllerRobotController extends AbstractRobotController implement
     private static final String BUILD = "build";
     private static final String JOINTS_TEST = "test";
     private static final String STEP = "step";
-    private static final String POINT = "point";
+    private static final String GO = "go";
     private static final String WHERE = "where";
     private static final String DRAW = "draw";
     private static final String LOCKER = "locker";
@@ -55,7 +55,7 @@ public class ControllerRobotController extends AbstractRobotController implement
         COMMANDS.add(BUILD);
         COMMANDS.add(JOINTS_TEST);
         COMMANDS.add(STEP);
-        COMMANDS.add(POINT);
+        COMMANDS.add(GO);
         COMMANDS.add(WHERE);
         COMMANDS.add(DRAW);
         COMMANDS.add(LOCKER);
@@ -185,19 +185,24 @@ public class ControllerRobotController extends AbstractRobotController implement
                 break;
 
             case HELP:
-                viewRobotController.addTextInConsole("Commands list :");
+                StringBuilder builder = new StringBuilder();
+                builder.append("Commands list :\n");
                 for (String cmd : COMMANDS) {
-                    viewRobotController.addTextInConsole("\t- " + cmd);
+                    builder.append("\t- ");
+                    builder.append(cmd);
+                    builder.append('\n');
                 }
+                viewRobotController.addTextInConsole(new String(builder));
                 break;
 
             case JOINTS_TEST:
                 try {
-                    int number = -1;
                     if (args.length >= 2) {
-                        number = Integer.parseInt(args[1]);
+                        int number = Integer.parseInt(args[1]) - 1;
+                        jointsTest(getStep(), number);
+                    } else {
+                        testAllJoints(getStep());
                     }
-                    jointsTest(getStep(), number);
                 } catch (NumberFormatException e) {
                     usage(JOINTS_TEST, "<joint number>");
                 }
@@ -215,9 +220,9 @@ public class ControllerRobotController extends AbstractRobotController implement
                 }
                 break;
 
-            case POINT:
+            case GO:
                 if (args.length < 4) {
-                    usage(POINT, "<x> <y> <z>");
+                    usage(GO, "<x> <y> <z>");
                 } else {
                     try {
                         Point3d point3d = new Point3d(Double.parseDouble(args[1]), Double.parseDouble(args[2]), Double.parseDouble(args[3]));
@@ -226,7 +231,7 @@ public class ControllerRobotController extends AbstractRobotController implement
                             viewRobotController.addTextInConsole("Can't find solution...");
                         }
                     } catch (NumberFormatException e) {
-                        usage(POINT, "<x> <y> <z>");
+                        usage(GO, "<x> <y> <z>");
                     }
                 }
                 break;
@@ -326,7 +331,7 @@ public class ControllerRobotController extends AbstractRobotController implement
 
             case REACH:
                 if (args.length < 4) {
-                    usage(POINT, "<x> <y> <z>");
+                    usage(GO, "<x> <y> <z>");
                 } else {
                     try {
                         Point3d point3d = new Point3d(Double.parseDouble(args[1]), Double.parseDouble(args[2]), Double.parseDouble(args[3]));
@@ -335,7 +340,7 @@ public class ControllerRobotController extends AbstractRobotController implement
                             viewRobotController.addTextInConsole("Can't find solution...");
                         }
                     } catch (NumberFormatException e) {
-                        usage(POINT, "<x> <y> <z>");
+                        usage(GO, "<x> <y> <z>");
                     }
                 }
                 break;

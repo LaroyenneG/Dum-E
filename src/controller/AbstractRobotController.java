@@ -56,23 +56,31 @@ public abstract class AbstractRobotController {
         return result;
     }
 
-    protected void jointsTest(double step, int number) {
+    protected void testAllJoints(double step) {
 
         viewRobotController.addTextInConsole("Test is running...");
 
         Joint[] joints = model.getJoints();
 
-        if (number >= joints.length) {
-            number = -1;
+        for (int i = 0; i < joints.length; i++) {
+            jointsTest(step, i);
+        }
+    }
+
+    protected void jointsTest(double step, int number) {
+
+        Joint[] joints = model.getJoints();
+
+        if (number >= joints.length || number < 0) {
+            viewRobotController.addTextInConsole("Invalid joint number value");
+            return;
         }
 
-        for (int i = (number < 0) ? 0 : number; i < ((number < 0) ? joints.length : number); i++) {
+        viewRobotController.addTextInConsole("Test joint number " + (number + 1));
 
-            viewRobotController.addTextInConsole("\t- Test joint number " + (i + 1));
+        Joint joint = joints[number];
 
-            Joint joint = joints[i];
-
-            final int maxCycle = (joint.min == -Double.MAX_VALUE || joint.max == Double.MAX_VALUE) ? (int) (1 / step * Math.PI * 2) : Integer.MAX_VALUE;
+        final int maxCycle = (joint.min == -Double.MAX_VALUE || joint.max == Double.MAX_VALUE) ? (int) (1 / step * Math.PI * 2) : Integer.MAX_VALUE;
 
             int cycle = 0;
 
@@ -95,8 +103,6 @@ public abstract class AbstractRobotController {
                     break;
                 }
             }
-        }
-
     }
 
     protected void randomAnimation(int cycle, double p) {
