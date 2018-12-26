@@ -144,7 +144,7 @@ public class ControllerRobotController extends AbstractRobotController implement
                         usage(ANIMATION, "<cycles>");
                     }
                 } else {
-                    randomAnimation(300, getStep());
+                    randomAnimation(300, getStep() / 2);
                 }
                 break;
 
@@ -302,7 +302,7 @@ public class ControllerRobotController extends AbstractRobotController implement
                             return;
                         }
                         model.getTerminalOrgan().setAction(state);
-                        computeAndSleepAndDisplay();
+                        displayView();
                     } catch (NumberFormatException e) {
                         usage(ORGAN, "<on/off>");
                     }

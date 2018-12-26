@@ -21,7 +21,7 @@ public abstract class AbstractRobotController {
     private static final SecureRandom SECURE_RANDOM = new SecureRandom();
 
     private static final int CLOCK = 50;
-    public static final double DEFAULT_STEP = 0.01;
+    public static final double DEFAULT_STEP = 0.02;
 
     private static double step = DEFAULT_STEP;
 
@@ -77,6 +77,8 @@ public abstract class AbstractRobotController {
         for (int i = 0; i < joints.length; i++) {
             testJoint(step, i);
         }
+
+        viewRobotController.printLineInConsole("done.");
     }
 
     protected void computeAndSleepAndDisplay() {
@@ -155,7 +157,9 @@ public abstract class AbstractRobotController {
             }
     }
 
-    protected void randomAnimation(int cycle, double p) {
+    protected void randomAnimation(int cycle, double step) {
+
+        viewRobotController.printLineInConsole("Animation in process...");
 
         Joint[] joints = model.getJoints();
 
@@ -172,16 +176,16 @@ public abstract class AbstractRobotController {
                 double v = joints[j].getValue();
 
                 if (status[j]) { // +
-                    if (v + p >= joints[j].max) {
+                    if (v + step >= joints[j].max) {
                         status[j] = false;
                     }
                 } else { // -
-                    if (v - p <= joints[j].min) {
+                    if (v - step <= joints[j].min) {
                         status[j] = true;
                     }
                 }
 
-                v += (status[j]) ? p : -p;
+                v += (status[j]) ? step : -step;
 
                 if (v < joints[j].max && v > joints[j].min) {
                     joints[j].setValue(v);
@@ -199,6 +203,8 @@ public abstract class AbstractRobotController {
 
             computeAndSleepAndDisplay();
         }
+
+        viewRobotController.printLineInConsole("done.");
     }
 
     protected boolean terminalOrganGotoPoint(Point3d point) {
