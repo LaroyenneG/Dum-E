@@ -293,7 +293,6 @@ public class ControllerRobotController extends AbstractRobotController implement
                 } else {
                     try {
                         boolean state;
-
                         if (args[1].equals("on")) {
                             state = true;
                         } else if (args[1].equals("off")) {
@@ -303,6 +302,7 @@ public class ControllerRobotController extends AbstractRobotController implement
                             return;
                         }
                         model.getTerminalOrgan().setAction(state);
+                        computeAndSleepAndDisplay();
                     } catch (NumberFormatException e) {
                         usage(ORGAN, "<on/off>");
                     }
