@@ -19,12 +19,11 @@ public abstract class Simple extends Connexion {
     public abstract boolean isConstant();
 
     @Override
-    public Transform3D applyTransformation(Transform3D transform3D) {
+    public void applyTransformation(Transform3D transform3D) {
 
         super.applyTransformation(transform3D);
 
         transform3D.mul(transformation());
 
-        return transform3D;
     }
 }

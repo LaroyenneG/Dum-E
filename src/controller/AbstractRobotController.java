@@ -236,19 +236,21 @@ public abstract class AbstractRobotController {
         final Solver solver = getSolver();
         solver.startSession();
 
-        viewRobotController.printLineInConsole("Compute in process...");
+        viewRobotController.printLineInConsole("Compute in process :");
 
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(stream));
 
         List<double[][]> travel = new ArrayList<>();
 
         String line;
-        while ((line = bufferedReader.readLine()) != null) {
+        while ((line = bufferedReader.readLine()) != null && !line.equals("")) {
 
-            String[] parameters = line.split(" ");
+            viewRobotController.printInConsole("#");
+
+            String[] parameters = line.trim().split(" ");
 
             if (parameters.length != 3) {
-                viewRobotController.printLineInConsole("Invalid data format");
+                viewRobotController.printLineInConsole("Invalid data format (" + line + ")");
                 travel.clear();
                 break;
             }
@@ -288,6 +290,8 @@ public abstract class AbstractRobotController {
         }
 
         solver.closeSession();
+
+        viewRobotController.printLineInConsole("\nDone.");
 
         for (double[][] solutions : travel) {
             solutionsReader(solutions);

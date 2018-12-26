@@ -115,7 +115,7 @@ public abstract class Robot extends Element implements NumerousJoints {
     }
 
     @Override
-    public Transform3D applyTransformation(Transform3D transform3D) {
+    public void applyTransformation(Transform3D transform3D) {
 
         super.applyTransformation(transform3D);
 
@@ -125,7 +125,6 @@ public abstract class Robot extends Element implements NumerousJoints {
 
         terminalOrgan.applyTransformation(transform3D);
 
-        return transform3D;
     }
 
     @Override

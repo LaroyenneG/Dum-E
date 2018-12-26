@@ -259,7 +259,7 @@ public class ControllerRobotController extends AbstractRobotController implement
 
             case JOINT:
                 if (args.length < 3) {
-                    usage(LOCKER, "<number> <value>");
+                    usage(JOINT, "<number> <value>");
                 } else {
                     try {
                         int number = Integer.parseInt(args[1]) - 1;
@@ -282,14 +282,14 @@ public class ControllerRobotController extends AbstractRobotController implement
                         computeAndSleepAndDisplay();
 
                     } catch (NumberFormatException e) {
-                        usage(LOCKER, "<number> <value>");
+                        usage(JOINT, "<number> <value>");
                     }
                 }
                 break;
 
             case ORGAN:
                 if (args.length < 2) {
-                    usage(LOCKER, "<on/off>");
+                    usage(ORGAN, "<on/off>");
                 } else {
                     try {
                         boolean state;
@@ -304,7 +304,7 @@ public class ControllerRobotController extends AbstractRobotController implement
                         }
                         model.getTerminalOrgan().setAction(state);
                     } catch (NumberFormatException e) {
-                        usage(LOCKER, "<on/off>");
+                        usage(ORGAN, "<on/off>");
                     }
                 }
                 break;

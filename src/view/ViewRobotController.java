@@ -110,7 +110,7 @@ public class ViewRobotController extends javax.swing.JFrame {
                         " * Pour activer ou désactiver l’éclairage dans l’environnement 3 D, utilisez la commande \"light\" suivi de \"on\" ou \"off\".\n" +
                         " * Pour réinitialiser l’environnement 3D lancer la commande \"clear\" suivi de \"all\".\n" +
                         " * Pour modifier la valeur d'une articulation utilisez la commande \"joint\" suivi de la valeur à affecter.\n    Exemple : joint 2 0.5\n" +
-                        " * Pour dessiner une forme géométrique utiliser la commande \"draw\" suivi du nom de la forme (circle, ellipse, line, dume).\n"
+                        " * Pour dessiner une forme géométrique utiliser la commande \"draw\" suivi du nom de la forme (circle, ellipse, line, enisa).\n"
         );
     }
 
@@ -128,7 +128,11 @@ public class ViewRobotController extends javax.swing.JFrame {
     }
 
     public void printLineInConsole(String text) {
-        outTextArea.append(text + '\n');
+        printInConsole(text + "\n");
+    }
+
+    public void printInConsole(String text) {
+        outTextArea.append(text);
         autoScroller.release();
     }
 

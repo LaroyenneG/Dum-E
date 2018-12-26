@@ -33,11 +33,9 @@ public abstract class Element implements Cloneable {
 
     public abstract Transform3D transformation();
 
-    public Transform3D applyTransformation(Transform3D transform3D) {
+    public void applyTransformation(Transform3D transform3D) {
 
         setTransform3D(new Transform3D(transform3D));
-
-        return transform3D;
     }
 
     public void accept(ElementVisitor sv) {

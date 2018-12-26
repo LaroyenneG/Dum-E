@@ -25,7 +25,7 @@ public class Grapnel extends TerminalOrgan {
     }
 
     @Override
-    public Transform3D applyTransformation(Transform3D transform3D) {
+    public void applyTransformation(Transform3D transform3D) {
 
         super.applyTransformation(transform3D);
 
@@ -35,7 +35,6 @@ public class Grapnel extends TerminalOrgan {
             addPoint(new Point3d(data[3], data[7], data[11]));
         }
 
-        return transform3D;
     }
 
     @Override

@@ -81,6 +81,9 @@ public class App {
 
         printDumE();
 
+        System.out.println("Created by Laroyenne Guillaume, ENISISA student, on 27/12/2018");
+        System.out.println("You can getting sources on this link : https://github.com/LaroyenneG/Dum-E");
+
         Robot robot = new DumE();
 
         SwingUtilities.invokeLater(() -> {
