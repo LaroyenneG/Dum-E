@@ -21,6 +21,8 @@ public class Solver {
 
     private double step;
 
+    private Robot session;
+
     public Solver(Robot robot) {
 
         this.robot = robot;
@@ -30,6 +32,8 @@ public class Solver {
         for (int i = 0; i < lockJoints.length; i++) {
             lockJoints[i] = false;
         }
+
+        session = null;
 
         step = DEFAULT_STEP;
     }
@@ -146,7 +150,7 @@ public class Solver {
 
     public double[][] computeTrajectory(final Point3d destination) {
 
-        Robot subject = (Robot) this.robot.clone();
+        Robot subject = getSubject();
 
         if (distance(subject, destination) <= MINIMAL_DISTANCE) {  // First building
             return new double[0][0];
@@ -216,12 +220,24 @@ public class Solver {
 
     public double[] reachDirectlyPoint(Point3d destination) {
 
-        Robot subject = (Robot) this.robot.clone();
+        Robot subject = getSubject();
 
         if (distance(subject, destination) <= MINIMAL_DISTANCE) {  // First building
             return new double[0];
         }
 
         return compute(subject, destination);
+    }
+
+    public void startSession() {
+        session = (Robot) this.robot.clone();
+    }
+
+    public void closeSession() {
+        session = null;
+    }
+
+    private Robot getSubject() {
+        return (session == null) ? (Robot) this.robot.clone() : session;
     }
 }

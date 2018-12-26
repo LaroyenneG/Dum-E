@@ -13,6 +13,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.security.SecureRandom;
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class AbstractRobotController {
 
@@ -36,13 +38,8 @@ public abstract class AbstractRobotController {
         this.viewRobotController = viewRobotController;
     }
 
-    private synchronized Solver getSolver() {
-
-        if (solver == null) {
-            solver = new Solver(model);
-        }
-
-        return solver;
+    protected static synchronized double getStep() {
+        return step;
     }
 
     protected static boolean myRandom(int v) {
@@ -56,27 +53,80 @@ public abstract class AbstractRobotController {
         return result;
     }
 
+    protected static synchronized void setStep(double step) {
+        AbstractRobotController.step = step;
+    }
+
+    private synchronized Solver getSolver() {
+
+        if (solver == null) {
+            solver = new Solver(model);
+        }
+
+        solver.setStep(getStep());
+
+        return solver;
+    }
+
     protected void testAllJoints(double step) {
 
-        viewRobotController.addTextInConsole("Test is running...");
+        viewRobotController.printLineInConsole("Test is running...");
 
         Joint[] joints = model.getJoints();
 
         for (int i = 0; i < joints.length; i++) {
-            jointsTest(step, i);
+            testJoint(step, i);
         }
     }
 
-    protected void jointsTest(double step, int number) {
+    protected void computeAndSleepAndDisplay() {
+
+        Thread[] threads = new Thread[2];
+
+        threads[0] = new Thread(() -> model.build());
+
+        threads[1] = new Thread(() -> {
+            try {
+                Thread.sleep(CLOCK);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+
+        for (Thread thread : threads) {
+            thread.start();
+        }
+
+        for (Thread thread : threads) {
+            try {
+                thread.join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+        displayView();
+    }
+
+    protected void displayView() {
+
+        ElementVirtualization virtualization = new ElementVirtualization();
+
+        model.accept(virtualization);
+
+        view.setNewScene(virtualization.getResult());
+    }
+
+    protected void testJoint(double step, int number) {
 
         Joint[] joints = model.getJoints();
 
         if (number >= joints.length || number < 0) {
-            viewRobotController.addTextInConsole("Invalid joint number value");
+            viewRobotController.printLineInConsole("Invalid joint number value");
             return;
         }
 
-        viewRobotController.addTextInConsole("Test joint number " + (number + 1));
+        viewRobotController.printLineInConsole("Test joint number " + (number + 1));
 
         Joint joint = joints[number];
 
@@ -136,7 +186,7 @@ public abstract class AbstractRobotController {
                 if (v < joints[j].max && v > joints[j].min) {
                     joints[j].setValue(v);
                 } else {
-                    viewRobotController.addTextInConsole("bad parameters" + v);
+                    viewRobotController.printLineInConsole("Error, step is probably too big");
                     return;
                 }
             }
@@ -151,57 +201,9 @@ public abstract class AbstractRobotController {
         }
     }
 
-    protected void computeAndSleepAndDisplay() {
-
-        Thread[] threads = new Thread[2];
-
-        threads[0] = new Thread(() -> model.build());
-
-        threads[1] = new Thread(() -> {
-            try {
-                Thread.sleep(CLOCK);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        });
-
-        for (Thread thread : threads) {
-            thread.start();
-        }
-
-        for (Thread thread : threads) {
-            try {
-                thread.join();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-
-        displayView();
-    }
-
-    protected void displayView() {
-
-        ElementVirtualization virtualization = new ElementVirtualization();
-
-        model.accept(virtualization);
-
-        view.setNewScene(virtualization.getResult());
-    }
-
-    public static synchronized void setStep(double step) {
-        AbstractRobotController.step = step;
-    }
-
-    public static synchronized double getStep() {
-        return step;
-    }
-
     protected boolean terminalOrganGotoPoint(Point3d point) {
 
         Solver solver = getSolver();
-
-        solver.setStep(getStep());
 
         double[][] solutions = solver.computeTrajectory(point);
 
@@ -209,16 +211,7 @@ public abstract class AbstractRobotController {
             return true;
         }
 
-        final Joint[] joints = model.getJoints();
-
-        for (double[] solution : solutions) {
-
-            for (int i = 0; i < joints.length; i++) {
-                joints[i].setValue(solution[i]);
-            }
-
-            computeAndSleepAndDisplay();
-        }
+        solutionsReader(solutions);
 
         return false;
     }
@@ -227,28 +220,27 @@ public abstract class AbstractRobotController {
 
         Solver solver = getSolver();
 
-        solver.setStep(getStep());
-
         double[] solution = solver.reachDirectlyPoint(point);
 
         if (solution == null) {
             return true;
         }
 
-        final Joint[] joints = model.getJoints();
-
-        for (int i = 0; i < solution.length; i++) {
-            joints[i].setValue(solution[i]);
-        }
-
-        computeAndSleepAndDisplay();
+        putSolution(solution);
 
         return false;
     }
 
     protected void automate(InputStream stream) throws IOException {
 
+        final Solver solver = getSolver();
+        solver.startSession();
+
+        viewRobotController.printLineInConsole("Compute in process...");
+
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(stream));
+
+        List<double[][]> travel = new ArrayList<>();
 
         String line;
         while ((line = bufferedReader.readLine()) != null) {
@@ -256,8 +248,9 @@ public abstract class AbstractRobotController {
             String[] parameters = line.split(" ");
 
             if (parameters.length != 3) {
-                viewRobotController.addTextInConsole("Invalid data format");
-                return;
+                viewRobotController.printLineInConsole("Invalid data format");
+                travel.clear();
+                break;
             }
 
             try {
@@ -267,21 +260,62 @@ public abstract class AbstractRobotController {
 
                 Point3d point = new Point3d(x, y, z);
 
-                if (terminalOrganGotoPoint(point)) {
-                    viewRobotController.addTextInConsole("Can't set terminal organ at this position " + point);
-                    return;
+                double[][] solutions = null;
+
+                if (travel.size() <= 0) {
+                    double[] solution = solver.reachDirectlyPoint(point);
+                    if (solution != null) {
+                        solutions = new double[1][];
+                        solutions[0] = solution;
+                    }
+                } else {
+                    solutions = solver.computeTrajectory(point);
                 }
+
+                if (solutions == null) {
+                    viewRobotController.printLineInConsole("C'ant compute travel");
+                    travel.clear();
+                    break;
+                }
+
+                travel.add(solutions);
+
             } catch (NumberFormatException e) {
-                viewRobotController.addTextInConsole("Invalid number format");
-                return;
+                viewRobotController.printLineInConsole("Invalid number format");
+                travel.clear();
+                break;
             }
         }
+
+        solver.closeSession();
+
+        for (double[][] solutions : travel) {
+            solutionsReader(solutions);
+        }
+    }
+
+    private void solutionsReader(double[][] solutions) {
+
+        for (double[] solution : solutions) {
+            putSolution(solution);
+        }
+    }
+
+    private void putSolution(double[] solution) {
+
+        Joint[] joints = model.getJoints();
+
+        for (int i = 0; i < joints.length; i++) {
+            joints[i].setValue(solution[i]);
+        }
+
+        computeAndSleepAndDisplay();
     }
 
     protected void jointLocker(int number, boolean state) {
 
         if (number < 0 || number >= model.jointsNumber()) {
-            viewRobotController.addTextInConsole("Invalid joint number");
+            viewRobotController.printLineInConsole("Invalid joint number");
             return;
         }
 

@@ -17,18 +17,15 @@ public class ControllerRobotController extends AbstractRobotController implement
 
     private static final Set<String> COMMANDS = new HashSet<>();
 
-    private static final String DISPLAY = "display";
     private static final String AXIS = "axis";
     private static final String LIGHT = "light";
     private static final String ORBIT = "orbit";
     private static final String CLEAR = "clear";
     private static final String EXIT = "exit";
-    private static final String BASIC = "basic";
     private static final String AUTO = "auto";
     private static final String ANIMATION = "animation";
     private static final String HELP = "help";
     private static final String MATRIX = "matrix";
-    private static final String BUILD = "build";
     private static final String JOINTS_TEST = "test";
     private static final String STEP = "step";
     private static final String GO = "go";
@@ -41,18 +38,15 @@ public class ControllerRobotController extends AbstractRobotController implement
 
 
     static {
-        COMMANDS.add(DISPLAY);
         COMMANDS.add(AXIS);
         COMMANDS.add(LIGHT);
         COMMANDS.add(ORBIT);
         COMMANDS.add(CLEAR);
         COMMANDS.add(EXIT);
-        COMMANDS.add(BASIC);
         COMMANDS.add(AUTO);
         COMMANDS.add(ANIMATION);
         COMMANDS.add(HELP);
         COMMANDS.add(MATRIX);
-        COMMANDS.add(BUILD);
         COMMANDS.add(JOINTS_TEST);
         COMMANDS.add(STEP);
         COMMANDS.add(GO);
@@ -70,31 +64,23 @@ public class ControllerRobotController extends AbstractRobotController implement
     }
 
     private void usage(String cmd, String args) {
-        viewRobotController.addTextInConsole("Usage : " + cmd + " " + args);
+        viewRobotController.printLineInConsole("Usage : " + cmd + " " + args);
     }
 
     private void execute(String line) {
 
-        String[] args = line.split(" ");
+        String[] args = line.trim().split(" ");
 
         if (args.length < 1) {
             return;
         }
 
         if (!COMMANDS.contains(args[0])) {
-            viewRobotController.addTextInConsole("Unknown command " + args[0]);
+            viewRobotController.printLineInConsole("Unknown command " + args[0]);
             return;
         }
 
         switch (args[0]) {
-
-            case DISPLAY:
-                displayView();
-                break;
-
-            case BUILD:
-                model.build();
-                break;
 
             case LIGHT:
                 if (args.length < 2) {
@@ -166,12 +152,6 @@ public class ControllerRobotController extends AbstractRobotController implement
                 System.exit(0);
                 break;
 
-            case BASIC:
-                view.addOrbitBehavior();
-                view.addBackground();
-                view.addAxis();
-                break;
-
             case AUTO:
                 model.build();
                 view.addOrbitBehavior();
@@ -181,7 +161,7 @@ public class ControllerRobotController extends AbstractRobotController implement
                 break;
 
             case MATRIX:
-                viewRobotController.addTextInConsole(model.toString());
+                viewRobotController.printLineInConsole(model.toString());
                 break;
 
             case HELP:
@@ -192,14 +172,14 @@ public class ControllerRobotController extends AbstractRobotController implement
                     builder.append(cmd);
                     builder.append('\n');
                 }
-                viewRobotController.addTextInConsole(new String(builder));
+                viewRobotController.printLineInConsole(new String(builder));
                 break;
 
             case JOINTS_TEST:
                 try {
                     if (args.length >= 2) {
                         int number = Integer.parseInt(args[1]) - 1;
-                        jointsTest(getStep(), number);
+                        testJoint(getStep(), number);
                     } else {
                         testAllJoints(getStep());
                     }
@@ -228,7 +208,7 @@ public class ControllerRobotController extends AbstractRobotController implement
                         Point3d point3d = new Point3d(Double.parseDouble(args[1]), Double.parseDouble(args[2]), Double.parseDouble(args[3]));
 
                         if (terminalOrganGotoPoint(point3d)) {
-                            viewRobotController.addTextInConsole("Can't find solution...");
+                            viewRobotController.printLineInConsole("Can't find solution...");
                         }
                     } catch (NumberFormatException e) {
                         usage(GO, "<x> <y> <z>");
@@ -237,7 +217,7 @@ public class ControllerRobotController extends AbstractRobotController implement
                 break;
 
             case WHERE:
-                viewRobotController.addTextInConsole("The terminal organ of the robot is here : " + model.getTerminalOrganPosition());
+                viewRobotController.printLineInConsole("The terminal organ of the robot is here : " + model.getTerminalOrganPosition());
                 break;
 
             case DRAW:
@@ -249,7 +229,7 @@ public class ControllerRobotController extends AbstractRobotController implement
                         automate(inputStream);
                         inputStream.close();
                     } catch (IOException e) {
-                        viewRobotController.addTextInConsole("Can't read file '" + args[1] + "'");
+                        viewRobotController.printLineInConsole("Can't read file '" + args[1] + "'");
                     }
                 }
                 break;
@@ -288,12 +268,12 @@ public class ControllerRobotController extends AbstractRobotController implement
                         Joint[] joints = model.getJoints();
 
                         if (number < 0 || number >= joints.length) {
-                            viewRobotController.addTextInConsole("Invalid joint number");
+                            viewRobotController.printLineInConsole("Invalid joint number");
                             return;
                         }
 
                         if (joints[number].max <= value || value <= joints[number].min) {
-                            viewRobotController.addTextInConsole("Invalid value, value must be between [" + joints[number].min + ", " + joints[number].max + "]");
+                            viewRobotController.printLineInConsole("Invalid value, value must be between [" + joints[number].min + ", " + joints[number].max + "]");
                             return;
                         }
 
@@ -337,7 +317,7 @@ public class ControllerRobotController extends AbstractRobotController implement
                         Point3d point3d = new Point3d(Double.parseDouble(args[1]), Double.parseDouble(args[2]), Double.parseDouble(args[3]));
 
                         if (terminalOrganReachPoint(point3d)) {
-                            viewRobotController.addTextInConsole("Can't find solution...");
+                            viewRobotController.printLineInConsole("Can't find solution...");
                         }
                     } catch (NumberFormatException e) {
                         usage(GO, "<x> <y> <z>");
