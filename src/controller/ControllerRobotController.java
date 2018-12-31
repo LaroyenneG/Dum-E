@@ -35,6 +35,7 @@ public class ControllerRobotController extends AbstractRobotController implement
     private static final String JOINT = "joint";
     private static final String ORGAN = "organ";
     private static final String REACH = "reach";
+    private static final String VALUES = "values";
 
 
     static {
@@ -56,6 +57,7 @@ public class ControllerRobotController extends AbstractRobotController implement
         COMMANDS.add(JOINT);
         COMMANDS.add(ORGAN);
         COMMANDS.add(REACH);
+        COMMANDS.add(VALUES);
     }
 
 
@@ -323,6 +325,20 @@ public class ControllerRobotController extends AbstractRobotController implement
                         usage(GO, "<x> <y> <z>");
                     }
                 }
+                break;
+
+            case VALUES:
+                Joint[] joints = model.getJoints();
+                StringBuilder stringBuilder = new StringBuilder();
+                stringBuilder.append("[");
+                for (int j = 0; j < joints.length; j++) {
+                    stringBuilder.append("q").append(j + 1).append("=").append(joints[j].getValue());
+                    if (j < joints.length - 1) {
+                        stringBuilder.append(", ");
+                    }
+                }
+                stringBuilder.append("]");
+                viewRobotController.printLineInConsole(new String(stringBuilder));
                 break;
 
             default:

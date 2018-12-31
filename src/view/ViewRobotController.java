@@ -104,6 +104,7 @@ public class ViewRobotController extends javax.swing.JFrame {
                         " * Pour changer le pas de traitement du robot utiliser la commande \"step\" suivi de la valeur à affecter.\n    Exemple : step 0.01\n" +
                         " * Pour connaitre l'emplacement actuel de l’organe terminal utiliser la commande \"where\".\n" +
                         " * Pour activer ou désactiver le traceur de mouvement de l'organe terminal. Lancer respectivement les commandes : organ on ou organ off\n" +
+                        " * Pour connaitre la valeur de toutes les articulations, utilisez la commande : \"values\"" +
                         "\n3) Commandes avancées\n" +
                         " * Pour visualiser ou non les axes 3D X, Y, Z utilisez la commande \"axis\" suivi de \"on\" ou \"off\".\n" +
                         " * Pour activer ou désactiver la navigation dans l'environnement 3D utilisez la commande \"orbit\" suivi de \"on\" ou \"off\".\n" +
