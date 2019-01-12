@@ -8,8 +8,8 @@ import view.ViewRobotController;
 import javax.vecmath.Point3d;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -228,8 +228,9 @@ public class ControllerRobotController extends AbstractRobotController implement
                     usage(DRAW, "<file name>");
                 } else {
                     try {
-                        FileInputStream inputStream = new FileInputStream("assets/" + args[1] + ".robot");
+                        InputStream inputStream = ClassLoader.getSystemClassLoader().getResourceAsStream("assets/" + args[1] + ".robot");
                         automate(inputStream);
+                        assert inputStream != null;
                         inputStream.close();
                     } catch (IOException e) {
                         viewRobotController.printLineInConsole("Can't read file '" + args[1] + "'");
