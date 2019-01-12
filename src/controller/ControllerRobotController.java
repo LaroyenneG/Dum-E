@@ -314,7 +314,7 @@ public class ControllerRobotController extends AbstractRobotController implement
 
             case REACH:
                 if (args.length < 4) {
-                    usage(GO, "<x> <y> <z>");
+                    usage(REACH, "<x> <y> <z>");
                 } else {
                     try {
                         Point3d point3d = new Point3d(Double.parseDouble(args[1]), Double.parseDouble(args[2]), Double.parseDouble(args[3]));
@@ -323,7 +323,7 @@ public class ControllerRobotController extends AbstractRobotController implement
                             viewRobotController.printLineInConsole("Can't find solution...");
                         }
                     } catch (NumberFormatException e) {
-                        usage(GO, "<x> <y> <z>");
+                        usage(REACH, "<x> <y> <z>");
                     }
                 }
                 break;
