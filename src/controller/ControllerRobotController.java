@@ -228,7 +228,7 @@ public class ControllerRobotController extends AbstractRobotController implement
                     usage(DRAW, "<file name>");
                 } else {
                     try {
-                        FileInputStream inputStream = new FileInputStream("asset/" + args[1] + ".robot");
+                        FileInputStream inputStream = new FileInputStream("assets/" + args[1] + ".robot");
                         automate(inputStream);
                         inputStream.close();
                     } catch (IOException e) {
