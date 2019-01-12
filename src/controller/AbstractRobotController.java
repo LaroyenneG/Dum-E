@@ -315,6 +315,10 @@ public abstract class AbstractRobotController {
 
         Joint[] joints = model.getJoints();
 
+        if (joints.length != solution.length) {
+            return;
+        }
+
         for (int i = 0; i < joints.length; i++) {
             joints[i].setValue(solution[i]);
         }
