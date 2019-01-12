@@ -63,6 +63,7 @@ public class ControllerRobotController extends AbstractRobotController implement
 
     public ControllerRobotController(Robot model, RobotViewer view, ViewRobotController viewRobotController) {
         super(model, view, viewRobotController);
+        computeAndSleepAndDisplay();
     }
 
     private void usage(String cmd, String args) {

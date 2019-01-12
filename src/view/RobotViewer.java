@@ -45,6 +45,14 @@ public class RobotViewer extends JFrame {
         setLocationRelativeTo(null);
         setResizable(true);
         setVisible(true);
+
+        defaultSetUpConfiguration();
+    }
+
+    private void defaultSetUpConfiguration() {
+        addAxis();
+        addBackground();
+        addOrbitBehavior();
     }
 
     private void createSimpleUniverse() {
