@@ -2,12 +2,16 @@ package controller;
 
 import model.element.robot.Robot;
 import view.RobotViewer;
-import view.ViewRobotController;
+
+import java.io.InputStream;
+import java.io.PrintStream;
 
 
 public class ControlGroup {
-    public ControlGroup(Robot robot, RobotViewer view, ViewRobotController viewRobotController) {
-        ControllerRobotController controllerRobotController = new ControllerRobotController(robot, view, viewRobotController);
-        viewRobotController.setActionEvent(controllerRobotController);
+    public ControlGroup(Robot robot, RobotViewer view, InputStream inputStream, PrintStream outputStream) {
+
+        Thread controllerRobotController = new Thread(new ControllerRobotController(robot, view, inputStream, outputStream));
+
+        controllerRobotController.start();
     }
 }

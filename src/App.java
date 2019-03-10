@@ -2,7 +2,6 @@ import controller.ControlGroup;
 import model.dume.DumE;
 import model.element.robot.Robot;
 import view.RobotViewer;
-import view.ViewRobotController;
 
 import javax.swing.*;
 
@@ -74,22 +73,18 @@ public class App {
                         "                                                `--`                                                  ";
 
 
-        System.out.println(DUM_E_IMAGE);
+        System.err.println(DUM_E_IMAGE);
     }
 
     public static void main(String[] args) {
 
         printDumE();
 
-        System.out.println("Created by Laroyenne Guillaume, ENISISA student, on 27/12/2018");
-        System.out.println("You can getting sources on this link : https://github.com/LaroyenneG/Dum-E");
-
-        Robot robot = new DumE();
+        final Robot robot = new DumE();
 
         SwingUtilities.invokeLater(() -> {
             RobotViewer view = new RobotViewer();
-            ViewRobotController viewRobotController = new ViewRobotController();
-            new ControlGroup(robot, view, viewRobotController);
+            new ControlGroup(robot, view, System.in, System.out);
         });
     }
 }
