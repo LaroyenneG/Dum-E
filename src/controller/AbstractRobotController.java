@@ -11,7 +11,7 @@ import javax.vecmath.Vector3d;
 
 public abstract class AbstractRobotController {
 
-    private static final int CLOCK = 50;
+    protected static final int CLOCK = 50;
     public static final double DEFAULT_STEP = 0.02;
 
     private static double step = DEFAULT_STEP;

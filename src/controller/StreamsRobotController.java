@@ -8,6 +8,7 @@ import java.io.*;
 
 public class StreamsRobotController extends AbstractRobotController implements Runnable {
 
+    private static final double MAX_DISTANCE = 1000.0;
 
     private InputStream inputStream;
     private PrintStream outputStream;
@@ -32,12 +33,6 @@ public class StreamsRobotController extends AbstractRobotController implements R
             try {
                 changeJoint(joint, value);
                 checkPosition();
-
-                final double distance = distanceWithGround();
-
-                if (distance < 1.0) {
-                    outputStream.println(distance);
-                }
             } catch (DolorisException e) {
                 e.apply(outputStream);
             }
@@ -46,6 +41,24 @@ public class StreamsRobotController extends AbstractRobotController implements R
 
     @Override
     public void run() {
+
+        Thread sensorsThread = new Thread(() -> {
+
+            while (true) {
+
+                final double distance = distanceWithGround();
+
+                outputStream.println((distance > MAX_DISTANCE) ? MAX_DISTANCE : distance);
+
+                try {
+                    Thread.sleep(CLOCK);
+                } catch (InterruptedException e) {
+                    break;
+                }
+            }
+        });
+
+        sensorsThread.start();
 
         try {
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
@@ -60,5 +73,7 @@ public class StreamsRobotController extends AbstractRobotController implements R
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        sensorsThread.interrupt();
     }
 }
