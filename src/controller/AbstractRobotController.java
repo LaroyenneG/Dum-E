@@ -42,7 +42,7 @@ public abstract class AbstractRobotController {
 
         Joint joint = model.getJoints()[jointId];
 
-        final double nValue = joint.getValue() * value;
+        final double nValue = joint.getValue() + step * value;
 
         joint.setValueSafe(nValue);
 
