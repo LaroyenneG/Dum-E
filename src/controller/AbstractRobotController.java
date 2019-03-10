@@ -6,8 +6,9 @@ import model.element.robot.Robot;
 import view.ElementVirtualization;
 import view.RobotViewer;
 
-public abstract class AbstractRobotController {
+import javax.vecmath.Point3d;
 
+public abstract class AbstractRobotController {
 
     private static final int CLOCK = 50;
     public static final double DEFAULT_STEP = 0.02;
@@ -31,17 +32,17 @@ public abstract class AbstractRobotController {
         AbstractRobotController.step = step;
     }
 
-    protected void changeJoint(double n, double v) throws DolorisException {
+    protected void changeJoint(double range, double value) throws DolorisException {
 
         final int jointNumber = model.jointsNumber();
 
-        final int tmp = (int) (Math.abs(n) * jointNumber % jointNumber);
+        final int tmp = (int) (Math.abs(range) * jointNumber % jointNumber);
 
         int jointId = (tmp < 0) ? tmp + jointNumber : tmp;
 
         Joint joint = model.getJoints()[jointId];
 
-        final double nValue = joint.getValue() * v;
+        final double nValue = joint.getValue() * value;
 
         joint.setValueSafe(nValue);
 
@@ -50,6 +51,19 @@ public abstract class AbstractRobotController {
         }
     }
 
+    protected void checkPosition() throws DolorisException {
+
+        Joint[] joints = model.getJoints();
+
+        for (Joint joint : joints) {
+
+            Point3d position = joint.getPosition();
+
+            if (position.y < 0) {
+                throw new DolorisException();
+            }
+        }
+    }
 
     protected void computeAndSleepAndDisplay() {
 

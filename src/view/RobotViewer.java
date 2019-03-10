@@ -12,7 +12,7 @@ import java.awt.*;
 
 public class RobotViewer extends JFrame {
 
-    private static final float MAXIMUM_RADIUS_OF_ACTION = 0.6f;
+    private static final float MAXIMUM_RADIUS_OF_ACTION = 0.7f;
 
     private static final int DEFAULT_WIDTH = 1000;
     private static final int DEFAULT_HEIGHT = (int) (DEFAULT_WIDTH / 1.61803398875);
@@ -94,6 +94,7 @@ public class RobotViewer extends JFrame {
         ColoringAttributes coloringAttributes = new ColoringAttributes();
         coloringAttributes.setColor(new Color3f(Color.lightGray));
         appearance.setColoringAttributes(coloringAttributes);
+        appearance.setTransparencyAttributes(new TransparencyAttributes(TransparencyAttributes.NICEST, 0.7F));
 
         cylinder.setAppearance(appearance);
 

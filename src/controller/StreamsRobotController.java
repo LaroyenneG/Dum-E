@@ -31,6 +31,7 @@ public class StreamsRobotController extends AbstractRobotController implements R
 
             try {
                 changeJoint(joint, value);
+                checkPosition();
             } catch (DolorisException e) {
                 e.apply(outputStream);
             }
