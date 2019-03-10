@@ -42,18 +42,23 @@ public class StreamsRobotController extends AbstractRobotController implements R
     @Override
     public void run() {
 
+        final boolean[] run = {true};
+
         Thread sensorsThread = new Thread(() -> {
 
-            while (true) {
+            while (run[0]) {
 
-                final double distance = distanceWithGround();
+                synchronized (run) {
 
-                outputStream.println((distance > MAX_DISTANCE) ? MAX_DISTANCE : distance);
+                    final double distance = distanceWithGround();
+
+                    outputStream.println((distance > MAX_DISTANCE) ? MAX_DISTANCE : distance);
+                }
 
                 try {
                     Thread.sleep(CLOCK);
                 } catch (InterruptedException e) {
-                    break;
+                    e.printStackTrace();
                 }
             }
         });
@@ -66,14 +71,17 @@ public class StreamsRobotController extends AbstractRobotController implements R
             String line = null;
 
             while ((line = bufferedReader.readLine()) != null) {
-                execute(line);
-                computeAndSleepAndDisplay();
+
+                synchronized (run) {
+                    execute(line);
+                    computeAndSleepAndDisplay();
+                }
             }
 
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        sensorsThread.interrupt();
+        run[0] = false;
     }
 }
