@@ -7,6 +7,7 @@ import view.ElementVirtualization;
 import view.RobotViewer;
 
 import javax.vecmath.Point3d;
+import javax.vecmath.Vector3d;
 
 public abstract class AbstractRobotController {
 
@@ -26,7 +27,6 @@ public abstract class AbstractRobotController {
     protected static synchronized double getStep() {
         return step;
     }
-
 
     protected static synchronized void setStep(double step) {
         AbstractRobotController.step = step;
@@ -49,6 +49,18 @@ public abstract class AbstractRobotController {
         if (nValue >= joint.max || nValue <= joint.min) {
             throw new DolorisException();
         }
+    }
+
+    protected double distanceWithGround() {
+
+        Vector3d vector = model.getTerminalOrgan().getVector();
+        Point3d position = model.getTerminalOrgan().getPosition();
+
+        double t = -position.y / vector.y;
+
+        Point3d ground = new Point3d(vector.x * t + position.x, vector.y * t + position.y, vector.z * t + position.z);
+
+        return position.distance(ground);
     }
 
     protected void checkPosition() throws DolorisException {

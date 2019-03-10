@@ -32,6 +32,12 @@ public class StreamsRobotController extends AbstractRobotController implements R
             try {
                 changeJoint(joint, value);
                 checkPosition();
+
+                final double distance = distanceWithGround();
+
+                if (distance < 1.0) {
+                    outputStream.println();
+                }
             } catch (DolorisException e) {
                 e.apply(outputStream);
             }
@@ -42,13 +48,13 @@ public class StreamsRobotController extends AbstractRobotController implements R
     public void run() {
 
         try {
-
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
 
             String line = null;
 
             while ((line = bufferedReader.readLine()) != null) {
                 execute(line);
+                computeAndSleepAndDisplay();
             }
 
         } catch (IOException e) {
