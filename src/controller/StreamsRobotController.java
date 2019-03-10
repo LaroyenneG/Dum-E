@@ -1,16 +1,18 @@
 package controller;
 
+import ia.DolorisException;
 import model.element.robot.Robot;
 import view.RobotViewer;
 
 import java.io.*;
 
-public class ControllerRobotController extends AbstractRobotController implements Runnable {
+public class StreamsRobotController extends AbstractRobotController implements Runnable {
+
 
     private InputStream inputStream;
     private PrintStream outputStream;
 
-    public ControllerRobotController(Robot model, RobotViewer view, InputStream inputStream, PrintStream outputStream) {
+    public StreamsRobotController(Robot model, RobotViewer view, InputStream inputStream, PrintStream outputStream) {
         super(model, view);
         computeAndSleepAndDisplay();
         this.inputStream = inputStream;
@@ -22,7 +24,17 @@ public class ControllerRobotController extends AbstractRobotController implement
 
         String[] args = line.trim().split(" ");
 
+        if (args.length == 2) {
 
+            double joint = Double.parseDouble(args[0]);
+            double value = Double.parseDouble(args[1]);
+
+            try {
+                changeJoint(joint, value);
+            } catch (DolorisException e) {
+                e.apply(outputStream);
+            }
+        }
     }
 
     @Override

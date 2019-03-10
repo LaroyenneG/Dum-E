@@ -1,5 +1,7 @@
 package controller;
 
+import ia.DolorisException;
+import model.element.connexion.joint.Joint;
 import model.element.robot.Robot;
 import view.ElementVirtualization;
 import view.RobotViewer;
@@ -27,6 +29,25 @@ public abstract class AbstractRobotController {
 
     protected static synchronized void setStep(double step) {
         AbstractRobotController.step = step;
+    }
+
+    protected void changeJoint(double n, double v) throws DolorisException {
+
+        final int jointNumber = model.jointsNumber();
+
+        final int tmp = (int) (Math.abs(n) * jointNumber % jointNumber);
+
+        int jointId = (tmp < 0) ? tmp + jointNumber : tmp;
+
+        Joint joint = model.getJoints()[jointId];
+
+        final double nValue = joint.getValue() * v;
+
+        joint.setValueSafe(nValue);
+
+        if (nValue >= joint.max || nValue <= joint.min) {
+            throw new DolorisException();
+        }
     }
 
 

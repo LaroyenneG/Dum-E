@@ -1,6 +1,7 @@
 package view;
 
 import com.sun.j3d.utils.behaviors.vp.OrbitBehavior;
+import com.sun.j3d.utils.geometry.Cylinder;
 import com.sun.j3d.utils.universe.SimpleUniverse;
 
 import javax.media.j3d.*;
@@ -10,6 +11,8 @@ import javax.vecmath.Point3d;
 import java.awt.*;
 
 public class RobotViewer extends JFrame {
+
+    private static final float MAXIMUM_RADIUS_OF_ACTION = 0.6f;
 
     private static final int DEFAULT_WIDTH = 1000;
     private static final int DEFAULT_HEIGHT = (int) (DEFAULT_WIDTH / 1.61803398875);
@@ -21,6 +24,7 @@ public class RobotViewer extends JFrame {
     private BranchGroup axis;
     private BranchGroup background;
     private BranchGroup scene;
+    private BranchGroup ground;
 
     private OrbitBehavior orbitBehavior;
 
@@ -35,6 +39,7 @@ public class RobotViewer extends JFrame {
         createBackground();
         createOrbitBehavior();
         createAxis();
+        createGround();
 
         scene = new BranchGroup();
 
@@ -53,6 +58,7 @@ public class RobotViewer extends JFrame {
         addAxis();
         addBackground();
         addOrbitBehavior();
+        addGround();
     }
 
     private void createSimpleUniverse() {
@@ -78,6 +84,23 @@ public class RobotViewer extends JFrame {
 
         orbitBehavior = new OrbitBehavior(canvas3D);
         orbitBehavior.setSchedulingBounds(new BoundingSphere(new Point3d(), Double.MAX_VALUE));
+    }
+
+    private void createGround() {
+
+        Cylinder cylinder = new Cylinder(MAXIMUM_RADIUS_OF_ACTION, Float.MIN_NORMAL);
+
+        Appearance appearance = new Appearance();
+        ColoringAttributes coloringAttributes = new ColoringAttributes();
+        coloringAttributes.setColor(new Color3f(Color.lightGray));
+        appearance.setColoringAttributes(coloringAttributes);
+
+        cylinder.setAppearance(appearance);
+
+        ground = new BranchGroup();
+        ground.setCapability(BranchGroup.ALLOW_DETACH);
+        ground.addChild(cylinder);
+        ground.compile();
     }
 
     private void createAxis() {
@@ -149,8 +172,17 @@ public class RobotViewer extends JFrame {
         simpleUniverse.addBranchGraph(background);
     }
 
+    public void addGround() {
+        removeGround();
+        simpleUniverse.addBranchGraph(ground);
+    }
+
     public void removeAxis() {
         axis.detach();
+    }
+
+    public void removeGround() {
+        ground.detach();
     }
 
     public void addAxis() {
