@@ -36,7 +36,7 @@ public class StreamsRobotController extends AbstractRobotController implements R
                 final double distance = distanceWithGround();
 
                 if (distance < 1.0) {
-                    outputStream.println();
+                    outputStream.println(distance);
                 }
             } catch (DolorisException e) {
                 e.apply(outputStream);
