@@ -242,7 +242,7 @@ public abstract class AbstractRobotController {
         final Solver solver = getSolver();
         solver.startSession();
 
-        viewRobotController.printLineInConsole("Compute in process :");
+        viewRobotController.printLineInConsole("Calculating :");
 
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(stream));
 
