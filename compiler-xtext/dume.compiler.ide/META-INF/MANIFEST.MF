@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Automatic-Module-Name: dume.compiler.ide
+Bundle-ManifestVersion: 2
+Bundle-Name: dume.compiler.ide
+Bundle-Vendor: My Company
+Bundle-Version: 1.0.0.qualifier
+Bundle-SymbolicName: dume.compiler.ide; singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: dume.compiler,
+ org.eclipse.xtext.ide,
+ org.eclipse.xtext.xbase.ide,
+ org.antlr.runtime;bundle-version="[3.2.0,3.2.1)"
+Bundle-RequiredExecutionEnvironment: JavaSE-10
+Export-Package: dume.compiler.ide.contentassist.antlr,
+ dume.compiler.ide.contentassist.antlr.internal
