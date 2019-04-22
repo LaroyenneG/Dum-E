@@ -8,6 +8,8 @@ import view.ViewRobotController;
 import javax.vecmath.Point3d;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashSet;
@@ -36,6 +38,7 @@ public class ControllerRobotController extends AbstractRobotController implement
     private static final String ORGAN = "organ";
     private static final String REACH = "reach";
     private static final String VALUES = "values";
+    private static final String LOAD = "load";
 
 
     static {
@@ -58,6 +61,7 @@ public class ControllerRobotController extends AbstractRobotController implement
         COMMANDS.add(ORGAN);
         COMMANDS.add(REACH);
         COMMANDS.add(VALUES);
+        COMMANDS.add(LOAD);
     }
 
 
@@ -69,6 +73,25 @@ public class ControllerRobotController extends AbstractRobotController implement
     private void usage(String cmd, String args) {
         viewRobotController.printLineInConsole("Usage : " + cmd + " " + args);
     }
+
+    private void loadFile(String filePath) {
+
+        try {
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(filePath));
+
+            String line;
+
+            while ((line = bufferedReader.readLine()) != null) {
+                execute(line);
+            }
+
+            bufferedReader.close();
+
+        } catch (IOException e) {
+            viewRobotController.printLineInConsole(e.getMessage());
+        }
+    }
+
 
     private void execute(String line) {
 
@@ -84,6 +107,24 @@ public class ControllerRobotController extends AbstractRobotController implement
         }
 
         switch (args[0]) {
+
+            case LOAD:
+                if (args.length < 2) {
+                    usage(LOAD, "<file>");
+                } else {
+
+                    StringBuilder stringBuilder = new StringBuilder();
+
+                    for (int i = 1; i < args.length; i++) {
+                        stringBuilder.append(args[i]);
+                        if (i + 1 < args.length) {
+                            stringBuilder.append(' ');
+                        }
+                    }
+
+                    loadFile(new String(stringBuilder));
+                }
+                break;
 
             case LIGHT:
                 if (args.length < 2) {
@@ -302,7 +343,7 @@ public class ControllerRobotController extends AbstractRobotController implement
                         } else if (args[1].equals("off")) {
                             state = false;
                         } else {
-                            usage(LOCKER, "<on/off>");
+                            usage(ORGAN, "<on/off>");
                             return;
                         }
                         model.getTerminalOrgan().setAction(state);
@@ -344,7 +385,7 @@ public class ControllerRobotController extends AbstractRobotController implement
                 break;
 
             default:
-                throw new IllegalStateException("XD");
+                throw new IllegalStateException("Impossible happened");
         }
     }
 

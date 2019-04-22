@@ -18,6 +18,10 @@ import java.util.List;
 
 public abstract class AbstractRobotController {
 
+    public static final String COMMENT_CHAR = "#";
+
+    public static final String ORGAN_COMMAND = "organ";
+
     private static final SecureRandom SECURE_RANDOM = new SecureRandom();
 
     private static final int CLOCK = 50;
@@ -134,27 +138,27 @@ public abstract class AbstractRobotController {
 
         final int maxCycle = (joint.min == -Double.MAX_VALUE || joint.max == Double.MAX_VALUE) ? (int) (1 / step * Math.PI * 2) : Integer.MAX_VALUE;
 
-            int cycle = 0;
+        int cycle = 0;
 
-            for (double v = joint.getValue(); v > joint.min; v -= step, cycle++) {
+        for (double v = joint.getValue(); v > joint.min; v -= step, cycle++) {
 
-                joint.setValue(v);
-                computeAndSleepAndDisplay();
+            joint.setValue(v);
+            computeAndSleepAndDisplay();
 
-                if (cycle > maxCycle) {
-                    break;
-                }
+            if (cycle > maxCycle) {
+                break;
             }
+        }
 
-            for (double v = joint.getValue(); v < joint.max; v += step, cycle++) {
+        for (double v = joint.getValue(); v < joint.max; v += step, cycle++) {
 
-                joint.setValue(v);
-                computeAndSleepAndDisplay();
+            joint.setValue(v);
+            computeAndSleepAndDisplay();
 
-                if (cycle > maxCycle) {
-                    break;
-                }
+            if (cycle > maxCycle) {
+                break;
             }
+        }
     }
 
     protected void randomAnimation(int cycle, double step) {
@@ -249,49 +253,59 @@ public abstract class AbstractRobotController {
         List<double[][]> travel = new ArrayList<>();
 
         String line;
-        while ((line = bufferedReader.readLine()) != null && !line.equals("")) {
+        while ((line = bufferedReader.readLine()) != null) {
 
             viewRobotController.printInConsole("#");
 
             String[] parameters = line.trim().split(" ");
 
-            if (parameters.length != 3) {
-                viewRobotController.printLineInConsole("Invalid data format (" + line + ")");
-                travel.clear();
-                break;
-            }
+            if (parameters.length >= 1 && parameters[0].equals(COMMENT_CHAR)) {
+                /* nothing to do */
+            } else if (parameters.length == 2 && parameters[0].equals(ORGAN_COMMAND)) {
 
-            try {
-                double x = Double.parseDouble(parameters[0]);
-                double y = Double.parseDouble(parameters[1]);
-                double z = Double.parseDouble(parameters[2]);
-
-                Point3d point = new Point3d(x, y, z);
-
-                double[][] solutions = null;
-
-                if (travel.size() <= 0) {
-                    double[] solution = solver.reachDirectlyPoint(point);
-                    if (solution != null) {
-                        solutions = new double[1][];
-                        solutions[0] = solution;
-                    }
+                if (parameters[1].equals("on")) {
+                    model.getTerminalOrgan().setAction(true);
                 } else {
-                    solutions = solver.computeTrajectory(point);
+                    model.getTerminalOrgan().setAction(false);
                 }
 
-                if (solutions == null) {
-                    viewRobotController.printLineInConsole("C'ant compute travel");
+            } else if (parameters.length == 3) {
+
+                try {
+                    double x = Double.parseDouble(parameters[0]);
+                    double y = Double.parseDouble(parameters[1]);
+                    double z = Double.parseDouble(parameters[2]);
+
+                    Point3d point = new Point3d(x, y, z);
+
+                    double[][] solutions = null;
+
+                    if (travel.size() <= 0) {
+                        double[] solution = solver.reachDirectlyPoint(point);
+                        if (solution != null) {
+                            solutions = new double[1][];
+                            solutions[0] = solution;
+                        }
+                    } else {
+                        solutions = solver.computeTrajectory(point);
+                    }
+
+                    if (solutions == null) {
+                        viewRobotController.printLineInConsole("Can't compute travel");
+                        travel.clear();
+                        break;
+                    }
+
+                    travel.add(solutions);
+
+                } catch (NumberFormatException e) {
+                    viewRobotController.printLineInConsole("Invalid number format");
                     travel.clear();
                     break;
                 }
-
-                travel.add(solutions);
-
-            } catch (NumberFormatException e) {
-                viewRobotController.printLineInConsole("Invalid number format");
+            } else {
+                viewRobotController.printLineInConsole("Invalid data format (" + line + ")");
                 travel.clear();
-                break;
             }
         }
 
