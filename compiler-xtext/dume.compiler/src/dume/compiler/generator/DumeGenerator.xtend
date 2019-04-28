@@ -10,7 +10,6 @@ import org.eclipse.xtext.generator.IGeneratorContext
 import dume.compiler.dume.Script
 import dume.compiler.dume.Instruction
 import dume.compiler.dume.Drawing
-import dume.compiler.dume.Clear
 import dume.compiler.dume.Go
 import dume.compiler.dume.Point
 import dume.compiler.dume.Shape
@@ -19,6 +18,10 @@ import dume.compiler.dume.Point3D
 import dume.compiler.dume.Shape2D
 import dume.compiler.dume.Shape3D
 import dume.compiler.dume.Loop
+import dume.compiler.dume.Circle
+import dume.compiler.dume.Number
+import dume.compiler.dume.Positive
+import dume.compiler.dume.Negative
 
 /**
  * Generates code from your model files on save.
@@ -27,10 +30,15 @@ import dume.compiler.dume.Loop
  */
 class DumeGenerator extends AbstractGenerator {
 
-	static int mapDistance = 50;
-	static double scale = 100;
+	static final int CIRCLE_POINT_NUMBER = 10;
+	static double mapDistance = 30;
+	static final double SCALE = 100;
+
+	boolean firstPoint;
 
 	override void doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
+
+		firstPoint = false;
 
 		for (e : resource.allContents.toIterable.filter(Script)) {
 			fsa.generateFile(e.name + ".sbot", e.compile)
@@ -39,9 +47,20 @@ class DumeGenerator extends AbstractGenerator {
 
 	def compile(Shape2D shape) '''
 		«FOR point : shape.points»
-			«goPoint2D(point.i,point.j, shape.map)»
+			«goPoint2D(point.i.getValue(),point.j.getValue(), shape.map)»
 		«ENDFOR»
 	'''
+
+	def int getValue(Number number) {
+
+		var value = number.v
+
+		switch number {
+			Negative: value *= -1
+		}
+
+		return value
+	}
 
 	def compile(Shape3D shape) '''
 		«FOR point : shape.points»
@@ -50,24 +69,45 @@ class DumeGenerator extends AbstractGenerator {
 	'''
 
 	def compile(Shape shape) {
+
+		firstPoint = true
+
 		return switch shape {
 			Shape2D: (shape as Shape2D).compile
 			Shape3D: (shape as Shape3D).compile
+			Circle: (shape as Circle).compile
 			default: '''error'''
 		}
-
 	}
 
-	def goPoint2D(int i, int j, String map) {
+	def compile(Circle circle) {
 
-		var x = 0;
-		var y = 0;
-		var z = 0;
+		var map = circle.map
+
+		var radius = circle.radius
+
+		var ci = circle.point.i.getValue()
+		var cj = circle.point.j.getValue()
+
+		var step = Math.PI * 2.0 / CIRCLE_POINT_NUMBER
+
+		return '''
+			«FOR i : 0..CIRCLE_POINT_NUMBER»
+				«goPoint2D(Math.cos(step*i)*radius + ci, Math.sin(step*i)*radius + cj, map)»
+			«ENDFOR»
+		'''
+	}
+
+	def goPoint2D(double i, double j, String map) {
+
+		var x = 0.0
+		var y = 0.0
+		var z = 0.0
 
 		if (map == "A") {
-			x = i - mapDistance;
-			y = j + mapDistance;
-			z = mapDistance;
+			x = i
+			y = j + mapDistance
+			z = mapDistance
 		} else if (map == "") {
 		} else if (map == "") {
 		}
@@ -75,18 +115,27 @@ class DumeGenerator extends AbstractGenerator {
 		return goPoint3D(x, y, z);
 	}
 
-	def goPoint3D(int x, int y, int z) '''
-		go «x/scale» «y/scale» «z/scale»
-	'''
+	def goPoint3D(double x, double y, double z) {
+
+		var cmd = "go"
+		if (firstPoint) {
+			cmd = "reach"
+			firstPoint = false
+		}
+
+		return '''
+			«cmd» «x/dume.compiler.generator.DumeGenerator.SCALE» «y/dume.compiler.generator.DumeGenerator.SCALE» «z/dume.compiler.generator.DumeGenerator.SCALE»
+		'''
+	}
 
 	def compile(Point3D point) {
-		return goPoint3D(point.x, point.y, point.z);
+		return goPoint3D(point.x.getValue(), point.y.getValue(), point.z.getValue())
 	}
 
 	def compile(Point point) {
 		return switch point {
 			Point2D:
-				goPoint2D((point as Point2D).i, (point as Point2D).j, point.map)
+				goPoint2D((point as Point2D).i.getValue(), (point as Point2D).j.getValue(), point.map)
 			Point3D:
 				(point as Point3D).compile
 			default: '''error'''
@@ -98,6 +147,7 @@ class DumeGenerator extends AbstractGenerator {
 	'''
 
 	def compile(Drawing drawing) '''
+		clear organ
 		«FOR shape : drawing.shapes»
 			organ on
 			«shape.compile»
@@ -105,16 +155,10 @@ class DumeGenerator extends AbstractGenerator {
 		«ENDFOR»
 	'''
 
-	def compile(Clear clear) '''
-		clear
-	'''
-
 	def compile(Instruction instruction) {
 		return switch instruction {
 			Drawing:
 				(instruction as Drawing).compile
-			Clear:
-				(instruction as Clear).compile
 			Go:
 				(instruction as Go).compile
 			Loop:

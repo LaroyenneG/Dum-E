@@ -5,13 +5,14 @@ package dume.compiler.serializer;
 
 import com.google.inject.Inject;
 import dume.compiler.dume.Circle;
-import dume.compiler.dume.Clear;
 import dume.compiler.dume.Drawing;
 import dume.compiler.dume.DumePackage;
 import dume.compiler.dume.Go;
 import dume.compiler.dume.Loop;
+import dume.compiler.dume.Negative;
 import dume.compiler.dume.Point2D;
 import dume.compiler.dume.Point3D;
+import dume.compiler.dume.Positive;
 import dume.compiler.dume.Script;
 import dume.compiler.dume.Scripts;
 import dume.compiler.dume.Shape2D;
@@ -45,9 +46,6 @@ public class DumeSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 			case DumePackage.CIRCLE:
 				sequence_Circle(context, (Circle) semanticObject); 
 				return; 
-			case DumePackage.CLEAR:
-				sequence_Clear(context, (Clear) semanticObject); 
-				return; 
 			case DumePackage.DRAWING:
 				sequence_Drawing(context, (Drawing) semanticObject); 
 				return; 
@@ -56,6 +54,9 @@ public class DumeSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 				return; 
 			case DumePackage.LOOP:
 				sequence_Loop(context, (Loop) semanticObject); 
+				return; 
+			case DumePackage.NEGATIVE:
+				sequence_Negative(context, (Negative) semanticObject); 
 				return; 
 			case DumePackage.POINT2_D:
 				if (rule == grammarAccess.getPoint2DRule()) {
@@ -69,6 +70,9 @@ public class DumeSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 				else break;
 			case DumePackage.POINT3_D:
 				sequence_Point3D(context, (Point3D) semanticObject); 
+				return; 
+			case DumePackage.POSITIVE:
+				sequence_Positive(context, (Positive) semanticObject); 
 				return; 
 			case DumePackage.SCRIPT:
 				sequence_Script(context, (Script) semanticObject); 
@@ -109,19 +113,6 @@ public class DumeSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 		feeder.accept(grammarAccess.getCircleAccess().getRadiusINTTerminalRuleCall_4_0(), semanticObject.getRadius());
 		feeder.accept(grammarAccess.getCircleAccess().getMapMapParserRuleCall_6_0(), semanticObject.getMap());
 		feeder.finish();
-	}
-	
-	
-	/**
-	 * Contexts:
-	 *     Instruction returns Clear
-	 *     Clear returns Clear
-	 *
-	 * Constraint:
-	 *     {Clear}
-	 */
-	protected void sequence_Clear(ISerializationContext context, Clear semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
@@ -172,10 +163,29 @@ public class DumeSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Contexts:
+	 *     Number returns Negative
+	 *     Negative returns Negative
+	 *
+	 * Constraint:
+	 *     v=INT
+	 */
+	protected void sequence_Negative(ISerializationContext context, Negative semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, DumePackage.Literals.NUMBER__V) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, DumePackage.Literals.NUMBER__V));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getNegativeAccess().getVINTTerminalRuleCall_1_0(), semanticObject.getV());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
 	 *     Point2D returns Point2D
 	 *
 	 * Constraint:
-	 *     (i=INT j=INT)
+	 *     (i=Number j=Number)
 	 */
 	protected void sequence_Point2D(ISerializationContext context, Point2D semanticObject) {
 		if (errorAcceptor != null) {
@@ -185,8 +195,8 @@ public class DumeSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, DumePackage.Literals.POINT2_D__J));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getPoint2DAccess().getIINTTerminalRuleCall_1_0(), semanticObject.getI());
-		feeder.accept(grammarAccess.getPoint2DAccess().getJINTTerminalRuleCall_2_0(), semanticObject.getJ());
+		feeder.accept(grammarAccess.getPoint2DAccess().getINumberParserRuleCall_0_0(), semanticObject.getI());
+		feeder.accept(grammarAccess.getPoint2DAccess().getJNumberParserRuleCall_1_0(), semanticObject.getJ());
 		feeder.finish();
 	}
 	
@@ -197,7 +207,7 @@ public class DumeSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     Point returns Point3D
 	 *
 	 * Constraint:
-	 *     (x=INT y=INT z=INT)
+	 *     (x=Number y=Number z=Number)
 	 */
 	protected void sequence_Point3D(ISerializationContext context, Point3D semanticObject) {
 		if (errorAcceptor != null) {
@@ -209,9 +219,9 @@ public class DumeSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, DumePackage.Literals.POINT3_D__Z));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getPoint3DAccess().getXINTTerminalRuleCall_1_0(), semanticObject.getX());
-		feeder.accept(grammarAccess.getPoint3DAccess().getYINTTerminalRuleCall_2_0(), semanticObject.getY());
-		feeder.accept(grammarAccess.getPoint3DAccess().getZINTTerminalRuleCall_3_0(), semanticObject.getZ());
+		feeder.accept(grammarAccess.getPoint3DAccess().getXNumberParserRuleCall_0_0(), semanticObject.getX());
+		feeder.accept(grammarAccess.getPoint3DAccess().getYNumberParserRuleCall_1_0(), semanticObject.getY());
+		feeder.accept(grammarAccess.getPoint3DAccess().getZNumberParserRuleCall_2_0(), semanticObject.getZ());
 		feeder.finish();
 	}
 	
@@ -221,7 +231,7 @@ public class DumeSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     Point returns Point2D
 	 *
 	 * Constraint:
-	 *     (i=INT j=INT map=Map)
+	 *     (i=Number j=Number map=Map)
 	 */
 	protected void sequence_Point_Point2D(ISerializationContext context, Point2D semanticObject) {
 		if (errorAcceptor != null) {
@@ -233,9 +243,28 @@ public class DumeSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, DumePackage.Literals.POINT2_D__MAP));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getPoint2DAccess().getIINTTerminalRuleCall_1_0(), semanticObject.getI());
-		feeder.accept(grammarAccess.getPoint2DAccess().getJINTTerminalRuleCall_2_0(), semanticObject.getJ());
+		feeder.accept(grammarAccess.getPoint2DAccess().getINumberParserRuleCall_0_0(), semanticObject.getI());
+		feeder.accept(grammarAccess.getPoint2DAccess().getJNumberParserRuleCall_1_0(), semanticObject.getJ());
 		feeder.accept(grammarAccess.getPointAccess().getMapMapParserRuleCall_1_2_0(), semanticObject.getMap());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Number returns Positive
+	 *     Positive returns Positive
+	 *
+	 * Constraint:
+	 *     v=INT
+	 */
+	protected void sequence_Positive(ISerializationContext context, Positive semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, DumePackage.Literals.NUMBER__V) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, DumePackage.Literals.NUMBER__V));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getPositiveAccess().getVINTTerminalRuleCall_0(), semanticObject.getV());
 		feeder.finish();
 	}
 	

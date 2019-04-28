@@ -3,26 +3,26 @@
  */
 package dume.compiler.dume.impl;
 
-import dume.compiler.dume.Clear;
 import dume.compiler.dume.DumePackage;
+import dume.compiler.dume.Positive;
 
 import org.eclipse.emf.ecore.EClass;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Clear</b></em>'.
+ * An implementation of the model object '<em><b>Positive</b></em>'.
  * <!-- end-user-doc -->
  *
  * @generated
  */
-public class ClearImpl extends InstructionImpl implements Clear
+public class PositiveImpl extends NumberImpl implements Positive
 {
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected ClearImpl()
+  protected PositiveImpl()
   {
     super();
   }
@@ -35,7 +35,7 @@ public class ClearImpl extends InstructionImpl implements Clear
   @Override
   protected EClass eStaticClass()
   {
-    return DumePackage.Literals.CLEAR;
+    return DumePackage.Literals.POSITIVE;
   }
 
-} //ClearImpl
+} //PositiveImpl

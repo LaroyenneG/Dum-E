@@ -42,6 +42,33 @@ public interface DumeFactory extends EFactory
   Script createScript();
 
   /**
+   * Returns a new object of class '<em>Number</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Number</em>'.
+   * @generated
+   */
+  Number createNumber();
+
+  /**
+   * Returns a new object of class '<em>Negative</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Negative</em>'.
+   * @generated
+   */
+  Negative createNegative();
+
+  /**
+   * Returns a new object of class '<em>Positive</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Positive</em>'.
+   * @generated
+   */
+  Positive createPositive();
+
+  /**
    * Returns a new object of class '<em>Instruction</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -112,15 +139,6 @@ public interface DumeFactory extends EFactory
    * @generated
    */
   Drawing createDrawing();
-
-  /**
-   * Returns a new object of class '<em>Clear</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Clear</em>'.
-   * @generated
-   */
-  Clear createClear();
 
   /**
    * Returns a new object of class '<em>Go</em>'.

@@ -31,29 +31,32 @@ public class DumeParser extends AbstractContentAssistParser {
 		}
 		
 		private static void init(ImmutableMap.Builder<AbstractElement, String> builder, DumeGrammarAccess grammarAccess) {
+			builder.put(grammarAccess.getNumberAccess().getAlternatives(), "rule__Number__Alternatives");
 			builder.put(grammarAccess.getInstructionAccess().getAlternatives(), "rule__Instruction__Alternatives");
 			builder.put(grammarAccess.getMapAccess().getAlternatives(), "rule__Map__Alternatives");
 			builder.put(grammarAccess.getPointAccess().getAlternatives(), "rule__Point__Alternatives");
 			builder.put(grammarAccess.getShapeAccess().getAlternatives(), "rule__Shape__Alternatives");
 			builder.put(grammarAccess.getScriptAccess().getGroup(), "rule__Script__Group__0");
+			builder.put(grammarAccess.getNegativeAccess().getGroup(), "rule__Negative__Group__0");
 			builder.put(grammarAccess.getPoint3DAccess().getGroup(), "rule__Point3D__Group__0");
 			builder.put(grammarAccess.getPoint2DAccess().getGroup(), "rule__Point2D__Group__0");
 			builder.put(grammarAccess.getPointAccess().getGroup_1(), "rule__Point__Group_1__0");
 			builder.put(grammarAccess.getShape3DAccess().getGroup(), "rule__Shape3D__Group__0");
 			builder.put(grammarAccess.getShape2DAccess().getGroup(), "rule__Shape2D__Group__0");
 			builder.put(grammarAccess.getDrawingAccess().getGroup(), "rule__Drawing__Group__0");
-			builder.put(grammarAccess.getClearAccess().getGroup(), "rule__Clear__Group__0");
 			builder.put(grammarAccess.getGoAccess().getGroup(), "rule__Go__Group__0");
 			builder.put(grammarAccess.getCircleAccess().getGroup(), "rule__Circle__Group__0");
 			builder.put(grammarAccess.getLoopAccess().getGroup(), "rule__Loop__Group__0");
 			builder.put(grammarAccess.getScriptsAccess().getScriptAssignment(), "rule__Scripts__ScriptAssignment");
 			builder.put(grammarAccess.getScriptAccess().getNameAssignment_1(), "rule__Script__NameAssignment_1");
 			builder.put(grammarAccess.getScriptAccess().getInstructionsAssignment_3(), "rule__Script__InstructionsAssignment_3");
-			builder.put(grammarAccess.getPoint3DAccess().getXAssignment_1(), "rule__Point3D__XAssignment_1");
-			builder.put(grammarAccess.getPoint3DAccess().getYAssignment_2(), "rule__Point3D__YAssignment_2");
-			builder.put(grammarAccess.getPoint3DAccess().getZAssignment_3(), "rule__Point3D__ZAssignment_3");
-			builder.put(grammarAccess.getPoint2DAccess().getIAssignment_1(), "rule__Point2D__IAssignment_1");
-			builder.put(grammarAccess.getPoint2DAccess().getJAssignment_2(), "rule__Point2D__JAssignment_2");
+			builder.put(grammarAccess.getNegativeAccess().getVAssignment_1(), "rule__Negative__VAssignment_1");
+			builder.put(grammarAccess.getPositiveAccess().getVAssignment(), "rule__Positive__VAssignment");
+			builder.put(grammarAccess.getPoint3DAccess().getXAssignment_0(), "rule__Point3D__XAssignment_0");
+			builder.put(grammarAccess.getPoint3DAccess().getYAssignment_1(), "rule__Point3D__YAssignment_1");
+			builder.put(grammarAccess.getPoint3DAccess().getZAssignment_2(), "rule__Point3D__ZAssignment_2");
+			builder.put(grammarAccess.getPoint2DAccess().getIAssignment_0(), "rule__Point2D__IAssignment_0");
+			builder.put(grammarAccess.getPoint2DAccess().getJAssignment_1(), "rule__Point2D__JAssignment_1");
 			builder.put(grammarAccess.getPointAccess().getMapAssignment_1_2(), "rule__Point__MapAssignment_1_2");
 			builder.put(grammarAccess.getShape3DAccess().getPointsAssignment_3(), "rule__Shape3D__PointsAssignment_3");
 			builder.put(grammarAccess.getShape2DAccess().getMapAssignment_3(), "rule__Shape2D__MapAssignment_3");

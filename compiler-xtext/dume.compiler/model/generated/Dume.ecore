@@ -10,15 +10,20 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="instructions" upperBound="-1"
         eType="#//Instruction" containment="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Number">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="v" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Negative" eSuperTypes="#//Number"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Positive" eSuperTypes="#//Number"/>
   <eClassifiers xsi:type="ecore:EClass" name="Instruction"/>
   <eClassifiers xsi:type="ecore:EClass" name="Point3D" eSuperTypes="#//Point">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="x" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="y" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="z" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="x" eType="#//Number" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="y" eType="#//Number" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="z" eType="#//Number" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Point2D" eSuperTypes="#//Point">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="i" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="j" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="i" eType="#//Number" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="j" eType="#//Number" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="map" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Point"/>
@@ -36,7 +41,6 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="shapes" upperBound="-1"
         eType="#//Shape" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Clear" eSuperTypes="#//Instruction"/>
   <eClassifiers xsi:type="ecore:EClass" name="Go" eSuperTypes="#//Instruction">
     <eStructuralFeatures xsi:type="ecore:EReference" name="point" eType="#//Point"
         containment="true"/>

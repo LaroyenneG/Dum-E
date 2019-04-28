@@ -7,8 +7,10 @@ import dume.compiler.dume.DumePackage;
 import dume.compiler.dume.Point2D;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
@@ -30,44 +32,24 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 public class Point2DImpl extends PointImpl implements Point2D
 {
   /**
-   * The default value of the '{@link #getI() <em>I</em>}' attribute.
+   * The cached value of the '{@link #getI() <em>I</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getI()
    * @generated
    * @ordered
    */
-  protected static final int I_EDEFAULT = 0;
+  protected dume.compiler.dume.Number i;
 
   /**
-   * The cached value of the '{@link #getI() <em>I</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getI()
-   * @generated
-   * @ordered
-   */
-  protected int i = I_EDEFAULT;
-
-  /**
-   * The default value of the '{@link #getJ() <em>J</em>}' attribute.
+   * The cached value of the '{@link #getJ() <em>J</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getJ()
    * @generated
    * @ordered
    */
-  protected static final int J_EDEFAULT = 0;
-
-  /**
-   * The cached value of the '{@link #getJ() <em>J</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getJ()
-   * @generated
-   * @ordered
-   */
-  protected int j = J_EDEFAULT;
+  protected dume.compiler.dume.Number j;
 
   /**
    * The default value of the '{@link #getMap() <em>Map</em>}' attribute.
@@ -116,7 +98,7 @@ public class Point2DImpl extends PointImpl implements Point2D
    * @generated
    */
   @Override
-  public int getI()
+  public dume.compiler.dume.Number getI()
   {
     return i;
   }
@@ -126,13 +108,16 @@ public class Point2DImpl extends PointImpl implements Point2D
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-  public void setI(int newI)
+  public NotificationChain basicSetI(dume.compiler.dume.Number newI, NotificationChain msgs)
   {
-    int oldI = i;
+    dume.compiler.dume.Number oldI = i;
     i = newI;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, DumePackage.POINT2_D__I, oldI, i));
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, DumePackage.POINT2_D__I, oldI, newI);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
   }
 
   /**
@@ -141,7 +126,29 @@ public class Point2DImpl extends PointImpl implements Point2D
    * @generated
    */
   @Override
-  public int getJ()
+  public void setI(dume.compiler.dume.Number newI)
+  {
+    if (newI != i)
+    {
+      NotificationChain msgs = null;
+      if (i != null)
+        msgs = ((InternalEObject)i).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - DumePackage.POINT2_D__I, null, msgs);
+      if (newI != null)
+        msgs = ((InternalEObject)newI).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - DumePackage.POINT2_D__I, null, msgs);
+      msgs = basicSetI(newI, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, DumePackage.POINT2_D__I, newI, newI));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public dume.compiler.dume.Number getJ()
   {
     return j;
   }
@@ -151,13 +158,38 @@ public class Point2DImpl extends PointImpl implements Point2D
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-  public void setJ(int newJ)
+  public NotificationChain basicSetJ(dume.compiler.dume.Number newJ, NotificationChain msgs)
   {
-    int oldJ = j;
+    dume.compiler.dume.Number oldJ = j;
     j = newJ;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, DumePackage.POINT2_D__J, oldJ, j));
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, DumePackage.POINT2_D__J, oldJ, newJ);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setJ(dume.compiler.dume.Number newJ)
+  {
+    if (newJ != j)
+    {
+      NotificationChain msgs = null;
+      if (j != null)
+        msgs = ((InternalEObject)j).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - DumePackage.POINT2_D__J, null, msgs);
+      if (newJ != null)
+        msgs = ((InternalEObject)newJ).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - DumePackage.POINT2_D__J, null, msgs);
+      msgs = basicSetJ(newJ, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, DumePackage.POINT2_D__J, newJ, newJ));
   }
 
   /**
@@ -191,6 +223,24 @@ public class Point2DImpl extends PointImpl implements Point2D
    * @generated
    */
   @Override
+  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+  {
+    switch (featureID)
+    {
+      case DumePackage.POINT2_D__I:
+        return basicSetI(null, msgs);
+      case DumePackage.POINT2_D__J:
+        return basicSetJ(null, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
     switch (featureID)
@@ -216,10 +266,10 @@ public class Point2DImpl extends PointImpl implements Point2D
     switch (featureID)
     {
       case DumePackage.POINT2_D__I:
-        setI((Integer)newValue);
+        setI((dume.compiler.dume.Number)newValue);
         return;
       case DumePackage.POINT2_D__J:
-        setJ((Integer)newValue);
+        setJ((dume.compiler.dume.Number)newValue);
         return;
       case DumePackage.POINT2_D__MAP:
         setMap((String)newValue);
@@ -239,10 +289,10 @@ public class Point2DImpl extends PointImpl implements Point2D
     switch (featureID)
     {
       case DumePackage.POINT2_D__I:
-        setI(I_EDEFAULT);
+        setI((dume.compiler.dume.Number)null);
         return;
       case DumePackage.POINT2_D__J:
-        setJ(J_EDEFAULT);
+        setJ((dume.compiler.dume.Number)null);
         return;
       case DumePackage.POINT2_D__MAP:
         setMap(MAP_EDEFAULT);
@@ -262,9 +312,9 @@ public class Point2DImpl extends PointImpl implements Point2D
     switch (featureID)
     {
       case DumePackage.POINT2_D__I:
-        return i != I_EDEFAULT;
+        return i != null;
       case DumePackage.POINT2_D__J:
-        return j != J_EDEFAULT;
+        return j != null;
       case DumePackage.POINT2_D__MAP:
         return MAP_EDEFAULT == null ? map != null : !MAP_EDEFAULT.equals(map);
     }
@@ -282,11 +332,7 @@ public class Point2DImpl extends PointImpl implements Point2D
     if (eIsProxy()) return super.toString();
 
     StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (i: ");
-    result.append(i);
-    result.append(", j: ");
-    result.append(j);
-    result.append(", map: ");
+    result.append(" (map: ");
     result.append(map);
     result.append(')');
     return result.toString();

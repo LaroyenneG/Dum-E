@@ -77,35 +77,88 @@ public class DumeGrammarAccess extends AbstractGrammarElementFinder {
 		//'}'
 		public Keyword getRightCurlyBracketKeyword_4() { return cRightCurlyBracketKeyword_4; }
 	}
+	public class NumberElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "dume.compiler.Dume.Number");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cNegativeParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cPositiveParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		
+		//Number:
+		//	Negative
+		//	| Positive;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//Negative | Positive
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
+		//Negative
+		public RuleCall getNegativeParserRuleCall_0() { return cNegativeParserRuleCall_0; }
+		
+		//Positive
+		public RuleCall getPositiveParserRuleCall_1() { return cPositiveParserRuleCall_1; }
+	}
+	public class NegativeElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "dume.compiler.Dume.Negative");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cHyphenMinusKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cVAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cVINTTerminalRuleCall_1_0 = (RuleCall)cVAssignment_1.eContents().get(0);
+		
+		//Negative:
+		//	'-' v=INT;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'-' v=INT
+		public Group getGroup() { return cGroup; }
+		
+		//'-'
+		public Keyword getHyphenMinusKeyword_0() { return cHyphenMinusKeyword_0; }
+		
+		//v=INT
+		public Assignment getVAssignment_1() { return cVAssignment_1; }
+		
+		//INT
+		public RuleCall getVINTTerminalRuleCall_1_0() { return cVINTTerminalRuleCall_1_0; }
+	}
+	public class PositiveElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "dume.compiler.Dume.Positive");
+		private final Assignment cVAssignment = (Assignment)rule.eContents().get(1);
+		private final RuleCall cVINTTerminalRuleCall_0 = (RuleCall)cVAssignment.eContents().get(0);
+		
+		//Positive:
+		//	v=INT;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//v=INT
+		public Assignment getVAssignment() { return cVAssignment; }
+		
+		//INT
+		public RuleCall getVINTTerminalRuleCall_0() { return cVINTTerminalRuleCall_0; }
+	}
 	public class InstructionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "dume.compiler.Dume.Instruction");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cDrawingParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
-		private final RuleCall cClearParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
-		private final RuleCall cGoParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
-		private final RuleCall cLoopParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
+		private final RuleCall cGoParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cLoopParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		
 		//Instruction:
 		//	Drawing
-		//	| Clear
 		//	| Go
 		//	| Loop;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//Drawing | Clear | Go | Loop
+		//Drawing | Go | Loop
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//Drawing
 		public RuleCall getDrawingParserRuleCall_0() { return cDrawingParserRuleCall_0; }
 		
-		//Clear
-		public RuleCall getClearParserRuleCall_1() { return cClearParserRuleCall_1; }
-		
 		//Go
-		public RuleCall getGoParserRuleCall_2() { return cGoParserRuleCall_2; }
+		public RuleCall getGoParserRuleCall_1() { return cGoParserRuleCall_1; }
 		
 		//Loop
-		public RuleCall getLoopParserRuleCall_3() { return cLoopParserRuleCall_3; }
+		public RuleCall getLoopParserRuleCall_2() { return cLoopParserRuleCall_2; }
 	}
 	public class MapElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "dume.compiler.Dume.Map");
@@ -145,80 +198,64 @@ public class DumeGrammarAccess extends AbstractGrammarElementFinder {
 	public class Point3DElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "dume.compiler.Dume.Point3D");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cLeftParenthesisKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cXAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cXINTTerminalRuleCall_1_0 = (RuleCall)cXAssignment_1.eContents().get(0);
-		private final Assignment cYAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cYINTTerminalRuleCall_2_0 = (RuleCall)cYAssignment_2.eContents().get(0);
-		private final Assignment cZAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cZINTTerminalRuleCall_3_0 = (RuleCall)cZAssignment_3.eContents().get(0);
-		private final Keyword cRightParenthesisKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		private final Assignment cXAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cXNumberParserRuleCall_0_0 = (RuleCall)cXAssignment_0.eContents().get(0);
+		private final Assignment cYAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cYNumberParserRuleCall_1_0 = (RuleCall)cYAssignment_1.eContents().get(0);
+		private final Assignment cZAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cZNumberParserRuleCall_2_0 = (RuleCall)cZAssignment_2.eContents().get(0);
 		
 		//Point3D:
-		//	'(' x=INT y=INT z=INT ')';
+		//	x=Number y=Number z=Number;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'(' x=INT y=INT z=INT ')'
+		//x=Number y=Number z=Number
 		public Group getGroup() { return cGroup; }
 		
-		//'('
-		public Keyword getLeftParenthesisKeyword_0() { return cLeftParenthesisKeyword_0; }
+		//x=Number
+		public Assignment getXAssignment_0() { return cXAssignment_0; }
 		
-		//x=INT
-		public Assignment getXAssignment_1() { return cXAssignment_1; }
+		//Number
+		public RuleCall getXNumberParserRuleCall_0_0() { return cXNumberParserRuleCall_0_0; }
 		
-		//INT
-		public RuleCall getXINTTerminalRuleCall_1_0() { return cXINTTerminalRuleCall_1_0; }
+		//y=Number
+		public Assignment getYAssignment_1() { return cYAssignment_1; }
 		
-		//y=INT
-		public Assignment getYAssignment_2() { return cYAssignment_2; }
+		//Number
+		public RuleCall getYNumberParserRuleCall_1_0() { return cYNumberParserRuleCall_1_0; }
 		
-		//INT
-		public RuleCall getYINTTerminalRuleCall_2_0() { return cYINTTerminalRuleCall_2_0; }
+		//z=Number
+		public Assignment getZAssignment_2() { return cZAssignment_2; }
 		
-		//z=INT
-		public Assignment getZAssignment_3() { return cZAssignment_3; }
-		
-		//INT
-		public RuleCall getZINTTerminalRuleCall_3_0() { return cZINTTerminalRuleCall_3_0; }
-		
-		//')'
-		public Keyword getRightParenthesisKeyword_4() { return cRightParenthesisKeyword_4; }
+		//Number
+		public RuleCall getZNumberParserRuleCall_2_0() { return cZNumberParserRuleCall_2_0; }
 	}
 	public class Point2DElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "dume.compiler.Dume.Point2D");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cLeftParenthesisKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cIAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cIINTTerminalRuleCall_1_0 = (RuleCall)cIAssignment_1.eContents().get(0);
-		private final Assignment cJAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cJINTTerminalRuleCall_2_0 = (RuleCall)cJAssignment_2.eContents().get(0);
-		private final Keyword cRightParenthesisKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Assignment cIAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cINumberParserRuleCall_0_0 = (RuleCall)cIAssignment_0.eContents().get(0);
+		private final Assignment cJAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cJNumberParserRuleCall_1_0 = (RuleCall)cJAssignment_1.eContents().get(0);
 		
 		//Point2D:
-		//	'(' i=INT j=INT ')';
+		//	i=Number j=Number;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'(' i=INT j=INT ')'
+		//i=Number j=Number
 		public Group getGroup() { return cGroup; }
 		
-		//'('
-		public Keyword getLeftParenthesisKeyword_0() { return cLeftParenthesisKeyword_0; }
+		//i=Number
+		public Assignment getIAssignment_0() { return cIAssignment_0; }
 		
-		//i=INT
-		public Assignment getIAssignment_1() { return cIAssignment_1; }
+		//Number
+		public RuleCall getINumberParserRuleCall_0_0() { return cINumberParserRuleCall_0_0; }
 		
-		//INT
-		public RuleCall getIINTTerminalRuleCall_1_0() { return cIINTTerminalRuleCall_1_0; }
+		//j=Number
+		public Assignment getJAssignment_1() { return cJAssignment_1; }
 		
-		//j=INT
-		public Assignment getJAssignment_2() { return cJAssignment_2; }
-		
-		//INT
-		public RuleCall getJINTTerminalRuleCall_2_0() { return cJINTTerminalRuleCall_2_0; }
-		
-		//')'
-		public Keyword getRightParenthesisKeyword_3() { return cRightParenthesisKeyword_3; }
+		//Number
+		public RuleCall getJNumberParserRuleCall_1_0() { return cJNumberParserRuleCall_1_0; }
 	}
 	public class PointElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "dume.compiler.Dume.Point");
@@ -398,25 +435,6 @@ public class DumeGrammarAccess extends AbstractGrammarElementFinder {
 		//'}'
 		public Keyword getRightCurlyBracketKeyword_4() { return cRightCurlyBracketKeyword_4; }
 	}
-	public class ClearElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "dume.compiler.Dume.Clear");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Action cClearAction_0 = (Action)cGroup.eContents().get(0);
-		private final Keyword cClearKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		
-		//Clear:
-		//	{Clear} 'clear';
-		@Override public ParserRule getRule() { return rule; }
-		
-		//{Clear} 'clear'
-		public Group getGroup() { return cGroup; }
-		
-		//{Clear}
-		public Action getClearAction_0() { return cClearAction_0; }
-		
-		//'clear'
-		public Keyword getClearKeyword_1() { return cClearKeyword_1; }
-	}
 	public class GoElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "dume.compiler.Dume.Go");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -534,6 +552,9 @@ public class DumeGrammarAccess extends AbstractGrammarElementFinder {
 	
 	private final ScriptsElements pScripts;
 	private final ScriptElements pScript;
+	private final NumberElements pNumber;
+	private final NegativeElements pNegative;
+	private final PositiveElements pPositive;
 	private final InstructionElements pInstruction;
 	private final MapElements pMap;
 	private final Point3DElements pPoint3D;
@@ -543,7 +564,6 @@ public class DumeGrammarAccess extends AbstractGrammarElementFinder {
 	private final Shape3DElements pShape3D;
 	private final Shape2DElements pShape2D;
 	private final DrawingElements pDrawing;
-	private final ClearElements pClear;
 	private final GoElements pGo;
 	private final CircleElements pCircle;
 	private final LoopElements pLoop;
@@ -559,6 +579,9 @@ public class DumeGrammarAccess extends AbstractGrammarElementFinder {
 		this.gaTerminals = gaTerminals;
 		this.pScripts = new ScriptsElements();
 		this.pScript = new ScriptElements();
+		this.pNumber = new NumberElements();
+		this.pNegative = new NegativeElements();
+		this.pPositive = new PositiveElements();
 		this.pInstruction = new InstructionElements();
 		this.pMap = new MapElements();
 		this.pPoint3D = new Point3DElements();
@@ -568,7 +591,6 @@ public class DumeGrammarAccess extends AbstractGrammarElementFinder {
 		this.pShape3D = new Shape3DElements();
 		this.pShape2D = new Shape2DElements();
 		this.pDrawing = new DrawingElements();
-		this.pClear = new ClearElements();
 		this.pGo = new GoElements();
 		this.pCircle = new CircleElements();
 		this.pLoop = new LoopElements();
@@ -621,9 +643,39 @@ public class DumeGrammarAccess extends AbstractGrammarElementFinder {
 		return getScriptAccess().getRule();
 	}
 	
+	//Number:
+	//	Negative
+	//	| Positive;
+	public NumberElements getNumberAccess() {
+		return pNumber;
+	}
+	
+	public ParserRule getNumberRule() {
+		return getNumberAccess().getRule();
+	}
+	
+	//Negative:
+	//	'-' v=INT;
+	public NegativeElements getNegativeAccess() {
+		return pNegative;
+	}
+	
+	public ParserRule getNegativeRule() {
+		return getNegativeAccess().getRule();
+	}
+	
+	//Positive:
+	//	v=INT;
+	public PositiveElements getPositiveAccess() {
+		return pPositive;
+	}
+	
+	public ParserRule getPositiveRule() {
+		return getPositiveAccess().getRule();
+	}
+	
 	//Instruction:
 	//	Drawing
-	//	| Clear
 	//	| Go
 	//	| Loop;
 	public InstructionElements getInstructionAccess() {
@@ -645,7 +697,7 @@ public class DumeGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//Point3D:
-	//	'(' x=INT y=INT z=INT ')';
+	//	x=Number y=Number z=Number;
 	public Point3DElements getPoint3DAccess() {
 		return pPoint3D;
 	}
@@ -655,7 +707,7 @@ public class DumeGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//Point2D:
-	//	'(' i=INT j=INT ')';
+	//	i=Number j=Number;
 	public Point2DElements getPoint2DAccess() {
 		return pPoint2D;
 	}
@@ -715,16 +767,6 @@ public class DumeGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public ParserRule getDrawingRule() {
 		return getDrawingAccess().getRule();
-	}
-	
-	//Clear:
-	//	{Clear} 'clear';
-	public ClearElements getClearAccess() {
-		return pClear;
-	}
-	
-	public ParserRule getClearRule() {
-		return getClearAccess().getRule();
 	}
 	
 	//Go:

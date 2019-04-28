@@ -3,7 +3,22 @@
  */
 package dume.compiler.dume.util;
 
-import dume.compiler.dume.*;
+import dume.compiler.dume.Circle;
+import dume.compiler.dume.Drawing;
+import dume.compiler.dume.DumePackage;
+import dume.compiler.dume.Go;
+import dume.compiler.dume.Instruction;
+import dume.compiler.dume.Loop;
+import dume.compiler.dume.Negative;
+import dume.compiler.dume.Point;
+import dume.compiler.dume.Point2D;
+import dume.compiler.dume.Point3D;
+import dume.compiler.dume.Positive;
+import dume.compiler.dume.Script;
+import dume.compiler.dume.Scripts;
+import dume.compiler.dume.Shape;
+import dume.compiler.dume.Shape2D;
+import dume.compiler.dume.Shape3D;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
@@ -87,6 +102,29 @@ public class DumeSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case DumePackage.NUMBER:
+      {
+        dume.compiler.dume.Number number = (dume.compiler.dume.Number)theEObject;
+        T result = caseNumber(number);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case DumePackage.NEGATIVE:
+      {
+        Negative negative = (Negative)theEObject;
+        T result = caseNegative(negative);
+        if (result == null) result = caseNumber(negative);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case DumePackage.POSITIVE:
+      {
+        Positive positive = (Positive)theEObject;
+        T result = casePositive(positive);
+        if (result == null) result = caseNumber(positive);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case DumePackage.INSTRUCTION:
       {
         Instruction instruction = (Instruction)theEObject;
@@ -148,14 +186,6 @@ public class DumeSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case DumePackage.CLEAR:
-      {
-        Clear clear = (Clear)theEObject;
-        T result = caseClear(clear);
-        if (result == null) result = caseInstruction(clear);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
       case DumePackage.GO:
       {
         Go go = (Go)theEObject;
@@ -212,6 +242,54 @@ public class DumeSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseScript(Script object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Number</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Number</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseNumber(dume.compiler.dume.Number object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Negative</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Negative</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseNegative(Negative object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Positive</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Positive</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T casePositive(Positive object)
   {
     return null;
   }
@@ -340,22 +418,6 @@ public class DumeSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseDrawing(Drawing object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Clear</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Clear</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseClear(Clear object)
   {
     return null;
   }

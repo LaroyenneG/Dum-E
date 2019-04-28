@@ -3,7 +3,22 @@
  */
 package dume.compiler.dume.util;
 
-import dume.compiler.dume.*;
+import dume.compiler.dume.Circle;
+import dume.compiler.dume.Drawing;
+import dume.compiler.dume.DumePackage;
+import dume.compiler.dume.Go;
+import dume.compiler.dume.Instruction;
+import dume.compiler.dume.Loop;
+import dume.compiler.dume.Negative;
+import dume.compiler.dume.Point;
+import dume.compiler.dume.Point2D;
+import dume.compiler.dume.Point3D;
+import dume.compiler.dume.Positive;
+import dume.compiler.dume.Script;
+import dume.compiler.dume.Scripts;
+import dume.compiler.dume.Shape;
+import dume.compiler.dume.Shape2D;
+import dume.compiler.dume.Shape3D;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
@@ -86,6 +101,21 @@ public class DumeAdapterFactory extends AdapterFactoryImpl
         return createScriptAdapter();
       }
       @Override
+      public Adapter caseNumber(dume.compiler.dume.Number object)
+      {
+        return createNumberAdapter();
+      }
+      @Override
+      public Adapter caseNegative(Negative object)
+      {
+        return createNegativeAdapter();
+      }
+      @Override
+      public Adapter casePositive(Positive object)
+      {
+        return createPositiveAdapter();
+      }
+      @Override
       public Adapter caseInstruction(Instruction object)
       {
         return createInstructionAdapter();
@@ -124,11 +154,6 @@ public class DumeAdapterFactory extends AdapterFactoryImpl
       public Adapter caseDrawing(Drawing object)
       {
         return createDrawingAdapter();
-      }
-      @Override
-      public Adapter caseClear(Clear object)
-      {
-        return createClearAdapter();
       }
       @Override
       public Adapter caseGo(Go object)
@@ -193,6 +218,51 @@ public class DumeAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createScriptAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link dume.compiler.dume.Number <em>Number</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see dume.compiler.dume.Number
+   * @generated
+   */
+  public Adapter createNumberAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link dume.compiler.dume.Negative <em>Negative</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see dume.compiler.dume.Negative
+   * @generated
+   */
+  public Adapter createNegativeAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link dume.compiler.dume.Positive <em>Positive</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see dume.compiler.dume.Positive
+   * @generated
+   */
+  public Adapter createPositiveAdapter()
   {
     return null;
   }
@@ -313,21 +383,6 @@ public class DumeAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createDrawingAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link dume.compiler.dume.Clear <em>Clear</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see dume.compiler.dume.Clear
-   * @generated
-   */
-  public Adapter createClearAdapter()
   {
     return null;
   }

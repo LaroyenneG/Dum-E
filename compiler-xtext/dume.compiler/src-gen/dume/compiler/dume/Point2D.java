@@ -25,48 +25,48 @@ package dume.compiler.dume;
 public interface Point2D extends Point
 {
   /**
-   * Returns the value of the '<em><b>I</b></em>' attribute.
+   * Returns the value of the '<em><b>I</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>I</em>' attribute.
-   * @see #setI(int)
+   * @return the value of the '<em>I</em>' containment reference.
+   * @see #setI(dume.compiler.dume.Number)
    * @see dume.compiler.dume.DumePackage#getPoint2D_I()
-   * @model
+   * @model containment="true"
    * @generated
    */
-  int getI();
+  dume.compiler.dume.Number getI();
 
   /**
-   * Sets the value of the '{@link dume.compiler.dume.Point2D#getI <em>I</em>}' attribute.
+   * Sets the value of the '{@link dume.compiler.dume.Point2D#getI <em>I</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>I</em>' attribute.
+   * @param value the new value of the '<em>I</em>' containment reference.
    * @see #getI()
    * @generated
    */
-  void setI(int value);
+  void setI(dume.compiler.dume.Number value);
 
   /**
-   * Returns the value of the '<em><b>J</b></em>' attribute.
+   * Returns the value of the '<em><b>J</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>J</em>' attribute.
-   * @see #setJ(int)
+   * @return the value of the '<em>J</em>' containment reference.
+   * @see #setJ(dume.compiler.dume.Number)
    * @see dume.compiler.dume.DumePackage#getPoint2D_J()
-   * @model
+   * @model containment="true"
    * @generated
    */
-  int getJ();
+  dume.compiler.dume.Number getJ();
 
   /**
-   * Sets the value of the '{@link dume.compiler.dume.Point2D#getJ <em>J</em>}' attribute.
+   * Sets the value of the '{@link dume.compiler.dume.Point2D#getJ <em>J</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>J</em>' attribute.
+   * @param value the new value of the '<em>J</em>' containment reference.
    * @see #getJ()
    * @generated
    */
-  void setJ(int value);
+  void setJ(dume.compiler.dume.Number value);
 
   /**
    * Returns the value of the '<em><b>Map</b></em>' attribute.

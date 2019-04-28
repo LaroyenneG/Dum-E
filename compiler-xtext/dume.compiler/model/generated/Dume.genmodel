@@ -13,15 +13,20 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Dume.ecore#//Script/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dume.ecore#//Script/instructions"/>
     </genClasses>
+    <genClasses ecoreClass="Dume.ecore#//Number">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Dume.ecore#//Number/v"/>
+    </genClasses>
+    <genClasses ecoreClass="Dume.ecore#//Negative"/>
+    <genClasses ecoreClass="Dume.ecore#//Positive"/>
     <genClasses ecoreClass="Dume.ecore#//Instruction"/>
     <genClasses ecoreClass="Dume.ecore#//Point3D">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Dume.ecore#//Point3D/x"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Dume.ecore#//Point3D/y"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Dume.ecore#//Point3D/z"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dume.ecore#//Point3D/x"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dume.ecore#//Point3D/y"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dume.ecore#//Point3D/z"/>
     </genClasses>
     <genClasses ecoreClass="Dume.ecore#//Point2D">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Dume.ecore#//Point2D/i"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Dume.ecore#//Point2D/j"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dume.ecore#//Point2D/i"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dume.ecore#//Point2D/j"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Dume.ecore#//Point2D/map"/>
     </genClasses>
     <genClasses ecoreClass="Dume.ecore#//Point"/>
@@ -36,7 +41,6 @@
     <genClasses ecoreClass="Dume.ecore#//Drawing">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dume.ecore#//Drawing/shapes"/>
     </genClasses>
-    <genClasses ecoreClass="Dume.ecore#//Clear"/>
     <genClasses ecoreClass="Dume.ecore#//Go">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dume.ecore#//Go/point"/>
     </genClasses>

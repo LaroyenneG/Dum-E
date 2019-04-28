@@ -25,69 +25,69 @@ package dume.compiler.dume;
 public interface Point3D extends Point
 {
   /**
-   * Returns the value of the '<em><b>X</b></em>' attribute.
+   * Returns the value of the '<em><b>X</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>X</em>' attribute.
-   * @see #setX(int)
+   * @return the value of the '<em>X</em>' containment reference.
+   * @see #setX(dume.compiler.dume.Number)
    * @see dume.compiler.dume.DumePackage#getPoint3D_X()
-   * @model
+   * @model containment="true"
    * @generated
    */
-  int getX();
+  dume.compiler.dume.Number getX();
 
   /**
-   * Sets the value of the '{@link dume.compiler.dume.Point3D#getX <em>X</em>}' attribute.
+   * Sets the value of the '{@link dume.compiler.dume.Point3D#getX <em>X</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>X</em>' attribute.
+   * @param value the new value of the '<em>X</em>' containment reference.
    * @see #getX()
    * @generated
    */
-  void setX(int value);
+  void setX(dume.compiler.dume.Number value);
 
   /**
-   * Returns the value of the '<em><b>Y</b></em>' attribute.
+   * Returns the value of the '<em><b>Y</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Y</em>' attribute.
-   * @see #setY(int)
+   * @return the value of the '<em>Y</em>' containment reference.
+   * @see #setY(dume.compiler.dume.Number)
    * @see dume.compiler.dume.DumePackage#getPoint3D_Y()
-   * @model
+   * @model containment="true"
    * @generated
    */
-  int getY();
+  dume.compiler.dume.Number getY();
 
   /**
-   * Sets the value of the '{@link dume.compiler.dume.Point3D#getY <em>Y</em>}' attribute.
+   * Sets the value of the '{@link dume.compiler.dume.Point3D#getY <em>Y</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Y</em>' attribute.
+   * @param value the new value of the '<em>Y</em>' containment reference.
    * @see #getY()
    * @generated
    */
-  void setY(int value);
+  void setY(dume.compiler.dume.Number value);
 
   /**
-   * Returns the value of the '<em><b>Z</b></em>' attribute.
+   * Returns the value of the '<em><b>Z</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Z</em>' attribute.
-   * @see #setZ(int)
+   * @return the value of the '<em>Z</em>' containment reference.
+   * @see #setZ(dume.compiler.dume.Number)
    * @see dume.compiler.dume.DumePackage#getPoint3D_Z()
-   * @model
+   * @model containment="true"
    * @generated
    */
-  int getZ();
+  dume.compiler.dume.Number getZ();
 
   /**
-   * Sets the value of the '{@link dume.compiler.dume.Point3D#getZ <em>Z</em>}' attribute.
+   * Sets the value of the '{@link dume.compiler.dume.Point3D#getZ <em>Z</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Z</em>' attribute.
+   * @param value the new value of the '<em>Z</em>' containment reference.
    * @see #getZ()
    * @generated
    */
-  void setZ(int value);
+  void setZ(dume.compiler.dume.Number value);
 
 } // Point3D

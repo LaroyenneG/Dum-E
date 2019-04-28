@@ -5,11 +5,12 @@ package dume.compiler.generator;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
-import dume.compiler.dume.Clear;
+import dume.compiler.dume.Circle;
 import dume.compiler.dume.Drawing;
 import dume.compiler.dume.Go;
 import dume.compiler.dume.Instruction;
 import dume.compiler.dume.Loop;
+import dume.compiler.dume.Negative;
 import dume.compiler.dume.Point;
 import dume.compiler.dume.Point2D;
 import dume.compiler.dume.Point3D;
@@ -34,12 +35,17 @@ import org.eclipse.xtext.xbase.lib.IteratorExtensions;
  */
 @SuppressWarnings("all")
 public class DumeGenerator extends AbstractGenerator {
-  private static int mapDistance = 50;
+  private static final int CIRCLE_POINT_NUMBER = 10;
   
-  private static double scale = 100;
+  private static double mapDistance = 30;
+  
+  private static final double SCALE = 100;
+  
+  private boolean firstPoint;
   
   @Override
   public void doGenerate(final Resource resource, final IFileSystemAccess2 fsa, final IGeneratorContext context) {
+    this.firstPoint = false;
     Iterable<Script> _filter = Iterables.<Script>filter(IteratorExtensions.<EObject>toIterable(resource.getAllContents()), Script.class);
     for (final Script e : _filter) {
       String _name = e.getName();
@@ -53,7 +59,7 @@ public class DumeGenerator extends AbstractGenerator {
     {
       EList<Point2D> _points = shape.getPoints();
       for(final Point2D point : _points) {
-        CharSequence _goPoint2D = this.goPoint2D(point.getI(), point.getJ(), shape.getMap());
+        String _goPoint2D = this.goPoint2D(this.getValue(point.getI()), this.getValue(point.getJ()), shape.getMap());
         _builder.append(_goPoint2D);
         _builder.newLineIfNotEmpty();
       }
@@ -61,12 +67,23 @@ public class DumeGenerator extends AbstractGenerator {
     return _builder;
   }
   
+  public int getValue(final dume.compiler.dume.Number number) {
+    int value = number.getV();
+    boolean _matched = false;
+    if (number instanceof Negative) {
+      _matched=true;
+      int _value = value;
+      value = (_value * (-1));
+    }
+    return value;
+  }
+  
   public CharSequence compile(final Shape3D shape) {
     StringConcatenation _builder = new StringConcatenation();
     {
       EList<Point3D> _points = shape.getPoints();
       for(final Point3D point : _points) {
-        CharSequence _compile = this.compile(point);
+        String _compile = this.compile(point);
         _builder.append(_compile);
         _builder.newLineIfNotEmpty();
       }
@@ -75,6 +92,7 @@ public class DumeGenerator extends AbstractGenerator {
   }
   
   public CharSequence compile(final Shape shape) {
+    this.firstPoint = true;
     CharSequence _switchResult = null;
     boolean _matched = false;
     if (shape instanceof Shape2D) {
@@ -88,6 +106,12 @@ public class DumeGenerator extends AbstractGenerator {
       }
     }
     if (!_matched) {
+      if (shape instanceof Circle) {
+        _matched=true;
+        _switchResult = this.compile(((Circle) shape));
+      }
+    }
+    if (!_matched) {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("error");
       _switchResult = _builder.toString();
@@ -95,13 +119,37 @@ public class DumeGenerator extends AbstractGenerator {
     return _switchResult;
   }
   
-  public CharSequence goPoint2D(final int i, final int j, final String map) {
-    int x = 0;
-    int y = 0;
-    int z = 0;
+  public String compile(final Circle circle) {
+    String map = circle.getMap();
+    int radius = circle.getRadius();
+    int ci = this.getValue(circle.getPoint().getI());
+    int cj = this.getValue(circle.getPoint().getJ());
+    double step = ((Math.PI * 2.0) / DumeGenerator.CIRCLE_POINT_NUMBER);
+    StringConcatenation _builder = new StringConcatenation();
+    {
+      IntegerRange _upTo = new IntegerRange(0, DumeGenerator.CIRCLE_POINT_NUMBER);
+      for(final Integer i : _upTo) {
+        double _cos = Math.cos((step * (i).intValue()));
+        double _multiply = (_cos * radius);
+        double _plus = (_multiply + ci);
+        double _sin = Math.sin((step * (i).intValue()));
+        double _multiply_1 = (_sin * radius);
+        double _plus_1 = (_multiply_1 + cj);
+        String _goPoint2D = this.goPoint2D(_plus, _plus_1, map);
+        _builder.append(_goPoint2D);
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    return _builder.toString();
+  }
+  
+  public String goPoint2D(final double i, final double j, final String map) {
+    double x = 0.0;
+    double y = 0.0;
+    double z = 0.0;
     boolean _equals = Objects.equal(map, "A");
     if (_equals) {
-      x = (i - DumeGenerator.mapDistance);
+      x = i;
       y = (j + DumeGenerator.mapDistance);
       z = DumeGenerator.mapDistance;
     } else {
@@ -116,28 +164,34 @@ public class DumeGenerator extends AbstractGenerator {
     return this.goPoint3D(x, y, z);
   }
   
-  public CharSequence goPoint3D(final int x, final int y, final int z) {
+  public String goPoint3D(final double x, final double y, final double z) {
+    String cmd = "go";
+    if (this.firstPoint) {
+      cmd = "reach";
+      this.firstPoint = false;
+    }
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("go ");
-    _builder.append((x / DumeGenerator.scale));
+    _builder.append(cmd);
     _builder.append(" ");
-    _builder.append((y / DumeGenerator.scale));
+    _builder.append((x / DumeGenerator.SCALE));
     _builder.append(" ");
-    _builder.append((z / DumeGenerator.scale));
+    _builder.append((y / DumeGenerator.SCALE));
+    _builder.append(" ");
+    _builder.append((z / DumeGenerator.SCALE));
     _builder.newLineIfNotEmpty();
-    return _builder;
+    return _builder.toString();
   }
   
-  public CharSequence compile(final Point3D point) {
-    return this.goPoint3D(point.getX(), point.getY(), point.getZ());
+  public String compile(final Point3D point) {
+    return this.goPoint3D(this.getValue(point.getX()), this.getValue(point.getY()), this.getValue(point.getZ()));
   }
   
-  public CharSequence compile(final Point point) {
-    CharSequence _switchResult = null;
+  public String compile(final Point point) {
+    String _switchResult = null;
     boolean _matched = false;
     if (point instanceof Point2D) {
       _matched=true;
-      _switchResult = this.goPoint2D(((Point2D) point).getI(), ((Point2D) point).getJ(), ((Point2D)point).getMap());
+      _switchResult = this.goPoint2D(this.getValue(((Point2D) point).getI()), this.getValue(((Point2D) point).getJ()), ((Point2D)point).getMap());
     }
     if (!_matched) {
       if (point instanceof Point3D) {
@@ -156,7 +210,7 @@ public class DumeGenerator extends AbstractGenerator {
   public CharSequence compile(final Go go) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("go ");
-    CharSequence _compile = this.compile(go.getPoint());
+    String _compile = this.compile(go.getPoint());
     _builder.append(_compile);
     _builder.newLineIfNotEmpty();
     return _builder;
@@ -164,6 +218,8 @@ public class DumeGenerator extends AbstractGenerator {
   
   public CharSequence compile(final Drawing drawing) {
     StringConcatenation _builder = new StringConcatenation();
+    _builder.append("clear organ");
+    _builder.newLine();
     {
       EList<Shape> _shapes = drawing.getShapes();
       for(final Shape shape : _shapes) {
@@ -179,25 +235,12 @@ public class DumeGenerator extends AbstractGenerator {
     return _builder;
   }
   
-  public CharSequence compile(final Clear clear) {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("clear");
-    _builder.newLine();
-    return _builder;
-  }
-  
   public CharSequence compile(final Instruction instruction) {
     CharSequence _switchResult = null;
     boolean _matched = false;
     if (instruction instanceof Drawing) {
       _matched=true;
       _switchResult = this.compile(((Drawing) instruction));
-    }
-    if (!_matched) {
-      if (instruction instanceof Clear) {
-        _matched=true;
-        _switchResult = this.compile(((Clear) instruction));
-      }
     }
     if (!_matched) {
       if (instruction instanceof Go) {

@@ -8,9 +8,18 @@ Scripts:
 Script:
 	'Script' name=ID '{' (instructions+=Instruction)* '}';
 
+Number:
+	Negative
+	| Positive;
+
+Negative:
+	'-' v=INT;
+
+Positive:
+	v=INT;
+
 Instruction:
 	Drawing
-	| Clear
 	| Go
 	| Loop;
 
@@ -18,10 +27,10 @@ Map:
 	'A' | 'B' | 'C' | 'D' | 'E' | 'F';
 
 Point3D:
-	'(' x=INT y=INT z=INT ')';
+	x=Number y=Number z=Number;
 
 Point2D:
-	'(' i=INT j=INT ')';
+	i=Number j=Number;
 
 Point:
 	Point3D
@@ -40,9 +49,6 @@ Shape2D:
 
 Drawing:
 	{Drawing} 'drawing' '{' (shapes+=Shape)* '}';
-
-Clear:
-	{Clear} 'clear';
 
 Go:
 	'go' point=Point;

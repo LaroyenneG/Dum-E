@@ -7,8 +7,10 @@ import dume.compiler.dume.DumePackage;
 import dume.compiler.dume.Point3D;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
@@ -30,64 +32,34 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 public class Point3DImpl extends PointImpl implements Point3D
 {
   /**
-   * The default value of the '{@link #getX() <em>X</em>}' attribute.
+   * The cached value of the '{@link #getX() <em>X</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getX()
    * @generated
    * @ordered
    */
-  protected static final int X_EDEFAULT = 0;
+  protected dume.compiler.dume.Number x;
 
   /**
-   * The cached value of the '{@link #getX() <em>X</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getX()
-   * @generated
-   * @ordered
-   */
-  protected int x = X_EDEFAULT;
-
-  /**
-   * The default value of the '{@link #getY() <em>Y</em>}' attribute.
+   * The cached value of the '{@link #getY() <em>Y</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getY()
    * @generated
    * @ordered
    */
-  protected static final int Y_EDEFAULT = 0;
+  protected dume.compiler.dume.Number y;
 
   /**
-   * The cached value of the '{@link #getY() <em>Y</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getY()
-   * @generated
-   * @ordered
-   */
-  protected int y = Y_EDEFAULT;
-
-  /**
-   * The default value of the '{@link #getZ() <em>Z</em>}' attribute.
+   * The cached value of the '{@link #getZ() <em>Z</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getZ()
    * @generated
    * @ordered
    */
-  protected static final int Z_EDEFAULT = 0;
-
-  /**
-   * The cached value of the '{@link #getZ() <em>Z</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getZ()
-   * @generated
-   * @ordered
-   */
-  protected int z = Z_EDEFAULT;
+  protected dume.compiler.dume.Number z;
 
   /**
    * <!-- begin-user-doc -->
@@ -116,7 +88,7 @@ public class Point3DImpl extends PointImpl implements Point3D
    * @generated
    */
   @Override
-  public int getX()
+  public dume.compiler.dume.Number getX()
   {
     return x;
   }
@@ -126,13 +98,16 @@ public class Point3DImpl extends PointImpl implements Point3D
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-  public void setX(int newX)
+  public NotificationChain basicSetX(dume.compiler.dume.Number newX, NotificationChain msgs)
   {
-    int oldX = x;
+    dume.compiler.dume.Number oldX = x;
     x = newX;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, DumePackage.POINT3_D__X, oldX, x));
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, DumePackage.POINT3_D__X, oldX, newX);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
   }
 
   /**
@@ -141,7 +116,29 @@ public class Point3DImpl extends PointImpl implements Point3D
    * @generated
    */
   @Override
-  public int getY()
+  public void setX(dume.compiler.dume.Number newX)
+  {
+    if (newX != x)
+    {
+      NotificationChain msgs = null;
+      if (x != null)
+        msgs = ((InternalEObject)x).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - DumePackage.POINT3_D__X, null, msgs);
+      if (newX != null)
+        msgs = ((InternalEObject)newX).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - DumePackage.POINT3_D__X, null, msgs);
+      msgs = basicSetX(newX, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, DumePackage.POINT3_D__X, newX, newX));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public dume.compiler.dume.Number getY()
   {
     return y;
   }
@@ -151,13 +148,16 @@ public class Point3DImpl extends PointImpl implements Point3D
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-  public void setY(int newY)
+  public NotificationChain basicSetY(dume.compiler.dume.Number newY, NotificationChain msgs)
   {
-    int oldY = y;
+    dume.compiler.dume.Number oldY = y;
     y = newY;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, DumePackage.POINT3_D__Y, oldY, y));
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, DumePackage.POINT3_D__Y, oldY, newY);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
   }
 
   /**
@@ -166,7 +166,29 @@ public class Point3DImpl extends PointImpl implements Point3D
    * @generated
    */
   @Override
-  public int getZ()
+  public void setY(dume.compiler.dume.Number newY)
+  {
+    if (newY != y)
+    {
+      NotificationChain msgs = null;
+      if (y != null)
+        msgs = ((InternalEObject)y).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - DumePackage.POINT3_D__Y, null, msgs);
+      if (newY != null)
+        msgs = ((InternalEObject)newY).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - DumePackage.POINT3_D__Y, null, msgs);
+      msgs = basicSetY(newY, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, DumePackage.POINT3_D__Y, newY, newY));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public dume.compiler.dume.Number getZ()
   {
     return z;
   }
@@ -176,13 +198,58 @@ public class Point3DImpl extends PointImpl implements Point3D
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-  public void setZ(int newZ)
+  public NotificationChain basicSetZ(dume.compiler.dume.Number newZ, NotificationChain msgs)
   {
-    int oldZ = z;
+    dume.compiler.dume.Number oldZ = z;
     z = newZ;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, DumePackage.POINT3_D__Z, oldZ, z));
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, DumePackage.POINT3_D__Z, oldZ, newZ);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setZ(dume.compiler.dume.Number newZ)
+  {
+    if (newZ != z)
+    {
+      NotificationChain msgs = null;
+      if (z != null)
+        msgs = ((InternalEObject)z).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - DumePackage.POINT3_D__Z, null, msgs);
+      if (newZ != null)
+        msgs = ((InternalEObject)newZ).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - DumePackage.POINT3_D__Z, null, msgs);
+      msgs = basicSetZ(newZ, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, DumePackage.POINT3_D__Z, newZ, newZ));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+  {
+    switch (featureID)
+    {
+      case DumePackage.POINT3_D__X:
+        return basicSetX(null, msgs);
+      case DumePackage.POINT3_D__Y:
+        return basicSetY(null, msgs);
+      case DumePackage.POINT3_D__Z:
+        return basicSetZ(null, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
   }
 
   /**
@@ -216,13 +283,13 @@ public class Point3DImpl extends PointImpl implements Point3D
     switch (featureID)
     {
       case DumePackage.POINT3_D__X:
-        setX((Integer)newValue);
+        setX((dume.compiler.dume.Number)newValue);
         return;
       case DumePackage.POINT3_D__Y:
-        setY((Integer)newValue);
+        setY((dume.compiler.dume.Number)newValue);
         return;
       case DumePackage.POINT3_D__Z:
-        setZ((Integer)newValue);
+        setZ((dume.compiler.dume.Number)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -239,13 +306,13 @@ public class Point3DImpl extends PointImpl implements Point3D
     switch (featureID)
     {
       case DumePackage.POINT3_D__X:
-        setX(X_EDEFAULT);
+        setX((dume.compiler.dume.Number)null);
         return;
       case DumePackage.POINT3_D__Y:
-        setY(Y_EDEFAULT);
+        setY((dume.compiler.dume.Number)null);
         return;
       case DumePackage.POINT3_D__Z:
-        setZ(Z_EDEFAULT);
+        setZ((dume.compiler.dume.Number)null);
         return;
     }
     super.eUnset(featureID);
@@ -262,34 +329,13 @@ public class Point3DImpl extends PointImpl implements Point3D
     switch (featureID)
     {
       case DumePackage.POINT3_D__X:
-        return x != X_EDEFAULT;
+        return x != null;
       case DumePackage.POINT3_D__Y:
-        return y != Y_EDEFAULT;
+        return y != null;
       case DumePackage.POINT3_D__Z:
-        return z != Z_EDEFAULT;
+        return z != null;
     }
     return super.eIsSet(featureID);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String toString()
-  {
-    if (eIsProxy()) return super.toString();
-
-    StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (x: ");
-    result.append(x);
-    result.append(", y: ");
-    result.append(y);
-    result.append(", z: ");
-    result.append(z);
-    result.append(')');
-    return result.toString();
   }
 
 } //Point3DImpl

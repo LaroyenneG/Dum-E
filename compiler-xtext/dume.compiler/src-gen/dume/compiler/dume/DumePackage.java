@@ -123,6 +123,90 @@ public interface DumePackage extends EPackage
   int SCRIPT_FEATURE_COUNT = 2;
 
   /**
+   * The meta object id for the '{@link dume.compiler.dume.impl.NumberImpl <em>Number</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see dume.compiler.dume.impl.NumberImpl
+   * @see dume.compiler.dume.impl.DumePackageImpl#getNumber()
+   * @generated
+   */
+  int NUMBER = 2;
+
+  /**
+   * The feature id for the '<em><b>V</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int NUMBER__V = 0;
+
+  /**
+   * The number of structural features of the '<em>Number</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int NUMBER_FEATURE_COUNT = 1;
+
+  /**
+   * The meta object id for the '{@link dume.compiler.dume.impl.NegativeImpl <em>Negative</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see dume.compiler.dume.impl.NegativeImpl
+   * @see dume.compiler.dume.impl.DumePackageImpl#getNegative()
+   * @generated
+   */
+  int NEGATIVE = 3;
+
+  /**
+   * The feature id for the '<em><b>V</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int NEGATIVE__V = NUMBER__V;
+
+  /**
+   * The number of structural features of the '<em>Negative</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int NEGATIVE_FEATURE_COUNT = NUMBER_FEATURE_COUNT + 0;
+
+  /**
+   * The meta object id for the '{@link dume.compiler.dume.impl.PositiveImpl <em>Positive</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see dume.compiler.dume.impl.PositiveImpl
+   * @see dume.compiler.dume.impl.DumePackageImpl#getPositive()
+   * @generated
+   */
+  int POSITIVE = 4;
+
+  /**
+   * The feature id for the '<em><b>V</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int POSITIVE__V = NUMBER__V;
+
+  /**
+   * The number of structural features of the '<em>Positive</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int POSITIVE_FEATURE_COUNT = NUMBER_FEATURE_COUNT + 0;
+
+  /**
    * The meta object id for the '{@link dume.compiler.dume.impl.InstructionImpl <em>Instruction</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -130,7 +214,7 @@ public interface DumePackage extends EPackage
    * @see dume.compiler.dume.impl.DumePackageImpl#getInstruction()
    * @generated
    */
-  int INSTRUCTION = 2;
+  int INSTRUCTION = 5;
 
   /**
    * The number of structural features of the '<em>Instruction</em>' class.
@@ -149,7 +233,7 @@ public interface DumePackage extends EPackage
    * @see dume.compiler.dume.impl.DumePackageImpl#getPoint()
    * @generated
    */
-  int POINT = 5;
+  int POINT = 8;
 
   /**
    * The number of structural features of the '<em>Point</em>' class.
@@ -168,10 +252,10 @@ public interface DumePackage extends EPackage
    * @see dume.compiler.dume.impl.DumePackageImpl#getPoint3D()
    * @generated
    */
-  int POINT3_D = 3;
+  int POINT3_D = 6;
 
   /**
-   * The feature id for the '<em><b>X</b></em>' attribute.
+   * The feature id for the '<em><b>X</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -180,7 +264,7 @@ public interface DumePackage extends EPackage
   int POINT3_D__X = POINT_FEATURE_COUNT + 0;
 
   /**
-   * The feature id for the '<em><b>Y</b></em>' attribute.
+   * The feature id for the '<em><b>Y</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -189,7 +273,7 @@ public interface DumePackage extends EPackage
   int POINT3_D__Y = POINT_FEATURE_COUNT + 1;
 
   /**
-   * The feature id for the '<em><b>Z</b></em>' attribute.
+   * The feature id for the '<em><b>Z</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -214,10 +298,10 @@ public interface DumePackage extends EPackage
    * @see dume.compiler.dume.impl.DumePackageImpl#getPoint2D()
    * @generated
    */
-  int POINT2_D = 4;
+  int POINT2_D = 7;
 
   /**
-   * The feature id for the '<em><b>I</b></em>' attribute.
+   * The feature id for the '<em><b>I</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -226,7 +310,7 @@ public interface DumePackage extends EPackage
   int POINT2_D__I = POINT_FEATURE_COUNT + 0;
 
   /**
-   * The feature id for the '<em><b>J</b></em>' attribute.
+   * The feature id for the '<em><b>J</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -260,7 +344,7 @@ public interface DumePackage extends EPackage
    * @see dume.compiler.dume.impl.DumePackageImpl#getShape()
    * @generated
    */
-  int SHAPE = 6;
+  int SHAPE = 9;
 
   /**
    * The number of structural features of the '<em>Shape</em>' class.
@@ -279,7 +363,7 @@ public interface DumePackage extends EPackage
    * @see dume.compiler.dume.impl.DumePackageImpl#getShape3D()
    * @generated
    */
-  int SHAPE3_D = 7;
+  int SHAPE3_D = 10;
 
   /**
    * The feature id for the '<em><b>Points</b></em>' containment reference list.
@@ -307,7 +391,7 @@ public interface DumePackage extends EPackage
    * @see dume.compiler.dume.impl.DumePackageImpl#getShape2D()
    * @generated
    */
-  int SHAPE2_D = 8;
+  int SHAPE2_D = 11;
 
   /**
    * The feature id for the '<em><b>Map</b></em>' attribute.
@@ -344,7 +428,7 @@ public interface DumePackage extends EPackage
    * @see dume.compiler.dume.impl.DumePackageImpl#getDrawing()
    * @generated
    */
-  int DRAWING = 9;
+  int DRAWING = 12;
 
   /**
    * The feature id for the '<em><b>Shapes</b></em>' containment reference list.
@@ -365,25 +449,6 @@ public interface DumePackage extends EPackage
   int DRAWING_FEATURE_COUNT = INSTRUCTION_FEATURE_COUNT + 1;
 
   /**
-   * The meta object id for the '{@link dume.compiler.dume.impl.ClearImpl <em>Clear</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see dume.compiler.dume.impl.ClearImpl
-   * @see dume.compiler.dume.impl.DumePackageImpl#getClear()
-   * @generated
-   */
-  int CLEAR = 10;
-
-  /**
-   * The number of structural features of the '<em>Clear</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int CLEAR_FEATURE_COUNT = INSTRUCTION_FEATURE_COUNT + 0;
-
-  /**
    * The meta object id for the '{@link dume.compiler.dume.impl.GoImpl <em>Go</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -391,7 +456,7 @@ public interface DumePackage extends EPackage
    * @see dume.compiler.dume.impl.DumePackageImpl#getGo()
    * @generated
    */
-  int GO = 11;
+  int GO = 13;
 
   /**
    * The feature id for the '<em><b>Point</b></em>' containment reference.
@@ -419,7 +484,7 @@ public interface DumePackage extends EPackage
    * @see dume.compiler.dume.impl.DumePackageImpl#getCircle()
    * @generated
    */
-  int CIRCLE = 12;
+  int CIRCLE = 14;
 
   /**
    * The feature id for the '<em><b>Point</b></em>' containment reference.
@@ -465,7 +530,7 @@ public interface DumePackage extends EPackage
    * @see dume.compiler.dume.impl.DumePackageImpl#getLoop()
    * @generated
    */
-  int LOOP = 13;
+  int LOOP = 15;
 
   /**
    * The feature id for the '<em><b>N</b></em>' attribute.
@@ -549,6 +614,47 @@ public interface DumePackage extends EPackage
   EReference getScript_Instructions();
 
   /**
+   * Returns the meta object for class '{@link dume.compiler.dume.Number <em>Number</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Number</em>'.
+   * @see dume.compiler.dume.Number
+   * @generated
+   */
+  EClass getNumber();
+
+  /**
+   * Returns the meta object for the attribute '{@link dume.compiler.dume.Number#getV <em>V</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>V</em>'.
+   * @see dume.compiler.dume.Number#getV()
+   * @see #getNumber()
+   * @generated
+   */
+  EAttribute getNumber_V();
+
+  /**
+   * Returns the meta object for class '{@link dume.compiler.dume.Negative <em>Negative</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Negative</em>'.
+   * @see dume.compiler.dume.Negative
+   * @generated
+   */
+  EClass getNegative();
+
+  /**
+   * Returns the meta object for class '{@link dume.compiler.dume.Positive <em>Positive</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Positive</em>'.
+   * @see dume.compiler.dume.Positive
+   * @generated
+   */
+  EClass getPositive();
+
+  /**
    * Returns the meta object for class '{@link dume.compiler.dume.Instruction <em>Instruction</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -569,37 +675,37 @@ public interface DumePackage extends EPackage
   EClass getPoint3D();
 
   /**
-   * Returns the meta object for the attribute '{@link dume.compiler.dume.Point3D#getX <em>X</em>}'.
+   * Returns the meta object for the containment reference '{@link dume.compiler.dume.Point3D#getX <em>X</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>X</em>'.
+   * @return the meta object for the containment reference '<em>X</em>'.
    * @see dume.compiler.dume.Point3D#getX()
    * @see #getPoint3D()
    * @generated
    */
-  EAttribute getPoint3D_X();
+  EReference getPoint3D_X();
 
   /**
-   * Returns the meta object for the attribute '{@link dume.compiler.dume.Point3D#getY <em>Y</em>}'.
+   * Returns the meta object for the containment reference '{@link dume.compiler.dume.Point3D#getY <em>Y</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Y</em>'.
+   * @return the meta object for the containment reference '<em>Y</em>'.
    * @see dume.compiler.dume.Point3D#getY()
    * @see #getPoint3D()
    * @generated
    */
-  EAttribute getPoint3D_Y();
+  EReference getPoint3D_Y();
 
   /**
-   * Returns the meta object for the attribute '{@link dume.compiler.dume.Point3D#getZ <em>Z</em>}'.
+   * Returns the meta object for the containment reference '{@link dume.compiler.dume.Point3D#getZ <em>Z</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Z</em>'.
+   * @return the meta object for the containment reference '<em>Z</em>'.
    * @see dume.compiler.dume.Point3D#getZ()
    * @see #getPoint3D()
    * @generated
    */
-  EAttribute getPoint3D_Z();
+  EReference getPoint3D_Z();
 
   /**
    * Returns the meta object for class '{@link dume.compiler.dume.Point2D <em>Point2 D</em>}'.
@@ -612,26 +718,26 @@ public interface DumePackage extends EPackage
   EClass getPoint2D();
 
   /**
-   * Returns the meta object for the attribute '{@link dume.compiler.dume.Point2D#getI <em>I</em>}'.
+   * Returns the meta object for the containment reference '{@link dume.compiler.dume.Point2D#getI <em>I</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>I</em>'.
+   * @return the meta object for the containment reference '<em>I</em>'.
    * @see dume.compiler.dume.Point2D#getI()
    * @see #getPoint2D()
    * @generated
    */
-  EAttribute getPoint2D_I();
+  EReference getPoint2D_I();
 
   /**
-   * Returns the meta object for the attribute '{@link dume.compiler.dume.Point2D#getJ <em>J</em>}'.
+   * Returns the meta object for the containment reference '{@link dume.compiler.dume.Point2D#getJ <em>J</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>J</em>'.
+   * @return the meta object for the containment reference '<em>J</em>'.
    * @see dume.compiler.dume.Point2D#getJ()
    * @see #getPoint2D()
    * @generated
    */
-  EAttribute getPoint2D_J();
+  EReference getPoint2D_J();
 
   /**
    * Returns the meta object for the attribute '{@link dume.compiler.dume.Point2D#getMap <em>Map</em>}'.
@@ -737,16 +843,6 @@ public interface DumePackage extends EPackage
    * @generated
    */
   EReference getDrawing_Shapes();
-
-  /**
-   * Returns the meta object for class '{@link dume.compiler.dume.Clear <em>Clear</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Clear</em>'.
-   * @see dume.compiler.dume.Clear
-   * @generated
-   */
-  EClass getClear();
 
   /**
    * Returns the meta object for class '{@link dume.compiler.dume.Go <em>Go</em>}'.
@@ -912,6 +1008,44 @@ public interface DumePackage extends EPackage
     EReference SCRIPT__INSTRUCTIONS = eINSTANCE.getScript_Instructions();
 
     /**
+     * The meta object literal for the '{@link dume.compiler.dume.impl.NumberImpl <em>Number</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see dume.compiler.dume.impl.NumberImpl
+     * @see dume.compiler.dume.impl.DumePackageImpl#getNumber()
+     * @generated
+     */
+    EClass NUMBER = eINSTANCE.getNumber();
+
+    /**
+     * The meta object literal for the '<em><b>V</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute NUMBER__V = eINSTANCE.getNumber_V();
+
+    /**
+     * The meta object literal for the '{@link dume.compiler.dume.impl.NegativeImpl <em>Negative</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see dume.compiler.dume.impl.NegativeImpl
+     * @see dume.compiler.dume.impl.DumePackageImpl#getNegative()
+     * @generated
+     */
+    EClass NEGATIVE = eINSTANCE.getNegative();
+
+    /**
+     * The meta object literal for the '{@link dume.compiler.dume.impl.PositiveImpl <em>Positive</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see dume.compiler.dume.impl.PositiveImpl
+     * @see dume.compiler.dume.impl.DumePackageImpl#getPositive()
+     * @generated
+     */
+    EClass POSITIVE = eINSTANCE.getPositive();
+
+    /**
      * The meta object literal for the '{@link dume.compiler.dume.impl.InstructionImpl <em>Instruction</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -932,28 +1066,28 @@ public interface DumePackage extends EPackage
     EClass POINT3_D = eINSTANCE.getPoint3D();
 
     /**
-     * The meta object literal for the '<em><b>X</b></em>' attribute feature.
+     * The meta object literal for the '<em><b>X</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute POINT3_D__X = eINSTANCE.getPoint3D_X();
+    EReference POINT3_D__X = eINSTANCE.getPoint3D_X();
 
     /**
-     * The meta object literal for the '<em><b>Y</b></em>' attribute feature.
+     * The meta object literal for the '<em><b>Y</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute POINT3_D__Y = eINSTANCE.getPoint3D_Y();
+    EReference POINT3_D__Y = eINSTANCE.getPoint3D_Y();
 
     /**
-     * The meta object literal for the '<em><b>Z</b></em>' attribute feature.
+     * The meta object literal for the '<em><b>Z</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute POINT3_D__Z = eINSTANCE.getPoint3D_Z();
+    EReference POINT3_D__Z = eINSTANCE.getPoint3D_Z();
 
     /**
      * The meta object literal for the '{@link dume.compiler.dume.impl.Point2DImpl <em>Point2 D</em>}' class.
@@ -966,20 +1100,20 @@ public interface DumePackage extends EPackage
     EClass POINT2_D = eINSTANCE.getPoint2D();
 
     /**
-     * The meta object literal for the '<em><b>I</b></em>' attribute feature.
+     * The meta object literal for the '<em><b>I</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute POINT2_D__I = eINSTANCE.getPoint2D_I();
+    EReference POINT2_D__I = eINSTANCE.getPoint2D_I();
 
     /**
-     * The meta object literal for the '<em><b>J</b></em>' attribute feature.
+     * The meta object literal for the '<em><b>J</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute POINT2_D__J = eINSTANCE.getPoint2D_J();
+    EReference POINT2_D__J = eINSTANCE.getPoint2D_J();
 
     /**
      * The meta object literal for the '<em><b>Map</b></em>' attribute feature.
@@ -1070,16 +1204,6 @@ public interface DumePackage extends EPackage
      * @generated
      */
     EReference DRAWING__SHAPES = eINSTANCE.getDrawing_Shapes();
-
-    /**
-     * The meta object literal for the '{@link dume.compiler.dume.impl.ClearImpl <em>Clear</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see dume.compiler.dume.impl.ClearImpl
-     * @see dume.compiler.dume.impl.DumePackageImpl#getClear()
-     * @generated
-     */
-    EClass CLEAR = eINSTANCE.getClear();
 
     /**
      * The meta object literal for the '{@link dume.compiler.dume.impl.GoImpl <em>Go</em>}' class.

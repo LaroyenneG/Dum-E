@@ -4,16 +4,17 @@
 package dume.compiler.dume.impl;
 
 import dume.compiler.dume.Circle;
-import dume.compiler.dume.Clear;
 import dume.compiler.dume.Drawing;
 import dume.compiler.dume.DumeFactory;
 import dume.compiler.dume.DumePackage;
 import dume.compiler.dume.Go;
 import dume.compiler.dume.Instruction;
 import dume.compiler.dume.Loop;
+import dume.compiler.dume.Negative;
 import dume.compiler.dume.Point;
 import dume.compiler.dume.Point2D;
 import dume.compiler.dume.Point3D;
+import dume.compiler.dume.Positive;
 import dume.compiler.dume.Script;
 import dume.compiler.dume.Scripts;
 import dume.compiler.dume.Shape;
@@ -48,6 +49,27 @@ public class DumePackageImpl extends EPackageImpl implements DumePackage
    * @generated
    */
   private EClass scriptEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass numberEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass negativeEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass positiveEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -104,13 +126,6 @@ public class DumePackageImpl extends EPackageImpl implements DumePackage
    * @generated
    */
   private EClass drawingEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass clearEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -257,6 +272,50 @@ public class DumePackageImpl extends EPackageImpl implements DumePackage
    * @generated
    */
   @Override
+  public EClass getNumber()
+  {
+    return numberEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getNumber_V()
+  {
+    return (EAttribute)numberEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getNegative()
+  {
+    return negativeEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getPositive()
+  {
+    return positiveEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EClass getInstruction()
   {
     return instructionEClass;
@@ -279,9 +338,9 @@ public class DumePackageImpl extends EPackageImpl implements DumePackage
    * @generated
    */
   @Override
-  public EAttribute getPoint3D_X()
+  public EReference getPoint3D_X()
   {
-    return (EAttribute)point3DEClass.getEStructuralFeatures().get(0);
+    return (EReference)point3DEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -290,9 +349,9 @@ public class DumePackageImpl extends EPackageImpl implements DumePackage
    * @generated
    */
   @Override
-  public EAttribute getPoint3D_Y()
+  public EReference getPoint3D_Y()
   {
-    return (EAttribute)point3DEClass.getEStructuralFeatures().get(1);
+    return (EReference)point3DEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -301,9 +360,9 @@ public class DumePackageImpl extends EPackageImpl implements DumePackage
    * @generated
    */
   @Override
-  public EAttribute getPoint3D_Z()
+  public EReference getPoint3D_Z()
   {
-    return (EAttribute)point3DEClass.getEStructuralFeatures().get(2);
+    return (EReference)point3DEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -323,9 +382,9 @@ public class DumePackageImpl extends EPackageImpl implements DumePackage
    * @generated
    */
   @Override
-  public EAttribute getPoint2D_I()
+  public EReference getPoint2D_I()
   {
-    return (EAttribute)point2DEClass.getEStructuralFeatures().get(0);
+    return (EReference)point2DEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -334,9 +393,9 @@ public class DumePackageImpl extends EPackageImpl implements DumePackage
    * @generated
    */
   @Override
-  public EAttribute getPoint2D_J()
+  public EReference getPoint2D_J()
   {
-    return (EAttribute)point2DEClass.getEStructuralFeatures().get(1);
+    return (EReference)point2DEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -447,17 +506,6 @@ public class DumePackageImpl extends EPackageImpl implements DumePackage
   public EReference getDrawing_Shapes()
   {
     return (EReference)drawingEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EClass getClear()
-  {
-    return clearEClass;
   }
 
   /**
@@ -597,16 +645,23 @@ public class DumePackageImpl extends EPackageImpl implements DumePackage
     createEAttribute(scriptEClass, SCRIPT__NAME);
     createEReference(scriptEClass, SCRIPT__INSTRUCTIONS);
 
+    numberEClass = createEClass(NUMBER);
+    createEAttribute(numberEClass, NUMBER__V);
+
+    negativeEClass = createEClass(NEGATIVE);
+
+    positiveEClass = createEClass(POSITIVE);
+
     instructionEClass = createEClass(INSTRUCTION);
 
     point3DEClass = createEClass(POINT3_D);
-    createEAttribute(point3DEClass, POINT3_D__X);
-    createEAttribute(point3DEClass, POINT3_D__Y);
-    createEAttribute(point3DEClass, POINT3_D__Z);
+    createEReference(point3DEClass, POINT3_D__X);
+    createEReference(point3DEClass, POINT3_D__Y);
+    createEReference(point3DEClass, POINT3_D__Z);
 
     point2DEClass = createEClass(POINT2_D);
-    createEAttribute(point2DEClass, POINT2_D__I);
-    createEAttribute(point2DEClass, POINT2_D__J);
+    createEReference(point2DEClass, POINT2_D__I);
+    createEReference(point2DEClass, POINT2_D__J);
     createEAttribute(point2DEClass, POINT2_D__MAP);
 
     pointEClass = createEClass(POINT);
@@ -622,8 +677,6 @@ public class DumePackageImpl extends EPackageImpl implements DumePackage
 
     drawingEClass = createEClass(DRAWING);
     createEReference(drawingEClass, DRAWING__SHAPES);
-
-    clearEClass = createEClass(CLEAR);
 
     goEClass = createEClass(GO);
     createEReference(goEClass, GO__POINT);
@@ -667,12 +720,13 @@ public class DumePackageImpl extends EPackageImpl implements DumePackage
     // Set bounds for type parameters
 
     // Add supertypes to classes
+    negativeEClass.getESuperTypes().add(this.getNumber());
+    positiveEClass.getESuperTypes().add(this.getNumber());
     point3DEClass.getESuperTypes().add(this.getPoint());
     point2DEClass.getESuperTypes().add(this.getPoint());
     shape3DEClass.getESuperTypes().add(this.getShape());
     shape2DEClass.getESuperTypes().add(this.getShape());
     drawingEClass.getESuperTypes().add(this.getInstruction());
-    clearEClass.getESuperTypes().add(this.getInstruction());
     goEClass.getESuperTypes().add(this.getInstruction());
     circleEClass.getESuperTypes().add(this.getShape());
     loopEClass.getESuperTypes().add(this.getInstruction());
@@ -685,16 +739,23 @@ public class DumePackageImpl extends EPackageImpl implements DumePackage
     initEAttribute(getScript_Name(), ecorePackage.getEString(), "name", null, 0, 1, Script.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getScript_Instructions(), this.getInstruction(), null, "instructions", null, 0, -1, Script.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+    initEClass(numberEClass, dume.compiler.dume.Number.class, "Number", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getNumber_V(), ecorePackage.getEInt(), "v", null, 0, 1, dume.compiler.dume.Number.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(negativeEClass, Negative.class, "Negative", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(positiveEClass, Positive.class, "Positive", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
     initEClass(instructionEClass, Instruction.class, "Instruction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(point3DEClass, Point3D.class, "Point3D", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getPoint3D_X(), ecorePackage.getEInt(), "x", null, 0, 1, Point3D.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getPoint3D_Y(), ecorePackage.getEInt(), "y", null, 0, 1, Point3D.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getPoint3D_Z(), ecorePackage.getEInt(), "z", null, 0, 1, Point3D.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getPoint3D_X(), this.getNumber(), null, "x", null, 0, 1, Point3D.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getPoint3D_Y(), this.getNumber(), null, "y", null, 0, 1, Point3D.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getPoint3D_Z(), this.getNumber(), null, "z", null, 0, 1, Point3D.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(point2DEClass, Point2D.class, "Point2D", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getPoint2D_I(), ecorePackage.getEInt(), "i", null, 0, 1, Point2D.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getPoint2D_J(), ecorePackage.getEInt(), "j", null, 0, 1, Point2D.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getPoint2D_I(), this.getNumber(), null, "i", null, 0, 1, Point2D.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getPoint2D_J(), this.getNumber(), null, "j", null, 0, 1, Point2D.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getPoint2D_Map(), ecorePackage.getEString(), "map", null, 0, 1, Point2D.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(pointEClass, Point.class, "Point", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -710,8 +771,6 @@ public class DumePackageImpl extends EPackageImpl implements DumePackage
 
     initEClass(drawingEClass, Drawing.class, "Drawing", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getDrawing_Shapes(), this.getShape(), null, "shapes", null, 0, -1, Drawing.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(clearEClass, Clear.class, "Clear", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(goEClass, Go.class, "Go", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getGo_Point(), this.getPoint(), null, "point", null, 0, 1, Go.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

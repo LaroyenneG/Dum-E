@@ -3,7 +3,23 @@
  */
 package dume.compiler.dume.impl;
 
-import dume.compiler.dume.*;
+import dume.compiler.dume.Circle;
+import dume.compiler.dume.Drawing;
+import dume.compiler.dume.DumeFactory;
+import dume.compiler.dume.DumePackage;
+import dume.compiler.dume.Go;
+import dume.compiler.dume.Instruction;
+import dume.compiler.dume.Loop;
+import dume.compiler.dume.Negative;
+import dume.compiler.dume.Point;
+import dume.compiler.dume.Point2D;
+import dume.compiler.dume.Point3D;
+import dume.compiler.dume.Positive;
+import dume.compiler.dume.Script;
+import dume.compiler.dume.Scripts;
+import dume.compiler.dume.Shape;
+import dume.compiler.dume.Shape2D;
+import dume.compiler.dume.Shape3D;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -67,6 +83,9 @@ public class DumeFactoryImpl extends EFactoryImpl implements DumeFactory
     {
       case DumePackage.SCRIPTS: return createScripts();
       case DumePackage.SCRIPT: return createScript();
+      case DumePackage.NUMBER: return createNumber();
+      case DumePackage.NEGATIVE: return createNegative();
+      case DumePackage.POSITIVE: return createPositive();
       case DumePackage.INSTRUCTION: return createInstruction();
       case DumePackage.POINT3_D: return createPoint3D();
       case DumePackage.POINT2_D: return createPoint2D();
@@ -75,7 +94,6 @@ public class DumeFactoryImpl extends EFactoryImpl implements DumeFactory
       case DumePackage.SHAPE3_D: return createShape3D();
       case DumePackage.SHAPE2_D: return createShape2D();
       case DumePackage.DRAWING: return createDrawing();
-      case DumePackage.CLEAR: return createClear();
       case DumePackage.GO: return createGo();
       case DumePackage.CIRCLE: return createCircle();
       case DumePackage.LOOP: return createLoop();
@@ -106,6 +124,42 @@ public class DumeFactoryImpl extends EFactoryImpl implements DumeFactory
   {
     ScriptImpl script = new ScriptImpl();
     return script;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public dume.compiler.dume.Number createNumber()
+  {
+    NumberImpl number = new NumberImpl();
+    return number;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Negative createNegative()
+  {
+    NegativeImpl negative = new NegativeImpl();
+    return negative;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Positive createPositive()
+  {
+    PositiveImpl positive = new PositiveImpl();
+    return positive;
   }
 
   /**
@@ -202,18 +256,6 @@ public class DumeFactoryImpl extends EFactoryImpl implements DumeFactory
   {
     DrawingImpl drawing = new DrawingImpl();
     return drawing;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public Clear createClear()
-  {
-    ClearImpl clear = new ClearImpl();
-    return clear;
   }
 
   /**
