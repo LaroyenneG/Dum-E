@@ -10,10 +10,17 @@ import java.util.List;
 
 public class Grapnel extends TerminalOrgan {
 
+    public static final int DRAW_CMD_ID = 0;
+    public static final int STOP_DRAW_CMD_ID = 1;
+    public static final int PURGE_CMD_ID = 2;
+
+    private boolean action;
+
     private List<Point3d> point3ds;
 
     public Grapnel() {
         point3ds = new ArrayList<>();
+        action = false;
     }
 
     public void addPoint(Point3d point3d) {
@@ -29,19 +36,32 @@ public class Grapnel extends TerminalOrgan {
 
         super.applyTransformation(transform3D);
 
-        if (isAction()) {
+        if (action) {
             double[] data = new double[16];
             getTransform3D().get(data);
             addPoint(new Point3d(data[3], data[7], data[11]));
         }
-
     }
 
     @Override
-    public void setAction(boolean action) {
-        super.setAction(action);
-        if (!action) {
-            purge();
+    public void command(int id) {
+
+        switch (id) {
+
+            case DRAW_CMD_ID:
+                action = true;
+                break;
+
+            case STOP_DRAW_CMD_ID:
+                action = false;
+                break;
+
+            case PURGE_CMD_ID:
+                purge();
+                break;
+
+            default:
+
         }
     }
 
@@ -66,7 +86,7 @@ public class Grapnel extends TerminalOrgan {
 
         grapnel = (Grapnel) super.clone();
 
-        grapnel.point3ds = new ArrayList<>();
+        grapnel.point3ds = new ArrayList<>(point3ds);
 
         return grapnel;
     }

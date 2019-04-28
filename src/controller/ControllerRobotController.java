@@ -1,5 +1,6 @@
 package controller;
 
+import model.dume.components.Grapnel;
 import model.element.connexion.joint.Joint;
 import model.element.robot.Robot;
 import view.RobotViewer;
@@ -170,8 +171,10 @@ public class ControllerRobotController extends AbstractRobotController implement
 
             case CLEAR:
                 if (args.length == 1) {
+                    model.getTerminalOrgan().command(Grapnel.PURGE_CMD_ID);
                     view.clear();
                 } else if (args.length == 2 && args[1].equals("all")) {
+                    model.getTerminalOrgan().command(Grapnel.PURGE_CMD_ID);
                     view.clearAll();
                 } else {
                     usage(CLEAR, "<option>");
@@ -337,16 +340,15 @@ public class ControllerRobotController extends AbstractRobotController implement
                     usage(ORGAN, "<on/off>");
                 } else {
                     try {
-                        boolean state;
+
                         if (args[1].equals("on")) {
-                            state = true;
+                            model.getTerminalOrgan().command(Grapnel.DRAW_CMD_ID);
                         } else if (args[1].equals("off")) {
-                            state = false;
+                            model.getTerminalOrgan().command(Grapnel.STOP_DRAW_CMD_ID);
                         } else {
                             usage(ORGAN, "<on/off>");
                             return;
                         }
-                        model.getTerminalOrgan().setAction(state);
                         displayView();
                     } catch (NumberFormatException e) {
                         usage(ORGAN, "<on/off>");

@@ -150,9 +150,7 @@ public class ElementVirtualization implements ElementVisitor {
 
         BranchGroup branchGroup = new BranchGroup();
 
-        if (grapnel.isAction()) {
-            DraftGrapnel.drawPoints(this.branchGroup, radius, grapnel.getPoint3ds());
-        }
+        DraftGrapnel.drawPoints(this.branchGroup, radius, grapnel.getPoint3ds());
 
         DraftGrapnel.buildBell(branchGroup, radius);
 

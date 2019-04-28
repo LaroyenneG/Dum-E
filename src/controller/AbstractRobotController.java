@@ -1,5 +1,6 @@
 package controller;
 
+import model.dume.components.Grapnel;
 import model.element.connexion.joint.Joint;
 import model.element.robot.Robot;
 import model.element.robot.Solver;
@@ -264,9 +265,9 @@ public abstract class AbstractRobotController {
             } else if (parameters.length == 2 && parameters[0].equals(ORGAN_COMMAND)) {
 
                 if (parameters[1].equals("on")) {
-                    model.getTerminalOrgan().setAction(true);
+                    model.getTerminalOrgan().command(Grapnel.DRAW_CMD_ID);
                 } else {
-                    model.getTerminalOrgan().setAction(false);
+                    model.getTerminalOrgan().command(Grapnel.STOP_DRAW_CMD_ID);
                 }
 
             } else if (parameters.length == 3) {
