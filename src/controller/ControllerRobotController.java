@@ -171,11 +171,12 @@ public class ControllerRobotController extends AbstractRobotController implement
 
             case CLEAR:
                 if (args.length == 1) {
-                    model.getTerminalOrgan().command(Grapnel.PURGE_CMD_ID);
                     view.clear();
                 } else if (args.length == 2 && args[1].equals("all")) {
-                    model.getTerminalOrgan().command(Grapnel.PURGE_CMD_ID);
                     view.clearAll();
+                } else if (args.length == 2 && args[1].equals("organ")) {
+                    model.getTerminalOrgan().command(Grapnel.PURGE_CMD_ID);
+                    computeAndSleepAndDisplay();
                 } else {
                     usage(CLEAR, "<option>");
                 }
