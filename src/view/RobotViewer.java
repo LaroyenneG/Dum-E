@@ -29,6 +29,8 @@ public class RobotViewer extends JFrame {
 
         canvas3D = new Canvas3D(SimpleUniverse.getPreferredConfiguration());
 
+        canvas3D.setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
+
         getContentPane().add(canvas3D);
 
         createSimpleUniverse();
@@ -159,13 +161,6 @@ public class RobotViewer extends JFrame {
     }
 
 
-    public SimpleUniverse getSimpleUniverse() {
-        return simpleUniverse;
-    }
-
-    public Canvas3D getCanvas3D() {
-        return canvas3D;
-    }
 
     public void setNewScene(BranchGroup scene) {
 

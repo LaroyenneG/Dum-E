@@ -7,7 +7,7 @@ import view.ViewRobotController;
 import javax.swing.*;
 
 
-public class App {
+public class AppDumE {
 
     private static void printDumE() {
 
@@ -76,6 +76,8 @@ public class App {
 
 
         System.out.println(DUM_E_IMAGE);
+
+
     }
 
     public static void main(String[] args) {
