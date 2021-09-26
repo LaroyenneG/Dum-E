@@ -273,7 +273,7 @@ public class ControllerRobotController extends AbstractRobotController implement
                     usage(DRAW, "<file name>");
                 } else {
                     try {
-                        InputStream inputStream = ClassLoader.getSystemClassLoader().getResourceAsStream("assets/" + args[1] + ".robot");
+                        InputStream inputStream = ClassLoader.getSystemClassLoader().getResourceAsStream(args[1] + ".robot");
                         automate(inputStream);
                         assert inputStream != null;
                         inputStream.close();

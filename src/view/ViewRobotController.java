@@ -12,7 +12,7 @@ public class ViewRobotController extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane;
     private javax.swing.JMenuBar menu;
     private javax.swing.JTextArea outTextArea;
-    private AutoScroller autoScroller;
+    private final AutoScroller autoScroller;
 
     public ViewRobotController() {
         initComponents();
@@ -34,7 +34,7 @@ public class ViewRobotController extends javax.swing.JFrame {
         setTitle("Robot Controller");
         setResizable(false);
 
-        button.setText("Fetch");
+        button.setText("Execute");
         button.setMnemonic(KeyEvent.VK_ENTER);
 
         outTextArea.setEditable(false);

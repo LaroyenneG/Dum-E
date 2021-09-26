@@ -16,7 +16,7 @@ public class RobotViewer extends JFrame {
 
     private SimpleUniverse simpleUniverse;
 
-    private Canvas3D canvas3D;
+    private final Canvas3D canvas3D;
 
     private BranchGroup axis;
     private BranchGroup background;
@@ -172,7 +172,9 @@ public class RobotViewer extends JFrame {
         scene.compile();
 
         simpleUniverse.addBranchGraph(scene);
+
         clear();
+
         this.scene = scene;
     }
 
