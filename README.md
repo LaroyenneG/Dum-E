@@ -62,3 +62,5 @@ Assistant Robot  in the iron man movies (Dum-E); programmed in Java 3D
                                              /dNNNNNNd`                                             
                                               .ydmmm/`                                              
                                                 `--`    
+
+![Dum-E](Demo_Dum-E.gif)
